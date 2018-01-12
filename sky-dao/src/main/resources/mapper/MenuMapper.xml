@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.sys.dao.MenuDao">
+    <sql id="fieldName" >coding,name,icon,sorting,is_enablement,superior_coding,configuration_page_coding,display_style,url</sql>
+    <sql id="tableName" >s_menu</sql>
+    <!--增加-->
+    <insert id="doCreate" parameterType="com.sky.sys.po.Menu">
+        INSERT INTO <include refid="tableName" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="coding != null">coding,</if>
+            <if test="name != null">name,</if>
+            <if test="icon != null">icon,</if>
+            <if test="sorting != null">sorting,</if>
+            <if test="isEnablement != null">is_enablement,</if>
+            <if test="superiorCoding != null">superior_coding,</if>
+            <if test="configurationPageCoding != null">configuration_page_coding,</if>
+            <if test="displayStyle != null">display_style,</if>
+            <if test="url != null">url,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="coding != null">#{coding},</if>
+            <if test="name != null">#{name},</if>
+            <if test="icon != null">#{icon},</if>
+            <if test="sorting != null">#{sorting},</if>
+            <if test="isEnablement != null">#{isEnablement},</if>
+            <if test="superiorCoding != null">#{superiorCoding},</if>
+            <if test="configurationPageCoding != null">#{configurationPageCoding},</if>
+            <if test="displayStyle != null">#{displayStyle},</if>
+            <if test="url != null">#{url},</if>
+        </trim>
+    </insert>
+
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.sys.po.Menu">
+        UPDATE <include refid="tableName" />
+        <trim prefix="SET" suffixOverrides=",">
+            name=#{name},icon=#{icon},sorting=#{sorting},is_enablement=#{isEnablement},superior_coding=#{superiorCoding},configuration_page_coding=#{configurationPageCoding},display_style=#{displayStyle},url=#{url},
+            <!--<if test="name != null">name=#{name},</if>
+            <if test="icon != null">icon=#{icon},</if>
+            <if test="sorting != null">sorting=#{sorting},</if>
+            <if test="isEnablement != null">is_enablement=#{isEnablement},</if>
+            <if test="superiorCoding != null">superior_coding=#{superiorCoding},</if>
+            <if test="configurationPageCoding != null">configuration_page_coding=#{configurationPageCoding},</if>
+            <if test="displayStyle != null">display_style=#{displayStyle},</if>
+            <if test="url != null">url=#{url},</if>-->
+        </trim>
+        WHERE coding=#{coding}
+    </update>
+
+    <!--删除-->
+    <delete id="doRemove" parameterType="java.lang.String">
+        DELETE FROM <include refid="tableName" />  WHERE coding=#{coding}
+    </delete>
+
+    <!--映射实体类-->
+    <resultMap id="menuClassesResultMap" type="com.sky.sys.po.Menu">
+        <id property="coding" column="coding"/>
+        <result property="name" column="name"/>
+        <result property="icon" column="icon"/>
+        <result property="sorting" column="sorting"/>
+        <result property="isEnablement" column="is_enablement"/>
+        <result property="superiorCoding" column="superior_coding"/>
+        <result property="configurationPageCoding" column="configuration_page_coding"/>
+        <result property="displayStyle" column="display_style"/>
+        <result property="url" column="url"/>
+        <collection property="menuList"  ofType="menuClassesResultMap"
+                    select="findCreationByCoding" column="coding" />
+        <!--<association property="classesResultMap" column="coding" select="findCreationByCoding"/>-->
+    </resultMap>
+    <select id="findCreationByCoding" parameterType="java.lang.String" resultMap="menuClassesResultMap">
+        SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE superior_coding=#{coding}
+    </select>
+    <select id="findMenuList" parameterType="java.lang.String" resultMap="menuClassesResultMap">
+        SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE superior_coding IS null;
+    </select>
+
+ </mapper>
