@@ -19,6 +19,11 @@ public class ConfigurationPageServerTest extends SpringTestCase {
     private ConfigurationPageServer configurationPageServer;
 
     @Test
+    public void editParams() {
+        configurationPageServer.getEditParams("ffae5b0d-c1b7-4f0d-9257-b97f5eda7532");
+    }
+
+    @Test
     public void addConfigurationPage(){
         System.out.println("创建配置页面信息");
         ConfigurationPage configurationPage = new ConfigurationPage();

@@ -5,118 +5,138 @@
   Time: 9:26
   To change this template use File | Settings | File Templates.
 --%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
-<%--<%@ page isELIgnored="false" %>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String basePath = request.getContextPath();
 %>
 <html>
 
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-    <title>H+ 后台主题UI框架 - Bootstrap Table</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-
-    <link rel="shortcut icon" href="<%=basePath%>/UI/hplus/html/favicon.ico">
-    <link href="<%=basePath%>/UI/hplus/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="<%=basePath%>/UI/hplus/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="<%=basePath%>/UI/hplus/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
-    <link href="<%=basePath%>/UI/hplus/css/animate.min.css" rel="stylesheet">
-    <link href="<%=basePath%>/UI/hplus/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <title>菜单栏设置</title>
+    <link rel="shortcut icon" href="<%=basePath%>/UI/sky/favicon.ico">
+    <link href="<%=basePath%>/UI/sky/css/bootstrap.min.css?" rel="stylesheet">
+    <link href="<%=basePath%>/UI/sky/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/UI/sky/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/UI/sky/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/UI/sky/css/style.min.css" rel="stylesheet">
     <!-- Sweet Alert -->
-    <link href="<%=basePath%>/UI/hplus/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-
+    <link href="<%=basePath%>/UI/sky/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
-<body class="gray-bg">
-<form action="" method="POST">
-    <input type="hidden" name="_method" value="DELETE"/>
-</form>
-<%--<div class="wrapper wrapper-content animated fadeInRight">--%>
-    <!-- Panel Other -->
-    <div class="ibox float-e-margins">
-        <div class="ibox-content">
-            <div class="row row-lg">
-                <div class="col-sm-12">
-                    <%--查询--%>
-                    <%--<c:import url="query.jsp"></c:import>--%>
-                    <!-- Example Toolbar -->
-                    <div class="example-wrap">
-                        <div class="example">
-                            <div id="toolbar">
-                                <div class="btn-group hidden-xs" id="exampleToolbar" role="group">
-                                    <button type="button" class="btn btn-outline btn-default" data-toggle="modal" data-target="#create">
-                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-outline btn-default">
-                                        <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-outline btn-default">
-                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <table id="listTable"></table>
-                        </div>
-                    </div>
-                    <div class="modal inmodal fade" id="update" tabindex="-1" role="dialog"  aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button id="closeUpdate" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    <h1 class="modal-title">修改</h1>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="ibox-content">
-                                        <iframe id="updateIframe" class="J_iframe" name="iframe0" width="100%" height="100%" src="" frameborder="0" data-id="index_v1.html" seamless></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal inmodal fade" id="create" tabindex="-1" role="dialog"  aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button id="closeCreate" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    <h1 class="modal-title">添加</h1>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="ibox-content">
-                                        <iframe id="createIframe" class="J_iframe" name="iframe0" width="100%" height="100%" src="${pageContext.request.contextPath}/create/${tableNameEN}" frameborder="0" data-id="index_v1.html" seamless></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Example Toolbar -->
+<body>
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="row row-lg">
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="stuNo" placeholder="请输入名称"/>
                 </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="stuName" placeholder="请输入价格"/>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-primary btn-sm" id="searchBtn">查询</button>
+                    <button class="btn btn-sm" id="resetBtn">重置</button>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="example-wrap">
+                    <div class="example">
+                        <div class="btn-group" id="toolbar" role="group">
+                            <button data-toggle="modal" type="button" class="btn btn-outline btn-default"
+                                    href="#add-modal-form">
+                                <i class="glyphicon glyphicon-plus" aria-hidden="true">新增</i>
+                            </button>
+                            <%--<button type="button" class="btn btn-outline btn-default">
+                                <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline btn-default">
+                                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                            </button>--%>
+                            <%--<button data-toggle="modal" type="button" class="btn btn-outline btn-default" href="#modal-form">
+                                <i class="glyphicon glyphicon-plus" aria-hidden="true">打开登录窗口</i>
+                            </button>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-outline btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">更多<span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">更多1</a></li>
+                                    <li><a href="#">更多2</a></li>
+                                </ul>
+                            </div>--%>
+                        </div>
 
+                        <table id="listTable"></table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- End Panel Other -->
-<%--</div>--%>
-<script src="<%=basePath%>/UI/hplus/js/jquery.min.js?v=2.1.4"></script>
-<script src="<%=basePath%>/UI/hplus/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="<%=basePath%>/UI/hplus/js/content.min.js?v=1.0.0"></script>
-<script src="<%=basePath%>/UI/hplus/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="<%=basePath%>/UI/hplus/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-<script src="<%=basePath%>/UI/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+</div>
+<div class="modal inmodal fade" id="add-modal-form" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="closeCreate" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h1 class="modal-title">添加</h1>
+            </div>
+            <div class="modal-body">
+                <div class="ibox-content">
+                    <iframe id="createIframe" class="J_iframe" name="iframe0" width="100%" height="100%"
+                            src="${pageContext.request.contextPath}/configuration/edit/ffae5b0d-c1b7-4f0d-9257-b97f5eda7532"
+                            frameborder="0" data-id="index_v1.html" seamless></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal fade" id="modal-form" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">窗口标题</h4>
+                <small class="font-bold">这里可以显示副标题。
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 b-r">
+                        <form role="form">
+                            <div class="form-group">
+                                <label>用户名：</label>
+                                <input type="email" placeholder="请输入用户名" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>密码：</label>
+                                <input type="password" placeholder="请输入密码" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<script src="<%=basePath%>/UI/hplus/js/plugins/iCheck/icheck.min.js"></script>
-
-<script src="<%=basePath%>/UI/hplus/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="<%=basePath%>/UI/starrysky/list/js/bootstrapTable.js"></script>
+<script src="<%=basePath%>/UI/sky/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath%>/UI/sky/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=basePath%>/UI/sky/js/content.min.js?v=1.0.0"></script>
+<script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="<%=basePath%>/UI/sky/js/demo/bootstrap-table-demo.min.js"></script>
+<!-- Sweet Alert -->
+<script src="<%=basePath%>/UI/sky/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(function () {
         //1.初始化Table
@@ -229,9 +249,5 @@
         ].join('');
     }
 </script>
-
 </body>
-
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
 </html>

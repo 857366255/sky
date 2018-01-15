@@ -30,4 +30,11 @@ public class ConfigurationPageController {
         map.put("listParams", JSON.toJSONString(listParams));
         return "sys/list";
     }
+
+    @RequestMapping(value = "/edit/{configurationPageCoding}", method = RequestMethod.GET)
+    public String goCreate(Map<String, Object> map, @PathVariable String configurationPageCoding) {
+        Map<String, Object> editParams = configurationPageServer.getEditParams(configurationPageCoding);
+        map.put("editParams", editParams);
+        return "sys/edit";
+    }
 }

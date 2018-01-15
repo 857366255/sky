@@ -138,6 +138,14 @@
     <select id="getFieldList" parameterType="java.lang.String" resultMap="fieldClassesResultMap">
         SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE configuration_page_coding=#{coding} ORDER BY list_sorting
     </select>
+    <!--查询 可编辑字段-->
+    <select id="getEditFieldList" parameterType="java.lang.String" resultMap="fieldClassesResultMap">
+        SELECT
+        <include refid="fieldName"/>
+        FROM
+        <include refid="tableName"/>
+        WHERE configuration_page_coding=#{coding} and is_edit=0 ORDER BY edit_sorting
+    </select>
 
     <!--映射实体类：数据库表字段信息-->
     <resultMap id="databaseFieldClassesResultMap" type="com.sky.sys.po.Field">

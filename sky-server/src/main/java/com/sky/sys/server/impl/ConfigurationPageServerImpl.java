@@ -33,6 +33,14 @@ public class ConfigurationPageServerImpl implements ConfigurationPageServer {
 
     public Map<String, Object> getListParams(String configurationPageCoding) {
         ConfigurationPage configurationPage=configurationPageDao.findById(configurationPageCoding);
+        if (configurationPage == null) {
+            try {
+                throw new Exception("编码不存在");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
         Map<String,Object> listParams = new HashMap<String, Object>();
         listParams.put("url","/"+"aa");//请求后台的URL
         listParams.put("method","get");//请求方式
@@ -44,6 +52,17 @@ public class ConfigurationPageServerImpl implements ConfigurationPageServer {
         listParams.put("columns",getFieldParams(configurationPage.getListFieldList()));
         return listParams;
     }
+
+    public Map<String, Object> getEditParams(String configurationPageCoding) {
+        ConfigurationPage configurationPage = configurationPageDao.findById(configurationPageCoding);
+        List<Field> editField = fieldDao.getEditFieldList(configurationPageCoding);
+        System.out.println(editField);
+        Map<String, Object> editParams = new HashMap<String, Object>();
+        editParams.put("editField", editField);
+        editParams.put("configurationPage", configurationPage);
+        return editParams;
+    }
+
     @Transactional
     public Boolean addConfigurationPageInformation(ConfigurationPage configurationPage) {
         String coding = UUIDTool.getUUID();//获得唯一标示符
