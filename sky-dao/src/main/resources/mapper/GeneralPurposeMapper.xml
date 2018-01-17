@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.sys.dao.GeneralPurposeDao">
+    <!--按条件查询-->
+    <select id="findByCondition" parameterType="com.sky.sys.po.GeneralPurpose" resultType="java.util.Map">
+        SELECT <foreach collection="fieldList" index="index" item="item" separator="," >${item}</foreach> FROM ${tableEn}
+        <where>
+            <foreach collection="findList" index="index" item="item" separator="AND " >
+                <choose>
+                    <when test="item.getType().equals(1)"><!--完全相同=-->
+                        ${item.field}=#{item.value}
+                    </when>
+                    <when test="item.getType().equals(2)"><!--模糊查询 like-->
+                        ${item.field} LIKE concat(concat('%',#{item.value}),'%')
+                    </when>
+                </choose>
+            </foreach>
+        </where>
+    </select>
+    <!--增加-->
+    <insert id="doCreate" parameterType="com.sky.sys.po.GeneralPurpose">
+        INSERT INTO ${tableEn}
+        <trim prefix="(" suffix=")" >
+            <foreach collection="createMap" index="index" item="item" separator="," ><if test="item != null"> ${index}</if></foreach>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <foreach collection="createMap" index="index" item="item" separator="," ><if test="item != null">#{item}</if></foreach>
+        </trim>
+    </insert>
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.sys.po.GeneralPurpose">
+        UPDATE ${tableEn}
+        <trim prefix="SET" suffixOverrides=",">
+            <foreach collection="updateMap" index="index" item="item" separator="," >
+                <choose>
+                    <when test="item != null and !index.equals(id)" > ${index}=#{item}</when >
+                </choose>
+            </foreach>
+        </trim>
+        WHERE
+        <foreach collection="updateMap" index="index" item="item" separator=" AND " >
+            <choose>
+                <when test="item != null and index.equals(id)"> ${index}=#{item} </when>
+            </choose>
+        </foreach>
+    </update>
+
+    <!--删除-->
+    <delete id="doRemove" parameterType="com.sky.sys.po.GeneralPurpose">
+        DELETE FROM ${tableEn}
+        WHERE
+        <foreach collection="findList" index="index" item="item" separator="AND " >
+            <choose>
+                <when test="item.getType().equals(1)"><!--完全相同=-->
+                    ${item.field}=#{item.value}
+                </when>
+                <when test="item.getType().equals(2)"><!--模糊查询 like-->
+                    ${item.field} LIKE concat(concat('%',#{item.value}),'%')
+                </when>
+            </choose>
+        </foreach>
+    </delete>
+
+</mapper>
