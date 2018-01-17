@@ -85,12 +85,12 @@
                         class="sr-only">Close</span></button>
                 <h1 class="modal-title">添加</h1>
             </div>
-            <div class="modal-body">
-                <div class="ibox-content">
-                    <iframe id="createIframe" class="J_iframe" name="iframe0" width="100%" height="100%"
+            <iframe id="createIframe" class="J_iframe" name="iframe0" width="100%" height="100%"
                             src="${pageContext.request.contextPath}/configuration/edit/ffae5b0d-c1b7-4f0d-9257-b97f5eda7532"
                             frameborder="0" data-id="index_v1.html" seamless></iframe>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
             </div>
         </div>
     </div>
@@ -102,7 +102,7 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
                         class="sr-only">Close</span></button>
                 <h4 class="modal-title">窗口标题</h4>
-                <small class="font-bold">这里可以显示副标题。
+                <small class="font-bold">这里可以显示副标题。</small>
             </div>
             <div class="modal-body">
                 <div class="row">

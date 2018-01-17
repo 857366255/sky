@@ -87,9 +87,12 @@ public class ConfigurationPageServerImpl implements ConfigurationPageServer {
             fieldDao.doCreate(field);
         }
 
-
-        System.out.println(configurationPage.getCoding());
         return null;
+    }
+
+    public List<Map<String, Object>> getListData(String configurationPageCoding, Map<String, Object> findMap) {
+        List<Map<String, Object>> listData = fieldDao.findAllMap();
+        return listData;
     }
 
     private List<Map<String,Object>> getFieldParams(List<Field> fieldList){

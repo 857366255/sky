@@ -178,4 +178,35 @@
         SELECT * FROM information_schema.columns WHERE table_schema = (SELECT DATABASE()) AND table_name = #{tableEn} ORDER BY ordinal_position;
     </select>
 
+
+    <!--映射实体类-->
+    <resultMap id="classesResultMap" type="java.util.Map">
+        <id property="coding" column="coding"/>
+        <result property="name" column="name"/>
+        <result property="fieldEn" column="field_en"/>
+        <result property="configurationPageCoding" column="configuration_page_coding"/>
+        <result property="tableCoding" column="table_coding"/>
+        <result property="field" column="field"/>
+        <result property="annotation" column="annotation"/>
+        <result property="type" column="type"/>
+        <result property="size" column="size"/>
+        <result property="inputType" column="input_type"/>
+        <result property="isEdit" column="is_edit"/>
+        <result property="isMust" column="is_must"/>
+        <result property="editAnnotation" column="edit_annotation"/>
+        <result property="editSorting" column="edit_sorting"/>
+        <result property="isShowList" column="is_show_list"/>
+        <result property="listWidth" column="list_width"/>
+        <result property="listSorting" column="list_sorting"/>
+        <result property="querySorting" column="query_sorting"/>
+        <result property="isQuery" column="is_query"/>
+        <result property="queryOccupy" column="query_occupy"/>
+        <result property="isShowSlave" column="is_show_slave"/>
+        <result property="slaveWidth" column="slave_width"/>
+        <result property="slaveSorting" column="slave_sorting"/>
+    </resultMap>
+    <!--查询全部数据-->
+    <select id="findAllMap" resultType="java.util.Map">
+        SELECT <include refid="fieldName"/> FROM <include refid="tableName"/>
+    </select>
  </mapper>

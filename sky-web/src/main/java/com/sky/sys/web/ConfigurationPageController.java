@@ -1,15 +1,14 @@
 package com.sky.sys.web;
 
 import com.alibaba.fastjson.JSON;
+import com.sdicons.json.mapper.MapperException;
 import com.sky.sys.po.Menu;
 import com.sky.sys.server.ConfigurationPageServer;
 import com.sky.sys.server.MenuServer;
+import com.sky.sys.vo.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,5 +35,16 @@ public class ConfigurationPageController {
         Map<String, Object> editParams = configurationPageServer.getEditParams(configurationPageCoding);
         map.put("editParams", editParams);
         return "sys/edit";
+    }
+
+
+    /**
+     *获得数据
+     */
+    @RequestMapping(value="data/{configurationPageCoding}", produces = "application/json; charset=utf-8" )
+    @ResponseBody
+    public List<Map<String, Object>> data(@PathVariable String configurationPageCoding,Params params) throws MapperException {
+        System.out.println("获得数据:");
+        return configurationPageServer.getListData(configurationPageCoding,  params.getQuery()==null ? new HashMap<String, Object>() : params.getQuery());
     }
 }

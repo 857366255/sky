@@ -3,6 +3,7 @@ package com.sky.sys.dao;
 import com.sky.sys.po.Field;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/12/17.
@@ -31,4 +32,10 @@ public interface FieldDao extends BaseDao<String, Field> {
      * @return
      */
     public List<Field> getDatabaseFieldList(String tableEn);
+
+    /**
+     * 获得全部数据
+     * @return
+     */
+    public List<Map<String, Object>> findAllMap();
 }

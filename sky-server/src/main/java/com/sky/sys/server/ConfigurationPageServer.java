@@ -2,6 +2,7 @@ package com.sky.sys.server;
 
 import com.sky.sys.po.ConfigurationPage;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,4 +26,6 @@ public interface ConfigurationPageServer {
     public Map<String, Object> getEditParams(String configurationPageCoding);
 
     public Boolean addConfigurationPageInformation(ConfigurationPage configurationPage);
+
+    public List<Map<String,Object>> getListData(String tableNameEn, Map<String, Object> findMap);
 }
