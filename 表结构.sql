@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : MySQL
-Source Server Version : 50158
+Source Server         : 127.0.0.1
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : sky
 
 Target Server Type    : MYSQL
-Target Server Version : 50158
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-01-12 20:38:49
+Date: 2018-01-20 16:25:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,11 @@ CREATE TABLE `s_configuration_page` (
   `querys_style` varchar(255) DEFAULT NULL COMMENT '查询窗口样式',
   PRIMARY KEY (`coding`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='配置页面设置';
+
+-- ----------------------------
+-- Records of s_configuration_page
+-- ----------------------------
+INSERT INTO `s_configuration_page` VALUES ('s_menu-1', '菜单栏树形结构配置', 's_menu', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for s_field
@@ -68,6 +73,14 @@ CREATE TABLE `s_field` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字段';
 
 -- ----------------------------
+-- Records of s_field
+-- ----------------------------
+INSERT INTO `s_field` VALUES ('s_menu-1-coding', '唯一标识符', 'coding', 's_menu-1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `s_field` VALUES ('s_menu-1-name', '名称', 'name', 's_menu-1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `s_field` VALUES ('s_menu-1-superior_coding', '上级编码', 'superior_coding', 's_menu-1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `s_field` VALUES ('s_menu-1-table_en', '表名称', 'table_en', 's_menu-1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+-- ----------------------------
 -- Table structure for s_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `s_menu`;
@@ -87,6 +100,17 @@ CREATE TABLE `s_menu` (
   CONSTRAINT `fk_sm_cpc_cp_c` FOREIGN KEY (`configuration_page_coding`) REFERENCES `s_configuration_page` (`coding`),
   CONSTRAINT `fk_sm_sc_m_c` FOREIGN KEY (`superior_coding`) REFERENCES `s_menu` (`coding`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单栏';
+
+-- ----------------------------
+-- Records of s_menu
+-- ----------------------------
+INSERT INTO `s_menu` VALUES ('1', '1', null, null, null, null, null, null, null);
+INSERT INTO `s_menu` VALUES ('2', '2', null, null, null, '1', null, null, null);
+INSERT INTO `s_menu` VALUES ('3', '3', null, null, null, '2', null, null, null);
+INSERT INTO `s_menu` VALUES ('4', '4', null, null, null, '3', null, null, null);
+INSERT INTO `s_menu` VALUES ('5', '5', null, null, null, '4', null, null, null);
+INSERT INTO `s_menu` VALUES ('6', '6', null, null, null, '5', null, null, null);
+INSERT INTO `s_menu` VALUES ('7', '7', null, null, null, '6', null, null, null);
 
 -- ----------------------------
 -- Table structure for s_table
@@ -109,6 +133,10 @@ CREATE TABLE `s_table` (
   CONSTRAINT `fk_st_cpc_scp_c` FOREIGN KEY (`configuration_page_coding`) REFERENCES `s_configuration_page` (`coding`),
   CONSTRAINT `fk_st_sc_st_c` FOREIGN KEY (`superior_coding`) REFERENCES `s_table` (`coding`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='表';
+
+-- ----------------------------
+-- Records of s_table
+-- ----------------------------
 
 -- ----------------------------
 -- Procedure structure for get_database_field

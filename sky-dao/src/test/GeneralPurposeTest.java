@@ -3,9 +3,7 @@
  */
 
 import base.SpringTestCase;
-import com.sky.sys.dao.FieldDao;
 import com.sky.sys.dao.GeneralPurposeDao;
-import com.sky.sys.po.Field;
 import com.sky.sys.po.Find;
 import com.sky.sys.po.GeneralPurpose;
 import org.junit.Test;
@@ -40,7 +38,7 @@ public class GeneralPurposeTest extends SpringTestCase {
         Find find = new Find();
         find.setField("name");
         find.setValue("管理");
-        find.setType(2);
+        find.setType("equal");
         findList.add(find);
         findList.add(find);
         generalPurpose.setFindList(findList);
@@ -81,7 +79,7 @@ public class GeneralPurposeTest extends SpringTestCase {
         Find find = new Find();
         find.setField("coding");
         find.setValue("213");
-        find.setType(1);
+        find.setType("equal");
         findList.add(find);
         generalPurpose.setFindList(findList);
         System.out.println(generalPurposeDao.doRemove(generalPurpose));

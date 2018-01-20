@@ -10,6 +10,13 @@ import java.util.Map;
  * Created by wz on 2017/10/9.
  */
 public interface GeneralPurposeDao {
+
+    /**
+     * 查询唯一数据
+     * @param generalPurpose
+     * @return
+     */
+    public Map<String,Object> findById(GeneralPurpose generalPurpose);
     /**
      * 查询数据
      * @param generalPurpose

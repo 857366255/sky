@@ -1,5 +1,6 @@
 package com.sky.sys.po;
 
+
 import java.util.*;
 
 /**
@@ -8,10 +9,21 @@ import java.util.*;
 public class GeneralPurpose {
     private String tableEn;//表名
     private String id;//唯一标示符名称
+    private String childField;//下级字段名称(树形)
     private List<String> fieldList;//字段列表
     private List<Find> findList;//查询条件列表
     private Map<String,Object> createMap;//添加数据
     private Map<String,Object> updateMap;//更新数据列表
+    private String findId;//查询数据id
+
+    public GeneralPurpose() {
+        super();
+    }
+
+    public GeneralPurpose(String tableEn, String id) {
+        this.tableEn = tableEn;
+        this.id = id;
+    }
 
     public String getTableEn() {
         return tableEn;
@@ -27,6 +39,14 @@ public class GeneralPurpose {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getChildField() {
+        return childField;
+    }
+
+    public void setChildField(String childField) {
+        this.childField = childField;
     }
 
     public List<String> getFieldList() {
@@ -59,5 +79,13 @@ public class GeneralPurpose {
 
     public void setUpdateMap(Map<String, Object> updateMap) {
         this.updateMap = updateMap;
+    }
+
+    public String getFindId() {
+        return findId;
+    }
+
+    public void setFindId(String findId) {
+        this.findId = findId;
     }
 }

@@ -7,7 +7,16 @@ package com.sky.sys.po;
 public class Find {
     private String field;//查询字段
     private Object value;//查询内容
-    private Integer type;//查询类型
+    private String type;//查询类型
+
+    public Find() {
+        super();
+    }
+    public Find(String field, Object value, String type) {
+        this.field = field;
+        this.value = value;
+        this.type = type;
+    }
 
     public String getField() {
         return field;
@@ -25,11 +34,11 @@ public class Find {
         this.value = value;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

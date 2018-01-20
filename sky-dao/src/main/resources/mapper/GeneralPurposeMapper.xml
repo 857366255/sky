@@ -2,20 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sky.sys.dao.GeneralPurposeDao">
+    <!--id查询-->
+    <select id="findById" parameterType="com.sky.sys.po.GeneralPurpose" resultType="java.util.Map">
+        SELECT <foreach collection="fieldList" index="index" item="item" separator="," >${item}</foreach> FROM ${tableEn} WHERE ${id}=#{findId}
+    </select>
     <!--按条件查询-->
     <select id="findByCondition" parameterType="com.sky.sys.po.GeneralPurpose" resultType="java.util.Map">
         SELECT <foreach collection="fieldList" index="index" item="item" separator="," >${item}</foreach> FROM ${tableEn}
         <where>
+           <if test="findList!=null">
             <foreach collection="findList" index="index" item="item" separator="AND " >
                 <choose>
-                    <when test="item.getType().equals(1)"><!--完全相同=-->
+                    <when test="item.getType().equals('is_null')"><!--查询null-->
+                        ${item.field} is NULL
+                    </when>
+                    <when test="item.getType().equals('equal')"><!--完全相同-->
                         ${item.field}=#{item.value}
                     </when>
-                    <when test="item.getType().equals(2)"><!--模糊查询 like-->
+                    <when test="item.getType().equals('like')"><!--模糊查询 like-->
                         ${item.field} LIKE concat(concat('%',#{item.value}),'%')
                     </when>
+                    <!--<otherwise>
+                        ${item.field}=#{item.value}
+                    </otherwise>-->
                 </choose>
             </foreach>
+           </if>
         </where>
     </select>
     <!--增加-->
