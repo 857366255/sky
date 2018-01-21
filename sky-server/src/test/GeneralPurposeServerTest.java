@@ -32,6 +32,25 @@ public class GeneralPurposeServerTest extends SpringTestCase {
         baseServer.getTree("asd",4);
     }
     @Test
+    public void getTableId(){
+        String configurationPageCoding ="s_menu-1";
+        String tableEn ="s_menu";
+        GeneralPurpose gp = new GeneralPurpose("s_table","coding");
+        List<String> fieldList = new ArrayList<String>();
+        fieldList.add("table_id");
+        gp.setFieldList(fieldList);
+        List<Find> findList = new ArrayList<Find>();
+        findList.add( new Find("configuration_page_coding",configurationPageCoding,"equal") );
+        findList.add( new Find("table_en",tableEn,"equal") );
+        gp.setFindList(findList);
+        List<Map<String,Object>> list = generalPurposeDao.findByCondition(gp);
+        if(list==null || list.size()!=1){
+            System.out.println("错误:表没有主键或者有多个");
+            //return null;
+        }
+        System.out.println(list.get(0).get("table_id").toString());
+    }
+    @Test
     public void getTableEn(){
         String configurationPageCoding ="s_menu-1";
         GeneralPurpose gp = new GeneralPurpose("s_configuration_page","coding");

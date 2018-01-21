@@ -57,7 +57,7 @@ public class BaseServerImpl implements BaseServer {
         GeneralPurpose generalPurpose = new GeneralPurpose();
         List<Find> findList = new ArrayList<Find>();
         generalPurpose.setTableEn(getTableEn(configurationPageCoding));
-        //generalPurpose.setId(getTableEn(configurationPageCoding));//s_table 表中 table_id 数据库字段还没添加
+        generalPurpose.setId(getTableEn(configurationPageCoding));
         //generalPurpose.setChildField(getChildField); // 创建一张表 s_fk  添加字段(coding,configuration_page_coding,本表表名,本表字段名称,引用表表名,引用字段名称)
         generalPurpose.setFieldList(getListField(configurationPageCoding,findList));
         return generalPurpose;
@@ -87,7 +87,8 @@ public class BaseServerImpl implements BaseServer {
         findList.add( new Find("configuration_page_coding",configurationPageCoding,"equal") );
         findList.add( new Find("table_en",tableEn,"equal") );
         List<Map<String,Object>> list = generalPurposeDao.findByCondition(gp);
-        if(list==null || list.size()!=0){
+        gp.setFindList(findList);
+        if(list==null || list.size()!=1){
             System.out.println("错误:表没有主键或者有多个");
             return null;
         }
