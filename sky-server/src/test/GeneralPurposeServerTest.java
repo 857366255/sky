@@ -3,8 +3,8 @@ import com.sky.sys.dao.GeneralPurposeDao;
 import com.sky.sys.po.ConfigurationPage;
 import com.sky.sys.po.Find;
 import com.sky.sys.po.GeneralPurpose;
-import com.sky.sys.server.BaseServer;
 import com.sky.sys.server.ConfigurationPageServer;
+import com.sky.sys.server.GeneralPurposeServer;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,15 +22,43 @@ public class GeneralPurposeServerTest extends SpringTestCase {
 
     @Autowired
     private GeneralPurposeDao generalPurposeDao;
+    //@Autowired
+    //private BaseServer baseServer;
     @Autowired
-    private BaseServer baseServer;
-
+    private GeneralPurposeServer generalPurposeServer;
 
     @Test
     public void test(){
         System.out.println("查询递归");
-        baseServer.getTree("asd",4);
+       // baseServer.getTree("asd",4);
     }
+
+    @Test
+    public void getTree(){
+        System.out.println("查询递归");
+        List<Map<String,Object>> list =generalPurposeServer.getTree2("s_menu");
+    }
+
+    @Test
+    public void getChildField(){
+        String configurationPageCoding ="s_menu-1";
+        String tableEn ="s_menu";
+        GeneralPurpose gp = new GeneralPurpose("s_fk","coding");
+        List<String> fieldList = new ArrayList<String>();
+        fieldList.add("reference_field_en");
+        gp.setFieldList(fieldList);
+        List<Find> findList = new ArrayList<Find>();
+        findList.add( new Find("configuration_page_coding",configurationPageCoding,"equal") );
+        findList.add( new Find("table_en",tableEn,"equal") );
+        findList.add( new Find("reference_table_en",tableEn,"equal") );
+        List<Map<String,Object>> list = generalPurposeDao.findByCondition(gp);
+        gp.setFindList(findList);
+        if(list==null || list.size()!=1){
+            return;
+        }
+        System.out.println(list.get(0).get("reference_field_en").toString());
+    }
+
     @Test
     public void getTableId(){
         String configurationPageCoding ="s_menu-1";

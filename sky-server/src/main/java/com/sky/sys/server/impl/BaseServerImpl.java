@@ -3,7 +3,6 @@ package com.sky.sys.server.impl;
 import com.sky.sys.dao.GeneralPurposeDao;
 import com.sky.sys.po.Find;
 import com.sky.sys.po.GeneralPurpose;
-import com.sky.sys.server.BaseServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ import java.util.Map;
  * Created by Administrator on 2017/12/30.
  */
 @Service
-public class BaseServerImpl implements BaseServer {
+public class BaseServerImpl {
 
     @Autowired
     private GeneralPurposeDao generalPurposeDao;
@@ -53,23 +52,36 @@ public class BaseServerImpl implements BaseServer {
         return getTree(configurationPageCoding);
     }
 
-    private GeneralPurpose getGeneralPurpose(String configurationPageCoding){
+    public GeneralPurpose getGeneralPurpose(String configurationPageCoding){
         GeneralPurpose generalPurpose = new GeneralPurpose();
         List<Find> findList = new ArrayList<Find>();
-        generalPurpose.setTableEn(getTableEn(configurationPageCoding));
-        generalPurpose.setId(getTableEn(configurationPageCoding));
-        //generalPurpose.setChildField(getChildField); // 创建一张表 s_fk  添加字段(coding,configuration_page_coding,本表表名,本表字段名称,引用表表名,引用字段名称)
-        generalPurpose.setFieldList(getListField(configurationPageCoding,findList));
+        generalPurpose.setTableEn(getTableEn(configurationPageCoding));//设置表名称
+        generalPurpose.setId(getTableId(configurationPageCoding, generalPurpose.getTableEn()));//设置唯一字段名称
+        generalPurpose.setChildField(getChildField(configurationPageCoding, generalPurpose.getTableEn())); //设置自关联名称
+        generalPurpose.setFieldList(getListField(configurationPageCoding,findList));//设置字段列表
         return generalPurpose;
     }
     /**
      * 获得 树形结构 关联字段
      * @param configurationPageCoding
+     * @param tableEn
      * @return 关联字段
      */
     private String getChildField(String configurationPageCoding,String tableEn){
-
-        return null;
+        GeneralPurpose gp = new GeneralPurpose("s_fk","coding");
+        List<String> fieldList = new ArrayList<String>();
+        fieldList.add("reference_field_en");
+        gp.setFieldList(fieldList);
+        List<Find> findList = new ArrayList<Find>();
+        findList.add( new Find("configuration_page_coding",configurationPageCoding,"equal") );
+        findList.add( new Find("table_en",tableEn,"equal") );
+        findList.add( new Find("reference_table_en",tableEn,"equal") );
+        gp.setFindList(findList);
+        List<Map<String,Object>> list = generalPurposeDao.findByCondition(gp);
+        if(list==null || list.size()!=1){
+            return null;
+        }
+        return list.get(0).get("reference_field_en").toString();
     }
 
     /**
@@ -86,8 +98,8 @@ public class BaseServerImpl implements BaseServer {
         List<Find> findList = new ArrayList<Find>();
         findList.add( new Find("configuration_page_coding",configurationPageCoding,"equal") );
         findList.add( new Find("table_en",tableEn,"equal") );
-        List<Map<String,Object>> list = generalPurposeDao.findByCondition(gp);
         gp.setFindList(findList);
+        List<Map<String,Object>> list = generalPurposeDao.findByCondition(gp);
         if(list==null || list.size()!=1){
             System.out.println("错误:表没有主键或者有多个");
             return null;
