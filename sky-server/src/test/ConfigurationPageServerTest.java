@@ -18,10 +18,8 @@ public class ConfigurationPageServerTest extends SpringTestCase {
     @Autowired
     private ConfigurationPageServer configurationPageServer;
 
-    @Test
-    public void editParams() {
-        configurationPageServer.getEditParams("ffae5b0d-c1b7-4f0d-9257-b97f5eda7532");
-    }
+ 
+
 
     @Test
     public void addConfigurationPage(){
@@ -43,6 +41,6 @@ public class ConfigurationPageServerTest extends SpringTestCase {
     @Test
     public void findConfigurationPage(){
         System.out.println("菜单栏列表");
-        System.out.println(configurationPageServer.getListParams("0f569b93-f69f-453e-a7c2-07394a89e446"));
+        //System.out.println(configurationPageServer.getListParams("0f569b93-f69f-453e-a7c2-07394a89e446"));
     }
 }

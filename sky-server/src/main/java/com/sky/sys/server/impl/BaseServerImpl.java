@@ -43,7 +43,6 @@ public class BaseServerImpl {
         generalPurpose.setFindList(findList);
         List<Map<String,Object>> mapList = generalPurposeDao.findByCondition(generalPurpose);
         tree(mapList,generalPurpose);
-        System.out.println(mapList);
         return mapList;
     }
     public List<Map<String, Object>> getTree(String configurationPageCoding, Integer fewTimes) {
@@ -58,7 +57,7 @@ public class BaseServerImpl {
         generalPurpose.setTableEn(getTableEn(configurationPageCoding));//设置表名称
         generalPurpose.setId(getTableId(configurationPageCoding, generalPurpose.getTableEn()));//设置唯一字段名称
         generalPurpose.setChildField(getChildField(configurationPageCoding, generalPurpose.getTableEn())); //设置自关联名称
-        generalPurpose.setFieldList(getListField(configurationPageCoding,findList));//设置字段列表
+        //generalPurpose.setFieldList(getListField(configurationPageCoding,findList));//设置字段列表
         return generalPurpose;
     }
     /**
@@ -120,25 +119,22 @@ public class BaseServerImpl {
         Map<String,Object> map = generalPurposeDao.findById(gp);
         return map.get("table_en").toString();
     }
+
     /**
-     * 获得 字段列表
+     * 获得 字段信息
      * @param configurationPageCoding
+     * @param showField 显示的内容（表的字段名）
+     * @param findList 查询内容
      * @return
      */
-    private List<String> getListField(String configurationPageCoding,List<Find> findList){
+    public List<Map<String,Object>> getFieldInformation(String configurationPageCoding,List<String> showField,List<Find> findList){
         List<String> list = new ArrayList<String>();
         GeneralPurpose gp = new GeneralPurpose("s_field","coding");
-        List<String> fieldList = new ArrayList<String>();
-        fieldList.add("field_en");
-        gp.setFieldList(fieldList);
-        //List<Find> findList = new ArrayList<Find>();
+        gp.setFieldList(showField);
         findList.add( new Find("configuration_page_coding",configurationPageCoding,"equal") );
         gp.setFindList(findList);
         List<Map<String,Object>> mapList = generalPurposeDao.findByCondition(gp);
-        for(Map<String,Object>map:mapList){
-            list.add(map.get("field_en").toString());
-        }
-        return  list;
+        return  mapList;
     }
     /**
      * 递归循环 查找树形结构的数据
@@ -162,6 +158,42 @@ public class BaseServerImpl {
             map.put("childMapList",childMapList);
         }
 
+    }
+
+    public List<Map<String,Object>> findListData(String configurationPageCoding,Map<String, Object> findMap){
+        GeneralPurpose generalPurpose = new GeneralPurpose();
+        List<Find> findList = new ArrayList<Find>();
+        generalPurpose.setTableEn(getTableEn(configurationPageCoding));//设置表名称
+        generalPurpose.setFieldList(getFindFieldList(configurationPageCoding));//设置字段列表
+        for(Map.Entry<String, Object> entry : findMap.entrySet()){
+            findList.add( new Find(entry.getKey(),entry.getValue(),"like") );
+        }
+        generalPurpose.setFindList(findList);
+        List<Map<String,Object>> mapList = generalPurposeDao.findByCondition(generalPurpose);
+        return mapList;
+    }
+
+    public List<String> getFindFieldList(String configurationPageCoding){
+        List<String> findFiledList = new ArrayList<String>();
+        List<Map<String,Object>> listShowField = getListShowField(configurationPageCoding);
+        for(Map<String,Object> map : listShowField){
+            findFiledList.add(map.get("field_en").toString());
+        }
+        return findFiledList;
+    }
+
+    /**
+     * 列表
+     * @param configurationPageCoding
+     * @return
+     */
+    public List<Map<String,Object>> getListShowField(String configurationPageCoding){
+        List<String> showField = new ArrayList<String>();
+        showField.add("field_en");
+        showField.add("name");
+        List<Find> findList = new ArrayList<Find>();
+        findList.add(new Find("is_show_list",0,"equal"));
+        return getFieldInformation(configurationPageCoding,showField,findList);
     }
 
 }

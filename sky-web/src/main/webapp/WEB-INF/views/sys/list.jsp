@@ -86,7 +86,7 @@
                 <h1 class="modal-title">添加</h1>
             </div>
             <iframe id="createIframe" class="J_iframe" name="iframe0" width="100%" height="100%"
-                            src="${pageContext.request.contextPath}/configuration/edit/ffae5b0d-c1b7-4f0d-9257-b97f5eda7532"
+                            src="${pageContext.request.contextPath}/configuration/edit/s_menu"
                             frameborder="0" data-id="index_v1.html" seamless></iframe>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
@@ -219,7 +219,7 @@
     };
 
     $(document).ready(function () {
-        $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
+       // $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
         $("#closeUpdate").click(function(){
             $('#listTable').bootstrapTable('refresh');//刷新数据
         });

@@ -2,9 +2,7 @@ package com.sky.sys.web;
 
 import com.alibaba.fastjson.JSON;
 import com.sdicons.json.mapper.MapperException;
-import com.sky.sys.po.Menu;
 import com.sky.sys.server.ConfigurationPageServer;
-import com.sky.sys.server.MenuServer;
 import com.sky.sys.vo.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

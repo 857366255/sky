@@ -44,10 +44,10 @@
                 <li class="nav-header">
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-table"></i> <span class="nav-label">基础页面样式</span><span
+                    <a href="#"><i class="fa fa-table"></i> <span class="nav-label">系统管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="<%=basePath%>/UI/sky/table_bootstrap.html">菜单栏配置</a></li>
+                        <li><a class="J_menuItem" href="configuration/list/s_menu">菜单栏配置</a></li>
                     </ul>
                 </li>
                 <li>
@@ -111,7 +111,7 @@
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-                    src="configuration/list/ffae5b0d-c1b7-4f0d-9257-b97f5eda7532" frameborder="0"
+                    src="configuration/list/s_menu" frameborder="0"
                     data-id="index_v1.html" seamless></iframe>
         </div>
         <div class="footer"></div>

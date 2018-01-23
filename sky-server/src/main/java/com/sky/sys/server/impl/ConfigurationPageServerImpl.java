@@ -4,10 +4,7 @@ import com.sky.sys.dao.ConfigurationPageDao;
 import com.sky.sys.dao.FieldDao;
 import com.sky.sys.dao.MenuDao;
 import com.sky.sys.dao.TableDao;
-import com.sky.sys.po.ConfigurationPage;
-import com.sky.sys.po.Field;
-import com.sky.sys.po.Menu;
-import com.sky.sys.po.Table;
+import com.sky.sys.po.*;
 import com.sky.sys.server.ConfigurationPageServer;
 import com.sky.sys.server.MenuServer;
 import com.sky.tool.UUIDTool;
@@ -22,7 +19,7 @@ import java.util.*;
  * Created by Administrator on 2017/12/30.
  */
 @Service
-public class ConfigurationPageServerImpl implements ConfigurationPageServer {
+public class ConfigurationPageServerImpl extends BaseServerImpl implements ConfigurationPageServer {
 
     @Autowired
     private ConfigurationPageDao configurationPageDao;
@@ -32,31 +29,21 @@ public class ConfigurationPageServerImpl implements ConfigurationPageServer {
     private FieldDao fieldDao;
 
     public Map<String, Object> getListParams(String configurationPageCoding) {
-        ConfigurationPage configurationPage=configurationPageDao.findById(configurationPageCoding);
-        if (configurationPage == null) {
-            try {
-                throw new Exception("编码不存在");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
         Map<String,Object> listParams = new HashMap<String, Object>();
-        listParams.put("url","/"+"aa");//请求后台的URL
+        listParams.put("url","/"+configurationPageCoding);//请求后台的URL
         listParams.put("method","get");//请求方式
         listParams.put("pageNumber","1");//初始化加载第一页，默认第一页
-        listParams.put("pageSize", configurationPage.getListRows());//每页的记录行数
-        listParams.put("height",configurationPage.getListHeight());//每页的记录行数
+        listParams.put("pageSize", "10");//每页的记录行数
+        listParams.put("height","500");//每页的记录行数
         listParams.put("pageList", Arrays.asList("10", "25","50","100"));//可供选择的每页的行数
         listParams.put("uniqueId","coding");
-        listParams.put("columns",getFieldParams(configurationPage.getListFieldList()));
+        listParams.put("columns",getFieldParams(configurationPageCoding));
         return listParams;
     }
 
     public Map<String, Object> getEditParams(String configurationPageCoding) {
         ConfigurationPage configurationPage = configurationPageDao.findById(configurationPageCoding);
         List<Field> editField = fieldDao.getEditFieldList(configurationPageCoding);
-        System.out.println(editField);
         Map<String, Object> editParams = new HashMap<String, Object>();
         editParams.put("editField", editField);
         editParams.put("configurationPage", configurationPage);
@@ -91,17 +78,22 @@ public class ConfigurationPageServerImpl implements ConfigurationPageServer {
     }
 
     public List<Map<String, Object>> getListData(String configurationPageCoding, Map<String, Object> findMap) {
-        List<Map<String, Object>> listData = fieldDao.findAllMap();
-        return listData;
+        return findListData(configurationPageCoding,findMap);
     }
 
-    private List<Map<String,Object>> getFieldParams(List<Field> fieldList){
+    /**
+     * 获得列表字段信息
+     * @param configurationPageCoding
+     * @return
+     */
+    private List<Map<String,Object>> getFieldParams(String configurationPageCoding){
+        List<Map<String,Object>> listShowField = getListShowField(configurationPageCoding);
         List<Map<String,Object>> filedParams = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
-        for(Field filed : fieldList){
+        for(Map<String,Object> filed : listShowField){
             map = new HashMap<String, Object>();
-            map.put("field",filed.getCoding());
-            map.put("title",filed.getName());
+            map.put("field",filed.get("field_en"));
+            map.put("title",filed.get("name"));
             filedParams.add(map);
         }
         map = new HashMap<String, Object>();
@@ -112,4 +104,5 @@ public class ConfigurationPageServerImpl implements ConfigurationPageServer {
         filedParams.add(map);
         return filedParams;
     }
+
 }
