@@ -54,7 +54,6 @@
 <script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 <script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-<script src="<%=basePath%>/UI/sky/js/demo/bootstrap-table-demo.min.js"></script>
 
 <script type="text/javascript">
     $(function () {

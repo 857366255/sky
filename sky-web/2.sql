@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1
-Source Server Version : 50717
+Source Server         : MySQL
+Source Server Version : 50158
 Source Host           : localhost:3306
 Source Database       : sky
 
 Target Server Type    : MYSQL
-Target Server Version : 50717
+Target Server Version : 50158
 File Encoding         : 65001
 
-Date: 2018-01-24 16:59:52
+Date: 2018-01-24 22:12:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,8 @@ CREATE TABLE `s_field` (
   `coding` varchar(255) DEFAULT NULL COMMENT '唯一标识符',
   `table_en` varchar(255) DEFAULT NULL COMMENT '数据库表名',
   `filed_en` varchar(255) DEFAULT NULL COMMENT '数据库字段名称',
-  `name` varchar(255) DEFAULT NULL COMMENT '名称'
+  `name` varchar(255) DEFAULT NULL COMMENT '名称',
+  `is_show_list` tinyint(1) DEFAULT NULL COMMENT '是否显示列表'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
