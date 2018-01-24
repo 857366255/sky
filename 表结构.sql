@@ -1,3 +1,17 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : MySQL
+Source Server Version : 50158
+Source Host           : localhost:3306
+Source Database       : sky
+
+Target Server Type    : MYSQL
+Target Server Version : 50158
+File Encoding         : 65001
+
+Date: 2018-01-24 20:09:18
+*/
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -21,6 +35,7 @@ CREATE TABLE `s_configuration_page` (
 -- ----------------------------
 -- Records of s_configuration_page
 -- ----------------------------
+INSERT INTO `s_configuration_page` VALUES ('s_menu', '菜单栏配置', 's_menu', null, null, null, null, null, null);
 INSERT INTO `s_configuration_page` VALUES ('s_menu-1', '菜单栏树形结构配置', 's_menu', null, null, null, null, null, null);
 
 -- ----------------------------
@@ -61,10 +76,9 @@ CREATE TABLE `s_field` (
 -- ----------------------------
 -- Records of s_field
 -- ----------------------------
-INSERT INTO `s_field` VALUES ('s_menu-1-coding', '唯一标识符', 'coding', 's_menu-1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `s_field` VALUES ('s_menu-1-name', '名称', 'name', 's_menu-1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `s_field` VALUES ('s_menu-1-superior_coding', '上级编码', 'superior_coding', 's_menu-1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `s_field` VALUES ('s_menu-1-table_en', '表名称', 'table_en', 's_menu-1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `s_field` VALUES ('s_menu-coding', '唯一标识符', 'coding', 's_menu', null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null);
+INSERT INTO `s_field` VALUES ('s_menu-name', '名称', 'name', 's_menu', null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null);
+INSERT INTO `s_field` VALUES ('s_menu-superior_coding', '上级编码', 'superior_coding', 's_menu', null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for s_fk
@@ -142,7 +156,7 @@ CREATE TABLE `s_table` (
 -- ----------------------------
 -- Records of s_table
 -- ----------------------------
-INSERT INTO `s_table` VALUES ('s_menu-1-s_menu', '12', 's_menu-1', 's_menu', 'copding', null, null, null, null, null, null);
+INSERT INTO `s_table` VALUES ('s_menu-s_menu', '菜单栏', 's_menu', 's_menu', 'copding', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Procedure structure for get_database_field
@@ -162,45 +176,6 @@ BEGIN
 END
 ;;
 DELIMITER ;
-
--- ----------------------------
--- Procedure structure for get_database_fk_field
--- ----------------------------
-DROP PROCEDURE IF EXISTS `get_database_fk_field`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_database_fk_field`()
-BEGIN
-   DECLARE stmt VARCHAR(6553);
-   #查询当前的 use-->database
-   SET @dbName=(SELECT DATABASE());
-     BEGIN
-       SET @sqlstr=CONCAT('SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE t WHERE t.constraint_name!="PRIMARY" and t.`table_schema`=','''',@dbName,'''');
-      END;
-   PREPARE stmt FROM @sqlstr;
-   EXECUTE stmt;
-END
-;;
-DELIMITER ;
-
--- ----------------------------
--- Procedure structure for get_database_table
--- ----------------------------
-DROP PROCEDURE IF EXISTS `get_database_table`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_database_table`()
-BEGIN
-   DECLARE stmt VARCHAR(6553);
-   #查询当前的 use-->database
-   SET @dbName=(SELECT DATABASE());
-     BEGIN
-       SET @sqlstr=CONCAT('SELECT * FROM information_schema.tables t WHERE  t.`table_schema`=','''',@dbName,'''');
-      END;
-   PREPARE stmt FROM @sqlstr;
-   EXECUTE stmt;
-END
-;;
-DELIMITER ;
-
 
 -- ----------------------------
 -- Procedure structure for get_database_fk_field
