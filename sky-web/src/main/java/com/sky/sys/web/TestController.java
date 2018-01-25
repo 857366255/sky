@@ -3,6 +3,7 @@ package com.sky.sys.web;
 import com.alibaba.fastjson.JSON;
 import com.sdicons.json.mapper.MapperException;
 import com.sky.admin.po.ListField;
+import com.sky.admin.po.ListFind;
 import com.sky.page.dao.PageDao;
 import com.sky.sys.vo.Params;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +41,12 @@ public class TestController {
     }
 
     private List<Map<String,Object>> getListData(String configurationPageCoding,Map<String,Object> findMap){
-        List<Map<String,Object>> listData =  new ArrayList<Map<String, Object>>();
-        Map<String,Object> data =  new HashMap<String, Object>();
-        data.put("coding","1");
-        data.put("name","名称");
-        listData.add(data);
-        listData.add(data);
-        return listData;
+        configurationPageCoding="1";
+        List<ListFind> listFinds =  listFieldDao.getListFinds(configurationPageCoding);
+        for(ListFind listFind : listFinds){
+            listFind.setValue("1");
+        }
+        return listFieldDao.getListDatas("s_menu",listFieldDao.getListFields(configurationPageCoding),null);
     }
 
     private Map<String, Object> getListParams(String configurationPageCoding) {

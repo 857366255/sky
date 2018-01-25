@@ -4,9 +4,10 @@
 <mapper namespace="com.sky.page.dao.PageDao">
 
     <sql id="fieldName" >coding,name,field_en,table_en,is_show_list</sql>
+    <sql id="findName" > coding,field_en,query_type</sql>
     <sql id="tableName" >s_field</sql>
 
-    <!--映射实体类-->
+    <!--映射实体类:列表显示字段-->
     <resultMap id="ListFieldClassesResultMap" type="com.sky.admin.po.ListField">
         <id property="coding" column="coding"/>
         <result property="name" column="name"/>
@@ -14,10 +15,43 @@
         <result property="fieldEn" column="field_en"/>
         <result property="isShowList" column="is_show_list"/>
     </resultMap>
+    <!--映射实体类:列表查询字段-->
+    <resultMap id="ListFindClassesResultMap" type="com.sky.admin.po.ListFind">
+        <id property="coding" column="coding"/>
+        <result property="fieldEn" column="field_en"/>
+        <result property="queryType" column="query_type"/>
+        <!--<result property="sorting_query" column="sorting_query"/>-->
+    </resultMap>
 
     <!--查询列表字段-->
     <select id="getListFields" parameterType="java.lang.String" resultMap="ListFieldClassesResultMap">
         SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE is_show_list=true AND configuration_page_coding=#{configuration_page_coding} ORDER BY sorting_list
+    </select>
+    <!--查询列表查询字段-->
+    <select id="getListFinds" parameterType="java.lang.String" resultMap="ListFindClassesResultMap">
+        SELECT <include refid="findName" /> FROM <include refid="tableName" /> WHERE is_query=true AND configuration_page_coding=#{configuration_page_coding} ORDER BY sorting_query
+    </select>
+
+    <!--查询列表数据-->
+    <select id="getListDatas" resultType="java.util.Map">
+        SELECT <foreach collection="listFields" index="index" item="item" separator="," >${item.fieldEn}</foreach> FROM ${tableEn}
+        <where>
+            <if test="listFinds!=null">
+                <foreach collection="listFinds" index="index" item="item" separator="AND " >
+                    <choose>
+                        <when test="item.getQueryType().equals('is_null')"><!--查询null-->
+                            ${item.fieldEn} is NULL
+                        </when>
+                        <when test="item.getQueryType().equals('等于')"><!--完全相同-->
+                            ${item.fieldEn}=#{item.value}
+                        </when>
+                        <when test="item.getQueryType().equals('like')"><!--模糊查询 like-->
+                            ${item.fieldEn} LIKE concat(concat('%',#{item.value}),'%')
+                        </when>
+                    </choose>
+                </foreach>
+            </if>
+        </where>
     </select>
 
  </mapper>
