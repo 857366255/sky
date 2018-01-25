@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="sky-web:war exploded">
-    <output-path>$PROJECT_DIR$/sky-web/target/sky-web</output-path>
+    <output-path>$PROJECT_DIR$/sky-web/target/sky-web-1.0-SNAPSHOT</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -12,6 +12,9 @@
           </element>
           <element id="archive" name="sky-dao-1.0-SNAPSHOT.jar">
             <element id="module-output" name="sky-dao" />
+          </element>
+          <element id="archive" name="sky-page-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="sky-page" />
           </element>
           <element id="archive" name="sky-common-1.0-SNAPSHOT.jar">
             <element id="module-output" name="sky-common" />
@@ -62,7 +65,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/sky-web/target/sky-web/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/sky-web/target/sky-web-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="sky-web/web/Web" />
     </root>

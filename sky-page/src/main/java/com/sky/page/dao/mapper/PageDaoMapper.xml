@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.page.dao.PageDao">
+
+    <sql id="fieldName" >coding,name,field_en,table_en,is_show_list</sql>
+    <sql id="tableName" >s_field</sql>
+
+    <!--映射实体类-->
+    <resultMap id="ListFieldClassesResultMap" type="com.sky.admin.po.ListField">
+        <id property="coding" column="coding"/>
+        <result property="name" column="name"/>
+        <result property="tableEn" column="table_en"/>
+        <result property="fieldEn" column="field_en"/>
+        <result property="isShowList" column="is_show_list"/>
+    </resultMap>
+
+    <!--查询列表字段-->
+    <select id="getListFields" parameterType="java.lang.String" resultMap="ListFieldClassesResultMap">
+        SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE is_show_list=true AND configuration_page_coding=#{configuration_page_coding} ORDER BY sorting_list
+    </select>
+
+ </mapper>

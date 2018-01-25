@@ -10,6 +10,7 @@
     <module>sky-dao</module>
     <module>sky-server</module>
     <module>sky-common</module>
+    <module>sky-page</module>
   </modules>
   <packaging>pom</packaging>
 

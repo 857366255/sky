@@ -67,7 +67,7 @@
         //初始化Table
         oTableInit.Init = function (params) {
             $('#listTable').bootstrapTable({
-                url: "../data"+params.url,//'/Interface/GetData',         //请求后台的URL（*）
+                url:params.url,//'/Interface/GetData',         //请求后台的URL（*）
                 method: params.method,//'get',                      //请求方式（*）
                 toolbar: '#toolbar',                //工具按钮用哪个容器
                 striped: true,                      //是否显示行间隔色
@@ -75,7 +75,7 @@
                 pagination: true,                   //是否显示分页（*）
                 sortable: false,                     //是否启用排序
                 sortOrder: "asc",                   //排序方式
-                queryParams: oTableInit.queryParams,//传递参数（*）
+               // queryParams: oTableInit.queryParams,//传递参数（*）
                 sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
                 pageNumber: params.pageNumber,//1,                       //初始化加载第一页，默认第一页
                 pageSize: params.pageSize,//10,                       //每页的记录行数（*）
