@@ -4,7 +4,7 @@
 <mapper namespace="com.sky.page.dao.PageDao">
 
     <sql id="fieldName" >coding,name,field_en,table_en,is_show_list</sql>
-    <sql id="findName" > coding,field_en,query_type</sql>
+    <sql id="findName" > coding,name,field_en,query_type</sql>
     <sql id="tableName" >s_field</sql>
 
     <!--映射实体类:列表显示字段-->
@@ -18,6 +18,7 @@
     <!--映射实体类:列表查询字段-->
     <resultMap id="ListFindClassesResultMap" type="com.sky.admin.po.ListFind">
         <id property="coding" column="coding"/>
+        <result property="name" column="name"/>
         <result property="fieldEn" column="field_en"/>
         <result property="queryType" column="query_type"/>
         <!--<result property="sorting_query" column="sorting_query"/>-->

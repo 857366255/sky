@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by Administrator on 2017/12/30.
@@ -27,7 +28,9 @@ public class TestController {
     @RequestMapping(value = "list",method= RequestMethod.GET)
     public String goList(Map<String, Object> map){
         Map<String,Object> listParams = getListParams("1");
+        List<ListFind> listFinds =  listFieldDao.getListFinds("1");
         map.put("listParams", JSON.toJSONString(listParams));
+        map.put("listFinds", listFinds);
         return "test/list";
     }
     /**
@@ -37,16 +40,25 @@ public class TestController {
     @ResponseBody
     public List<Map<String, Object>> data(@PathVariable String configurationPageCoding, Params params) throws MapperException {
         System.out.println("获得数据:");
-        return getListData(configurationPageCoding,  params.getQuery()==null ? new HashMap<String, Object>() : params.getQuery());
+        System.out.println(params);
+        return getListData(configurationPageCoding,  params.getQuery()==null ? null : params.getQuery());
     }
 
     private List<Map<String,Object>> getListData(String configurationPageCoding,Map<String,Object> findMap){
+        if(findMap==null) findMap = new HashMap<String, Object>();
         configurationPageCoding="1";
-        List<ListFind> listFinds =  listFieldDao.getListFinds(configurationPageCoding);
-        for(ListFind listFind : listFinds){
-            listFind.setValue("1");
+        CopyOnWriteArrayList<ListFind> listFinds = new CopyOnWriteArrayList<ListFind>(listFieldDao.getListFinds(configurationPageCoding));
+        for (ListFind listFind : listFinds) {
+            Object temp = findMap.get(listFind.getFieldEn());
+            if(temp==null){//前台传入的查询条件为空时
+                listFinds.remove(listFind);//删除多余查询条件
+                continue;
+            }
+            listFind.setValue(temp);//添加查询值
         }
-        return listFieldDao.getListDatas("s_menu",listFieldDao.getListFields(configurationPageCoding),null);
+
+        System.out.println(listFinds);
+        return listFieldDao.getListDatas("s_menu",listFieldDao.getListFields(configurationPageCoding),listFinds);
     }
 
     private Map<String, Object> getListParams(String configurationPageCoding) {

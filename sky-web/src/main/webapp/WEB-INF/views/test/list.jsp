@@ -19,17 +19,41 @@
 
     <title>列表</title>
     <link rel="shortcut icon" href="<%=basePath%>/UI/sky/favicon.ico">
-    <link href="<%=basePath%>/UI/sky/css/bootstrap.min.css?" rel="stylesheet">
+    <link href="<%=basePath%>/UI/sky/css/bootstrap.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/font-awesome.min.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/animate.min.css" rel="stylesheet">
-    <link href="<%=basePath%>/UI/sky/css/style.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/UI/sky/css/style.css" rel="stylesheet">
+    <style type="text/css">
+        /*label {width: 200px;}*/
+    </style>
 </head>
 
 <body>
 <div class="ibox float-e-margins">
     <div class="ibox-content">
         <div class="row row-lg">
+            <div id="query" class="col-md-12">
+                <c:forEach items="${listFinds}" var="listFind">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <label class="input-group-addon">${listFind.name}</label>
+                            <input type="text" class="form-control" placeholder="请输入用户名" id="${listFind.fieldEn}">
+                        </div>
+                    </div>
+                </c:forEach>
+
+<%--
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="stuNo" placeholder="请输入名称"/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="stuName" placeholder="请输入价格"/>
+                </div>--%>
+                <div class="col-md-2" style="text-align:left;">
+                    <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+                </div>
+            </div>
             <div class="col-sm-12">
                 <div class="example-wrap">
                     <div class="example">
@@ -60,6 +84,9 @@
         //1.初始化Table
         var oTable = new TableInit();
         oTable.Init(${listParams});
+        $("#btn_query").click(function(){
+            $('#listTable').bootstrapTable('refresh');//刷新数据
+        });
     });/**/
 
     var TableInit = function () {
@@ -75,7 +102,7 @@
                 pagination: true,                   //是否显示分页（*）
                 sortable: false,                     //是否启用排序
                 sortOrder: "asc",                   //排序方式
-               // queryParams: oTableInit.queryParams,//传递参数（*）
+                queryParams: oTableInit.queryParams,//传递参数（*）
                 sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
                 pageNumber: params.pageNumber,//1,                       //初始化加载第一页，默认第一页
                 pageSize: params.pageSize,//10,                       //每页的记录行数（*）
@@ -107,6 +134,18 @@
         };
         return oTableInit;
     };
+    function query() {
+        var q = new Object();
+        var $query = $("#query input");
+        for(var i=0;i<$query.length;i++){
+            var temp = $query[i];
+            if(temp.value==null)continue;//查询条件为空时不传入后台
+            var value = temp.value.replace(/(^\s*)|(\s*$)/g, "");//去除前后空格
+            if(value=="")continue;//查询条件为""时不传入后台
+            q[temp.id]=value;
+        }
+        return q;
+    }
 </script>
 </body>
 </html>

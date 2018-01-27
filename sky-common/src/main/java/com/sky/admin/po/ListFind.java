@@ -7,6 +7,7 @@ package com.sky.admin.po;
 public class ListFind {
     private String coding;
     private String fieldEn;//查询字段
+    private String name;//名称
     private Object value;//查询内容
     private String queryType;//查询类型
 
@@ -24,6 +25,14 @@ public class ListFind {
 
     public void setFieldEn(String fieldEn) {
         this.fieldEn = fieldEn;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Object getValue() {
@@ -47,6 +56,7 @@ public class ListFind {
         return "ListFind{" +
                 "coding='" + coding + '\'' +
                 ", fieldEn='" + fieldEn + '\'' +
+                ", name='" + name + '\'' +
                 ", value=" + value +
                 ", queryType='" + queryType + '\'' +
                 '}';
