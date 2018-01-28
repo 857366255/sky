@@ -23,6 +23,12 @@
         <result property="queryType" column="query_type"/>
         <!--<result property="sorting_query" column="sorting_query"/>-->
     </resultMap>
+    <!--映射实体类:编辑字段-->
+    <resultMap id="EditFieldClassesResultMap" type="com.sky.admin.po.ListFind">
+        <id property="coding" column="coding"/>
+        <result property="name" column="name"/>
+        <result property="fieldEn" column="field_en"/>
+    </resultMap>
 
     <!--查询列表字段-->
     <select id="getListFields" parameterType="java.lang.String" resultMap="ListFieldClassesResultMap">
@@ -32,6 +38,11 @@
     <select id="getListFinds" parameterType="java.lang.String" resultMap="ListFindClassesResultMap">
         SELECT <include refid="findName" /> FROM <include refid="tableName" /> WHERE is_query=true AND configuration_page_coding=#{configuration_page_coding} ORDER BY sorting_query
     </select>
+    <!--查询编辑字段-->
+    <select id="getEditFields" parameterType="java.lang.String" resultMap="EditFieldClassesResultMap">
+        SELECT <include refid="editName" /> FROM <include refid="tableName" /> WHERE is_edit=true AND configuration_page_coding=#{configuration_page_coding} ORDER BY sorting_query
+    </select>
+
 
     <!--查询列表数据-->
     <select id="getListDatas" resultType="java.util.Map">

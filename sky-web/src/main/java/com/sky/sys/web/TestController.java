@@ -25,6 +25,16 @@ public class TestController {
     @Autowired
     private PageDao listFieldDao;
 
+    @RequestMapping(value = "edit",method= RequestMethod.GET)
+    public String goEdit(Map<String, Object> map){
+
+        return "test/edit";
+    }
+    /**
+     * 打开列表页面
+     * @param map
+     * @return
+     */
     @RequestMapping(value = "list",method= RequestMethod.GET)
     public String goList(Map<String, Object> map){
         Map<String,Object> listParams = getListParams("1");
