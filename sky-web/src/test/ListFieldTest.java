@@ -1,4 +1,5 @@
 import base.SpringTestCase;
+import com.sky.admin.po.EditField;
 import com.sky.admin.po.ListFind;
 import com.sky.page.dao.PageDao;
 import org.junit.Test;
@@ -18,6 +19,11 @@ public class ListFieldTest extends SpringTestCase {
     private PageDao listFieldDao;
 
 
+    @Test
+    public void getEditField(){
+        System.out.println("编辑字段");
+        System.out.println(listFieldDao.getEditFields("1"));
+    }
     @Test
     public void getListData(){
         System.out.println("列表数据");

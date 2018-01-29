@@ -21,7 +21,7 @@ import java.util.Map;
 public class ConfigurationPageController {
     @Autowired
     private ConfigurationPageServer configurationPageServer;
-    @RequestMapping(value = "/list/{configurationPageCoding}",method= RequestMethod.GET)
+   /* @RequestMapping(value = "/list/{configurationPageCoding}",method= RequestMethod.GET)
     public String goList(Map<String, Object> map, @PathVariable String configurationPageCoding){
         Map<String,Object> listParams = configurationPageServer.getListParams(configurationPageCoding);
         map.put("listParams", JSON.toJSONString(listParams));
@@ -36,13 +36,13 @@ public class ConfigurationPageController {
     }
 
 
-    /**
+    *//**
      *获得数据
-     */
+     *//*
     @RequestMapping(value="data/{configurationPageCoding}", produces = "application/json; charset=utf-8" )
     @ResponseBody
     public List<Map<String, Object>> data(@PathVariable String configurationPageCoding,Params params) throws MapperException {
         System.out.println("获得数据:");
         return configurationPageServer.getListData(configurationPageCoding,  params.getQuery()==null ? new HashMap<String, Object>() : params.getQuery());
-    }
+    }*/
 }

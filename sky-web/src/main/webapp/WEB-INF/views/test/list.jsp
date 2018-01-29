@@ -42,14 +42,6 @@
                         </div>
                     </div>
                 </c:forEach>
-
-<%--
-                <div class="col-md-2">
-                    <input type="text" class="form-control" id="stuNo" placeholder="请输入名称"/>
-                </div>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" id="stuName" placeholder="请输入价格"/>
-                </div>--%>
                 <div class="col-md-2" style="text-align:left;">
                     <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
                 </div>

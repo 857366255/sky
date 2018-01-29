@@ -17,27 +17,24 @@
     <title>Title</title>
     <link rel="shortcut icon" href="<%=basePath%>/UI/sky/favicon.ico">
     <link href="<%=basePath%>/UI/sky/css/bootstrap.css" rel="stylesheet">
-    <link href="<%=basePath%>/UI/sky/css/font-awesome.css" rel="stylesheet">
-    <link href="<%=basePath%>/UI/sky/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="<%=basePath%>/UI/sky/css/font-awesome.min.css" rel="stylesheet">
+    <%--<link href="<%=basePath%>/UI/sky/css/plugins/iCheck/custom.css" rel="stylesheet">--%>
     <link href="<%=basePath%>/UI/sky/css/animate.min.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/style.css" rel="stylesheet">
 </head>
 <body class="gray-bg">
 
-    <form role="get" action="${pageContext.request.contextPath}/create/${tableNameEN}" method="post"
+    <form role="get" action="${pageContext.request.contextPath}/add/${configurationPageCoding}" method="post"
                       id="list" class="form-horizontal">
         <div class="ibox float-e-margins">
             <div class="ibox-content">
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <c:forEach items="${editParams.editField}" var="it">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">${it.name}</label>
-                                    <div class="col-sm-9 input-group">
-                                        <input name="${it.fieldEn}" type="${it.inputType}"
-                                               placeholder="${it.editAnnotation}" class="form-control">
-                                    </div>
+                        <c:forEach items="${editFields}" var="editField">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <label class="input-group-addon">${editField.name}</label>
+                                    <input type="text" class="form-control" placeholder="请输入" name="${editField.fieldEn}" value="${data[editField.fieldEn]}">
                                 </div>
                             </div>
                         </c:forEach>
@@ -57,8 +54,8 @@
 <script src="<%=basePath%>/UI/sky/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath%>/UI/sky/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="<%=basePath%>/UI/sky/js/content.min.js?v=1.0.0"></script>
-<script src="<%=basePath%>/UI/sky/js/plugins/iCheck/icheck.min.js"></script>
-<script src="<%=basePath%>/UI/sky/js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<%--<script src="<%=basePath%>/UI/sky/js/plugins/iCheck/icheck.min.js"></script>--%>
+<%--<script src="<%=basePath%>/UI/sky/js/plugins/suggest/bootstrap-suggest.min.js"></script>--%>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})

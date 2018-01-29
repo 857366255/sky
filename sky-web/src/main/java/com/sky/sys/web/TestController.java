@@ -2,16 +2,14 @@ package com.sky.sys.web;
 
 import com.alibaba.fastjson.JSON;
 import com.sdicons.json.mapper.MapperException;
+import com.sky.admin.po.EditField;
 import com.sky.admin.po.ListField;
 import com.sky.admin.po.ListFind;
 import com.sky.page.dao.PageDao;
 import com.sky.sys.vo.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -25,9 +23,49 @@ public class TestController {
     @Autowired
     private PageDao listFieldDao;
 
-    @RequestMapping(value = "edit",method= RequestMethod.GET)
-    public String goEdit(Map<String, Object> map){
 
+    @RequestMapping(value = "add/{configurationPageCoding}",method= RequestMethod.POST)
+    public String add(@RequestParam Map<String, Object> map, @PathVariable String configurationPageCoding){
+        System.out.println("新增");
+        System.out.println(map);
+        List<EditField> editFields =  listFieldDao.getEditFields(configurationPageCoding);
+        map.put("editFields", editFields);
+        map.put("configurationPageCoding", configurationPageCoding);
+        map.put("type", "add");
+        return "redirect:../edit";
+    }
+    @RequestMapping(value = "update/{configurationPageCoding}",method= RequestMethod.POST)
+    public String update(@RequestParam Map<String, Object> map, @PathVariable String configurationPageCoding){
+        System.out.println("修改");
+        System.out.println(map);
+        List<EditField> editFields =  listFieldDao.getEditFields(configurationPageCoding);
+        map.put("configurationPageCoding", configurationPageCoding);
+        map.put("type", "update");
+        map.put("editFields", editFields);
+        return "redirect:../edit";
+    }
+
+    @RequestMapping(value = "add/{configurationPageCoding}",method= RequestMethod.GET)
+    public String goAdd(Map<String, Object> map, @PathVariable String configurationPageCoding){
+        List<EditField> editFields =  listFieldDao.getEditFields(configurationPageCoding);
+        map.put("editFields", editFields);
+        map.put("configurationPageCoding", configurationPageCoding);
+        map.put("type", "add");
+        return "test/edit";
+    }
+    @RequestMapping(value = "update/{configurationPageCoding}/{id}",method= RequestMethod.GET)
+    public String goUpdate(@PathVariable String configurationPageCoding,@PathVariable Integer id, Map<String, Object> map){
+        List<EditField> editFields =  listFieldDao.getEditFields(configurationPageCoding);
+        map.put("editFields", editFields);
+        map.put("configurationPageCoding", configurationPageCoding);
+        map.put("type", "update");
+        Map<String,Object> data =  new HashMap<String, Object>();
+        data.put("coding","asd");
+        map.put("data",data);
+        // pageConfigurationService.getUpdateField(map,tableNameEn);
+       // Map<String, Object> findMap = new HashMap<String, Object>();
+       // findMap.put("id",id);
+        //map.put("data",generalPurposeService.findById(findMap));
         return "test/edit";
     }
     /**

@@ -21,7 +21,7 @@ public class MenuController {
     private MenuServer menuServer;
     @Autowired
     private ConfigurationPageServer configurationPageServer;
-    @RequestMapping(value = "admin",method= RequestMethod.GET)
+    /*@RequestMapping(value = "admin",method= RequestMethod.GET)
     public String goAdmin(Map<String, Object> map){
         List<Menu> menuList = menuServer.findMenuList();
         map.put("menuList",menuList);
@@ -46,5 +46,5 @@ public class MenuController {
             e.printStackTrace();
         }
         return "sys/index";
-    }
+    }*/
 }
