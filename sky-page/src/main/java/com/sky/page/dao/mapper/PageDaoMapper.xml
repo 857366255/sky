@@ -30,7 +30,6 @@
         <result property="name" column="name"/>
         <result property="fieldEn" column="field_en"/>
     </resultMap>
-
     <!--查询列表字段-->
     <select id="getListFields" parameterType="java.lang.String" resultMap="ListFieldClassesResultMap">
         SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE is_show_list=true AND configuration_page_coding=#{configuration_page_coding} ORDER BY sorting_list
@@ -43,8 +42,6 @@
     <select id="getEditFields" parameterType="java.lang.String" resultMap="EditFieldClassesResultMap">
         SELECT <include refid="editName" /> FROM <include refid="tableName" /> WHERE is_edit=true AND configuration_page_coding=#{configuration_page_coding} ORDER BY sorting_edit
     </select>
-
-
     <!--查询列表数据-->
     <select id="getListDatas" resultType="java.util.Map">
         SELECT <foreach collection="listFields" index="index" item="item" separator="," >${item.fieldEn}</foreach> FROM ${tableEn}
@@ -66,5 +63,21 @@
             </if>
         </where>
     </select>
+    <!--增加-->
+    <insert id="doAdd">
+        INSERT INTO ${tableEn}
+        <trim prefix="(" suffix=")" >
+            <foreach collection="editFields" index="index" item="item" separator="," >${item.fieldEn}</foreach>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <foreach collection="editFields" index="index" item="item" separator="," >
+                <choose>
+                    <when test="item.value != null and !item.value.equals('')">#{item.value}</when>
+                    <otherwise>null</otherwise>
+                </choose>
+            </foreach>
+        </trim>
+    </insert>
 
  </mapper>

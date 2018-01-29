@@ -21,24 +21,29 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class TestController {
 
     @Autowired
-    private PageDao listFieldDao;
+    private PageDao pageDao;
 
 
     @RequestMapping(value = "add/{configurationPageCoding}",method= RequestMethod.POST)
     public String add(@RequestParam Map<String, Object> map, @PathVariable String configurationPageCoding){
         System.out.println("新增");
+        if(doAdd(configurationPageCoding,map)){
+            System.out.println("保存成功");
+        }else{
+            System.out.println("保存失败");
+        }
         System.out.println(map);
-        List<EditField> editFields =  listFieldDao.getEditFields(configurationPageCoding);
+        List<EditField> editFields =  pageDao.getEditFields(configurationPageCoding);
         map.put("editFields", editFields);
         map.put("configurationPageCoding", configurationPageCoding);
         map.put("type", "add");
-        return "redirect:../edit";
+        return "redirect:"+configurationPageCoding;
     }
     @RequestMapping(value = "update/{configurationPageCoding}",method= RequestMethod.POST)
     public String update(@RequestParam Map<String, Object> map, @PathVariable String configurationPageCoding){
         System.out.println("修改");
         System.out.println(map);
-        List<EditField> editFields =  listFieldDao.getEditFields(configurationPageCoding);
+        List<EditField> editFields =  pageDao.getEditFields(configurationPageCoding);
         map.put("configurationPageCoding", configurationPageCoding);
         map.put("type", "update");
         map.put("editFields", editFields);
@@ -47,7 +52,7 @@ public class TestController {
 
     @RequestMapping(value = "add/{configurationPageCoding}",method= RequestMethod.GET)
     public String goAdd(Map<String, Object> map, @PathVariable String configurationPageCoding){
-        List<EditField> editFields =  listFieldDao.getEditFields(configurationPageCoding);
+        List<EditField> editFields =  pageDao.getEditFields(configurationPageCoding);
         map.put("editFields", editFields);
         map.put("configurationPageCoding", configurationPageCoding);
         map.put("type", "add");
@@ -55,7 +60,7 @@ public class TestController {
     }
     @RequestMapping(value = "update/{configurationPageCoding}/{id}",method= RequestMethod.GET)
     public String goUpdate(@PathVariable String configurationPageCoding,@PathVariable Integer id, Map<String, Object> map){
-        List<EditField> editFields =  listFieldDao.getEditFields(configurationPageCoding);
+        List<EditField> editFields =  pageDao.getEditFields(configurationPageCoding);
         map.put("editFields", editFields);
         map.put("configurationPageCoding", configurationPageCoding);
         map.put("type", "update");
@@ -76,7 +81,7 @@ public class TestController {
     @RequestMapping(value = "list",method= RequestMethod.GET)
     public String goList(Map<String, Object> map){
         Map<String,Object> listParams = getListParams("1");
-        List<ListFind> listFinds =  listFieldDao.getListFinds("1");
+        List<ListFind> listFinds =  pageDao.getListFinds("1");
         map.put("listParams", JSON.toJSONString(listParams));
         map.put("listFinds", listFinds);
         return "test/list";
@@ -95,7 +100,7 @@ public class TestController {
     private List<Map<String,Object>> getListData(String configurationPageCoding,Map<String,Object> findMap){
         if(findMap==null) findMap = new HashMap<String, Object>();
         configurationPageCoding="1";
-        CopyOnWriteArrayList<ListFind> listFinds = new CopyOnWriteArrayList<ListFind>(listFieldDao.getListFinds(configurationPageCoding));
+        CopyOnWriteArrayList<ListFind> listFinds = new CopyOnWriteArrayList<ListFind>(pageDao.getListFinds(configurationPageCoding));
         for (ListFind listFind : listFinds) {
             Object temp = findMap.get(listFind.getFieldEn());
             if(temp==null){//前台传入的查询条件为空时
@@ -106,7 +111,7 @@ public class TestController {
         }
 
         System.out.println(listFinds);
-        return listFieldDao.getListDatas("s_menu",listFieldDao.getListFields(configurationPageCoding),listFinds);
+        return pageDao.getListDatas("s_menu",pageDao.getListFields(configurationPageCoding),listFinds);
     }
 
     private Map<String, Object> getListParams(String configurationPageCoding) {
@@ -124,7 +129,7 @@ public class TestController {
 
     private List<Map<String,Object>> getFieldParams(String configurationPageCoding){
         List<Map<String,Object>> filedParams = new ArrayList<Map<String, Object>>();
-        List<ListField> listFields = listFieldDao.getListFields(configurationPageCoding);
+        List<ListField> listFields = pageDao.getListFields(configurationPageCoding);
         Map<String, Object> map;
         for(ListField listField : listFields){
             map = new HashMap<String, Object>();
@@ -139,5 +144,26 @@ public class TestController {
         map.put("formatter","operateFormatter");
         filedParams.add(map);*/
         return filedParams;
+    }
+    private Boolean doAdd(String configurationPageCoding, Map<String,Object> dataMap){
+        if(dataMap==null) dataMap = new HashMap<String, Object>();
+        configurationPageCoding="1";
+        System.out.println(dataMap);
+        CopyOnWriteArrayList<EditField> editFields = new CopyOnWriteArrayList<EditField>(pageDao.getEditFields(configurationPageCoding));
+        System.out.println(editFields);
+        for (EditField editField : editFields) {
+            Object temp = dataMap.get(editField.getFieldEn());
+            if(temp==null){//前台传入的查询条件为空时
+                editFields.remove(editField);//删除多余查询条件
+                continue;
+            }
+            editField.setValue(temp);//添加查询值
+        }
+        System.out.println(editFields);
+        if(pageDao.doAdd("s_menu",editFields)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

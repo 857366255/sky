@@ -13,6 +13,13 @@ import java.util.Map;
  */
 public interface PageDao {
     /**
+     * 新增数据
+     * @param tableEn
+     * @param editFields 数据
+     * @return
+     */
+    public Boolean doAdd(@Param("tableEn")String tableEn,@Param("editFields")List<EditField> editFields);
+    /**
      * 获得列表显示字段
      * @param configurationPageCoding
      * @return

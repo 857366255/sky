@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1
-Source Server Version : 50717
+Source Server         : MySQL
+Source Server Version : 50158
 Source Host           : localhost:3306
 Source Database       : sky
 
 Target Server Type    : MYSQL
-Target Server Version : 50717
+Target Server Version : 50158
 File Encoding         : 65001
 
-Date: 2018-01-29 16:33:43
+Date: 2018-01-29 21:51:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,15 +37,15 @@ CREATE TABLE `s_field` (
 -- ----------------------------
 -- Records of s_field
 -- ----------------------------
-INSERT INTO `s_field` VALUES ('1', '1', 's_menu', 'coding', '唯一标识符', '1', '1', '1', '等于', null, '1', null);
-INSERT INTO `s_field` VALUES ('2', '1', 's_menu', 'name', '名称', '1', '2', '1', '等于', null, '1', null);
-INSERT INTO `s_field` VALUES ('3', '1', 's_menu', 'icon', '图标', '1', '3', '1', '等于', null, '1', null);
-INSERT INTO `s_field` VALUES ('4', '1', 's_menu', 'sorting', '排序号', '1', '4', '1', '等于', null, '1', null);
-INSERT INTO `s_field` VALUES ('5', '1', 's_menu', 'is_enablement', '是否启用', '1', '5', '0', '等于', null, '0', null);
-INSERT INTO `s_field` VALUES ('6', '1', 's_menu', 'superior_coding', '上级编码', '1', '6', '1', '等于', null, '1', null);
-INSERT INTO `s_field` VALUES ('7', '1', 's_menu', 'configuration_page_coding', '配置页面编码', '1', '7', '0', '等于', null, '0', null);
-INSERT INTO `s_field` VALUES ('8', '1', 's_menu', 'display_style', '显示样式', '1', '8', '0', '等于', null, '0', null);
-INSERT INTO `s_field` VALUES ('9', '1', 's_menu', 'url', '链接', '1', '9', '0', '等于', null, '0', null);
+INSERT INTO `s_field` VALUES ('1', '1', 's_menu', 'coding', '唯一标识符', '1', '1', '1', '等于', '1', '1', '1');
+INSERT INTO `s_field` VALUES ('2', '1', 's_menu', 'name', '名称', '1', '2', '1', '等于', '2', '1', '2');
+INSERT INTO `s_field` VALUES ('3', '1', 's_menu', 'icon', '图标', '1', '3', '1', '等于', '3', '1', '3');
+INSERT INTO `s_field` VALUES ('4', '1', 's_menu', 'sorting', '排序号', '1', '4', '1', '等于', '4', '1', '4');
+INSERT INTO `s_field` VALUES ('5', '1', 's_menu', 'is_enablement', '是否启用', '1', '5', '0', '等于', '5', '0', '5');
+INSERT INTO `s_field` VALUES ('6', '1', 's_menu', 'superior_coding', '上级编码', '1', '6', '1', '等于', '6', '1', '6');
+INSERT INTO `s_field` VALUES ('7', '1', 's_menu', 'configuration_page_coding', '配置页面编码', '1', '7', '0', '等于', '7', '0', '7');
+INSERT INTO `s_field` VALUES ('8', '1', 's_menu', 'display_style', '显示样式', '1', '8', '0', '等于', '8', '0', '8');
+INSERT INTO `s_field` VALUES ('9', '1', 's_menu', 'url', '链接', '1', '9', '0', '等于', '9', '0', '9');
 
 -- ----------------------------
 -- Table structure for s_menu

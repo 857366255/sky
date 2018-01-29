@@ -9,6 +9,7 @@ public class EditField {
     private String fieldEn;//数据库字段名称
     private String tableEn;//数据库表名
     private Boolean isEdit;//是否编辑
+    private Object value;//编辑 值
 
     public String getCoding() {
         return coding;
@@ -50,6 +51,10 @@ public class EditField {
         isEdit = edit;
     }
 
+    public Object getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return "EditField{" +
@@ -58,6 +63,12 @@ public class EditField {
                 ", fieldEn='" + fieldEn + '\'' +
                 ", tableEn='" + tableEn + '\'' +
                 ", isEdit=" + isEdit +
+                ", value=" + value +
                 '}';
     }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
+
 }
