@@ -47,7 +47,9 @@
                     <a href="#"><i class="fa fa-table"></i> <span class="nav-label">系统管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="configuration/list/s_menu">菜单栏配置</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath}/list">列表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath}/add/1">新增</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath}/update/1/1">修改</a></li>
                     </ul>
                 </li>
                 <li>
@@ -111,7 +113,7 @@
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-                    src="configuration/list/s_menu" frameborder="0"
+                    src="${pageContext.request.contextPath}/list" frameborder="0"
                     data-id="index_v1.html" seamless></iframe>
         </div>
         <div class="footer"></div>

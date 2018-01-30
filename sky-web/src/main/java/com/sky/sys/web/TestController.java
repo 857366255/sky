@@ -23,8 +23,13 @@ public class TestController {
     @Autowired
     private PageDao pageDao;
 
-
-    @RequestMapping(value = "add/{configurationPageCoding}",method= RequestMethod.POST)
+    /**
+     * 新增数据
+     * @param map
+     * @param configurationPageCoding
+     * @return
+     */
+    @RequestMapping(value = "add/{configurationPageCoding}",method = RequestMethod.POST)
     public String add(@RequestParam Map<String, Object> map, @PathVariable String configurationPageCoding){
         System.out.println("新增");
         if(doAdd(configurationPageCoding,map)){
@@ -37,20 +42,38 @@ public class TestController {
         map.put("editFields", editFields);
         map.put("configurationPageCoding", configurationPageCoding);
         map.put("type", "add");
-        return "redirect:"+configurationPageCoding;
+        return "redirect:../"+configurationPageCoding;
     }
-    @RequestMapping(value = "update/{configurationPageCoding}",method= RequestMethod.POST)
-    public String update(@RequestParam Map<String, Object> map, @PathVariable String configurationPageCoding){
+
+    /**
+     * 更新数据 doUpdate
+     * @param map
+     * @param configurationPageCoding
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "update/{configurationPageCoding}/{id}",method = RequestMethod.POST)
+    public String update(@RequestParam Map<String, Object> map, @PathVariable String configurationPageCoding, @PathVariable String id){
         System.out.println("修改");
-        System.out.println(map);
+        if(doUpdate(configurationPageCoding,map)){
+            System.out.println("修改成功");
+        }else{
+            System.out.println("修改失败");
+        }
         List<EditField> editFields =  pageDao.getEditFields(configurationPageCoding);
         map.put("configurationPageCoding", configurationPageCoding);
         map.put("type", "update");
         map.put("editFields", editFields);
-        return "redirect:../edit";
+        return "redirect:"+id;
     }
 
-    @RequestMapping(value = "add/{configurationPageCoding}",method= RequestMethod.GET)
+    /**
+     * 打开新增页面
+     * @param map
+     * @param configurationPageCoding
+     * @return
+     */
+    @RequestMapping(value = "add/{configurationPageCoding}",method = RequestMethod.GET)
     public String goAdd(Map<String, Object> map, @PathVariable String configurationPageCoding){
         List<EditField> editFields =  pageDao.getEditFields(configurationPageCoding);
         map.put("editFields", editFields);
@@ -58,19 +81,26 @@ public class TestController {
         map.put("type", "add");
         return "test/edit";
     }
-    @RequestMapping(value = "update/{configurationPageCoding}/{id}",method= RequestMethod.GET)
-    public String goUpdate(@PathVariable String configurationPageCoding,@PathVariable Integer id, Map<String, Object> map){
+
+    /**
+     * 打开更新页面
+     * @param configurationPageCoding
+     * @param id
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "update/{configurationPageCoding}/{id}",method = RequestMethod.GET)
+    public String goUpdate(@PathVariable String configurationPageCoding,@PathVariable String id, Map<String, Object> map){
+        System.out.println("打开更新页面");
         List<EditField> editFields =  pageDao.getEditFields(configurationPageCoding);
         map.put("editFields", editFields);
         map.put("configurationPageCoding", configurationPageCoding);
         map.put("type", "update");
-        Map<String,Object> data =  new HashMap<String, Object>();
-        data.put("coding","asd");
+        map.put("id", id);
+        Map<String,Object> idMap = new HashMap<String, Object>();
+        idMap.put("coding",id);
+        Map<String,Object> data = pageDao.getEidtData("s_menu",idMap,editFields);
         map.put("data",data);
-        // pageConfigurationService.getUpdateField(map,tableNameEn);
-       // Map<String, Object> findMap = new HashMap<String, Object>();
-       // findMap.put("id",id);
-        //map.put("data",generalPurposeService.findById(findMap));
         return "test/edit";
     }
     /**
@@ -78,7 +108,7 @@ public class TestController {
      * @param map
      * @return
      */
-    @RequestMapping(value = "list",method= RequestMethod.GET)
+    @RequestMapping(value = "list",method = RequestMethod.GET)
     public String goList(Map<String, Object> map){
         Map<String,Object> listParams = getListParams("1");
         List<ListFind> listFinds =  pageDao.getListFinds("1");
@@ -161,6 +191,29 @@ public class TestController {
         }
         System.out.println(editFields);
         if(pageDao.doAdd("s_menu",editFields)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    private Boolean doUpdate(String configurationPageCoding, Map<String,Object> dataMap){
+        if(dataMap==null) dataMap = new HashMap<String, Object>();
+        Map<String,Object> findMap = new HashMap<String, Object>();
+        CopyOnWriteArrayList<EditField> editFields = new CopyOnWriteArrayList<EditField>(pageDao.getEditFields("1"));
+        for (EditField editField : editFields) {
+            String fieldEn = editField.getFieldEn();
+            Object temp = dataMap.get(fieldEn);
+            if(fieldEn.equals("coding")){
+                findMap.put(fieldEn,temp);
+                editFields.remove(editField);//删除多余查询条件
+                continue;
+            }else if(temp==null){//前台传入的查询条件为空时
+                editFields.remove(editField);//删除多余查询条件
+                continue;
+            }
+            editField.setValue(temp);//添加查询值
+        }
+        if(pageDao.doUpdate("s_menu",editFields,findMap)){
             return true;
         }else{
             return false;

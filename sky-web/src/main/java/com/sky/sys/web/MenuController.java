@@ -21,14 +21,14 @@ public class MenuController {
     private MenuServer menuServer;
     @Autowired
     private ConfigurationPageServer configurationPageServer;
-    /*@RequestMapping(value = "admin",method= RequestMethod.GET)
+    @RequestMapping(value = "admin",method= RequestMethod.GET)
     public String goAdmin(Map<String, Object> map){
-        List<Menu> menuList = menuServer.findMenuList();
-        map.put("menuList",menuList);
-        map.put("number",0);
+        //List<Menu> menuList = menuServer.findMenuList();
+       // map.put("menuList",menuList);
+       // map.put("number",0);
         return "sys/index";
     }
-    @RequestMapping(value = "add",method= RequestMethod.GET)
+   /* @RequestMapping(value = "add",method= RequestMethod.GET)
     public String test(){
         ConfigurationPage configurationPage = new ConfigurationPage();
         configurationPage.setCoding("HWAS21123123");

@@ -19,12 +19,15 @@
     <link href="<%=basePath%>/UI/sky/css/bootstrap.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/font-awesome.min.css" rel="stylesheet">
     <%--<link href="<%=basePath%>/UI/sky/css/plugins/iCheck/custom.css" rel="stylesheet">--%>
+    <link href="<%=basePath%>/UI/sky/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="<%=basePath%>/UI/sky/css/plugins/chosen/chosen.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/animate.min.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/style.css" rel="stylesheet">
+
 </head>
 <body class="gray-bg">
 
-    <form role="get" action="${pageContext.request.contextPath}/add/${configurationPageCoding}" method="post"
+    <form role="get" action="${pageContext.request.contextPath}/${type}/${configurationPageCoding}/${id}" method="post"
                       id="list" class="form-horizontal">
         <div class="ibox float-e-margins">
             <div class="ibox-content">
@@ -34,7 +37,37 @@
                             <div class="col-md-3">
                                 <div class="input-group">
                                     <label class="input-group-addon">${editField.name}</label>
-                                    <input type="text" class="form-control" placeholder="请输入" name="${editField.fieldEn}" value="${data[editField.fieldEn]}">
+                                    <c:choose>
+                                        <c:when  test="${editField.inputType.equals('radio')}">
+                                            <div class="radio radio-info radio-inline">
+                                                <input type="radio" class="form-control" id="inlineRadio1" value="1" name="${editField.fieldEn}" ${data[editField.fieldEn] ? "checked=''" : ""}>
+                                                <label for="inlineRadio1"> 启用 </label>
+                                            </div>
+                                            <div class="radio radio-info radio-inline">
+                                                <input type="radio" class="form-control" id="inlineRadio2" value="0" name="${editField.fieldEn}" ${!data[editField.fieldEn] ? "checked=''" : ""}>
+                                                <label for="inlineRadio2"> 停止 </label>
+                                            </div>
+                                        </c:when >
+                                        <c:when test="${editField.inputType.equals('select')}">
+                                            <%--<select data-placeholder="选择省份..." class="chosen-select form-control" name="${editField.fieldEn}" tabindex="2">
+                                                <option value="">请选择省份</option>
+                                                <option value="110000" hassubinfo="true" selected = "selected">北京</option>
+                                                <option value="120000" hassubinfo="true">天津</option>
+                                                <option value="130000" hassubinfo="true">河北省</option>
+                                                <option value="140000" hassubinfo="true">山西省</option>
+                                            </select>--%>
+                                            <select data-placeholder="选择省份" class="chosen-select form-control" multiple name="${editField.fieldEn}" tabindex="4">
+                                                <option value="">请选择省份</option>
+                                                <option value="110000" hassubinfo="true">北京</option>
+                                                <option value="120000" hassubinfo="true">天津</option>
+                                                <option value="130000" hassubinfo="true">河北省</option>
+                                                <option value="140000" hassubinfo="true">山西省</option>
+                                            </select>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <input type="text" class="form-control" placeholder="请输入" name="${editField.fieldEn}" value="${data[editField.fieldEn]}">
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </c:forEach>
@@ -54,6 +87,8 @@
 <script src="<%=basePath%>/UI/sky/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath%>/UI/sky/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="<%=basePath%>/UI/sky/js/content.min.js?v=1.0.0"></script>
+<script src="<%=basePath%>/UI/sky/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="<%=basePath%>/UI/sky/js/demo/form-advanced-demo.min.js"></script><%--多选下拉框是需要--%>
 <%--<script src="<%=basePath%>/UI/sky/js/plugins/iCheck/icheck.min.js"></script>--%>
 <%--<script src="<%=basePath%>/UI/sky/js/plugins/suggest/bootstrap-suggest.min.js"></script>--%>
 <script type="text/javascript">

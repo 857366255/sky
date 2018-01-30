@@ -9,6 +9,7 @@ public class EditField {
     private String fieldEn;//数据库字段名称
     private String tableEn;//数据库表名
     private Boolean isEdit;//是否编辑
+    private String inputType;//输入框类型
     private Object value;//编辑 值
 
     public String getCoding() {
@@ -51,8 +52,20 @@ public class EditField {
         isEdit = edit;
     }
 
+    public String getInputType() {
+        return inputType;
+    }
+
+    public void setInputType(String inputType) {
+        this.inputType = inputType;
+    }
+
     public Object getValue() {
         return value;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
     }
 
     @Override
@@ -63,12 +76,8 @@ public class EditField {
                 ", fieldEn='" + fieldEn + '\'' +
                 ", tableEn='" + tableEn + '\'' +
                 ", isEdit=" + isEdit +
+                ", inputType='" + inputType + '\'' +
                 ", value=" + value +
                 '}';
     }
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
-
 }
