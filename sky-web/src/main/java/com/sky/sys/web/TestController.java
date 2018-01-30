@@ -79,6 +79,18 @@ public class TestController {
         map.put("editFields", editFields);
         map.put("configurationPageCoding", configurationPageCoding);
         map.put("type", "add");
+
+        List<Map<String, Object>> inputList = new ArrayList<Map<String, Object>>();
+        Map<String,Object> inputMap =  new HashMap<String, Object>();
+        inputMap.put("name","自行车");
+        inputMap.put("value","1");
+        inputList.add(inputMap);
+        inputMap =  new HashMap<String, Object>();
+        inputMap.put("name","自行车2");
+        inputMap.put("value","2");
+        inputList.add(inputMap);
+        map.put("inputList",inputList);
+
         return "test/edit";
     }
 
@@ -101,6 +113,18 @@ public class TestController {
         idMap.put("coding",id);
         Map<String,Object> data = pageDao.getEidtData("s_menu",idMap,editFields);
         map.put("data",data);
+
+        List<Map<String, Object>> inputList = new ArrayList<Map<String, Object>>();
+        Map<String,Object> inputMap =  new HashMap<String, Object>();
+        inputMap.put("name","自行车");
+        inputMap.put("value","1");
+        inputList.add(inputMap);
+        inputMap =  new HashMap<String, Object>();
+        inputMap.put("name","自行车2");
+        inputMap.put("value","2");
+        inputList.add(inputMap);
+        map.put("inputList",inputList);
+
         return "test/edit";
     }
     /**

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-01-30 17:17:27
+Date: 2018-01-30 20:13:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -85,7 +85,8 @@ CREATE TABLE `s_menu` (
 -- ----------------------------
 -- Records of s_menu
 -- ----------------------------
-INSERT INTO `s_menu` VALUES ('1', '1', '1', '1', '1', '130000', '1', '1', '1');
+INSERT INTO `s_menu` VALUES ('1', '1', '1', '1', '1', '2', '1', '1', '1');
+INSERT INTO `s_menu` VALUES ('1203', null, null, null, '0', '2', null, null, null);
 INSERT INTO `s_menu` VALUES ('2', '2', '2', '2', null, '2', '2', '2', '2');
 INSERT INTO `s_menu` VALUES ('3', '3', '3', '3', null, '3', '3', '3', '3');
 INSERT INTO `s_menu` VALUES ('4', '4', '4', '4', null, '4', '4', '4', '4');

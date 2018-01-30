@@ -49,13 +49,14 @@
                                             </div>
                                         </c:when >
                                         <c:when test="${editField.inputType.equals('select')}">
-                                            <%--<select data-placeholder="选择省份..." class="chosen-select form-control" name="${editField.fieldEn}" tabindex="2">
-                                                <option value="">请选择省份</option>
-                                                <option value="110000" hassubinfo="true" selected = "selected">北京</option>
-                                                <option value="120000" hassubinfo="true">天津</option>
-                                                <option value="130000" hassubinfo="true">河北省</option>
-                                                <option value="140000" hassubinfo="true">山西省</option>
-                                            </select>--%>
+                                            <select data-placeholder="选择..." class="chosen-select form-control" name="${editField.fieldEn}" tabindex="2">
+                                                <option value="">请选择</option>
+                                                <c:forEach items="${inputList}" var="input">
+                                                    <option value="${input.value}" hassubinfo="true" ${data[editField.fieldEn].equals(input.value) ? "selected" : "" }>${input.name}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </c:when>
+                                        <c:when test="${editField.inputType.equals('multiple')}">
                                             <select data-placeholder="选择省份" class="chosen-select form-control" multiple name="${editField.fieldEn}" tabindex="4">
                                                 <option value="">请选择省份</option>
                                                 <option value="110000" hassubinfo="true">北京</option>
