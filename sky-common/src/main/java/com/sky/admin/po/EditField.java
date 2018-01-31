@@ -1,5 +1,7 @@
 package com.sky.admin.po;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/1/28.
  */
@@ -11,6 +13,10 @@ public class EditField {
     private Boolean isEdit;//是否编辑
     private String inputType;//输入框类型
     private Object value;//编辑 值
+   // private List<InputField> inputFields;
+    private String selectBoxCoding;//选择框编码
+    private SelectBox selectBox;
+    private List<SelectBoxValue> selectBoxValues;//
 
     public String getCoding() {
         return coding;
@@ -68,6 +74,30 @@ public class EditField {
         this.value = value;
     }
 
+    public String getSelectBoxCoding() {
+        return selectBoxCoding;
+    }
+
+    public void setSelectBoxCoding(String selectBoxCoding) {
+        this.selectBoxCoding = selectBoxCoding;
+    }
+
+    public SelectBox getSelectBox() {
+        return selectBox;
+    }
+
+    public void setSelectBox(SelectBox selectBox) {
+        this.selectBox = selectBox;
+    }
+
+    public List<SelectBoxValue> getSelectBoxValues() {
+        return selectBoxValues;
+    }
+
+    public void setSelectBoxValues(List<SelectBoxValue> selectBoxValues) {
+        this.selectBoxValues = selectBoxValues;
+    }
+
     @Override
     public String toString() {
         return "EditField{" +
@@ -78,6 +108,9 @@ public class EditField {
                 ", isEdit=" + isEdit +
                 ", inputType='" + inputType + '\'' +
                 ", value=" + value +
+                ", selectBoxCoding='" + selectBoxCoding + '\'' +
+                ", selectBox=" + selectBox +
+                ", selectBoxValues=" + selectBoxValues +
                 '}';
     }
 }

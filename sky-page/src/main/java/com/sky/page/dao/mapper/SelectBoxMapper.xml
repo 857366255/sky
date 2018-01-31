@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.page.dao.SelectBoxDao">
+    <sql id="showName" >coding,selectbox_coding,name,table_en,field_en,sorting,is_show</sql>
+    <sql id="selectBoxName" >coding,name,table_en,type,value_field_en,custom_selectbox_group</sql>
+    <sql id="tableName" >s_selectbox_show_field</sql>
+    <sql id="tableName2" >s_selectbox</sql>
+
+    <!--映射实体类:拉框需要显示的字段-->
+    <resultMap id="SelectBoxShowFieldClassesResultMap" type="com.sky.admin.po.SelectBoxShowField">
+        <id property="coding" column="coding"/>
+        <result property="name" column="name"/>
+        <result property="tableEn" column="table_en"/>
+        <result property="fieldEn" column="field_en"/>
+        <result property="isShow" column="is_show"/>
+    </resultMap>
+    <!--查询 下拉框需要显示的字段-->
+    <select id="getSelectBoxShowFields"  resultMap="SelectBoxShowFieldClassesResultMap">
+        SELECT <include refid="showName" /> FROM <include refid="tableName" /> WHERE selectbox_coding=#{selectbox_coding} AND is_show=true ORDER BY sorting
+    </select>
+
+    <!--映射实体类:下拉框-->
+    <resultMap id="SelectBoxClassesResultMap" type="com.sky.admin.po.SelectBox">
+        <id property="coding" column="coding"/>
+        <result property="name" column="name"/>
+        <result property="tableEn" column="table_en"/>
+        <result property="type" column="type"/>
+        <result property="valueFieldEn" column="value_field_en"/>
+        <result property="customSelectboxGroup" column="custom_selectbox_group"/>
+        <collection property="selectBoxShowFields" column="coding" select="getSelectBoxShowFields" />
+        <!--<result property="isShow" column="is_show"/>-->
+    </resultMap>
+    <!--查询 下拉框-->
+    <select id="getSelectBox"  resultMap="SelectBoxClassesResultMap">
+        SELECT <include refid="selectBoxName" /> FROM <include refid="tableName2" /> WHERE coding=#{selectbox_coding}
+    </select>
+
+    <!--映射实体类:下拉框-->
+    <resultMap id="SelectBoxValueClassesResultMap" type="com.sky.admin.po.SelectBoxValue">
+        <id property="value" column="value_string"/>
+        <result property="name" column="name"/>
+        <result property="valueBoolean" column="value_boolean"/>
+    </resultMap>
+    <!--查询 下拉框-->
+    <select id="getSelectBoxValues"  resultMap="SelectBoxValueClassesResultMap">
+        SELECT
+        <choose>
+            <when test="selectBox.customSelectboxGroup!=null and !selectBox.customSelectboxGroup.isEmpty() and selectBox.tableEn.equals('s_custom_selectbox')">
+                name,value_string,value_boolean
+            </when>
+            <otherwise>
+                concat_ws(" ",<foreach collection="selectBox.selectBoxShowFields" index="index" item="item" separator="," > ${item.fieldEn} </foreach>) AS name, ${selectBox.valueFieldEn} AS value
+            </otherwise>
+        </choose>
+
+        FROM  ${selectBox.tableEn}
+        <where>
+            <if test="selectBox.customSelectboxGroup!=null and !selectBox.customSelectboxGroup.isEmpty() and selectBox.tableEn.equals('s_custom_selectbox')">
+                groups=#{selectBox.customSelectboxGroup}
+            </if>
+        </where>
+    </select>
+
+ </mapper>

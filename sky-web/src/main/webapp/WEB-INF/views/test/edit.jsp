@@ -38,25 +38,23 @@
                                 <div class="input-group">
                                     <label class="input-group-addon">${editField.name}</label>
                                     <c:choose>
-                                        <c:when  test="${editField.inputType.equals('radio')}">
-                                            <div class="radio radio-info radio-inline">
-                                                <input type="radio" class="form-control" id="inlineRadio1" value="1" name="${editField.fieldEn}" ${data[editField.fieldEn] ? "checked=''" : ""}>
-                                                <label for="inlineRadio1"> 启用 </label>
-                                            </div>
-                                            <div class="radio radio-info radio-inline">
-                                                <input type="radio" class="form-control" id="inlineRadio2" value="0" name="${editField.fieldEn}" ${!data[editField.fieldEn] ? "checked=''" : ""}>
-                                                <label for="inlineRadio2"> 停止 </label>
-                                            </div>
+                                        <c:when  test="${editField.selectBox.type.equals('radio')}">
+                                            <c:forEach items="${editField.selectBoxValues}" varStatus="i" var="input">
+                                                <div class="radio radio-info radio-inline">
+                                                    <input type="radio" class="form-control" id="${editField.fieldEn}${i}" value="${input.value}" name="${editField.fieldEn}" ${data[editField.fieldEn].equals(input.valueBoolean) ? "checked=''" : "" }>
+                                                    <label for="${editField.fieldEn}${i}"> ${input.name} </label>
+                                                </div>
+                                            </c:forEach>
                                         </c:when >
-                                        <c:when test="${editField.inputType.equals('select')}">
+                                        <c:when test="${editField.selectBox.type.equals('select')}">
                                             <select data-placeholder="选择..." class="chosen-select form-control" name="${editField.fieldEn}" tabindex="2">
                                                 <option value="">请选择</option>
-                                                <c:forEach items="${inputList}" var="input">
+                                                <c:forEach items="${editField.selectBoxValues}" var="input">
                                                     <option value="${input.value}" hassubinfo="true" ${data[editField.fieldEn].equals(input.value) ? "selected" : "" }>${input.name}</option>
                                                 </c:forEach>
                                             </select>
                                         </c:when>
-                                        <c:when test="${editField.inputType.equals('multiple')}">
+                                        <c:when test="${editField.selectBox.type.equals('multiple')}">
                                             <select data-placeholder="选择省份" class="chosen-select form-control" multiple name="${editField.fieldEn}" tabindex="4">
                                                 <option value="">请选择省份</option>
                                                 <option value="110000" hassubinfo="true">北京</option>

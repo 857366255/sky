@@ -2,10 +2,9 @@ package com.sky.sys.web;
 
 import com.alibaba.fastjson.JSON;
 import com.sdicons.json.mapper.MapperException;
-import com.sky.admin.po.EditField;
-import com.sky.admin.po.ListField;
-import com.sky.admin.po.ListFind;
+import com.sky.admin.po.*;
 import com.sky.page.dao.PageDao;
+import com.sky.page.dao.SelectBoxDao;
 import com.sky.sys.vo.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +21,8 @@ public class TestController {
 
     @Autowired
     private PageDao pageDao;
+    @Autowired
+    private SelectBoxDao selectBoxDao;
 
     /**
      * 新增数据
@@ -76,11 +77,22 @@ public class TestController {
     @RequestMapping(value = "add/{configurationPageCoding}",method = RequestMethod.GET)
     public String goAdd(Map<String, Object> map, @PathVariable String configurationPageCoding){
         List<EditField> editFields =  pageDao.getEditFields(configurationPageCoding);
+
+        for(EditField editField : editFields){
+            SelectBox selectBox = editField.getSelectBox();
+            if(selectBox!=null){
+                System.out.println(selectBox);
+                List<SelectBoxValue> selectBoxValue = selectBoxDao.getSelectBoxValues(selectBox);
+                editField.setSelectBoxValues(selectBoxValue);
+                System.out.println(selectBoxValue);
+            }
+        }
+
         map.put("editFields", editFields);
         map.put("configurationPageCoding", configurationPageCoding);
         map.put("type", "add");
 
-        List<Map<String, Object>> inputList = new ArrayList<Map<String, Object>>();
+       /* List<Map<String, Object>> inputList = new ArrayList<Map<String, Object>>();
         Map<String,Object> inputMap =  new HashMap<String, Object>();
         inputMap.put("name","自行车");
         inputMap.put("value","1");
@@ -89,7 +101,7 @@ public class TestController {
         inputMap.put("name","自行车2");
         inputMap.put("value","2");
         inputList.add(inputMap);
-        map.put("inputList",inputList);
+        map.put("inputList",inputList);*/
 
         return "test/edit";
     }
@@ -104,7 +116,17 @@ public class TestController {
     @RequestMapping(value = "update/{configurationPageCoding}/{id}",method = RequestMethod.GET)
     public String goUpdate(@PathVariable String configurationPageCoding,@PathVariable String id, Map<String, Object> map){
         System.out.println("打开更新页面");
+
         List<EditField> editFields =  pageDao.getEditFields(configurationPageCoding);
+        for(EditField editField : editFields){
+            SelectBox selectBox = editField.getSelectBox();
+            if(selectBox!=null){
+                System.out.println(selectBox);
+                List<SelectBoxValue> selectBoxValue = selectBoxDao.getSelectBoxValues(selectBox);
+                editField.setSelectBoxValues(selectBoxValue);
+                System.out.println(selectBoxValue);
+            }
+        }
         map.put("editFields", editFields);
         map.put("configurationPageCoding", configurationPageCoding);
         map.put("type", "update");

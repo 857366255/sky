@@ -1,7 +1,9 @@
 import base.SpringTestCase;
 import com.sky.admin.po.EditField;
 import com.sky.admin.po.ListFind;
+import com.sky.admin.po.SelectBox;
 import com.sky.page.dao.PageDao;
+import com.sky.page.dao.SelectBoxDao;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +23,25 @@ public class PageTest extends SpringTestCase {
 
     @Autowired
     private PageDao pageDao;
+    @Autowired
+    private SelectBoxDao selectBoxDao;
+
+    @Test
+    public void test(){
+        List<EditField> editFields =  pageDao.getEditFields("1");
+
+        for(EditField editField : editFields){
+            SelectBox selectBox = editField.getSelectBox();
+            if(selectBox!=null){
+                System.out.println(selectBox);
+                editField.setSelectBoxValues(selectBoxDao.getSelectBoxValues(selectBox));
+            }
+        }
+
+        System.out.println(editFields);
+
+    }
+
     @Test
     public void doDelete(){
         System.out.println("删除");
