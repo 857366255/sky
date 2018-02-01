@@ -17,6 +17,11 @@
         <result property="fieldEn" column="field_en"/>
         <result property="isShowList" column="is_show_list"/>
     </resultMap>
+    <!--查询列表字段-->
+    <select id="getListFields" parameterType="java.lang.String" resultMap="ListFieldClassesResultMap">
+        SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE is_show_list=true AND configuration_page_coding=#{configuration_page_coding} ORDER BY sorting_list
+    </select>
+
     <!--映射实体类:列表查询字段-->
     <resultMap id="ListFindClassesResultMap" type="com.sky.admin.po.ListFind">
         <id property="coding" column="coding"/>
@@ -25,15 +30,11 @@
         <result property="queryType" column="query_type"/>
         <!--<result property="sorting_query" column="sorting_query"/>-->
     </resultMap>
-
-    <!--查询列表字段-->
-    <select id="getListFields" parameterType="java.lang.String" resultMap="ListFieldClassesResultMap">
-        SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE is_show_list=true AND configuration_page_coding=#{configuration_page_coding} ORDER BY sorting_list
-    </select>
     <!--查询列表查询字段-->
     <select id="getListFinds" parameterType="java.lang.String" resultMap="ListFindClassesResultMap">
         SELECT <include refid="findName" /> FROM <include refid="tableName" /> WHERE is_query=true AND configuration_page_coding=#{configuration_page_coding} ORDER BY sorting_query
     </select>
+
     <!--映射实体类:编辑字段-->
     <resultMap id="EditFieldClassesResultMap" type="com.sky.admin.po.EditField">
         <id property="coding" column="coding"/>
@@ -46,6 +47,7 @@
     <select id="getEditFields" parameterType="java.lang.String" resultMap="EditFieldClassesResultMap">
         SELECT <include refid="editName" /> FROM <include refid="tableName" /> WHERE is_edit=true AND configuration_page_coding=#{configuration_page_coding} ORDER BY sorting_edit
     </select>
+
     <!--查询列表数据-->
     <select id="getListDatas" resultType="java.util.Map">
         SELECT <foreach collection="listFields" index="index" item="item" separator="," >${item.fieldEn}</foreach> FROM ${tableEn}
