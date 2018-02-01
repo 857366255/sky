@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <div class="col-sm-12">
                         <c:forEach items="${editFields}" var="editField">
-                            <div class="col-md-3">
+                            <div class="col-sm-6">
                                 <div class="input-group">
                                     <label class="input-group-addon">${editField.name}</label>
                                     <c:choose>
@@ -50,7 +50,7 @@
                                             <select data-placeholder="选择..." class="chosen-select form-control" name="${editField.fieldEn}" tabindex="2">
                                                 <option value="">请选择</option>
                                                 <c:forEach items="${editField.selectBoxValues}" var="input">
-                                                    <option value="${input.value}" hassubinfo="true" ${data[editField.fieldEn].equals(input.value) ? "selected" : "" }>${input.name}</option>
+                                                    <option value="${input.value}" ${data[editField.fieldEn].equals(input.value) ? "selected" : "" }>${input.name}</option>
                                                 </c:forEach>
                                             </select>
                                         </c:when>
@@ -75,7 +75,8 @@
                 <div class="hr-line-dashed"></div>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2">
-                        <button class="btn btn-primary" type="submit">保存内容</button>
+                        <button id="save" class="btn btn-primary" type="submit">保存内容</button>
+                        <%--<button class="layui-btn layui-btn-small bcql-icon icon-save" lay-submit lay-filter="save" ></button>--%>
                         <button class="btn btn-white" type="submit">取消</button>
                     </div>
                 </div>
@@ -87,12 +88,14 @@
 <script src="<%=basePath%>/UI/sky/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="<%=basePath%>/UI/sky/js/content.min.js?v=1.0.0"></script>
 <script src="<%=basePath%>/UI/sky/js/plugins/chosen/chosen.jquery.js"></script>
-<script src="<%=basePath%>/UI/sky/js/demo/form-advanced-demo.min.js"></script><%--多选下拉框是需要--%>
+<%--<script src="<%=basePath%>/UI/sky/js/demo/form-advanced-demo.min.js"></script>&lt;%&ndash;多选下拉框是需要&ndash;%&gt;--%>
 <%--<script src="<%=basePath%>/UI/sky/js/plugins/iCheck/icheck.min.js"></script>--%>
 <%--<script src="<%=basePath%>/UI/sky/js/plugins/suggest/bootstrap-suggest.min.js"></script>--%>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
+        $(".chosen-select").chosen();
+
+//        $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
     });
 </script>
 </body>

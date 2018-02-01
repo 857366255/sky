@@ -149,6 +149,7 @@ public class TestController {
         List<ListFind> listFinds =  pageDao.getListFinds(configurationPageCoding);
         map.put("listParams", JSON.toJSONString(listParams));
         map.put("listFinds", listFinds);
+        map.put("configurationPageCoding", configurationPageCoding);
         return "test/list";
     }
     /**
@@ -201,12 +202,12 @@ public class TestController {
             map.put("title",listField.getName());//列表字段名称
             filedParams.add(map);
         }
-        /*map = new HashMap<String, Object>();
+        map = new HashMap<String, Object>();
         map.put("field","operate");
         map.put("title","操作");
         map.put("events","operateEvents");
         map.put("formatter","operateFormatter");
-        filedParams.add(map);*/
+        filedParams.add(map);
         return filedParams;
     }
     private Boolean doAdd(String configurationPageCoding, Map<String,Object> dataMap){
@@ -232,7 +233,7 @@ public class TestController {
     private Boolean doUpdate(String configurationPageCoding, Map<String,Object> dataMap){
         if(dataMap==null) dataMap = new HashMap<String, Object>();
         Map<String,Object> findMap = new HashMap<String, Object>();
-        CopyOnWriteArrayList<EditField> editFields = new CopyOnWriteArrayList<EditField>(pageDao.getEditFields("1"));
+        CopyOnWriteArrayList<EditField> editFields = new CopyOnWriteArrayList<EditField>(pageDao.getEditFields(configurationPageCoding));
         for (EditField editField : editFields) {
             String fieldEn = editField.getFieldEn();
             Object temp = dataMap.get(fieldEn);
@@ -246,7 +247,7 @@ public class TestController {
             }
             editField.setValue(temp);//添加查询值
         }
-        if(pageDao.doUpdate("s_menu",editFields,findMap)){
+        if(pageDao.doUpdate(pageDao.getConfigurationPage(configurationPageCoding).getTableEn(),editFields,findMap)){
             return true;
         }else{
             return false;

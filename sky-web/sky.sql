@@ -10,10 +10,27 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-01-31 16:59:02
+Date: 2018-02-01 17:16:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for s_configuration_page
+-- ----------------------------
+DROP TABLE IF EXISTS `s_configuration_page`;
+CREATE TABLE `s_configuration_page` (
+  `coding` varchar(255) NOT NULL COMMENT '唯一标识符',
+  `name` varchar(255) DEFAULT NULL COMMENT '名称',
+  `table_en` varchar(255) DEFAULT NULL COMMENT '数据库表名',
+  `pk_field_en` varchar(255) DEFAULT NULL COMMENT '数据库表主键字段',
+  PRIMARY KEY (`coding`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='配置页面';
+
+-- ----------------------------
+-- Records of s_configuration_page
+-- ----------------------------
+INSERT INTO `s_configuration_page` VALUES ('s_menu', '菜单栏配置', 's_menu', 'coding');
 
 -- ----------------------------
 -- Table structure for s_custom_selectbox
@@ -59,32 +76,15 @@ CREATE TABLE `s_field` (
 -- ----------------------------
 -- Records of s_field
 -- ----------------------------
-INSERT INTO `s_field` VALUES ('1', '1', 's_menu', 'coding', '唯一标识符', '1', '1', '1', '等于', '1', '1', '1', null, null);
-INSERT INTO `s_field` VALUES ('2', '1', 's_menu', 'name', '名称', '1', '2', '1', '等于', '2', '1', '2', null, null);
-INSERT INTO `s_field` VALUES ('3', '1', 's_menu', 'icon', '图标', '1', '3', '1', '等于', '3', '1', '3', null, '');
-INSERT INTO `s_field` VALUES ('4', '1', 's_menu', 'sorting', '排序号', '1', '4', '1', '等于', '4', '1', '4', null, null);
-INSERT INTO `s_field` VALUES ('5', '1', 's_menu', 'is_enablement', '是否启用', '1', '5', '0', '等于', '5', '1', '5', 'radio', '2');
-INSERT INTO `s_field` VALUES ('6', '1', 's_menu', 'superior_coding', '上级编码', '1', '6', '1', '等于', '6', '1', '6', 'select', '1');
-INSERT INTO `s_field` VALUES ('7', '1', 's_menu', 'configuration_page_coding', '配置页面编码', '1', '7', '0', '等于', '7', '1', '7', null, null);
-INSERT INTO `s_field` VALUES ('8', '1', 's_menu', 'display_style', '显示样式', '1', '8', '0', '等于', '8', '1', '8', null, null);
-INSERT INTO `s_field` VALUES ('9', '1', 's_menu', 'url', '链接', '1', '9', '0', '等于', '9', '1', '9', null, null);
-
--- ----------------------------
--- Table structure for s_input
--- ----------------------------
-DROP TABLE IF EXISTS `s_input`;
-CREATE TABLE `s_input` (
-  `coding` varchar(255) DEFAULT NULL COMMENT '唯一标识符',
-  `input_type` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL COMMENT '名称',
-  `table_en` varchar(255) DEFAULT NULL COMMENT '数据库表名',
-  `key_field_en` varchar(255) DEFAULT NULL COMMENT '显示字段',
-  `value_field_en` varchar(255) DEFAULT NULL COMMENT '值'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of s_input
--- ----------------------------
+INSERT INTO `s_field` VALUES ('s_menu-coding', 's_menu', 's_menu', 'coding', '唯一标识符', '1', '1', '1', '等于', '1', '1', '1', null, null);
+INSERT INTO `s_field` VALUES ('s_menu-configuration_page_coding', 's_menu', 's_menu', 'configuration_page_coding', '配置页面编码', '1', '7', '0', '等于', '7', '1', '7', 'select', 's_configuration_page-coding');
+INSERT INTO `s_field` VALUES ('s_menu-display_url', 's_menu', 's_menu', 'url', 'URL', '1', '8', '0', '等于', '8', '1', '8', null, null);
+INSERT INTO `s_field` VALUES ('s_menu-name', 's_menu', 's_menu', 'name', '名称', '1', '2', '1', '等于', '2', '1', '2', null, null);
+INSERT INTO `s_field` VALUES ('s_menu-icon', 's_menu', 's_menu', 'icon', '图标', '1', '3', '1', '等于', '3', '1', '3', null, '');
+INSERT INTO `s_field` VALUES ('s_menu-sorting', 's_menu', 's_menu', 'sorting', '排序号', '1', '4', '1', '等于', '4', '1', '4', null, null);
+INSERT INTO `s_field` VALUES ('s_menu-is_enablement', 's_menu', 's_menu', 'is_enablement', '是否启用', '1', '5', '0', '等于', '5', '1', '5', 'radio', 's_custom_selectbox-value');
+INSERT INTO `s_field` VALUES ('s_menu-superior_coding', 's_menu', 's_menu', 'superior_coding', '上级编码', '1', '6', '1', '等于', '6', '1', '6', 'select', 's_menu-coding');
+INSERT INTO `s_field` VALUES ('s_menu-display_style', 's_menu', 's_menu', 'display_style', '显示样式', '1', '8', '0', '等于', '8', '1', '8', null, null);
 
 -- ----------------------------
 -- Table structure for s_menu
@@ -106,24 +106,9 @@ CREATE TABLE `s_menu` (
 -- ----------------------------
 -- Records of s_menu
 -- ----------------------------
-INSERT INTO `s_menu` VALUES ('1', '1', '1', '1', '0', '123456', '1', '1', '1');
-INSERT INTO `s_menu` VALUES ('1000', '2', null, null, null, 'qwe', null, null, null);
-INSERT INTO `s_menu` VALUES ('1203', '2', null, null, '0', '2', null, null, null);
-INSERT INTO `s_menu` VALUES ('12312312312', null, null, null, null, '2', null, null, null);
-INSERT INTO `s_menu` VALUES ('123456', '2', null, null, null, 'qwe', null, null, null);
-INSERT INTO `s_menu` VALUES ('123456789', null, '1', null, null, null, null, null, null);
-INSERT INTO `s_menu` VALUES ('2', '2', '2', '2', null, '2', '2', '2', '2');
-INSERT INTO `s_menu` VALUES ('3', '3', '3', '3', null, '3', '3', '3', '3');
-INSERT INTO `s_menu` VALUES ('4', '4', '4', '4', null, '4', '4', '4', '4');
-INSERT INTO `s_menu` VALUES ('5', '5', '5', '5', null, '5', '5', '5', '5');
-INSERT INTO `s_menu` VALUES ('asdasd', '3', null, null, '1', null, null, null, null);
-INSERT INTO `s_menu` VALUES ('asdasfasff', '14', null, null, '0', '120000', null, null, null);
-INSERT INTO `s_menu` VALUES ('asdsadasdsa', '1', null, null, '0', '130000', null, null, null);
-INSERT INTO `s_menu` VALUES ('ddd', null, null, null, '1', '1203', null, null, null);
-INSERT INTO `s_menu` VALUES ('dddddd', null, null, null, '1', '1', null, null, null);
-INSERT INTO `s_menu` VALUES ('df', '2', null, null, null, 'asd', null, null, null);
-INSERT INTO `s_menu` VALUES ('fasfsafas', '3', null, null, '0', null, null, null, null);
-INSERT INTO `s_menu` VALUES ('qwe', '', null, null, null, null, null, null, null);
+INSERT INTO `s_menu` VALUES ('MenuBarSettings', '菜单栏设置', null, '1', '1', 'PageConfigurationManagement', 's_menu', null, 's_menu');
+INSERT INTO `s_menu` VALUES ('PageConfigurationManagement', '页面配置管理', null, '9999', '1', null, null, null, null);
+INSERT INTO `s_menu` VALUES ('s_configuration_page', '页面配置', null, '1', '0', null, null, null, 's_configuration_page');
 
 -- ----------------------------
 -- Table structure for s_selectbox
@@ -142,8 +127,9 @@ CREATE TABLE `s_selectbox` (
 -- ----------------------------
 -- Records of s_selectbox
 -- ----------------------------
-INSERT INTO `s_selectbox` VALUES ('1', '1', 's_menu', 'coding', 'select', null);
-INSERT INTO `s_selectbox` VALUES ('2', '2', 's_custom_selectbox', 'value', 'radio', 'is_enable');
+INSERT INTO `s_selectbox` VALUES ('s_configuration_page-coding', '配置页面', 's_configuration_page', 'coding', 'select', null);
+INSERT INTO `s_selectbox` VALUES ('s_custom_selectbox-value', '是否启用', 's_custom_selectbox', 'value', 'radio', 'is_enable');
+INSERT INTO `s_selectbox` VALUES ('s_menu-coding', '菜单栏上级编号', 's_menu', 'coding', 'select', null);
 
 -- ----------------------------
 -- Table structure for s_selectbox_show_field
@@ -163,10 +149,12 @@ CREATE TABLE `s_selectbox_show_field` (
 -- ----------------------------
 -- Records of s_selectbox_show_field
 -- ----------------------------
-INSERT INTO `s_selectbox_show_field` VALUES ('1', '1', '1', 's_menu', 'name', '1', '1');
-INSERT INTO `s_selectbox_show_field` VALUES ('2', '1', '2', 's_menu', 'coding', '2', '1');
-INSERT INTO `s_selectbox_show_field` VALUES ('3', '1', '2', 's_menu', 'icon', '2', '0');
-INSERT INTO `s_selectbox_show_field` VALUES ('4', '2', '4', 's_custom_selectbox', 'name', '1', '1');
+INSERT INTO `s_selectbox_show_field` VALUES ('s_configuration_page-coding', 's_configuration_page-coding', '编码', 's_configuration_page', 'coding', '1', '1');
+INSERT INTO `s_selectbox_show_field` VALUES ('s_configuration_page-name', 's_configuration_page-coding', '名称', 's_configuration_page', 'name', '2', '1');
+INSERT INTO `s_selectbox_show_field` VALUES ('s_custom_selectbox-name', 's_custom_selectbox-value', '是否启用实现内容', 's_custom_selectbox', 'name', '1', '1');
+INSERT INTO `s_selectbox_show_field` VALUES ('s_menu-coding', 's_menu-coding', '唯一标识符', 's_menu', 'coding', '2', '1');
+INSERT INTO `s_selectbox_show_field` VALUES ('s_menu-icon', 's_menu-coding', '图标', 's_menu', 'icon', '2', '1');
+INSERT INTO `s_selectbox_show_field` VALUES ('s_menu-name', 's_menu-coding', '名称', 's_menu', 'name', '1', '1');
 
 -- ----------------------------
 -- Procedure structure for get_database_field

@@ -50,8 +50,7 @@
                 <div class="example-wrap">
                     <div class="example">
                         <div class="btn-group" id="toolbar" role="group">
-                            <button data-toggle="modal" type="button" class="btn btn-outline btn-default"
-                                    href="#add-modal-form">
+                            <button id="add" type="button" class="btn btn-outline btn-default">
                                 <i class="glyphicon glyphicon-plus" aria-hidden="true">新增</i>
                             </button>
                         </div>
@@ -63,13 +62,14 @@
     </div>
 </div>
 
-
 <script src="<%=basePath%>/UI/sky/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath%>/UI/sky/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="<%=basePath%>/UI/sky/js/content.min.js?v=1.0.0"></script>
+<script src="<%=basePath%>/UI/sky/js/plugins/layer/layer.js"></script>
 <script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 <script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
 
 <script type="text/javascript">
     $(function () {
@@ -79,6 +79,34 @@
         $("#btn_query").click(function(){
             $('#listTable').bootstrapTable('refresh');//刷新数据
         });
+        $("#add").click(function(){
+            //iframe层
+            layer.open({
+                //id:"asd",
+                type: 2,
+                title: '新增',
+                //shadeClose: true,//是否点击遮罩关闭
+                shade: 0,//遮罩shade: [0.8, '#393D49']
+                maxmin: true,//放大和缩小
+                tipsMore: true,//是否允许多个tips
+                area: ['50%', '50%'],
+                content: '${pageContext.request.contextPath}/add/${configurationPageCoding}' //iframe的url
+                /*,success: function(layero, index){//打开后调整
+                    console.log(layero, index);
+                    alert("sad");
+                }*/
+                ,end:function(layero, index){//销毁后触发的回调
+                    $('#listTable').bootstrapTable('refresh');//刷新数据
+                }
+                ,btn: ['保存', '按钮二', '按钮三'] //可以无限个按钮
+                ,btn1: function(index, layero){
+                    window.frames["layui-layer-iframe"+index].document.getElementById("save").click();//执行弹出窗口里的保存按钮
+                    layer.close(index);//关闭
+                }
+
+            });
+        });
+
     });/**/
 
     var TableInit = function () {
@@ -138,6 +166,60 @@
         }
         return q;
     }
+
+    function operateFormatter(value, row, index) {//赋予的参数
+        return [
+            '<button type="button" class="ck btn btn-outline btn-default btn-sm"><i class="fa fa-wrench" aria-hidden="true"></i>查看明细</button>',
+            '<button type="button" class="update btn btn-outline btn-default btn-sm" ><i class="fa fa-wrench" aria-hidden="true"></i>修改</button>',
+            '<button type="button" class="remove btn btn-outline btn-default btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i>删除</button>'
+        ].join('');
+    }
+
+    window.operateEvents = {
+        'click .update': function (e, value, row, index) {
+           // $("#updateIframe").attr("src", "${pageContext.request.contextPath}/update/${tableNameEN}/"+row.id);
+            layer.open({
+                type: 2,
+                title: '更新',
+                shade: 0,//遮罩shade: [0.8, '#393D49']
+                maxmin: true,//放大和缩小
+                tipsMore: true,//是否允许多个tips
+                area: ['50%', '50%'],
+                content: '${pageContext.request.contextPath}/update/${configurationPageCoding}/'+row.coding //iframe的url
+                ,end:function(layero, index){//销毁后触发的回调
+                    $('#listTable').bootstrapTable('refresh');//刷新数据
+                }
+                ,btn: ['保存', '按钮二', '按钮三'] //可以无限个按钮
+                ,btn1: function(index, layero){
+                    window.frames["layui-layer-iframe"+index].document.getElementById("save").click();//执行弹出窗口里的保存按钮
+                    layer.close(index);//关闭
+                }
+
+            });
+        },'click .remove': function (e, value, row, index) {
+            swal({
+                title: "您确定要删除这条信息吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/remove/${tableNameEN}/"+row.id,
+                    type: 'DELETE',
+                    success: function(data) {
+                        swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                        $('#listTable').bootstrapTable('refresh');//刷新数据
+                    },error : function(data) {
+                        swal("删除失败！", "您没有删除这条信息。", "error");
+                    }
+                });
+            });
+        }
+    };
+
 </script>
 </body>
 </html>

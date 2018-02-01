@@ -23,7 +23,7 @@
     <link href="<%=basePath%>/UI/sky/css/font-awesome.min.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/animate.min.css" rel="stylesheet">
-    <link href="<%=basePath%>/UI/sky/css/style.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/UI/sky/css/style.css" rel="stylesheet">
     <!-- Sweet Alert -->
     <link href="<%=basePath%>/UI/sky/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 </head>

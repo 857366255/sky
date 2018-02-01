@@ -30,7 +30,7 @@
     <link href="<%=basePath%>/UI/sky/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/font-awesome.min.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/animate.min.css" rel="stylesheet">
-    <link href="<%=basePath%>/UI/sky/css/style.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/UI/sky/css/style.css" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -124,7 +124,7 @@
 <script src="<%=basePath%>/UI/sky/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>/UI/sky/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="<%=basePath%>/UI/sky/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="<%=basePath%>/UI/sky/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath%>/UI/sky/js/plugins/layer/layer.js"></script>
 <script src="<%=basePath%>/UI/sky/js/hplus.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>/UI/sky/js/contabs.min.js"></script>
 <script src="<%=basePath%>/UI/sky/js/plugins/pace/pace.min.js"></script>
