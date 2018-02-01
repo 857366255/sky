@@ -3,11 +3,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sky.page.dao.PageDao">
 
+    <sql id="configurationPageName" > coding,name,table_en,pk_field_en</sql>
     <sql id="fieldName" >coding,name,field_en,table_en,is_show_list</sql>
     <sql id="findName" > coding,name,field_en,query_type</sql>
     <sql id="editName" > coding,name,field_en,input_type,selectbox_coding</sql>
     <sql id="inputName" > coding,input_type,name,table_en,key_field_en,value_field_en</sql>
     <sql id="tableName" >s_field</sql>
+    <sql id="tableName2" >s_configuration_page</sql>
+
+
+    <!--映射实体类:配置页面-->
+    <resultMap id="ConfigurationPageMap" type="com.sky.admin.po.ConfigurationPage">
+        <id property="coding" column="coding"/>
+        <result property="name" column="name"/>
+        <result property="tableEn" column="table_en"/>
+        <result property="pkFieldEn" column="pk_field_en"/>
+    </resultMap>
+    <!--查询 配置页面-->
+    <select id="getConfigurationPage"  resultMap="ConfigurationPageMap">
+        SELECT <include refid="configurationPageName" /> FROM <include refid="tableName2" /> WHERE coding=#{selectbox_coding}
+    </select>
 
     <!--映射实体类:列表显示字段-->
     <resultMap id="ListFieldClassesResultMap" type="com.sky.admin.po.ListField">

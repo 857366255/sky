@@ -1,4 +1,4 @@
-package com.sky.sys.po;
+package com.sky.admin.po;
 
 import java.util.List;
 

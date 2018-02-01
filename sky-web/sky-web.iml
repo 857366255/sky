@@ -31,8 +31,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="sky-server" />
-    <orderEntry type="module" module-name="sky-dao" />
     <orderEntry type="module" module-name="sky-page" />
     <orderEntry type="module" module-name="sky-common" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />

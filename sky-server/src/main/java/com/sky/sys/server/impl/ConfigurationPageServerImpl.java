@@ -1,12 +1,12 @@
 package com.sky.sys.server.impl;
 
+import com.sky.admin.po.*;
 import com.sky.sys.dao.ConfigurationPageDao;
 import com.sky.sys.dao.FieldDao;
-import com.sky.sys.dao.MenuDao;
 import com.sky.sys.dao.TableDao;
 import com.sky.sys.po.*;
+import com.sky.sys.po.ConfigurationPage;
 import com.sky.sys.server.ConfigurationPageServer;
-import com.sky.sys.server.MenuServer;
 import com.sky.tool.UUIDTool;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +48,10 @@ public class ConfigurationPageServerImpl extends BaseServerImpl implements Confi
         editParams.put("editField", editField);
         editParams.put("configurationPage", configurationPage);
         return editParams;
+    }
+
+    public Boolean addConfigurationPageInformation(com.sky.admin.po.ConfigurationPage configurationPage) {
+        return null;
     }
 
     @Transactional

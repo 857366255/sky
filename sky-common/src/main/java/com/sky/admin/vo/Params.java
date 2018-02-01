@@ -1,4 +1,4 @@
-package com.sky.sys.vo;
+package com.sky.admin.vo;
 
 import java.util.Map;
 

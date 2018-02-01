@@ -4,9 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/sky.iml" filepath="$PROJECT_DIR$/sky.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-common/sky-common.iml" filepath="$PROJECT_DIR$/sky-common/sky-common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sky-dao/sky-dao.iml" filepath="$PROJECT_DIR$/sky-dao/sky-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-page/sky-page.iml" filepath="$PROJECT_DIR$/sky-page/sky-page.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sky-server/sky-server.iml" filepath="$PROJECT_DIR$/sky-server/sky-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-web/sky-web.iml" filepath="$PROJECT_DIR$/sky-web/sky-web.iml" />
     </modules>
   </component>

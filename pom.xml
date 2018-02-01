@@ -7,8 +7,8 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>sky-web</module>
-    <module>sky-dao</module>
-    <module>sky-server</module>
+    <!--<module>sky-dao</module>-->
+    <!--<module>sky-server</module>-->
     <module>sky-common</module>
     <module>sky-page</module>
   </modules>

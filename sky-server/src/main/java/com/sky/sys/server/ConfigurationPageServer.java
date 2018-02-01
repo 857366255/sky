@@ -1,6 +1,6 @@
 package com.sky.sys.server;
 
-import com.sky.sys.po.ConfigurationPage;
+import com.sky.admin.po.ConfigurationPage;
 
 import java.util.List;
 import java.util.Map;

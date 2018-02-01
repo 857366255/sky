@@ -1,14 +1,17 @@
 package com.sky.sys.web;
 
-import com.sky.sys.po.ConfigurationPage;
-import com.sky.sys.po.Menu;
-import com.sky.sys.server.ConfigurationPageServer;
-import com.sky.sys.server.MenuServer;
+
+
+import com.sky.admin.po.Menu;
+import com.sky.page.dao.MenuDao;
+//import com.sky.sys.server.ConfigurationPageServer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,14 +21,14 @@ import java.util.Map;
 @Controller
 public class MenuController {
     @Autowired
-    private MenuServer menuServer;
-    @Autowired
-    private ConfigurationPageServer configurationPageServer;
+    private MenuDao menuDao;
+    //@Autowired
+    //private ConfigurationPageServer configurationPageServer;
     @RequestMapping(value = "admin",method= RequestMethod.GET)
     public String goAdmin(Map<String, Object> map){
-        //List<Menu> menuList = menuServer.findMenuList();
-       // map.put("menuList",menuList);
-       // map.put("number",0);
+        List<Menu> menuList = menuDao.findMenuList();
+        map.put("menuList",menuList);
+        map.put("number",0);
         return "sys/index";
     }
    /* @RequestMapping(value = "add",method= RequestMethod.GET)

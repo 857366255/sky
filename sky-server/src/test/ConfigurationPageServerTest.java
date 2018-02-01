@@ -1,9 +1,9 @@
 import base.SpringTestCase;
 import com.sky.sys.dao.ConfigurationPageDao;
 import com.sky.sys.po.ConfigurationPage;
-import com.sky.sys.po.Menu;
+
 import com.sky.sys.server.ConfigurationPageServer;
-import com.sky.sys.server.MenuServer;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,7 +34,7 @@ public class ConfigurationPageServerTest extends SpringTestCase {
         configurationPage.setSlaveHeight(500);
         configurationPage.setTableEn("s_menu");
         configurationPage.setSlaveRows(10);
-        configurationPageServer.addConfigurationPageInformation(configurationPage);
+      //  configurationPageServer.addConfigurationPageInformation(configurationPage);
         System.out.println("结束创建");
     }
 

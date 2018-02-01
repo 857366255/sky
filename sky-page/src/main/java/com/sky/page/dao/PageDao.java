@@ -1,5 +1,6 @@
 package com.sky.page.dao;
 
+import com.sky.admin.po.ConfigurationPage;
 import com.sky.admin.po.EditField;
 import com.sky.admin.po.ListField;
 import com.sky.admin.po.ListFind;
@@ -13,6 +14,12 @@ import java.util.Map;
  */
 public interface PageDao {
 
+    /**
+     * 获得配置页面
+     * @param configurationPageCoding
+     * @return
+     */
+    public ConfigurationPage getConfigurationPage(String configurationPageCoding);
     /**
      * 获得列表显示字段
      * @param configurationPageCoding

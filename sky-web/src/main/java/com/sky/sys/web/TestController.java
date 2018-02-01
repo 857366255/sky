@@ -5,7 +5,7 @@ import com.sdicons.json.mapper.MapperException;
 import com.sky.admin.po.*;
 import com.sky.page.dao.PageDao;
 import com.sky.page.dao.SelectBoxDao;
-import com.sky.sys.vo.Params;
+import com.sky.admin.vo.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -87,21 +87,10 @@ public class TestController {
                 System.out.println(selectBoxValue);
             }
         }
-
         map.put("editFields", editFields);
         map.put("configurationPageCoding", configurationPageCoding);
         map.put("type", "add");
 
-       /* List<Map<String, Object>> inputList = new ArrayList<Map<String, Object>>();
-        Map<String,Object> inputMap =  new HashMap<String, Object>();
-        inputMap.put("name","自行车");
-        inputMap.put("value","1");
-        inputList.add(inputMap);
-        inputMap =  new HashMap<String, Object>();
-        inputMap.put("name","自行车2");
-        inputMap.put("value","2");
-        inputList.add(inputMap);
-        map.put("inputList",inputList);*/
 
         return "test/edit";
     }
@@ -154,10 +143,10 @@ public class TestController {
      * @param map
      * @return
      */
-    @RequestMapping(value = "list",method = RequestMethod.GET)
-    public String goList(Map<String, Object> map){
-        Map<String,Object> listParams = getListParams("1");
-        List<ListFind> listFinds =  pageDao.getListFinds("1");
+    @RequestMapping(value = "list/{configurationPageCoding}",method = RequestMethod.GET)
+    public String goList(Map<String, Object> map,@PathVariable String configurationPageCoding){
+        Map<String,Object> listParams = getListParams(configurationPageCoding);
+        List<ListFind> listFinds =  pageDao.getListFinds(configurationPageCoding);
         map.put("listParams", JSON.toJSONString(listParams));
         map.put("listFinds", listFinds);
         return "test/list";
@@ -175,7 +164,6 @@ public class TestController {
 
     private List<Map<String,Object>> getListData(String configurationPageCoding,Map<String,Object> findMap){
         if(findMap==null) findMap = new HashMap<String, Object>();
-        configurationPageCoding="1";
         CopyOnWriteArrayList<ListFind> listFinds = new CopyOnWriteArrayList<ListFind>(pageDao.getListFinds(configurationPageCoding));
         for (ListFind listFind : listFinds) {
             Object temp = findMap.get(listFind.getFieldEn());
@@ -192,7 +180,7 @@ public class TestController {
 
     private Map<String, Object> getListParams(String configurationPageCoding) {
         Map<String,Object> listParams = new HashMap<String, Object>();
-        listParams.put("url","listData/"+configurationPageCoding);//请求后台的URL
+        listParams.put("url","../listData/"+configurationPageCoding);//请求后台的URL
         listParams.put("method","get");//请求方式
         listParams.put("pageNumber","1");//初始化加载第一页，默认第一页
         listParams.put("pageSize", "10");//每页的记录行数
@@ -223,7 +211,6 @@ public class TestController {
     }
     private Boolean doAdd(String configurationPageCoding, Map<String,Object> dataMap){
         if(dataMap==null) dataMap = new HashMap<String, Object>();
-        configurationPageCoding="1";
         System.out.println(dataMap);
         CopyOnWriteArrayList<EditField> editFields = new CopyOnWriteArrayList<EditField>(pageDao.getEditFields(configurationPageCoding));
         System.out.println(editFields);
@@ -236,7 +223,7 @@ public class TestController {
             editField.setValue(temp);//添加查询值
         }
         System.out.println(editFields);
-        if(pageDao.doAdd("s_menu",editFields)){
+        if(pageDao.doAdd(pageDao.getConfigurationPage(configurationPageCoding).getTableEn(),editFields)){
             return true;
         }else{
             return false;

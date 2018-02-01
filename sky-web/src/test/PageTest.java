@@ -28,17 +28,8 @@ public class PageTest extends SpringTestCase {
 
     @Test
     public void test(){
-        List<EditField> editFields =  pageDao.getEditFields("1");
 
-        for(EditField editField : editFields){
-            SelectBox selectBox = editField.getSelectBox();
-            if(selectBox!=null){
-                System.out.println(selectBox);
-                editField.setSelectBoxValues(selectBoxDao.getSelectBoxValues(selectBox));
-            }
-        }
-
-        System.out.println(editFields);
+        System.out.println(pageDao.getConfigurationPage("s_menu"));
 
     }
 

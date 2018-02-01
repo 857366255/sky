@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : MySQL
-Source Server Version : 50158
+Source Server         : 127.0.0.1
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : sky
 
 Target Server Type    : MYSQL
-Target Server Version : 50158
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-01-24 20:09:18
+Date: 2018-02-01 10:58:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,90 +20,78 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `s_configuration_page`;
 CREATE TABLE `s_configuration_page` (
-  `coding` varchar(255) NOT NULL COMMENT '编码',
+  `coding` varchar(255) NOT NULL COMMENT '唯一标识符',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
-  `table_en` varchar(255) DEFAULT NULL COMMENT '表',
-  `slave_height` int(11) DEFAULT NULL COMMENT '从表高度',
-  `list_height` int(11) DEFAULT NULL COMMENT '列表高度',
-  `slave_rows` int(11) DEFAULT NULL COMMENT '从表行数',
-  `list_rows` int(11) DEFAULT NULL COMMENT '列表行数',
-  `is_shown_querys` tinyint(1) DEFAULT NULL COMMENT '是否显示查询',
-  `querys_style` varchar(255) DEFAULT NULL COMMENT '查询窗口样式',
+  `table_en` varchar(255) DEFAULT NULL COMMENT '数据库表名',
+  `pk_field_en` varchar(255) DEFAULT NULL COMMENT '数据库表主键字段',
   PRIMARY KEY (`coding`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='配置页面设置';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='配置页面';
 
 -- ----------------------------
 -- Records of s_configuration_page
 -- ----------------------------
-INSERT INTO `s_configuration_page` VALUES ('s_menu', '菜单栏配置', 's_menu', null, null, null, null, null, null);
-INSERT INTO `s_configuration_page` VALUES ('s_menu-1', '菜单栏树形结构配置', 's_menu', null, null, null, null, null, null);
+INSERT INTO `s_configuration_page` VALUES ('s_menu', '菜单栏配置', 's_menu', 'coding');
+
+-- ----------------------------
+-- Table structure for s_custom_selectbox
+-- ----------------------------
+DROP TABLE IF EXISTS `s_custom_selectbox`;
+CREATE TABLE `s_custom_selectbox` (
+  `coding` varchar(255) NOT NULL COMMENT '唯一标识符',
+  `name` varchar(255) DEFAULT NULL COMMENT '显示内容',
+  `value_string` varchar(255) DEFAULT NULL COMMENT '值 字符串',
+  `value_integer` int(11) DEFAULT NULL COMMENT '值 数字',
+  `value_boolean` tinyint(1) DEFAULT NULL COMMENT '值 判断',
+  `groups` varchar(255) DEFAULT NULL COMMENT '组',
+  PRIMARY KEY (`coding`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='自定义下拉框选择内容';
+
+-- ----------------------------
+-- Records of s_custom_selectbox
+-- ----------------------------
+INSERT INTO `s_custom_selectbox` VALUES ('1', '启用', '1', null, '1', 'is_enable');
+INSERT INTO `s_custom_selectbox` VALUES ('2', '停止', '0', null, '0', 'is_enable');
 
 -- ----------------------------
 -- Table structure for s_field
 -- ----------------------------
 DROP TABLE IF EXISTS `s_field`;
 CREATE TABLE `s_field` (
-  `coding` varchar(255) NOT NULL COMMENT '编码',
-  `name` varchar(255) DEFAULT NULL COMMENT '名称',
-  `field_en` varchar(255) DEFAULT NULL COMMENT '字段名称',
+  `coding` varchar(255) DEFAULT NULL COMMENT '唯一标识符',
   `configuration_page_coding` varchar(255) DEFAULT NULL COMMENT '配置页面编码',
-  `table_coding` varchar(255) DEFAULT NULL COMMENT '表编码',
-  `field` varchar(255) DEFAULT NULL COMMENT '字段',
-  `annotation` varchar(255) DEFAULT NULL COMMENT '注释',
-  `type` varchar(255) DEFAULT NULL COMMENT '类型',
-  `size` int(11) DEFAULT NULL COMMENT '大小',
-  `input_type` varchar(255) DEFAULT NULL COMMENT '输入类型',
-  `is_edit` tinyint(1) DEFAULT NULL COMMENT '是否编辑',
-  `is_must` tinyint(1) DEFAULT NULL COMMENT '是否必填',
-  `edit_annotation` varchar(255) DEFAULT NULL COMMENT '编辑注释',
-  `edit_sorting` tinyint(11) DEFAULT NULL COMMENT '编辑排序号',
+  `table_en` varchar(255) DEFAULT NULL COMMENT '数据库表名',
+  `field_en` varchar(255) DEFAULT NULL COMMENT '数据库字段名称',
+  `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `is_show_list` tinyint(1) DEFAULT NULL COMMENT '是否显示列表',
-  `list_width` int(11) DEFAULT NULL COMMENT '列表宽度',
-  `list_sorting` int(11) DEFAULT NULL COMMENT '列表排序号',
-  `query_sorting` int(11) DEFAULT NULL COMMENT '查询排序号',
+  `sorting_list` int(11) DEFAULT NULL COMMENT '列表排序号',
   `is_query` tinyint(1) DEFAULT NULL COMMENT '是否查询',
-  `query_occupy` int(11) DEFAULT NULL COMMENT '查询站几列',
-  `is_show_slave` tinyint(1) DEFAULT NULL COMMENT '是否显示从表',
-  `slave_width` int(11) DEFAULT NULL COMMENT '从表宽度',
-  `slave_sorting` int(11) DEFAULT NULL COMMENT '从表排序',
-  PRIMARY KEY (`coding`),
-  KEY `fk_sf_cpc_scp_c` (`configuration_page_coding`),
-  KEY `fk_sf_tc_st_c` (`table_coding`),
-  CONSTRAINT `fk_sf_cpc_scp_c` FOREIGN KEY (`configuration_page_coding`) REFERENCES `s_configuration_page` (`coding`),
-  CONSTRAINT `fk_sf_tc_st_c` FOREIGN KEY (`table_coding`) REFERENCES `s_table` (`coding`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字段';
+  `query_type` varchar(255) DEFAULT NULL COMMENT '查询条件类型',
+  `sorting_query` int(11) DEFAULT NULL COMMENT '查询字段排序号',
+  `is_edit` tinyint(1) DEFAULT NULL COMMENT '是否编辑',
+  `sorting_edit` int(1) DEFAULT NULL COMMENT '编辑排序',
+  `input_type` varchar(255) DEFAULT NULL COMMENT '输入框类型',
+  `selectbox_coding` varchar(255) DEFAULT NULL COMMENT '下拉框编码'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of s_field
 -- ----------------------------
-INSERT INTO `s_field` VALUES ('s_menu-coding', '唯一标识符', 'coding', 's_menu', null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null);
-INSERT INTO `s_field` VALUES ('s_menu-name', '名称', 'name', 's_menu', null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null);
-INSERT INTO `s_field` VALUES ('s_menu-superior_coding', '上级编码', 'superior_coding', 's_menu', null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null);
-
--- ----------------------------
--- Table structure for s_fk
--- ----------------------------
-DROP TABLE IF EXISTS `s_fk`;
-CREATE TABLE `s_fk` (
-  `coding` varchar(255) NOT NULL COMMENT '唯一标示符',
-  `configuration_page_coding` varchar(255) DEFAULT NULL COMMENT '配置页面编码',
-  `table_en` varchar(255) DEFAULT NULL COMMENT '表名',
-  `field_id` varchar(255) DEFAULT NULL COMMENT '字段名称',
-  `reference_table_en` varchar(255) DEFAULT NULL COMMENT '引用表名',
-  `reference_field_en` varchar(255) DEFAULT NULL COMMENT '引用字段名称',
-  PRIMARY KEY (`coding`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of s_fk
--- ----------------------------
+INSERT INTO `s_field` VALUES ('s_menu-coding', 's_menu', 's_menu', 'coding', '唯一标识符', '1', '1', '1', '等于', '1', '1', '1', null, null);
+INSERT INTO `s_field` VALUES ('s_menu-configuration_page_coding', 's_menu', 's_menu', 'configuration_page_coding', '配置页面编码', '1', '7', '0', '等于', '7', '1', '7', null, null);
+INSERT INTO `s_field` VALUES ('s_menu-display_url', 's_menu', 's_menu', 'url', 'URL', '1', '8', '0', '等于', '8', '1', '8', null, null);
+INSERT INTO `s_field` VALUES ('s_menu-name', 's_menu', 's_menu', 'name', '名称', '1', '2', '1', '等于', '2', '1', '2', null, null);
+INSERT INTO `s_field` VALUES ('s_menu-icon', 's_menu', 's_menu', 'icon', '图标', '1', '3', '1', '等于', '3', '1', '3', null, '');
+INSERT INTO `s_field` VALUES ('s_menu-sorting', 's_menu', 's_menu', 'sorting', '排序号', '1', '4', '1', '等于', '4', '1', '4', null, null);
+INSERT INTO `s_field` VALUES ('s_menu-is_enablement', 's_menu', 's_menu', 'is_enablement', '是否启用', '1', '5', '0', '等于', '5', '1', '5', 'radio', 's_custom_selectbox-value');
+INSERT INTO `s_field` VALUES ('s_menu-superior_coding', 's_menu', 's_menu', 'superior_coding', '上级编码', '1', '6', '1', '等于', '6', '1', '6', 'select', 's_menu-coding');
+INSERT INTO `s_field` VALUES ('s_menu-display_style', 's_menu', 's_menu', 'display_style', '显示样式', '1', '8', '0', '等于', '8', '1', '8', null, null);
 
 -- ----------------------------
 -- Table structure for s_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `s_menu`;
 CREATE TABLE `s_menu` (
-  `coding` varchar(255) NOT NULL COMMENT '编码',
+  `coding` varchar(255) NOT NULL COMMENT '唯一标识符',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `icon` varchar(255) DEFAULT NULL COMMENT '图标',
   `sorting` int(11) DEFAULT NULL COMMENT '排序号',
@@ -112,51 +100,57 @@ CREATE TABLE `s_menu` (
   `configuration_page_coding` varchar(255) DEFAULT NULL COMMENT '配置页面编码',
   `display_style` varchar(255) DEFAULT NULL COMMENT '显示样式',
   `url` varchar(255) DEFAULT NULL COMMENT '链接',
-  PRIMARY KEY (`coding`),
-  KEY `fk_sm_sc_m_c` (`superior_coding`),
-  KEY `fk_sm_cpc_cp_c` (`configuration_page_coding`),
-  CONSTRAINT `fk_sm_cpc_cp_c` FOREIGN KEY (`configuration_page_coding`) REFERENCES `s_configuration_page` (`coding`),
-  CONSTRAINT `fk_sm_sc_m_c` FOREIGN KEY (`superior_coding`) REFERENCES `s_menu` (`coding`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单栏';
+  PRIMARY KEY (`coding`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of s_menu
 -- ----------------------------
-INSERT INTO `s_menu` VALUES ('1', '1', null, null, null, null, null, null, null);
-INSERT INTO `s_menu` VALUES ('2', '2', null, null, null, '1', null, null, null);
-INSERT INTO `s_menu` VALUES ('3', '3', null, null, null, '2', null, null, null);
-INSERT INTO `s_menu` VALUES ('4', '4', null, null, null, '3', null, null, null);
-INSERT INTO `s_menu` VALUES ('5', '5', null, null, null, '4', null, null, null);
-INSERT INTO `s_menu` VALUES ('6', '6', null, null, null, '5', null, null, null);
-INSERT INTO `s_menu` VALUES ('7', '7', null, null, null, '6', null, null, null);
+INSERT INTO `s_menu` VALUES ('MenuBarSettings', '菜单栏设置', null, '1', '1', 'PageConfigurationManagement', 's_menu', null, 's_menu');
+INSERT INTO `s_menu` VALUES ('PageConfigurationManagement', '页面配置管理', null, '9999', '1', null, null, null, null);
 
 -- ----------------------------
--- Table structure for s_table
+-- Table structure for s_selectbox
 -- ----------------------------
-DROP TABLE IF EXISTS `s_table`;
-CREATE TABLE `s_table` (
-  `coding` varchar(255) NOT NULL COMMENT '编码',
+DROP TABLE IF EXISTS `s_selectbox`;
+CREATE TABLE `s_selectbox` (
+  `coding` varchar(255) NOT NULL COMMENT '唯一标识符',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
-  `configuration_page_coding` varchar(255) DEFAULT NULL COMMENT '配置页面编码',
-  `table_en` varchar(255) DEFAULT NULL COMMENT '表',
-  `table_id` varchar(255) DEFAULT NULL COMMENT '表的主键',
-  `annotation` varchar(255) DEFAULT NULL COMMENT '注释',
+  `table_en` varchar(255) DEFAULT NULL COMMENT '数据库表名',
+  `value_field_en` varchar(255) DEFAULT NULL COMMENT '数据库表字段',
   `type` varchar(255) DEFAULT NULL COMMENT '类型',
-  `slave_sorting` int(11) DEFAULT NULL COMMENT '从表排序',
-  `superior_coding` varchar(255) DEFAULT NULL COMMENT '上级编码',
-  `superior_correlate_field` varchar(255) DEFAULT NULL COMMENT '上级表关联字段',
-  `correlate_field` varchar(255) DEFAULT NULL COMMENT '关联字段',
-  PRIMARY KEY (`coding`),
-  KEY `fk_st_sc_st_c` (`superior_coding`),
-  KEY `fk_st_cpc_scp_c` (`configuration_page_coding`),
-  CONSTRAINT `fk_st_cpc_scp_c` FOREIGN KEY (`configuration_page_coding`) REFERENCES `s_configuration_page` (`coding`),
-  CONSTRAINT `fk_st_sc_st_c` FOREIGN KEY (`superior_coding`) REFERENCES `s_table` (`coding`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='表';
+  `custom_selectbox_group` varchar(255) DEFAULT NULL COMMENT '自定义下拉框分组',
+  PRIMARY KEY (`coding`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of s_table
+-- Records of s_selectbox
 -- ----------------------------
-INSERT INTO `s_table` VALUES ('s_menu-s_menu', '菜单栏', 's_menu', 's_menu', 'copding', null, null, null, null, null, null);
+INSERT INTO `s_selectbox` VALUES ('s_custom_selectbox-value', '是否启用', 's_custom_selectbox', 'value', 'radio', 'is_enable');
+INSERT INTO `s_selectbox` VALUES ('s_menu-coding', '菜单栏上级编号', 's_menu', 'coding', 'select', null);
+
+-- ----------------------------
+-- Table structure for s_selectbox_show_field
+-- ----------------------------
+DROP TABLE IF EXISTS `s_selectbox_show_field`;
+CREATE TABLE `s_selectbox_show_field` (
+  `coding` varchar(255) NOT NULL COMMENT '唯一标识符',
+  `selectbox_coding` varchar(255) DEFAULT NULL COMMENT '选择框编码',
+  `name` varchar(255) DEFAULT NULL COMMENT '名称',
+  `table_en` varchar(255) DEFAULT NULL COMMENT '数据库表名',
+  `field_en` varchar(255) DEFAULT NULL COMMENT '数据库表字段',
+  `sorting` int(11) DEFAULT NULL COMMENT '排序号',
+  `is_show` tinyint(1) DEFAULT NULL COMMENT '是否显示',
+  PRIMARY KEY (`coding`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='下拉框 需要显示的字段';
+
+-- ----------------------------
+-- Records of s_selectbox_show_field
+-- ----------------------------
+INSERT INTO `s_selectbox_show_field` VALUES ('s_custom_selectbox-name', 's_custom_selectbox-value', '是否启用实现内容', 's_custom_selectbox', 'name', '1', '1');
+INSERT INTO `s_selectbox_show_field` VALUES ('s_menu-coding', 's_menu-coding', '唯一标识符', 's_menu', 'coding', '2', '1');
+INSERT INTO `s_selectbox_show_field` VALUES ('s_menu-icon', 's_menu-coding', '图标', 's_menu', 'icon', '2', '1');
+INSERT INTO `s_selectbox_show_field` VALUES ('s_menu-name', 's_menu-coding', '名称', 's_menu', 'name', '1', '1');
 
 -- ----------------------------
 -- Procedure structure for get_database_field

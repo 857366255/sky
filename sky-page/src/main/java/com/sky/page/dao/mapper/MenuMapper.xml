@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.page.dao.MenuDao">
+    <sql id="fieldName" >coding,name,icon,sorting,is_enablement,superior_coding,configuration_page_coding,display_style,url</sql>
+    <sql id="tableName" >s_menu</sql>
+    <!--映射实体类-->
+    <resultMap id="menuClassesResultMap" type="com.sky.admin.po.Menu">
+        <id property="coding" column="coding"/>
+        <result property="name" column="name"/>
+        <result property="icon" column="icon"/>
+        <result property="sorting" column="sorting"/>
+        <result property="isEnablement" column="is_enablement"/>
+        <result property="superiorCoding" column="superior_coding"/>
+        <result property="configurationPageCoding" column="configuration_page_coding"/>
+        <result property="displayStyle" column="display_style"/>
+        <result property="url" column="url"/>
+        <collection property="menuList"  ofType="menuClassesResultMap"
+                    select="findCreationByCoding" column="coding" />
+        <!--<association property="classesResultMap" column="coding" select="findCreationByCoding"/>-->
+    </resultMap>
+    <select id="findCreationByCoding" parameterType="java.lang.String" resultMap="menuClassesResultMap">
+        SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE superior_coding=#{coding}
+    </select>
+    <select id="findMenuList" parameterType="java.lang.String" resultMap="menuClassesResultMap">
+        SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE superior_coding IS null;
+    </select>
+
+ </mapper>

@@ -1,6 +1,7 @@
-package com.sky.sys.dao;
+package com.sky.page.dao;
 
-import com.sky.sys.po.Menu;
+
+import com.sky.admin.po.Menu;
 
 import java.util.List;
 
