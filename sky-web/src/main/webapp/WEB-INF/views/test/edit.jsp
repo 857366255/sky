@@ -40,7 +40,7 @@
                                     <c:choose>
                                         <c:when  test="${editField.selectBox.type.equals('radio')}">
                                             <c:forEach items="${editField.selectBoxValues}" varStatus="i" var="input">
-                                                <div class="radio radio-info radio-inline">
+                                                <div class="radio radio-info radio-inline" style="height: 34px;">
                                                     <input type="radio" class="form-control" id="${editField.fieldEn}${i}" value="${input.value}" name="${editField.fieldEn}" ${data[editField.fieldEn].equals(input.valueBoolean) ? "checked=''" : "" }>
                                                     <label for="${editField.fieldEn}${i}"> ${input.name} </label>
                                                 </div>

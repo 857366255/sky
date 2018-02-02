@@ -20,10 +20,10 @@
         <!--<association property="classesResultMap" column="coding" select="findCreationByCoding"/>-->
     </resultMap>
     <select id="findCreationByCoding" parameterType="java.lang.String" resultMap="menuClassesResultMap">
-        SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE superior_coding=#{coding}
+        SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE superior_coding=#{coding} AND is_enablement=true ORDER BY sorting;
     </select>
     <select id="findMenuList" parameterType="java.lang.String" resultMap="menuClassesResultMap">
-        SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE superior_coding IS null;
+        SELECT <include refid="fieldName" /> FROM <include refid="tableName" /> WHERE superior_coding IS null AND is_enablement=true ORDER BY sorting;
     </select>
 
  </mapper>

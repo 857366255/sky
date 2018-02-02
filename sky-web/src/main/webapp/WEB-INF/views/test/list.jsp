@@ -24,6 +24,8 @@
     <link href="<%=basePath%>/UI/sky/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/animate.min.css" rel="stylesheet">
     <link href="<%=basePath%>/UI/sky/css/style.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="<%=basePath%>/UI/sky/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <style type="text/css">
         /*label {width: 200px;}*/
     </style>
@@ -69,7 +71,8 @@
 <script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 <script src="<%=basePath%>/UI/sky/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-
+<!-- Sweet Alert -->
+<script src="<%=basePath%>/UI/sky/js/plugins/sweetalert/sweetalert.min.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -171,7 +174,7 @@
         return [
             '<button type="button" class="ck btn btn-outline btn-default btn-sm"><i class="fa fa-wrench" aria-hidden="true"></i>查看明细</button>',
             '<button type="button" class="update btn btn-outline btn-default btn-sm" ><i class="fa fa-wrench" aria-hidden="true"></i>修改</button>',
-            '<button type="button" class="remove btn btn-outline btn-default btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i>删除</button>'
+            '<button type="button" class="delete btn btn-outline btn-default btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i>删除</button>'
         ].join('');
     }
 
@@ -196,21 +199,26 @@
                 }
 
             });
-        },'click .remove': function (e, value, row, index) {
+        },'click .delete': function (e, value, row, index) {
             swal({
                 title: "您确定要删除这条信息吗",
                 text: "删除后将无法恢复，请谨慎操作！",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
+                cancelButtonText: "取消",
                 confirmButtonText: "删除",
-                closeOnConfirm: false
+                closeOnConfirm: true,
+                closeOnCancel: true
             }, function () {
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/remove/${tableNameEN}/"+row.id,
+                    url: "${pageContext.request.contextPath}/delete/${configurationPageCoding}/"+row.coding,
                     type: 'DELETE',
                     success: function(data) {
-                        swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                        if(data=="false"){
+                            swal("删除失败！", "您没有删除这条信息。", "error");
+                        }
+                        //swal("删除成功！", "您已经永久删除了这条信息。", "success");
                         $('#listTable').bootstrapTable('refresh');//刷新数据
                     },error : function(data) {
                         swal("删除失败！", "您没有删除这条信息。", "error");

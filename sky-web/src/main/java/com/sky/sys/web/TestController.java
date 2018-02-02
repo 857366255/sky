@@ -25,6 +25,21 @@ public class TestController {
     private SelectBoxDao selectBoxDao;
 
     /**
+     * 删除数据
+     * @param configurationPageCoding
+     */
+    @RequestMapping(value={"delete/{configurationPageCoding}/{id}"},method=RequestMethod.DELETE)
+    @ResponseBody
+    public Boolean delete(@RequestParam Map<String, Object> map, @PathVariable String configurationPageCoding, @PathVariable String id){
+        if(doRemove(configurationPageCoding,id)){
+            System.out.println("删除成功");
+            return true;
+        }else{
+            System.out.println("删除失败");
+            return false;
+        }
+    }
+    /**
      * 新增数据
      * @param map
      * @param configurationPageCoding
@@ -122,19 +137,8 @@ public class TestController {
         map.put("id", id);
         Map<String,Object> idMap = new HashMap<String, Object>();
         idMap.put("coding",id);
-        Map<String,Object> data = pageDao.getEidtData("s_menu",idMap,editFields);
+        Map<String,Object> data = pageDao.getEidtData(pageDao.getConfigurationPage(configurationPageCoding).getTableEn(),idMap,editFields);
         map.put("data",data);
-
-        List<Map<String, Object>> inputList = new ArrayList<Map<String, Object>>();
-        Map<String,Object> inputMap =  new HashMap<String, Object>();
-        inputMap.put("name","自行车");
-        inputMap.put("value","1");
-        inputList.add(inputMap);
-        inputMap =  new HashMap<String, Object>();
-        inputMap.put("name","自行车2");
-        inputMap.put("value","2");
-        inputList.add(inputMap);
-        map.put("inputList",inputList);
 
         return "test/edit";
     }
@@ -176,7 +180,7 @@ public class TestController {
         }
 
         System.out.println(listFinds);
-        return pageDao.getListDatas("s_menu",pageDao.getListFields(configurationPageCoding),listFinds);
+        return pageDao.getListDatas(pageDao.getConfigurationPage(configurationPageCoding).getTableEn(),pageDao.getListFields(configurationPageCoding),listFinds);
     }
 
     private Map<String, Object> getListParams(String configurationPageCoding) {
@@ -184,8 +188,8 @@ public class TestController {
         listParams.put("url","../listData/"+configurationPageCoding);//请求后台的URL
         listParams.put("method","get");//请求方式
         listParams.put("pageNumber","1");//初始化加载第一页，默认第一页
-        listParams.put("pageSize", "10");//每页的记录行数
-        listParams.put("height","500");//每页的记录行数
+        listParams.put("pageSize", "20");//每页的记录行数
+        listParams.put("height","800");//每页的记录行数
         listParams.put("pageList", Arrays.asList("10", "25","50","100"));//可供选择的每页的行数
         listParams.put("uniqueId","coding");
         listParams.put("columns",getFieldParams(configurationPageCoding));
@@ -248,6 +252,15 @@ public class TestController {
             editField.setValue(temp);//添加查询值
         }
         if(pageDao.doUpdate(pageDao.getConfigurationPage(configurationPageCoding).getTableEn(),editFields,findMap)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    private Boolean doRemove (String configurationPageCoding,String id){
+        Map<String,Object> findMap = new HashMap<String, Object>();
+        findMap.put("coding",id);
+        if(pageDao.doDelete(pageDao.getConfigurationPage(configurationPageCoding).getTableEn(),findMap)){
             return true;
         }else{
             return false;

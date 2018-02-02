@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-02-01 17:16:55
+Date: 2018-02-02 14:13:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,8 @@ CREATE TABLE `s_configuration_page` (
 -- ----------------------------
 -- Records of s_configuration_page
 -- ----------------------------
+INSERT INTO `s_configuration_page` VALUES ('s_configuration_page', '配置页面', 's_configuration_page', 'coding');
+INSERT INTO `s_configuration_page` VALUES ('s_field-list', '列表字段设置', 's_field', 'coding');
 INSERT INTO `s_configuration_page` VALUES ('s_menu', '菜单栏配置', 's_menu', 'coding');
 
 -- ----------------------------
@@ -79,12 +81,30 @@ CREATE TABLE `s_field` (
 INSERT INTO `s_field` VALUES ('s_menu-coding', 's_menu', 's_menu', 'coding', '唯一标识符', '1', '1', '1', '等于', '1', '1', '1', null, null);
 INSERT INTO `s_field` VALUES ('s_menu-configuration_page_coding', 's_menu', 's_menu', 'configuration_page_coding', '配置页面编码', '1', '7', '0', '等于', '7', '1', '7', 'select', 's_configuration_page-coding');
 INSERT INTO `s_field` VALUES ('s_menu-display_url', 's_menu', 's_menu', 'url', 'URL', '1', '8', '0', '等于', '8', '1', '8', null, null);
-INSERT INTO `s_field` VALUES ('s_menu-name', 's_menu', 's_menu', 'name', '名称', '1', '2', '1', '等于', '2', '1', '2', null, null);
+INSERT INTO `s_field` VALUES ('s_configuration_page-name', 's_configuration_page', 's_configuration_page', 'name', '名称', '1', '2', '1', '等于', '2', '1', '2', null, null);
 INSERT INTO `s_field` VALUES ('s_menu-icon', 's_menu', 's_menu', 'icon', '图标', '1', '3', '1', '等于', '3', '1', '3', null, '');
 INSERT INTO `s_field` VALUES ('s_menu-sorting', 's_menu', 's_menu', 'sorting', '排序号', '1', '4', '1', '等于', '4', '1', '4', null, null);
 INSERT INTO `s_field` VALUES ('s_menu-is_enablement', 's_menu', 's_menu', 'is_enablement', '是否启用', '1', '5', '0', '等于', '5', '1', '5', 'radio', 's_custom_selectbox-value');
 INSERT INTO `s_field` VALUES ('s_menu-superior_coding', 's_menu', 's_menu', 'superior_coding', '上级编码', '1', '6', '1', '等于', '6', '1', '6', 'select', 's_menu-coding');
 INSERT INTO `s_field` VALUES ('s_menu-display_style', 's_menu', 's_menu', 'display_style', '显示样式', '1', '8', '0', '等于', '8', '1', '8', null, null);
+INSERT INTO `s_field` VALUES ('s_configuration_page-coding', 's_configuration_page', 's_configuration_page', 'coding', '唯一标识符', '1', '1', '1', '等于', '1', '1', '1', '', null);
+INSERT INTO `s_field` VALUES ('s_configuration_page-name', 's_menu', 's_menu', 'name', '名称', '1', '2', '1', '等于', '2', '1', '2', null, null);
+INSERT INTO `s_field` VALUES ('s_configuration_page-table_en', 's_configuration_page', 's_configuration_page', 'table_en', '数据库表名', '1', '3', '1', '等于', '3', '1', '3', null, null);
+INSERT INTO `s_field` VALUES ('s_configuration_page-pk_field_en', 's_configuration_page', 's_configuration_page', 'pk_field_en', '主键字段', '1', '4', '1', '等于', '4', '1', '4', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-coding', 's_field-list', 's_field', 'coding', '唯一标识符', '1', '1', '0', '等于', '1', '0', '1', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-configuration_page_coding', 's_field-list', 's_field', 'configuration_page_coding', '配置页面编码', '1', '2', '1', '等于', '2', '0', '2', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-table_en', 's_field-list', 's_field', 'table_en', '数据库表名', '1', '3', '0', '等于', '3', '0', '3', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-field_en', 's_field-list', 's_field', 'field_en', '数据库字段名', '1', '4', '0', '等于', '4', '0', '4', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-name', 's_field-list', 's_field', 'name', '名称', '1', '5', '0', '等于', '5', '1', '5', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-is_show_list', 's_field-list', 's_field', 'is_show_list', '是否显示列表', '1', '6', '0', '等于', '6', '1', '6', 'radio', 's_custom_selectbox-value');
+INSERT INTO `s_field` VALUES ('s_field-list-sorting_list', 's_field-list', 's_field', 'sorting_list', '列表排序', '1', '7', '0', '等于', '7', '1', '7', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-is_query', 's_field-list', 's_field', 'is_query', '是否查询', '0', '8', '0', '等于', '8', '0', '8', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-query_type', 's_field-list', 's_field', 'query_type', '查询类型', '0', '9', '0', '等于', '9', '0', '9', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-sorting_query', 's_field-list', 's_field', 'sorting_query', '查询排序', '0', '10', '0', '等于', '10', '0', '10', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-is_edit', 's_field-list', 's_field', 'is_edit', '是否编辑', '0', '11', '0', '等于', '11', '0', '11', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-sorting_edit', 's_field-list', 's_field', 'sorting_edit', '编辑排序', '0', '12', '0', '等于', '12', '0', '12', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-input_type', 's_field-list', 's_field', 'input_type', '输入框样式', '0', '13', '0', '等于', '13', '0', '13', null, null);
+INSERT INTO `s_field` VALUES ('s_field-list-selectbox_coding', 's_field-list', 's_field', 'selectbox_coding', '下拉框类型编码', '0', '14', '0', '等于', '14', '0', '14', null, null);
 
 -- ----------------------------
 -- Table structure for s_menu
@@ -106,9 +126,10 @@ CREATE TABLE `s_menu` (
 -- ----------------------------
 -- Records of s_menu
 -- ----------------------------
-INSERT INTO `s_menu` VALUES ('MenuBarSettings', '菜单栏设置', null, '1', '1', 'PageConfigurationManagement', 's_menu', null, 's_menu');
+INSERT INTO `s_menu` VALUES ('FieldList', '字段列表设置', null, '3', '1', 'PageConfigurationManagement', 's_field-list', null, 's_field-list');
+INSERT INTO `s_menu` VALUES ('MenuBarSettings', '菜单栏设置', null, '2', '1', 'PageConfigurationManagement', 's_menu', null, 's_menu');
 INSERT INTO `s_menu` VALUES ('PageConfigurationManagement', '页面配置管理', null, '9999', '1', null, null, null, null);
-INSERT INTO `s_menu` VALUES ('s_configuration_page', '页面配置', null, '1', '0', null, null, null, 's_configuration_page');
+INSERT INTO `s_menu` VALUES ('s_configuration_page', '页面配置', null, '1', '1', 'PageConfigurationManagement', null, null, 's_configuration_page');
 
 -- ----------------------------
 -- Table structure for s_selectbox

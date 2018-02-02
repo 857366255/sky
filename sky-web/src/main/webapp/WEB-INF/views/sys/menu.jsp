@@ -13,25 +13,13 @@
 %>
 <c:forEach items="${menuList}" var="m">
     <li>
-        <%--<a href="#"><i class="fa fa-table"></i> <span class="nav-label">系统管理</span><span
-                class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-            <li><a class="J_menuItem" href="${pageContext.request.contextPath}/list/s_menu">列表</a></li>
-            <li><a class="J_menuItem" href="${pageContext.request.contextPath}/add/s_menu">新增</a></li>
-            <li><a class="J_menuItem" href="${pageContext.request.contextPath}/update/s_menu/1">修改</a></li>
-        </ul>--%>
         <c:choose>
             <c:when test="${m.getMenuList().size() == 0}">
                 <li>
-                    <a href="#">
+                    <a class="J_menuItem" href="${pageContext.request.contextPath}/list/${m.getUrl()}">
                         <i class="fa ${m.getIcon()}"></i>
-                        <span class="nav-label">${m.getName()}</span><span class="fa arrow"></span>
+                        <span class="nav-label">${m.getName()}</span>
                     </a>
-                    <ul class="nav nav-third-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath}/list/${m.getUrl()}">列表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath}/add/${m.getUrl()}">新增</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath}/update/${m.getUrl()}/1">修改</a></li>
-                    </ul>
                 </li>
             </c:when>
             <c:otherwise>
