@@ -7,46 +7,16 @@ import java.util.List;
  * 菜单栏
  */
 public class Menu {
-    /**
-     *编码
-     */
-    private String coding;
-    /**
-     *名称
-     */
-    private String name;
-    /**
-     *图标
-     */
-    private String icon;
-    /**
-     *排序号
-     */
-    private Integer sorting;
-    /**
-     *是否启用
-     */
-    private Boolean isEnablement;
-    /**
-     *上级编码
-     */
-    private String superiorCoding;
-    /**
-     * 通过查询上级编码找到下级菜单
-     */
-    private List<Menu> menuList;
-    /**
-     *配置页面编码
-     */
-    private String configurationPageCoding;
-    /**
-     *显示样式
-     */
-    private String displayStyle;
-    /**
-     *链接
-     */
-    private String url;
+    private String coding;//编码
+    private String name;//名称
+    private String icon;//图标
+    private Integer sorting;//排序号
+    private Boolean isEnablement;//是否启用
+    private String superiorCoding;//上级编码
+    private List<Menu> menuList;//通过查询上级编码找到下级菜单
+    private String configurationPageCoding;//配置页面编码
+    private String url;//链接
+    private String openStyle;//打开页面样式
 
     public String getCoding() {
         return coding;
@@ -112,20 +82,20 @@ public class Menu {
         this.configurationPageCoding = configurationPageCoding;
     }
 
-    public String getDisplayStyle() {
-        return displayStyle;
-    }
-
-    public void setDisplayStyle(String displayStyle) {
-        this.displayStyle = displayStyle;
-    }
-
     public String getUrl() {
         return url;
     }
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getOpenStyle() {
+        return openStyle;
+    }
+
+    public void setOpenStyle(String openStyle) {
+        this.openStyle = openStyle;
     }
 
     @Override
@@ -139,8 +109,8 @@ public class Menu {
                 ", superiorCoding='" + superiorCoding + '\'' +
                 ", menuList=" + menuList +
                 ", configurationPageCoding='" + configurationPageCoding + '\'' +
-                ", displayStyle='" + displayStyle + '\'' +
                 ", url='" + url + '\'' +
+                ", openStyle='" + openStyle + '\'' +
                 '}';
     }
 }

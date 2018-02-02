@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sky.page.dao.MenuDao">
-    <sql id="fieldName" >coding,name,icon,sorting,is_enablement,superior_coding,configuration_page_coding,display_style,url</sql>
+    <sql id="fieldName" >coding,name,icon,sorting,is_enablement,superior_coding,configuration_page_coding,url,open_style</sql>
     <sql id="tableName" >s_menu</sql>
     <!--映射实体类-->
     <resultMap id="menuClassesResultMap" type="com.sky.admin.po.Menu">
@@ -13,8 +13,8 @@
         <result property="isEnablement" column="is_enablement"/>
         <result property="superiorCoding" column="superior_coding"/>
         <result property="configurationPageCoding" column="configuration_page_coding"/>
-        <result property="displayStyle" column="display_style"/>
         <result property="url" column="url"/>
+        <result property="openStyle" column="open_style"/>
         <collection property="menuList"  ofType="menuClassesResultMap"
                     select="findCreationByCoding" column="coding" />
         <!--<association property="classesResultMap" column="coding" select="findCreationByCoding"/>-->

@@ -24,6 +24,22 @@ public class TestController {
     @Autowired
     private SelectBoxDao selectBoxDao;
 
+
+    /**
+     * 打主从页面
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "master-slave/{configurationPageCoding}/{id}",method = RequestMethod.GET)
+    public String goMasterSlave(Map<String, Object> map,@PathVariable String configurationPageCoding, @PathVariable String id){
+        Map<String,Object> listParams = getListParams(configurationPageCoding);
+        listParams.put("url","../../listData/"+configurationPageCoding);//请求后台的URL
+        List<ListFind> listFinds =  pageDao.getListFinds(configurationPageCoding);
+        map.put("listParams", JSON.toJSONString(listParams));
+        map.put("listFinds", listFinds);
+        map.put("configurationPageCoding", configurationPageCoding);
+        return "test/master-slave";
+    }
     /**
      * 删除数据
      * @param configurationPageCoding

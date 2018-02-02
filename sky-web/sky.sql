@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-02-02 14:13:47
+Date: 2018-02-02 17:33:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -86,7 +86,7 @@ INSERT INTO `s_field` VALUES ('s_menu-icon', 's_menu', 's_menu', 'icon', '图标
 INSERT INTO `s_field` VALUES ('s_menu-sorting', 's_menu', 's_menu', 'sorting', '排序号', '1', '4', '1', '等于', '4', '1', '4', null, null);
 INSERT INTO `s_field` VALUES ('s_menu-is_enablement', 's_menu', 's_menu', 'is_enablement', '是否启用', '1', '5', '0', '等于', '5', '1', '5', 'radio', 's_custom_selectbox-value');
 INSERT INTO `s_field` VALUES ('s_menu-superior_coding', 's_menu', 's_menu', 'superior_coding', '上级编码', '1', '6', '1', '等于', '6', '1', '6', 'select', 's_menu-coding');
-INSERT INTO `s_field` VALUES ('s_menu-display_style', 's_menu', 's_menu', 'display_style', '显示样式', '1', '8', '0', '等于', '8', '1', '8', null, null);
+INSERT INTO `s_field` VALUES ('s_menu-display_style', 's_menu', 's_menu', 'open_style', '打开页面样式', '1', '8', '0', '等于', '8', '1', '8', null, null);
 INSERT INTO `s_field` VALUES ('s_configuration_page-coding', 's_configuration_page', 's_configuration_page', 'coding', '唯一标识符', '1', '1', '1', '等于', '1', '1', '1', '', null);
 INSERT INTO `s_field` VALUES ('s_configuration_page-name', 's_menu', 's_menu', 'name', '名称', '1', '2', '1', '等于', '2', '1', '2', null, null);
 INSERT INTO `s_field` VALUES ('s_configuration_page-table_en', 's_configuration_page', 's_configuration_page', 'table_en', '数据库表名', '1', '3', '1', '等于', '3', '1', '3', null, null);
@@ -118,18 +118,20 @@ CREATE TABLE `s_menu` (
   `is_enablement` tinyint(1) DEFAULT NULL COMMENT '是否启用',
   `superior_coding` varchar(255) DEFAULT NULL COMMENT '上级编码',
   `configuration_page_coding` varchar(255) DEFAULT NULL COMMENT '配置页面编码',
-  `display_style` varchar(255) DEFAULT NULL COMMENT '显示样式',
   `url` varchar(255) DEFAULT NULL COMMENT '链接',
+  `open_style` varchar(255) DEFAULT NULL COMMENT '打开页面样式',
   PRIMARY KEY (`coding`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of s_menu
 -- ----------------------------
-INSERT INTO `s_menu` VALUES ('FieldList', '字段列表设置', null, '3', '1', 'PageConfigurationManagement', 's_field-list', null, 's_field-list');
-INSERT INTO `s_menu` VALUES ('MenuBarSettings', '菜单栏设置', null, '2', '1', 'PageConfigurationManagement', 's_menu', null, 's_menu');
+INSERT INTO `s_menu` VALUES ('ConfigurationPage', '页面配置', null, '1', '1', 'PageConfigurationManagement', 's_configuration_page', null, 'list');
+INSERT INTO `s_menu` VALUES ('FieldList', '字段列表设置', null, '3', '1', 'PageConfigurationManagement', 's_field-list', null, 'list');
+INSERT INTO `s_menu` VALUES ('MasterSlave', '主从页面', null, '1', '1', null, 's_configuration_page', 's_configuration_page/s_menu', 'master-slave');
+INSERT INTO `s_menu` VALUES ('MeneAd', '菜单栏添加页面', null, '4', '1', 'PageConfigurationManagement', 's_menu', null, 'add');
+INSERT INTO `s_menu` VALUES ('MenuBarSettings', '菜单栏设置', null, '2', '1', 'PageConfigurationManagement', 's_menu', null, 'list');
 INSERT INTO `s_menu` VALUES ('PageConfigurationManagement', '页面配置管理', null, '9999', '1', null, null, null, null);
-INSERT INTO `s_menu` VALUES ('s_configuration_page', '页面配置', null, '1', '1', 'PageConfigurationManagement', null, null, 's_configuration_page');
 
 -- ----------------------------
 -- Table structure for s_selectbox

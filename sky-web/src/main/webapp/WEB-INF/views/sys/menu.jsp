@@ -16,7 +16,7 @@
         <c:choose>
             <c:when test="${m.getMenuList().size() == 0}">
                 <li>
-                    <a class="J_menuItem" href="${pageContext.request.contextPath}/list/${m.getUrl()}">
+                    <a class="J_menuItem" href="${pageContext.request.contextPath}/${m.getOpenStyle()==null ? "other" : m.getOpenStyle() }/${m.getUrl()==null ? m.getConfigurationPageCoding() : m.getUrl()}">
                         <i class="fa ${m.getIcon()}"></i>
                         <span class="nav-label">${m.getName()}</span>
                     </a>
