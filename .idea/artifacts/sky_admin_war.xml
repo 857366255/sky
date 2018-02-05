@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sky-admin:war">
+    <output-path>$PROJECT_DIR$/sky-admin/target</output-path>
+    <root id="archive" name="sky-admin-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="sky-admin:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -2,6 +2,7 @@ package com.sky.page.dao;
 
 
 import com.sky.admin.po.Menu;
+import com.sky.common.base.BaseDao;
 
 import java.util.List;
 

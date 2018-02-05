@@ -1,4 +1,4 @@
-package com.sky.page.dao;
+package com.sky.common.base;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -14,7 +14,7 @@ public interface BaseDao<K,V> {
      * @return 成功返回true,失败返回false
      * @throws SQLException
      */
-    public boolean doCreate(V vo);
+    public boolean doAdd(V vo);
 
     /**
      * 实现数据操作
@@ -30,14 +30,14 @@ public interface BaseDao<K,V> {
      * @return 成功返回true,失败返回false
      * @throws SQLException
      */
-    public boolean doRemoveBatch(List<?> ids);
+    public boolean doDeleteBatch(List<?> ids);
     /**
      * 实现数据单个删除
      * @param id 表示要执行删除的数据的行
      * @return 成功返回true,失败返回false
      * @throws SQLException
      */
-    public boolean doRemove(K id);
+    public boolean doDelete(K id);
 
     /**
      * 根据用户提供的id进行查询

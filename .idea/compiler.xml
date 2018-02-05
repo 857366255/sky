@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="sky-admin" />
         <module name="sky-common" />
         <module name="sky-page" />
         <module name="sky-web" />
@@ -13,6 +14,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="sky" target="1.5" />
+      <module name="sky-admin" target="1.5" />
       <module name="sky-common" target="1.5" />
       <module name="sky-dao" target="1.5" />
       <module name="sky-page" target="1.5" />

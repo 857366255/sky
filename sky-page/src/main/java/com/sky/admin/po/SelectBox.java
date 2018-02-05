@@ -1,7 +1,6 @@
 package com.sky.admin.po;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by wz on 2018/1/31.
