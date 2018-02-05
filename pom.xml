@@ -11,6 +11,7 @@
     <!--<module>sky-server</module>-->
     <module>sky-common</module>
     <module>sky-page</module>
+      <module>sky-admin</module>
   </modules>
   <packaging>pom</packaging>
 
