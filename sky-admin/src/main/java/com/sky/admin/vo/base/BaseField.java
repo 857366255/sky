@@ -1,10 +1,10 @@
-package com.sky.admin.po.base;
+package com.sky.admin.vo.base;
 
 /**
  * 实体类:字段基础信息
  * Created by wz on 2018/2/5.
  */
-public class Field {
+public class BaseField {
     private String coding;//唯一标识符
     private String configurationPageCoding;//配置页面编码
     private String tableEn;//数据库表名

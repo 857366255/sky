@@ -1,12 +1,12 @@
-package com.sky.admin.po;
+package com.sky.admin.vo;
 
-import com.sky.admin.po.base.Field;
+import com.sky.admin.vo.base.BaseField;
 
 /**
  * 实体类:列表字段信息
  * Created by wz on 2018/2/5.
  */
-public class ListField extends Field {
+public class ListField extends BaseField {
 
     private Boolean isShowList;//列表显示是否
     private Integer sortingList;//列表排序

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.admin.dao.FieldDao">
+    <sql id="editField"> is_show_edit,is_edit,input_coding,sorting_edit </sql><!--编辑字段信息-->
+    <sql id="listField"> is_show_list,sorting_list </sql><!--列表字段信息-->
+    <sql id="queryField"> is_query,query_type,sorting_list </sql><!--查询字段信息-->
+    <sql id="baseField"> coding,configuration_page_coding,table_en,field_en,name </sql><!--基本字段信息-->
+    <sql id="field" > <include refid="baseField" />,<include refid="listField" />,<include refid="queryField" />,<include refid="editField" /> </sql>
+    <sql id="tableEn" > s_field </sql>
+    <!--映射实体类-->
+    <resultMap id="FieldResultMap" type="com.sky.admin.po.Field">
+        <id property="coding" column="coding"/>
+        <result property="configurationPageCoding" column="configuration_page_coding"/>
+        <result property="tableEn" column="table_en"/>
+        <result property="fieldEn" column="field_en"/>
+        <result property="name" column="name"/>
+        <result property="isShowEdit" column="is_show_edit"/>
+        <result property="isEdit" column="is_edit"/>
+        <result property="inputCoding" column="input_coding"/>
+        <result property="sortingEdit" column="sorting_edit"/>
+        <result property="isShowList" column="is_show_list"/>
+        <result property="sortingList" column="sorting_list"/>
+        <result property="isQuery" column="is_query"/>
+        <result property="queryType" column="query_type"/>
+        <result property="sortingQuery" column="sorting_query"/>
+    </resultMap>
+    <!--查询全部数据-->
+    <select id="findAll" parameterType="java.util.List"  resultMap="FieldResultMap">
+        SELECT <include refid="field" /> FROM <include refid="tableEn" />
+    </select>
+    <!--查询-->
+    <select id="findById" parameterType="java.lang.String" resultMap="FieldResultMap">
+        SELECT <include refid="field" /> FROM <include refid="tableEn" /> WHERE coding=#{coding}
+    </select>
+    <!--按条件查询-->
+    <select id="findByCondition" parameterType="com.sky.admin.po.Field" resultMap="FieldResultMap">
+        SELECT <include refid="field" /> FROM <include refid="tableEn" />
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="coding != null"> AND coding LIKE CONCAT(CONCAT('%', #{coding}),'%') </if>
+            <if test="configurationPageCoding != null"> AND configuration_page_coding LIKE CONCAT(CONCAT('%', #{configurationPageCoding}),'%') </if>
+            <if test="tableEn != null"> AND table_en LIKE CONCAT(CONCAT('%', #{tableEn}),'%') </if>
+            <if test="fieldEn != null"> AND field_en LIKE CONCAT(CONCAT('%', #{fieldEn}),'%') </if>
+            <if test="name != null"> AND name LIKE CONCAT(CONCAT('%', #{name}),'%') </if>
+            <if test="isShowEdit != null"> AND is_show_edit LIKE CONCAT(CONCAT('%', #{isShowEdit}),'%') </if>
+            <if test="isEdit != null"> AND is_edit LIKE CONCAT(CONCAT('%', #{isEdit}),'%') </if>
+            <if test="inputCoding != null"> AND input_coding LIKE CONCAT(CONCAT('%', #{inputCoding}),'%') </if>
+            <if test="sortingEdit != null"> AND sorting_edit LIKE CONCAT(CONCAT('%', #{sortingEdit}),'%') </if>
+            <if test="isShowList != null"> AND is_show_list LIKE CONCAT(CONCAT('%', #{isShowList}),'%') </if>
+            <if test="sortingList != null"> AND sorting_list LIKE CONCAT(CONCAT('%', #{sortingList}),'%') </if>
+            <if test="isQuery != null"> AND is_query LIKE CONCAT(CONCAT('%', #{isQuery}),'%') </if>
+            <if test="queryType != null"> AND query_type LIKE CONCAT(CONCAT('%', #{queryType}),'%') </if>
+            <if test="sortingQuery != null"> AND sorting_query LIKE CONCAT(CONCAT('%', #{sortingQuery}),'%') </if>
+        </trim>
+    </select>
+    <!--增加-->
+    <insert id="doAdd" parameterType="com.sky.admin.po.Field">
+        INSERT INTO <include refid="tableEn" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="coding != null">coding,</if>
+            <if test="configurationPageCoding != null">configuration_page_coding,</if>
+            <if test="tableEn != null">table_en,</if>
+            <if test="fieldEn != null">field_en,</if>
+            <if test="name != null">name,</if>
+            <if test="isShowEdit != null">is_show_edit,</if>
+            <if test="isEdit != null">is_edit,</if>
+            <if test="inputCoding != null">input_coding,</if>
+            <if test="sortingEdit != null">sorting_edit,</if>
+            <if test="isShowList != null">is_show_list,</if>
+            <if test="sortingList != null">sorting_list,</if>
+            <if test="isQuery != null">is_query,</if>
+            <if test="queryType != null">query_type,</if>
+            <if test="sortingQuery != null">sorting_query,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="coding != null">#{coding},</if>
+            <if test="configurationPageCoding != null">#{configurationPageCoding},</if>
+            <if test="tableEn != null">#{tableEn},</if>
+            <if test="fieldEn != null">#{fieldEn},</if>
+            <if test="name != null">#{name},</if>
+            <if test="isShowEdit != null">#{isShowEdit},</if>
+            <if test="isEdit != null">#{isEdit},</if>
+            <if test="inputCoding != null">#{inputCoding},</if>
+            <if test="sortingEdit != null">#{sortingEdit},</if>
+            <if test="isShowList != null">#{isShowList},</if>
+            <if test="sortingList != null">#{sortingList},</if>
+            <if test="isQuery != null">#{isQuery},</if>
+            <if test="queryType != null">#{queryType},</if>
+            <if test="sortingQuery != null">#{sortingQuery},</if>
+        </trim>
+    </insert>
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.admin.po.Field">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="configurationPageCoding != null">configuration_page_coding=#{configurationPageCoding},</if>
+            <if test="tableEn != null">table_en=#{tableEn},</if>
+            <if test="fieldEn != null">field_en=#{fieldEn},</if>
+            <if test="name != null">name=#{name},</if>
+            <if test="isShowEdit != null">is_show_edit=#{isShowEdit},</if>
+            <if test="isEdit != null">is_edit=#{isEdit},</if>
+            <if test="inputCoding != null">input_coding=#{inputCoding},</if>
+            <if test="sortingEdit != null">sorting_edit=#{sortingEdit},</if>
+            <if test="isShowList != null">is_show_list=#{isShowList},</if>
+            <if test="sortingList != null">sorting_list=#{sortingList},</if>
+            <if test="isQuery != null">is_query=#{isQuery},</if>
+            <if test="queryType != null">query_type=#{queryType},</if>
+            <if test="sortingQuery != null">sorting_query=#{sortingQuery},</if>
+        </trim>
+        WHERE coding=#{coding}
+    </update>
+    <!--批量删除-->
+    <delete id="doDeleteBatch" parameterType="java.util.List">
+        DELETE FROM <include refid="tableEn" />
+        <where>
+            coding IN
+            <foreach collection="list" item="ele" open="(" separator="," close=")">
+                '${ele}'
+            </foreach>
+        </where>
+    </delete>
+    <!--删除-->
+    <delete id="doDelete" parameterType="java.lang.String">
+        DELETE FROM <include refid="tableEn" /> WHERE coding = #{coding}
+    </delete>
+    <!--映射实体类-->
+    <resultMap id="DataFieldResultMap" type="com.sky.admin.po.Field">
+        <id property="coding" column="coding"/>
+        <result property="configurationPageCoding" column="configuration_page_coding"/>
+        <result property="tableEn" column="table_name"/>
+        <result property="fieldEn" column="column_name"/>
+        <result property="name" column="column_comment"/>
+        <result property="isShowEdit" column="truename"/>
+        <result property="isEdit" column="truename"/>
+        <!--<result property="inputCoding" column="input_coding"/>-->
+        <result property="sortingEdit" column="ordinal_position"/>
+        <result property="isShowList" column="truename"/>
+        <result property="sortingList" column="ordinal_position"/>
+        <result property="isQuery" column="truename"/>
+        <!--<result property="queryType" column="query_type"/>-->
+        <result property="sortingQuery" column="ordinal_position"/>
+    </resultMap>
+    <!--查询数据库表字段-->
+    <sql id="dataField">
+        table_name,column_name,column_comment,ordinal_position,true truename ,#{configurationPageCoding} configuration_page_coding
+        ,concat_ws('-',#{configurationPageCoding},column_name) coding
+    </sql>
+    <select id="getTableFieldData" parameterType="java.lang.String"  resultMap="DataFieldResultMap">
+        SELECT <include refid="dataField" /> FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name=#{tableEn}
+    </select>
+
+
+</mapper>

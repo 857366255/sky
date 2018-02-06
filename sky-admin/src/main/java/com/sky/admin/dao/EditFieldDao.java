@@ -1,6 +1,6 @@
 package com.sky.admin.dao;
 
-import com.sky.admin.po.EditField;
+import com.sky.admin.vo.EditField;
 import com.sky.common.base.BaseDao;
 
 /**

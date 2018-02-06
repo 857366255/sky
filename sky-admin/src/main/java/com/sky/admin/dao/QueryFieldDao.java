@@ -1,7 +1,6 @@
 package com.sky.admin.dao;
 
-import com.sky.admin.po.ListField;
-import com.sky.admin.po.QueryField;
+import com.sky.admin.vo.QueryField;
 import com.sky.common.base.BaseDao;
 
 /**

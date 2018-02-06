@@ -1,8 +1,6 @@
 import base.SpringTestCase;
 import com.sky.admin.dao.EditFieldDao;
-import com.sky.admin.dao.ListFieldDao;
-import com.sky.admin.po.EditField;
-import com.sky.admin.po.ListField;
+import com.sky.admin.vo.EditField;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

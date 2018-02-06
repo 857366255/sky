@@ -3,18 +3,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sky.admin.dao.EditFieldDao">
 
-    <sql id="showField" > coding,configuration_page_coding,table_en,field_en,name </sql>
+    <sql id="showField" > coding,configuration_page_coding,table_en,field_en,name,is_show_edit,is_edit,input_coding,sorting_edit </sql>
     <sql id="tableEn" > s_field </sql>
-
     <!--映射实体类-->
-    <resultMap id="EditFieldResultMap" type="com.sky.admin.po.EditField">
+    <resultMap id="EditFieldResultMap" type="com.sky.admin.vo.EditField">
         <id property="coding" column="coding"/>
         <result property="configurationPageCoding" column="configuration_page_coding"/>
         <result property="tableEn" column="table_en"/>
         <result property="fieldEn" column="field_en"/>
         <result property="name" column="name"/>
+        <result property="isShowEdit" column="is_show_edit"/>
+        <result property="isEdit" column="is_edit"/>
+        <result property="inputCoding" column="input_coding"/>
+        <result property="sortingEdit" column="sorting_edit"/>
     </resultMap>
 
+    <!--查询显示编辑字段-->
+    <select id="getShowEditField" parameterType="java.lang.String" resultMap="EditFieldResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE table_en=#{tableEn} AND is_show_edit=true
+    </select>
     <!--查询全部数据-->
     <select id="findAll" parameterType="java.util.List"  resultMap="EditFieldResultMap">
         SELECT <include refid="showField" /> FROM <include refid="tableEn" />
@@ -24,7 +31,7 @@
         SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE coding=#{coding}
     </select>
     <!--按条件查询-->
-    <select id="findByCondition" parameterType="com.sky.admin.po.EditField" resultMap="EditFieldResultMap">
+    <select id="findByCondition" parameterType="com.sky.admin.vo.EditField" resultMap="EditFieldResultMap">
         SELECT <include refid="showField" /> FROM <include refid="tableEn" />
         <trim prefix="WHERE" prefixOverrides="AND | OR">
             <if test="coding != null">
@@ -45,7 +52,7 @@
         </trim>
     </select>
     <!--增加-->
-    <insert id="doAdd" parameterType="com.sky.admin.po.EditField">
+    <insert id="doAdd" parameterType="com.sky.admin.vo.EditField">
         INSERT INTO <include refid="tableEn" />
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="coding != null">coding,</if>
@@ -64,7 +71,7 @@
         </trim>
     </insert>
     <!--更新-->
-    <update id="doUpdate" parameterType="com.sky.admin.po.EditField">
+    <update id="doUpdate" parameterType="com.sky.admin.vo.EditField">
         UPDATE <include refid="tableEn" />
         <trim prefix="SET" suffixOverrides=",">
             <if test="configurationPageCoding != null">configuration_page_coding=#{configurationPageCoding},</if>

@@ -1,12 +1,12 @@
-package com.sky.admin.po;
+package com.sky.admin.vo;
 
-import com.sky.admin.po.base.Field;
+import com.sky.admin.vo.base.BaseField;
 
 /**
  * 实体类:查询字段信息
  * Created by wz on 2018/2/5.
  */
-public class QueryField extends Field {
+public class QueryField extends BaseField {
 
     private Boolean isQuery;//是否查询
     private String queryType;//查询条件类型

@@ -82,5 +82,22 @@
         DELETE FROM <include refid="tableEn" />  WHERE coding = #{coding}
     </delete>
 
+    <!--映射实体类-->
+    <resultMap id="DataTableResultMap" type="com.sky.admin.po.ConfigurationPage">
+        <id property="coding" column="coding"/>
+        <result property="name" column="name"/>
+        <result property="tableEn" column="table_name"/>
+        <result property="pkFieldEn" column="column_name"/>
+    </resultMap>
+    <!--查询数据库表字段-->
+    <sql id="dataTable">
+        #{cp.coding} coding,#{cp.name} name,a.table_name,b.column_name
+    </sql>
+    <select id="getTableData" parameterType="java.lang.String"  resultMap="DataTableResultMap">
+        SELECT <include refid="dataTable" />
+          FROM information_schema.tables a
+          LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE b on a.table_name=b.table_name
+        WHERE a.table_schema=DATABASE() AND b.table_schema=DATABASE() AND a.table_name=#{cp.tableEn}
+    </select>
 
 </mapper>

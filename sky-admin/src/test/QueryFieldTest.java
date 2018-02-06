@@ -1,8 +1,6 @@
 import base.SpringTestCase;
-import com.sky.admin.dao.ListFieldDao;
 import com.sky.admin.dao.QueryFieldDao;
-import com.sky.admin.po.ListField;
-import com.sky.admin.po.QueryField;
+import com.sky.admin.vo.QueryField;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

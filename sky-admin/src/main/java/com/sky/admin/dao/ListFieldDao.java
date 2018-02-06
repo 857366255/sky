@@ -1,6 +1,6 @@
 package com.sky.admin.dao;
 
-import com.sky.admin.po.ListField;
+import com.sky.admin.vo.ListField;
 import com.sky.common.base.BaseDao;
 
 /**

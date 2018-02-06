@@ -1,10 +1,15 @@
 import base.SpringTestCase;
 import com.sky.admin.dao.ConfigurationPageDao;
+import com.sky.admin.dao.FieldDao;
 import com.sky.admin.po.ConfigurationPage;
+import com.sky.admin.po.Field;
+import com.sky.admin.service.ConfigurationPageService;
+import com.sky.admin.vo.ListField;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +22,28 @@ public class ConfigurationPageTest extends SpringTestCase {
 
     @Autowired
     private ConfigurationPageDao configurationPageDao;
+    @Autowired
+    private FieldDao fieldDao;
+    @Autowired
+    private ConfigurationPageService configurationPageService;
+
+    private Field field = new Field();
+
+    @Test
+    public void doAdd2(){
+        System.out.println("新增2");
+        ConfigurationPage cp = new ConfigurationPage();
+        cp.setCoding("s_menu2");
+        cp.setTableEn("s_menu");
+        cp.setName("菜单栏");
+        configurationPageService.doAdd(cp);
+    }
+    @Test
+    public void doDelete2(){
+        System.out.println("删除");
+        System.out.println(configurationPageDao.doDelete("4563"));
+    }
+
     @Test
     public void findAll(){
         System.out.println("查询");

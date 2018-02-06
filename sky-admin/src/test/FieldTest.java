@@ -1,6 +1,7 @@
 import base.SpringTestCase;
-import com.sky.admin.dao.ListFieldDao;
-import com.sky.admin.vo.ListField;
+import com.sky.admin.dao.FieldDao;
+import com.sky.admin.vo.EditField;
+import com.sky.admin.po.Field;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,44 +14,44 @@ import java.util.List;
  */
 
 @Component("configInfo")
-public class ListFieldTest extends SpringTestCase {
+public class FieldTest extends SpringTestCase {
 
     @Autowired
-    private ListFieldDao listFieldDao;
-    private ListField  lf = new ListField();
+    private FieldDao fieldDao;
+    private Field field = new Field();
     private List<String> ele = new ArrayList<String>();
 
     @Test
     public void findAll(){
         System.out.println("查询");
-        System.out.println(listFieldDao.findAll());
+        System.out.println(fieldDao.findAll());
     }
 
     @Test
     public void findByCondition(){
         System.out.println("按条件查询");
 
-        lf.setName("配置");
-        System.out.println(listFieldDao.findByCondition(lf));
+        field.setName("配置");
+        System.out.println(fieldDao.findByCondition(field));
     }
     @Test
     public void doAdd(){
         System.out.println("新增");
-        lf.setCoding("4563");
-        lf.setName("配置");
-        System.out.println(listFieldDao.doAdd(lf));
+        field.setCoding("4563");
+        field.setName("配置");
+        System.out.println(fieldDao.doAdd(field));
     }
     @Test
     public void doUpdate(){
         System.out.println("修改");
-        lf.setCoding("4563");
-        lf.setName("配置123");
-        System.out.println(listFieldDao.doUpdate(lf));
+        field.setCoding("4563");
+        field.setName("配置123");
+        System.out.println(fieldDao.doUpdate(field));
     }
     @Test
     public void doDelete(){
         System.out.println("删除");
-        System.out.println(listFieldDao.doDelete("4563"));
+        System.out.println(fieldDao.doDelete("4563"));
     }
 
     @Test
@@ -58,6 +59,6 @@ public class ListFieldTest extends SpringTestCase {
         System.out.println("删除");
         ele.add("4563");
         ele.add("456");
-        System.out.println(listFieldDao.doDeleteBatch(ele));
+        System.out.println(fieldDao.doDeleteBatch(ele));
     }
 }

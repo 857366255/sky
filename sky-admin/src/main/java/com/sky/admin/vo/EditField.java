@@ -1,12 +1,12 @@
-package com.sky.admin.po;
+package com.sky.admin.vo;
 
-import com.sky.admin.po.base.Field;
+import com.sky.admin.vo.base.BaseField;
 
 /**
  * 实体类:编辑字段信息
  * Created by wz on 2018/2/5.
  */
-public class EditField extends Field {
+public class EditField extends BaseField {
 
     private Boolean isShowEdit;//是否显示
     private Boolean isEdit;//是否编辑
