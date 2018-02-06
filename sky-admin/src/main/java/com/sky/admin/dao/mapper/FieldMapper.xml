@@ -124,6 +124,10 @@
     <delete id="doDelete" parameterType="java.lang.String">
         DELETE FROM <include refid="tableEn" /> WHERE coding = #{coding}
     </delete>
+    <!--删除-->
+    <delete id="doDeleteByConfigurationPageCoding" parameterType="java.lang.String">
+        DELETE FROM <include refid="tableEn" /> WHERE configuration_page_coding = #{configurationPageCoding}
+    </delete>
     <!--映射实体类-->
     <resultMap id="DataFieldResultMap" type="com.sky.admin.po.Field">
         <id property="coding" column="coding"/>

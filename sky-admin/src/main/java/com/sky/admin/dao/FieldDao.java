@@ -16,4 +16,6 @@ public interface FieldDao extends BaseDao<String ,Field> {
      * @return
      */
     List<Field> getTableFieldData(@Param("tableEn")String tableEn,@Param("configurationPageCoding")String configurationPageCoding);
+
+    Boolean doDeleteByConfigurationPageCoding(@Param("configurationPageCoding")String configurationPageCoding);
 }

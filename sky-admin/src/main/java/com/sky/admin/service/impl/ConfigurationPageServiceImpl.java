@@ -39,7 +39,8 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
     }
 
     public Boolean doDelete(String coding) {
-
+        fieldDao.doDeleteByConfigurationPageCoding(coding);
+        configurationPageDao.doDelete(coding);
         return null;
     }
 }

@@ -28,7 +28,14 @@ public class ConfigurationPageTest extends SpringTestCase {
     private ConfigurationPageService configurationPageService;
 
     private Field field = new Field();
-
+    @Test
+    public void doUpdate2(){
+        System.out.println("修改2");
+        ConfigurationPage cp = new ConfigurationPage();
+        cp.setCoding("4563");
+        cp.setName("配置123");
+        System.out.println(configurationPageDao.doUpdate(cp));
+    }
     @Test
     public void doAdd2(){
         System.out.println("新增2");
@@ -40,8 +47,8 @@ public class ConfigurationPageTest extends SpringTestCase {
     }
     @Test
     public void doDelete2(){
-        System.out.println("删除");
-        System.out.println(configurationPageDao.doDelete("4563"));
+        System.out.println("删除2");
+        System.out.println(configurationPageService.doDelete("s_menu2"));
     }
 
     @Test
