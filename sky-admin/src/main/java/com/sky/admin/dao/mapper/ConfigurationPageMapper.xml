@@ -99,5 +99,21 @@
           LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE b on a.table_name=b.table_name
         WHERE a.table_schema=DATABASE() AND b.table_schema=DATABASE() AND a.table_name=#{cp.tableEn}
     </select>
+    <!---->
+
+    <resultMap id="voConfigurationPageResultMap" type="com.sky.admin.vo.ConfigurationPage">
+        <id property="coding" column="coding"/>
+        <result property="name" column="name"/>
+        <result property="tableEn" column="table_name"/>
+        <result property="pkFieldEn" column="column_name"/>
+        <collection property="editFields"  ofType="EditFieldResultMap" select="com.sky.admin.dao.FieldDao.getEditFields" column="coding" />
+        <collection property="listFields"  ofType="ListFieldResultMap" select="com.sky.admin.dao.FieldDao.getListFields" column="coding" />
+        <collection property="queryFields"  ofType="QueryFieldResultMap" select="com.sky.admin.dao.FieldDao.getQueryFields" column="coding" />
+    </resultMap>
+    <!--查询配置页面信息及其它信息-->
+    <select id="getConfigurationPage" parameterType="java.lang.String"  resultMap="voConfigurationPageResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE coding=#{coding}
+    </select>
+
 
 </mapper>

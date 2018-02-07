@@ -53,6 +53,7 @@
             <if test="sortingQuery != null"> AND sorting_query LIKE CONCAT(CONCAT('%', #{sortingQuery}),'%') </if>
         </trim>
     </select>
+
     <!--增加-->
     <insert id="doAdd" parameterType="com.sky.admin.po.Field">
         INSERT INTO <include refid="tableEn" />
@@ -90,6 +91,7 @@
             <if test="sortingQuery != null">#{sortingQuery},</if>
         </trim>
     </insert>
+
     <!--更新-->
     <update id="doUpdate" parameterType="com.sky.admin.po.Field">
         UPDATE <include refid="tableEn" />
@@ -110,6 +112,7 @@
         </trim>
         WHERE coding=#{coding}
     </update>
+
     <!--批量删除-->
     <delete id="doDeleteBatch" parameterType="java.util.List">
         DELETE FROM <include refid="tableEn" />
@@ -120,14 +123,17 @@
             </foreach>
         </where>
     </delete>
+
     <!--删除-->
     <delete id="doDelete" parameterType="java.lang.String">
         DELETE FROM <include refid="tableEn" /> WHERE coding = #{coding}
     </delete>
+
     <!--删除-->
     <delete id="doDeleteByConfigurationPageCoding" parameterType="java.lang.String">
         DELETE FROM <include refid="tableEn" /> WHERE configuration_page_coding = #{configurationPageCoding}
     </delete>
+
     <!--映射实体类-->
     <resultMap id="DataFieldResultMap" type="com.sky.admin.po.Field">
         <id property="coding" column="coding"/>
@@ -154,5 +160,52 @@
         SELECT <include refid="dataField" /> FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name=#{tableEn}
     </select>
 
+    <!--映射实体类:编辑字段-->
+    <resultMap id="EditFieldResultMap" type="com.sky.admin.vo.EditField">
+        <id property="coding" column="coding"/>
+        <result property="configurationPageCoding" column="configuration_page_coding"/>
+        <result property="tableEn" column="table_en"/>
+        <result property="fieldEn" column="field_en"/>
+        <result property="name" column="name"/>
+        <result property="isShowEdit" column="is_show_edit"/>
+        <result property="isEdit" column="is_edit"/>
+        <result property="inputCoding" column="input_coding"/>
+        <result property="sortingEdit" column="sorting_edit"/>
+    </resultMap>
+    <!--查询配置页面:编辑字段-->
+    <select id="getEditFields" parameterType="java.lang.String" resultMap="EditFieldResultMap">
+          SELECT <include refid="baseField" />,<include refid="editField" /> FROM <include refid="tableEn" /> WHERE configuration_page_coding=#{configurationPageCoding} AND is_show_edit=true
+    </select>
+
+    <!--映射实体类:列表字段-->
+    <resultMap id="ListFieldResultMap" type="com.sky.admin.vo.ListField">
+        <id property="coding" column="coding"/>
+        <result property="configurationPageCoding" column="configuration_page_coding"/>
+        <result property="tableEn" column="table_en"/>
+        <result property="fieldEn" column="field_en"/>
+        <result property="name" column="name"/>
+        <result property="isShowList" column="is_show_list"/>
+        <result property="sortingList" column="sorting_list"/>
+    </resultMap>
+    <!--查询配置页面:列表字段-->
+    <select id="getListFields" parameterType="java.lang.String" resultMap="ListFieldResultMap">
+        SELECT <include refid="baseField" />,<include refid="listField" /> FROM <include refid="tableEn" /> WHERE configuration_page_coding=#{configurationPageCoding} AND is_show_list=true
+    </select>
+
+    <!--映射实体类:查询字段-->
+    <resultMap id="QueryFieldResultMap" type="com.sky.admin.vo.QueryField">
+        <id property="coding" column="coding"/>
+        <result property="configurationPageCoding" column="configuration_page_coding"/>
+        <result property="tableEn" column="table_en"/>
+        <result property="fieldEn" column="field_en"/>
+        <result property="name" column="name"/>
+        <result property="isQuery" column="is_query"/>
+        <result property="queryType" column="query_type"/>
+        <result property="sortingQuery" column="sorting_query"/>
+    </resultMap>
+    <!--查询配置页面:查询字段-->
+    <select id="getQueryFields" parameterType="java.lang.String" resultMap="QueryFieldResultMap">
+        SELECT <include refid="baseField" />,<include refid="queryField" /> FROM <include refid="tableEn" /> WHERE configuration_page_coding=#{configurationPageCoding} AND is_query=true
+    </select>
 
 </mapper>

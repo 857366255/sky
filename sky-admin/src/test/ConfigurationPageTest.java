@@ -28,13 +28,21 @@ public class ConfigurationPageTest extends SpringTestCase {
     private ConfigurationPageService configurationPageService;
 
     private Field field = new Field();
+
+    @Test
+    public void getConfigurationPage(){
+        System.out.println("获得配置页面");
+        System.out.println(configurationPageDao.getConfigurationPage("s_menu2"));
+    }
+
     @Test
     public void doUpdate2(){
         System.out.println("修改2");
         ConfigurationPage cp = new ConfigurationPage();
-        cp.setCoding("4563");
+        cp.setCoding("s_menu2");
+        cp.setTableEn("s_configuration_page");
         cp.setName("配置123");
-        System.out.println(configurationPageDao.doUpdate(cp));
+        System.out.println(configurationPageService.doUpdate(cp));
     }
     @Test
     public void doAdd2(){

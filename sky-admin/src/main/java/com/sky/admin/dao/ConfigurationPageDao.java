@@ -9,4 +9,5 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface ConfigurationPageDao extends BaseDao<String ,ConfigurationPage> {
     ConfigurationPage getTableData(@Param("cp")ConfigurationPage cp);
+    com.sky.admin.vo.ConfigurationPage getConfigurationPage(String coding);
 }

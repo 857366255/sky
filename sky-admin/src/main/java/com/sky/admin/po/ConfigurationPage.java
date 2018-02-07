@@ -51,4 +51,11 @@ public class ConfigurationPage {
                 ", pkFieldEn='" + pkFieldEn + '\'' +
                 '}';
     }
+
+    public Boolean equalsTableEn(ConfigurationPage cp) {
+       if(!this.coding.equals(cp.getCoding())) return false;
+       else if(!this.tableEn.equals(cp.getTableEn())) return false;
+       return true;
+    }
+
 }

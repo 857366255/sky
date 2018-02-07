@@ -53,12 +53,11 @@ public class BaseField {
 
     @Override
     public String toString() {
-        return "Field{" +
-                "coding='" + coding + '\'' +
-                "configurationPageCoding='" + configurationPageCoding + '\'' +
+        return  "coding='" + coding + '\'' +
+                ", configurationPageCoding='" + configurationPageCoding + '\'' +
                 ", tableEn='" + tableEn + '\'' +
                 ", fieldEn='" + fieldEn + '\'' +
                 ", name='" + name + '\'' +
-                '}';
+                ",";
     }
 }
