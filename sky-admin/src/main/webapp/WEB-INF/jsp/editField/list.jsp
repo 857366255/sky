@@ -26,6 +26,8 @@
     <link href="<%=basePath%>/resources/sky/css/style.css" rel="stylesheet">
     <!-- Sweet Alert -->
     <link href="<%=basePath%>/resources/sky/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <link href="<%=basePath%>/resources/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
     <style type="text/css">
         /*label {width: 200px;}*/
     </style>
@@ -51,7 +53,13 @@
 <script src="<%=basePath%>/resources/sky/js/content.min.js?v=1.0.0"></script>
 <script src="<%=basePath%>/resources/sky/js/plugins/layer/layer.js"></script>
 <script src="<%=basePath%>/resources/sky/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+
+<script src="<%=basePath%>/resources/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script src="<%=basePath%>/resources/bootstrap3-editable/js/bootstrap-table-editable.js"></script>
+
 <script src="<%=basePath%>/resources/sky/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+
+
 <script src="<%=basePath%>/resources/sky/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <!-- Sweet Alert -->
 <script src="<%=basePath%>/resources/sky/js/plugins/sweetalert/sweetalert.min.js"></script>
@@ -98,10 +106,49 @@
                 detailView: false,                   //是否显示父子表
                 columns: [{
                     field: 'coding',
-                    title: '唯一标识符'
+                    title: '唯一标识符',
+                    editable:true
                 }, {
                     field: 'name',
-                    title: '名称'
+                    title: '名称',
+
+                    cellStyle:function(value,row,index) {return {"css":{padding:'0px', width: '100px'}};},
+                    editable:{
+                        type: 'text',
+                        title: '用户名',
+                        clear:false,
+                        mode:'inline',
+                        showbuttons:false,
+                        sortable:true
+                    }/*,{field: 'number',title: '数量', sortable:true,
+                     cellStyle:function(value,row,index) {
+                     return {
+                     "css":{
+                     padding:'0px'
+                     }
+                     };
+                     },
+                     formatter:function(value,row,index){
+                     if(value == undefined) return "0";
+                     else return value;
+                     },
+                     editable:{
+                     type:'text',
+                     clear:false,
+                     validate:function(value){
+                     if(isNaN(value)) return {newValue:0, msg:'只允许输入数字'};
+                     else if(value<0) return {newValue:0, msg:'数量不能小于0'};
+                     else if(value>=1000000) return {newValue:0, msg:'当前最大只能输入999999'};
+                     },
+                     display:function(value){
+                     $(this).text(Number(value));
+                     },
+                     //onblur:'ignore',
+                     showbuttons:false,
+                     defaultValue:0,
+                     mode:'inline'
+                     }
+                     } */
                 }, {
                     field: 'tableEn',
                     title: '数据库表名'
@@ -113,7 +160,16 @@
                     title: '操作',
                     events:'operateEvents',
                     formatter:'operateFormatter'
-                } ]
+                }]
+                ,onEditableHidden: function(field, row, $el, reason) { // 当编辑状态被隐藏时触发
+                    if(reason === 'save') {
+                        var $td = $el.closest('tr').children();
+                        $td.eq(-1).html((row.price*row.number).toFixed(2));
+                        $el.closest('tr').next().find('.editable').editable('show'); //编辑状态向下一行移动
+                    } else if(reason === 'nochange') {
+                        $el.closest('tr').next().find('.editable').editable('show');
+                    }
+                }
             });
 
         };
