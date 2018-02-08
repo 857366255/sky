@@ -107,59 +107,40 @@
                 columns: [{
                     field: 'coding',
                     title: '唯一标识符',
-                    editable:true
+                    visible:false
+                },{
+                    field: 'configurationPageCoding',
+                    title: '配置页面编码'
+                },{
+                    field: 'tableEn',
+                    title: '数据库表名'
+                },{
+                    field: 'fieldEn',
+                    title: '数据库字段名称'
                 }, {
                     field: 'name',
                     title: '名称',
-
+                },{
+                    field: 'isShowEdit',
+                    title: '是否显示',
+                    radio:true
+                },{
+                    field: 'isEdit',
+                    title: '是否编辑'
+                },{
+                    field: 'inputCoding',
+                    title: '输入框编码',
                     cellStyle:function(value,row,index) {return {"css":{padding:'0px', width: '100px'}};},
                     editable:{
                         type: 'text',
-                        title: '用户名',
                         clear:false,
                         mode:'inline',
                         showbuttons:false,
                         sortable:true
-                    }/*,{field: 'number',title: '数量', sortable:true,
-                     cellStyle:function(value,row,index) {
-                     return {
-                     "css":{
-                     padding:'0px'
-                     }
-                     };
-                     },
-                     formatter:function(value,row,index){
-                     if(value == undefined) return "0";
-                     else return value;
-                     },
-                     editable:{
-                     type:'text',
-                     clear:false,
-                     validate:function(value){
-                     if(isNaN(value)) return {newValue:0, msg:'只允许输入数字'};
-                     else if(value<0) return {newValue:0, msg:'数量不能小于0'};
-                     else if(value>=1000000) return {newValue:0, msg:'当前最大只能输入999999'};
-                     },
-                     display:function(value){
-                     $(this).text(Number(value));
-                     },
-                     //onblur:'ignore',
-                     showbuttons:false,
-                     defaultValue:0,
-                     mode:'inline'
-                     }
-                     } */
-                }, {
-                    field: 'tableEn',
-                    title: '数据库表名'
-                }, {
-                    field: 'pkFieldEn',
-                    title: '数据库表主键字段'
-                } , {
-                    field: 'operate',
-                    title: '操作',
-                    events:'operateEvents',
-                    formatter:'operateFormatter'
+                    }
+                },{
+                    field: 'sortingEdit',
+                    title: '编辑排序'
                 }]
                 ,onEditableHidden: function(field, row, $el, reason) { // 当编辑状态被隐藏时触发
                     if(reason === 'save') {
@@ -169,6 +150,27 @@
                     } else if(reason === 'nochange') {
                         $el.closest('tr').next().find('.editable').editable('show');
                     }
+                },onEditableSave: function (field, row, oldValue, $el) {
+                    //可进行异步操作
+
+                    $.ajax({
+                        type: "post",
+                        url: "../update",
+                        data: row,
+                        dataType: 'JSON',
+                        success: function (data, status) {
+                            if (status == "success") {
+                                alert('提交数据成功');
+                            }
+                        },
+                        error: function () {
+                            alert('编辑失败');
+                        },
+                        complete: function () {
+
+                        }
+
+                    });
                 }
             });
 

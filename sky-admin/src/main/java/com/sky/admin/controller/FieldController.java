@@ -39,4 +39,24 @@ public class FieldController {
         return configurationPageService.getEditFields(id);
     }
 
+
+    /**
+     * 更新数据
+     */
+    @RequestMapping(value = "editField/update",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public Boolean update(Map<String, Object> map,ConfigurationPage configurationPage){
+        System.out.println("更新asdsd");
+        System.out.println(configurationPage);
+        //map.put("type","update");
+       /* if(configurationPageService.doUpdate(configurationPage)){
+            System.out.println("更新成功");
+            return true;
+        } else{
+            System.out.println("更新失败");
+            return false;
+        }*/
+        return true;
+    }
+
 }
