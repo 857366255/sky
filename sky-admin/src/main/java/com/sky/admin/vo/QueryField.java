@@ -8,16 +8,16 @@ import com.sky.admin.vo.base.BaseField;
  */
 public class QueryField extends BaseField {
 
-    private Boolean isQuery;//是否查询
+    private Boolean query;//是否查询
     private String queryType;//查询条件类型
     private Integer sortingQuery;//查询排序
 
     public Boolean getQuery() {
-        return isQuery;
+        return query;
     }
 
     public void setQuery(Boolean query) {
-        isQuery = query;
+        this.query = query;
     }
 
     public String getQueryType() {
@@ -40,7 +40,7 @@ public class QueryField extends BaseField {
     public String toString() {
         return "QueryField{" +
                 super.toString() +
-                "isQuery=" + isQuery +
+                "query=" + query +
                 ", queryType='" + queryType + '\'' +
                 ", sortingQuery=" + sortingQuery +
                 '}';

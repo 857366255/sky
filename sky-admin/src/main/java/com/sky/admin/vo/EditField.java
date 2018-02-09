@@ -8,25 +8,25 @@ import com.sky.admin.vo.base.BaseField;
  */
 public class EditField extends BaseField {
 
-    private Boolean isShowEdit;//是否显示
-    private Boolean isEdit;//是否编辑
+    private Boolean showEdit;//是否显示
+    private Boolean edit;//是否编辑
     private String inputCoding;//输入框编码
     private Integer sortingEdit;//编辑排序
 
     public Boolean getShowEdit() {
-        return isShowEdit;
+        return showEdit;
     }
 
     public void setShowEdit(Boolean showEdit) {
-        isShowEdit = showEdit;
+        this.showEdit = showEdit;
     }
 
     public Boolean getEdit() {
-        return isEdit;
+        return edit;
     }
 
     public void setEdit(Boolean edit) {
-        isEdit = edit;
+        this.edit = edit;
     }
 
     public String getInputCoding() {
@@ -49,8 +49,8 @@ public class EditField extends BaseField {
     public String toString() {
         return "EditField{" +
                 super.toString() +
-                "isShowEdit=" + isShowEdit +
-                ", isEdit=" + isEdit +
+                "showEdit=" + showEdit +
+                ", edit=" + edit +
                 ", inputCoding='" + inputCoding + '\'' +
                 ", sortingEdit=" + sortingEdit +
                 '}';

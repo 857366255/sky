@@ -8,15 +8,15 @@ import com.sky.admin.vo.base.BaseField;
  */
 public class ListField extends BaseField {
 
-    private Boolean isShowList;//列表显示是否
+    private Boolean showList;//列表显示是否
     private Integer sortingList;//列表排序
 
     public Boolean getShowList() {
-        return isShowList;
+        return showList;
     }
 
     public void setShowList(Boolean showList) {
-        isShowList = showList;
+        this.showList = showList;
     }
 
     public Integer getSortingList() {
@@ -31,7 +31,7 @@ public class ListField extends BaseField {
     public String toString() {
         return "ListField{" +
                 super.toString() +
-                "isShowList=" + isShowList +
+                "showList=" + showList +
                 ", sortingList=" + sortingList +
                 '}';
     }

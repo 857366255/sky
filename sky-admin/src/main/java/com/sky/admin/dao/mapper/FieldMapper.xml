@@ -167,14 +167,29 @@
         <result property="tableEn" column="table_en"/>
         <result property="fieldEn" column="field_en"/>
         <result property="name" column="name"/>
-        <result property="isShowEdit" column="is_show_edit"/>
-        <result property="isEdit" column="is_edit"/>
+        <result property="showEdit" column="is_show_edit"/>
+        <result property="edit" column="is_edit"/>
         <result property="inputCoding" column="input_coding"/>
         <result property="sortingEdit" column="sorting_edit"/>
     </resultMap>
     <!--查询配置页面:编辑字段-->
     <select id="getEditFields" parameterType="java.lang.String" resultMap="EditFieldResultMap">
-          SELECT <include refid="baseField" />,<include refid="editField" /> FROM <include refid="tableEn" /> WHERE configuration_page_coding=#{configurationPageCoding} AND is_show_edit=true
+          SELECT <include refid="baseField" />,<include refid="editField" /> FROM <include refid="tableEn" /> WHERE configuration_page_coding=#{configurationPageCoding} ORDER BY sorting_edit
+    </select>
+    <!--更新-->
+    <update id="doUpdateEditField" parameterType="com.sky.admin.vo.EditField">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="showEdit != null">is_show_edit=#{showEdit},</if>
+            <if test="edit != null">is_edit=#{edit},</if>
+            <if test="inputCoding != null">input_coding=#{inputCoding},</if>
+            <if test="sortingEdit != null">sorting_edit=#{sortingEdit},</if>
+        </trim>
+        WHERE coding=#{coding}
+    </update>
+    <!--查询-->
+    <select id="getEditField" parameterType="java.lang.String" resultMap="EditFieldResultMap">
+        SELECT <include refid="baseField" />,<include refid="editField" /> FROM <include refid="tableEn" /> WHERE coding=#{coding}
     </select>
 
     <!--映射实体类:列表字段-->
@@ -184,12 +199,25 @@
         <result property="tableEn" column="table_en"/>
         <result property="fieldEn" column="field_en"/>
         <result property="name" column="name"/>
-        <result property="isShowList" column="is_show_list"/>
+        <result property="showList" column="is_show_list"/>
         <result property="sortingList" column="sorting_list"/>
     </resultMap>
     <!--查询配置页面:列表字段-->
     <select id="getListFields" parameterType="java.lang.String" resultMap="ListFieldResultMap">
-        SELECT <include refid="baseField" />,<include refid="listField" /> FROM <include refid="tableEn" /> WHERE configuration_page_coding=#{configurationPageCoding} AND is_show_list=true
+        SELECT <include refid="baseField" />,<include refid="listField" /> FROM <include refid="tableEn" /> WHERE configuration_page_coding=#{configurationPageCoding} ORDER BY sorting_list
+    </select>
+    <!--更新-->
+    <update id="doUpdateListField" parameterType="com.sky.admin.vo.ListField">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="showList != null">is_show_list=#{showList},</if>
+            <if test="sortingList != null">is_edit=#{sortingList},</if>
+        </trim>
+        WHERE coding=#{coding}
+    </update>
+    <!--查询-->
+    <select id="getListField" parameterType="java.lang.String" resultMap="ListFieldResultMap">
+        SELECT <include refid="baseField" />,<include refid="listField" /> WHERE coding=#{coding}
     </select>
 
     <!--映射实体类:查询字段-->
@@ -199,13 +227,27 @@
         <result property="tableEn" column="table_en"/>
         <result property="fieldEn" column="field_en"/>
         <result property="name" column="name"/>
-        <result property="isQuery" column="is_query"/>
+        <result property="query" column="is_query"/>
         <result property="queryType" column="query_type"/>
         <result property="sortingQuery" column="sorting_query"/>
     </resultMap>
     <!--查询配置页面:查询字段-->
     <select id="getQueryFields" parameterType="java.lang.String" resultMap="QueryFieldResultMap">
-        SELECT <include refid="baseField" />,<include refid="queryField" /> FROM <include refid="tableEn" /> WHERE configuration_page_coding=#{configurationPageCoding} AND is_query=true
+        SELECT <include refid="baseField" />,<include refid="queryField" /> FROM <include refid="tableEn" /> WHERE configuration_page_coding=#{configurationPageCoding} ORDER BY sorting_query
+    </select>
+    <!--更新-->
+    <update id="doUpdateQueryField" parameterType="com.sky.admin.vo.QueryField">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="query != null">is_query=#{query},</if>
+            <if test="queryType != null">query_type=#{queryType},</if>
+            <if test="sortingQuery != null">sorting_query=#{sortingQuery},</if>
+        </trim>
+        WHERE coding=#{coding}
+    </update>
+    <!--查询-->
+    <select id="getQueryField" parameterType="java.lang.String" resultMap="QueryFieldResultMap">
+        SELECT <include refid="baseField" />,<include refid="queryField" /> FROM <include refid="tableEn" /> WHERE coding=#{coding}
     </select>
 
 </mapper>

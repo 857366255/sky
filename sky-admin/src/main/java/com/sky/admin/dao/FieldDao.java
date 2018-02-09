@@ -30,4 +30,15 @@ public interface FieldDao extends BaseDao<String ,Field> {
     List<EditField> getEditFields(String configurationPageCoding);
     List<ListField> getListFields(String configurationPageCoding);
     List<QueryField> getQueryFields(String configurationPageCoding);
+
+    EditField getEditField (String coding);
+    ListField getListField (String coding);
+    QueryField getQueryField (String coding);
+
+    Boolean doUpdateEditField(EditField editField);
+    Boolean doUpdateListField(ListField listField);
+    Boolean doUpdateQueryField(QueryField queryField);
+
+
+
 }

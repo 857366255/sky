@@ -60,6 +60,7 @@ public class ConfigurationPageController {
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String add(Map<String, Object> map,ConfigurationPage configurationPage){
         System.out.println("新增");
+        System.out.println(configurationPage);
         configurationPageService.doAdd(configurationPage);
         map.put("type","update");
         return "redirect:../update/"+configurationPage.getCoding();
