@@ -2,13 +2,13 @@ package com.sky.admin.controller;
 
 import com.sky.admin.po.ConfigurationPage;
 import com.sky.admin.service.ConfigurationPageService;
+import com.sky.admin.vo.ListField;
 import com.sky.admin.vo.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wz on 2018/2/7.
@@ -17,30 +17,32 @@ import java.util.Map;
 @RequestMapping(value = "configurationpage")
 public class ConfigurationPageController {
 
+    private static final String BASIC_PATH = "configurationpage";
+
     @Autowired
     private ConfigurationPageService configurationPageService;
 
     @RequestMapping(value = "/list",method= RequestMethod.GET)
     public String goList(Map<String, Object> map){
-        return "configurationpage/list";
+        return BASIC_PATH+"/list";
     }
     @RequestMapping(value = "/add",method= RequestMethod.GET)
     public String goAdd(Map<String, Object> map){
         map.put("type","add");
-        return "configurationpage/edit";
+        return BASIC_PATH+"/edit";
     }
     @RequestMapping(value = "/update/{id}",method= RequestMethod.GET)
     public String goUpdate(Map<String, Object> map,@PathVariable String id){
         System.out.println(id);
         map.put("cp",configurationPageService.getConfiguration(id));
         map.put("type","update");
-        return "configurationpage/edit";
+        return BASIC_PATH+"/edit";
     }
     @RequestMapping(value = "/detail/{id}",method= RequestMethod.GET)
     public String goDetail(Map<String, Object> map,@PathVariable String id){
         System.out.println(id);
         map.put("cp",configurationPageService.getConfiguration(id));
-        return "configurationpage/detail";
+        return BASIC_PATH+"/detail";
     }
 
     /**
@@ -95,4 +97,47 @@ public class ConfigurationPageController {
             return false;
         }
     }
+
+    @RequestMapping(value = "{type}/list/{id}",method= RequestMethod.GET)
+    public String goFieldList(Map<String, Object> map,@PathVariable String type,@PathVariable String id){
+        System.out.println(type);
+        map.put("type",type);
+        /*Map<String,Object> listParams = getListParams(configurationPageCoding);
+        map.put("listParams", JSON.toJSONString(listParams));*/
+        return BASIC_PATH+"/detail/list";
+    }
+
+    /*private Map<String, Object> getListParams(String configurationPageCoding) {
+        Map<String,Object> listParams = new HashMap<String, Object>();
+        listParams.put("url","../listData/"+configurationPageCoding);//请求后台的URL
+        listParams.put("method","get");//请求方式
+        listParams.put("pageNumber","1");//初始化加载第一页，默认第一页
+        listParams.put("pageSize", "20");//每页的记录行数
+        listParams.put("height","800");//每页的记录行数
+        listParams.put("pageList", Arrays.asList("10", "25","50","100"));//可供选择的每页的行数
+        listParams.put("uniqueId","coding");
+        listParams.put("columns",getFieldParams(configurationPageCoding));
+        return listParams;
+    }
+
+    private List<Map<String,Object>> getFieldParams(String configurationPageCoding){
+        List<Map<String,Object>> filedParams = new ArrayList<Map<String, Object>>();
+        List<ListField> listFields = pageDao.getListFields(configurationPageCoding);
+        Map<String, Object> map;
+        for(ListField listField : listFields){
+            map = new HashMap<String, Object>();
+            map.put("field",listField.getFieldEn());//列表字段标识符
+            map.put("title",listField.getName());//列表字段名称
+            filedParams.add(map);
+        }
+        map = new HashMap<String, Object>();
+        map.put("field","operate");
+        map.put("title","操作");
+        map.put("events","operateEvents");
+        map.put("formatter","operateFormatter");
+        filedParams.add(map);
+        return filedParams;
+    }*/
+
+
 }

@@ -78,7 +78,7 @@
                 </ul>
                 <div class="tab-content">
                     <div id="tab-editField" class="tab-pane active">
-                        <iframe class="J_iframe" name="iframe0" width="100%" height="83%" src="${pageContext.request.contextPath}/editField/list/${cp.coding}" frameborder="0" ></iframe>
+                        <iframe class="J_iframe" name="iframe0" width="100%" height="83%" src="${pageContext.request.contextPath}/configurationpage/editField/list/${cp.coding}" frameborder="0" ></iframe>
                     </div>
                     <div id="tab-listField" class="tab-pane ">
                         <iframe  class="J_iframe" name="iframe2" width="100%" height="83%" src="${pageContext.request.contextPath}/listField/list/${cp.coding}" frameborder="0" ></iframe>
