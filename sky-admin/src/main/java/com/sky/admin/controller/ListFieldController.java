@@ -36,7 +36,7 @@ public class ListFieldController {
     @RequestMapping(value = "/update/{id}",method= RequestMethod.GET)
     public String goUpdate(Map<String, Object> map,@PathVariable String id){
         System.out.println(id);
-        map.put("ef",fieldDao.getListField(id));
+        map.put("lf",fieldDao.getListField(id));
         map.put("id",id);
         return V+"/edit";
     }

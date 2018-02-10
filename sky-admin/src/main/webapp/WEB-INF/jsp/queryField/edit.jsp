@@ -26,7 +26,7 @@
 </head>
 <body class="gray-bg">
 
-    <form role="get" action="${pageContext.request.contextPath}/editField/update/${id}" method="post"
+    <form role="get" action="${pageContext.request.contextPath}/queryField/update/${id}" method="post"
                       id="list" class="form-horizontal">
         <div class="ibox float-e-margins">
             <div class="ibox-content">
@@ -34,40 +34,26 @@
                     <div class="col-sm-12">
                         <div class="col-sm-6">
                             <div class="input-group">
-                                <label class="input-group-addon">输入框编码</label>
-                                <input type="text" class="form-control" placeholder="请输入" name="inputCoding" value="${ef.inputCoding}">
+                                <label class="input-group-addon">查询排序</label>
+                                <input type="text" class="form-control" placeholder="请输入" name="sortingQuery" value="${qf.sortingQuery}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="input-group">
-                                <label class="input-group-addon">编辑排序</label>
-                                <input type="text" class="form-control" placeholder="请输入" name="sortingEdit" value="${ef.sortingEdit}">
+                                <label class="input-group-addon">输入框编码</label>
+                                <input type="text" class="form-control" placeholder="请输入" name="queryType" value="${qf.queryType}">
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="input-group">
                                 <label class="input-group-addon">是否显示</label>
                                 <div class="radio radio-info radio-inline" style="height: 34px;">
-
-                                    <input type="radio" class="form-control" id="editField1" value="1" name="showEdit"  ${ef.showEdit.equals(true) ? "checked=''" : "" }>
-                                    <label for="editField1"> 显示 </label>
+                                    <input type="radio" class="form-control" id="query1" value="1" name="query" ${qf.query.equals(true) ? "checked=''" : "" } >
+                                    <label for="query1"> 编辑 </label>
                                 </div>
                                 <div class="radio radio-info radio-inline" style="height: 34px;">
-                                    <input type="radio" class="form-control" id="editField2" value="0" name="showEdit" ${!ef.showEdit.equals(true) ? "checked=''" : "" }>
-                                    <label for="editField2"> 隐藏 </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="input-group">
-                                <label class="input-group-addon">是否编辑</label>
-                                <div class="radio radio-info radio-inline" style="height: 34px;">
-                                    <input type="radio" class="form-control" id="edit1" value="1" name="edit" ${ef.edit.equals(true) ? "checked=''" : "" } >
-                                    <label for="edit1"> 编辑 </label>
-                                </div>
-                                <div class="radio radio-info radio-inline" style="height: 34px;">
-                                    <input type="radio" class="form-control" id="edit2" value="0" name="edit" ${!ef.edit.equals(true) ? "checked=''" : "" }>
-                                    <label for="edit2"> 禁用 </label>
+                                    <input type="radio" class="form-control" id="query2" value="0" name="query" ${!qf.query.equals(true) ? "checked=''" : "" }>
+                                    <label for="query2"> 禁用 </label>
                                 </div>
                             </div>
                         </div>

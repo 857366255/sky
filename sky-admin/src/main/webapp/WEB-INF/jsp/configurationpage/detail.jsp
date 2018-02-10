@@ -27,9 +27,9 @@
     <!-- Sweet Alert -->
     <link href="<%=basePath%>/resources/sky/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <style type="text/css">
-        body, body.full-height-layout #page-wrapper, body.full-height-layout #wrapper, html {
+        /*body, body.full-height-layout #page-wrapper, body.full-height-layout #wrapper, html {
             height: 70%;
-        }
+        }*/
         /*label {width: 200px;}*/
     </style>
 </head>
@@ -78,13 +78,13 @@
                 </ul>
                 <div class="tab-content">
                     <div id="tab-editField" class="tab-pane active">
-                        <iframe class="J_iframe" name="iframe0" width="100%" height="168%" src="${pageContext.request.contextPath}/editField/list/${cp.coding}" frameborder="0" seamless></iframe>
+                        <iframe class="J_iframe" name="iframe0" width="100%" height="83%" src="${pageContext.request.contextPath}/editField/list/${cp.coding}" frameborder="0" ></iframe>
                     </div>
                     <div id="tab-listField" class="tab-pane ">
-                        <iframe i class="J_iframe" name="iframe2" width="100%" height="168%" src="${pageContext.request.contextPath}/listField/list/${cp.coding}" frameborder="0" seamless></iframe>
+                        <iframe  class="J_iframe" name="iframe2" width="100%" height="83%" src="${pageContext.request.contextPath}/listField/list/${cp.coding}" frameborder="0" ></iframe>
                     </div>
                     <div id="tab-queryField" class="tab-pane ">
-                        <iframe i class="J_iframe" name="iframe3" width="100%" height="168%" src="${pageContext.request.contextPath}/queryField/list/${cp.coding}" frameborder="0" seamless></iframe>
+                        <iframe  class="J_iframe" name="iframe3" width="100%" height="83%" src="${pageContext.request.contextPath}/queryField/list/${cp.coding}" frameborder="0" ></iframe>
                     </div>
                 </div>
             </div>

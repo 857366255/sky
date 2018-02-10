@@ -4,7 +4,7 @@
 <mapper namespace="com.sky.admin.dao.FieldDao">
     <sql id="editField"> is_show_edit,is_edit,input_coding,sorting_edit </sql><!--编辑字段信息-->
     <sql id="listField"> is_show_list,sorting_list </sql><!--列表字段信息-->
-    <sql id="queryField"> is_query,query_type,sorting_list </sql><!--查询字段信息-->
+    <sql id="queryField"> is_query,query_type,sorting_query </sql><!--查询字段信息-->
     <sql id="baseField"> coding,configuration_page_coding,table_en,field_en,name </sql><!--基本字段信息-->
     <sql id="field" > <include refid="baseField" />,<include refid="listField" />,<include refid="queryField" />,<include refid="editField" /> </sql>
     <sql id="tableEn" > s_field </sql>
@@ -211,13 +211,13 @@
         UPDATE <include refid="tableEn" />
         <trim prefix="SET" suffixOverrides=",">
             <if test="showList != null">is_show_list=#{showList},</if>
-            <if test="sortingList != null">is_edit=#{sortingList},</if>
+            <if test="sortingList != null">sorting_list=#{sortingList},</if>
         </trim>
         WHERE coding=#{coding}
     </update>
     <!--查询-->
     <select id="getListField" parameterType="java.lang.String" resultMap="ListFieldResultMap">
-        SELECT <include refid="baseField" />,<include refid="listField" /> WHERE coding=#{coding}
+        SELECT <include refid="baseField" />,<include refid="listField" /> FROM <include refid="tableEn" /> WHERE coding=#{coding}
     </select>
 
     <!--映射实体类:查询字段-->

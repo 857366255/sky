@@ -32,19 +32,19 @@
 </head>
 
 <body>
-<div class="ibox float-e-margins">
+<%--<div class="ibox float-e-margins">
     <div class="ibox-content">
 
-            <div class="col-sm-12">
-                <div class="example-wrap">
-                    <div class="example">
+            <div class="col-sm-12">--%>
+               <%-- <div class="example-wrap">
+                    <div class="example">--%>
                         <table id="listTable"></table>
-                    </div>
-                </div>
-            </div>
+                  <%--  </div>
+                </div>--%>
+<%--            </div>
 
     </div>
-</div>
+</div>--%>
 
 <script src="<%=basePath%>/resources/sky/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath%>/resources/sky/js/bootstrap.min.js?v=3.3.6"></script>
@@ -93,14 +93,14 @@
                 showRefresh: false,                  //是否显示刷新按钮
                 minimumCountColumns: 2,             //最少允许的列数
                 clickToSelect: true,                //是否启用点击选中行
-                height: 560,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                height: 550,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 uniqueId: "coding",//"no",                     //每一行的唯一标识，一般为主键列
                 showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
                 cardView: false,                    //是否显示详细视图
                 detailView: false,                   //是否显示父子表
                 columns: [{
-                    field: 'sortingEdit',
-                    title: '编辑排序'
+                    field: 'sortingQuery',
+                    title: '查询排序'
                 },{
                     field: 'coding',
                     title: '唯一标识符',
@@ -115,20 +115,18 @@
                     visible:false
                 },{
                     field: 'fieldEn',
-                    title: '数据库字段名称'
+                    title: '数据库字段名称',
+                    visible:false
                 }, {
                     field: 'name',
                     title: '名称'
                 },{
-                    field: 'showEdit',
+                    field: 'query',
                     title: '是否显示'
                 },{
-                    field: 'edit',
-                    title: '是否编辑'
+                    field: 'queryType',
+                    title: '查询条件类型'
                 },{
-                    field: 'inputCoding',
-                    title: '输入框编码'
-                }, {
                     field: 'operate',
                     title: '操作',
                     events:'operateEvents',
@@ -164,7 +162,7 @@
                 maxmin: true,//放大和缩小
                 tipsMore: true,//是否允许多个tips
                 area: ['60%', '60%'],
-                content: '${pageContext.request.contextPath}/editField/update/'+row.coding //iframe的url
+                content: '${pageContext.request.contextPath}/queryField/update/'+row.coding //iframe的url
                 ,end:function(layero, index){//销毁后触发的回调
                     $('#listTable').bootstrapTable('refresh');//刷新数据
                 }

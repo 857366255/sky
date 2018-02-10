@@ -35,7 +35,7 @@ public class QueryFieldController {
     @RequestMapping(value = "/update/{id}",method= RequestMethod.GET)
     public String goUpdate(Map<String, Object> map,@PathVariable String id){
         System.out.println(id);
-        map.put("ef",fieldDao.getQueryField(id));
+        map.put("qf",fieldDao.getQueryField(id));
         map.put("id",id);
         return V+"/edit";
     }
