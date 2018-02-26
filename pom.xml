@@ -12,6 +12,7 @@
     <module>sky-common</module>
     <module>sky-page</module>
       <module>sky-admin</module>
+      <module>sky-test</module>
   </modules>
   <packaging>pom</packaging>
 
