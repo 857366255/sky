@@ -13,6 +13,7 @@
     <module>sky-page</module>
       <module>sky-admin</module>
       <module>sky-test</module>
+      <module>test-shiro</module>
   </modules>
   <packaging>pom</packaging>
 
