@@ -14,6 +14,7 @@
       <module>sky-admin</module>
       <module>sky-test</module>
       <module>test-shiro</module>
+    <module>sky-shiro</module>
   </modules>
   <packaging>pom</packaging>
 

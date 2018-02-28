@@ -9,6 +9,7 @@
         <module name="sky-admin" />
         <module name="sky-common" />
         <module name="sky-page" />
+        <module name="sky-shiro" />
         <module name="sky-test" />
         <module name="sky-web" />
         <module name="test-shiro" />
@@ -21,6 +22,7 @@
       <module name="sky-dao" target="1.5" />
       <module name="sky-page" target="1.5" />
       <module name="sky-server" target="1.5" />
+      <module name="sky-shiro" target="1.5" />
       <module name="sky-test" target="1.5" />
       <module name="sky-web" target="1.5" />
       <module name="test-shiro" target="1.6" />
