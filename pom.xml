@@ -17,6 +17,7 @@
     <module>sky-shiro</module>
       <module>test-web</module>
     <module>sky-mybatis</module>
+      <module>sky-erp</module>
   </modules>
   <packaging>pom</packaging>
 
