@@ -9,7 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/sky-shiro/sky-shiro.iml" filepath="$PROJECT_DIR$/sky-shiro/sky-shiro.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-test/sky-test.iml" filepath="$PROJECT_DIR$/sky-test/sky-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-web/sky-web.iml" filepath="$PROJECT_DIR$/sky-web/sky-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/test-shiro/test-shiro.iml" filepath="$PROJECT_DIR$/test-shiro/test-shiro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test-web/test-web.iml" filepath="$PROJECT_DIR$/test-web/test-web.iml" />
     </modules>
   </component>
 </project>

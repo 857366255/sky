@@ -18,6 +18,7 @@
        default-lazy-init="true">
     <!-- 配置自动扫描的包 -->
     <context:component-scan base-package="com.sky.*" />
+    <import resource="spring-shiro.xml"/>
     <!-- 自动扫描注解的bean -->
     <!--<context:component-scan base-package="com.sky.**.server" />-->
     <!-- 配置数据源 -->
@@ -27,6 +28,7 @@
     <!-- 自动扫描了所有的XxxxMapper.xml对应的mapper接口文件，这样就不用一个一个手动配置Mpper的映射了，只要Mapper接口类和Mapper映射文件对应起来就可以了。 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.sky.**.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
     <!-- 配置DataSource -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -38,7 +40,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <!--<property name="mapperLocations" value="classpath*:/*Mapper.xml"/>-->
-        <property name="mapperLocations" value="classpath*:com/sky/**/dao/mapper/*Mapper.xml"/>
+        <property name="mapperLocations" value="classpath*:com/sky/shiro/dao/mapper/*Mapper.xml"/>
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
     </bean>
 
