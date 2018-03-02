@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  * Created by Administrator on 2017/10/10.
  */
 @Controller
-@RequestMapping("/user")
+//@RequestMapping("/user")
 public class loginController {
     @Autowired
     private ShiroService shiroService;

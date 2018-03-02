@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/fitness/fitness.iml" filepath="$PROJECT_DIR$/fitness/fitness.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky.iml" filepath="$PROJECT_DIR$/sky.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-admin/sky-admin.iml" filepath="$PROJECT_DIR$/sky-admin/sky-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-common/sky-common.iml" filepath="$PROJECT_DIR$/sky-common/sky-common.iml" />

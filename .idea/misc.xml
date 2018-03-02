@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/fitness" />
     <file type="web" url="file://$PROJECT_DIR$/sky-admin" />
     <file type="web" url="file://$PROJECT_DIR$/sky-erp" />
     <file type="web" url="file://$PROJECT_DIR$/sky-fitness" />
@@ -19,6 +20,7 @@
         <option value="$PROJECT_DIR$/sky-dao/pom.xml" />
         <option value="$PROJECT_DIR$/sky-erp/pom.xml" />
         <option value="$PROJECT_DIR$/sky-fitness/pom.xml" />
+        <option value="$PROJECT_DIR$/sky-members/pom.xml" />
         <option value="$PROJECT_DIR$/sky-mybatis/pom.xml" />
         <option value="$PROJECT_DIR$/sky-server/pom.xml" />
         <option value="$PROJECT_DIR$/sky-test/pom.xml" />

@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
     private int id;
-    private String account;
+    private String username;
     private String password;
 
-    public User(int id, String account, String password) {
+    public User(int id, String username, String password) {
         this.id = id;
-        this.account = account;
+        this.username = username;
         this.password = password;
     }
 
@@ -29,12 +29,12 @@ public class User {
         this.id = id;
     }
 
-    public String getAccount() {
-        return account;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -49,7 +49,7 @@ public class User {
     public String toString() {
         return "UserPojo{" +
                 "id=" + id +
-                ", account='" + account + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

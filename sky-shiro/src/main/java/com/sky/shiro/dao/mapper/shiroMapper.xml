@@ -3,18 +3,18 @@
 
 <mapper namespace="com.sky.shiro.dao.ShiroDao">
     <select id="getUserByUserName" resultType="com.sky.shiro.po.User">
-        select * FROM user
-        WHERE account= #{0}
+        select * FROM t_user
+        WHERE username = #{0}
     </select>
 
     <select id="getUserRoleByUserId" resultType="int">
-        SELECT roleid FROM user_role
-        where userid = #{_parameter}
+        SELECT role_id FROM t_user_role
+        where user_id = #{_parameter}
     </select>
 
     <select id="getPermissionsByRoleId" resultType="com.sky.shiro.po.Permission">
-        SELECT a.id,a.url,a.roleid as roleId,a.description FROM permission a
-        WHERE roleid = #{_parameter}
+        SELECT a.id,a.url,a.role_id as role_id,a.name FROM t_permission a
+        WHERE role_id = #{_parameter}
     </select>
 
 </mapper>

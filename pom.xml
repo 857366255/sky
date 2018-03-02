@@ -21,6 +21,9 @@
       <module>sky-members</module>
     <module>sky-fitness</module>
       <module>sky-fitness</module>
+      <module>sky-fitness</module>
+    <module>sky-members</module>
+    <module>fitness</module>
   </modules>
   <packaging>pom</packaging>
 
