@@ -20,6 +20,7 @@
     <link href="${basePath}/resources/sky/css/font-awesome.min.css" rel="stylesheet">
     <link href="${basePath}/resources/sky/css/animate.min.css" rel="stylesheet">
     <link href="${basePath}/resources/sky/css/style.min.css" rel="stylesheet">
+    <link href="${basePath}/resources/sky/css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -30,11 +31,11 @@
     <div>
         <div>
 
-            <h1 class="logo-name">Sky1</h1>
+            <h1 class="logo-name">Sky</h1>
 
         </div>
         <h3>欢迎使用 Sky</h3>
-        <form class="m-t" role="form" action="login">
+        <form class="m-t" role="form" method="post" action="login">
             <div class="form-group">
                 <input type="text" name="username" class="form-control" placeholder="用户名" required="">
             </div>
@@ -52,6 +53,15 @@
 </div>
 <script src="${basePath}/resources/sky/js/jquery.min.js?v=2.1.4"></script>
 <script src="${basePath}/resources/sky/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="${basePath}/resources/sky/js/plugins/toastr/toastr.min.js"></script>
+<script src="${basePath}/resources/sky/js/sky/toastrInit.js"></script>
+
+<script>
+
+    $(function(){
+        toastr["${toastrType}"]("${toastrMessage}", "${toastrTitle}");
+    });
+</script>
 </body>
 
 </html>

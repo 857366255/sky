@@ -2,10 +2,11 @@ package com.sky.shiro.controller;
 
 import com.sky.shiro.po.User;
 import com.sky.shiro.service.ShiroService;
+import com.sky.tool.Toastr;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.ShiroException;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2017/10/10.
@@ -37,13 +40,10 @@ public class loginController {
             model.addAttribute("message", "账号不为空");
             return "login";
         }
-        System.out.println("asd");
-
         //主体,当前状态为没有认证的状态“未认证”
         Subject subject = SecurityUtils.getSubject();
         // 登录后存放进shiro token
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);
-        System.out.println("asd2312");
         User user;
         //登录方法（认证是否通过）
         //使用subject调用securityManager,安全管理器调用Realm
@@ -55,16 +55,26 @@ public class loginController {
             subject.login(token);
             user = (User)subject.getPrincipal();
             session.setAttribute("user",subject);
-            model.addAttribute("message", "登录完成");
-            System.out.println("登录完成");
+            model.addAttribute("toastrTitle", "登录完成");
+            model.addAttribute("toastrType", Toastr.TYPE_SUCCESS);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
+            model.addAttribute("toastrMessage", sdf.format(new Date()));
+            System.out.println("登录完成:"+user);
+            //UnknownAccountException
         } catch (UnknownAccountException e) {
-            model.addAttribute("message", "账号密码不正确");
+            model.addAttribute("toastrTitle", "账号密码不正确");
+            model.addAttribute("toastrType", Toastr.TYPE_ERROR);
             System.out.println("账号密码不正确    ");
-            return "index";
+            return "login";
+        } catch (ShiroException e){
+            model.addAttribute("toastrTitle", "账号密码不正确");
+            model.addAttribute("toastrType", Toastr.TYPE_ERROR);
+            System.out.println("账号密码不正确    ");
+            return "login";
         }
         System.out.println("登录完成");
 
-        return "test";
+        return "index";
     }
 
     @RequestMapping("/check")
