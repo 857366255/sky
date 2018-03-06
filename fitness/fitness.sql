@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-03-02 16:38:28
+Date: 2018-03-06 15:50:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS `t_card_type`;
 CREATE TABLE `t_card_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
-  `month` varchar(255) DEFAULT NULL COMMENT '几月',
+  `month` int(255) DEFAULT NULL COMMENT '几月',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='卡类型';
 
@@ -107,12 +107,13 @@ CREATE TABLE `t_user` (
   `username` varchar(255) DEFAULT NULL COMMENT '账号',
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='账号';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='账号';
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
 INSERT INTO `t_user` VALUES ('1', '1', '1');
+INSERT INTO `t_user` VALUES ('2', 'user', '123456');
 
 -- ----------------------------
 -- Table structure for t_user_role
@@ -138,7 +139,7 @@ DROP TABLE IF EXISTS `t_vip`;
 CREATE TABLE `t_vip` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
-  `phone_number` int(11) DEFAULT NULL COMMENT '手机号码',
+  `contact` int(11) DEFAULT NULL COMMENT '联系方式',
   `user_id` int(11) DEFAULT NULL COMMENT '账号id',
   PRIMARY KEY (`id`),
   KEY `fk_tm_tu_user_id` (`user_id`),

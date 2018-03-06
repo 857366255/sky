@@ -52,6 +52,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath}/update/s_menu/1">修改</a></li>
                     </ul>
                 </li>--%>
+                <li><a class="J_menuItem" href="${basePath}/vip/add">会员注册</a></li>
                 <li>
                     <a href="#"><i class="fa fa-table"></i> <span class="nav-label">基础页面样式</span><span
                             class="fa arrow"></span></a>
