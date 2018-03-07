@@ -8,7 +8,7 @@ public class Vip {
     private Integer id;//唯一标识符
     private String name;//名称
     private String contact;//类型方式
-    private Integer usesId;//用户id
+    private Integer userId;//用户id
 
     public Integer getId() {
         return id;
@@ -34,12 +34,12 @@ public class Vip {
         this.contact = contact;
     }
 
-    public Integer getUsesId() {
-        return usesId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUsesId(Integer usesId) {
-        this.usesId = usesId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Vip {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", contact='" + contact + '\'' +
-                ", usesId=" + usesId +
+                ", userId=" + userId +
                 '}';
     }
 }

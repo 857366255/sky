@@ -7,7 +7,7 @@
 
     <!--增加-->
     <insert id="doAdd" parameterType="com.sky.fitness.po.Vip">
-        INSERT INTO <include refid="tableEn" />
+        INSERT INTO <include refid="tableName" />
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">name,</if>
             <if test="contact != null">contact,</if>
