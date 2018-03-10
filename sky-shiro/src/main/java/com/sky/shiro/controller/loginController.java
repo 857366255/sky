@@ -36,6 +36,7 @@ public class loginController {
      */
     @RequestMapping(value = "/login")
     public String Login(String username, String password, HttpSession session, Model model){
+       // System.out.println("asds");
         if(username==null){
             model.addAttribute("message", "账号不为空");
             return "login";

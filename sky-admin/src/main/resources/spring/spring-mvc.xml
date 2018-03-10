@@ -15,7 +15,7 @@
 
     <!-- 配置视图解析器:如何把handler方法返回值解析为时间的物理视图 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="prefix" value="/WEB-INF/views/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
 
@@ -36,7 +36,7 @@
                         <value>application/json;charset=utf-8</value>
                     </list>
                 </property>
-               <!-- <property name="objectMapper">
+                <property name="objectMapper">
                     <bean class="com.fasterxml.jackson.databind.ObjectMapper">
                         <property name="dateFormat">
                             <bean class="java.text.SimpleDateFormat">
@@ -44,7 +44,7 @@
                             </bean>
                         </property>
                     </bean>
-                </property>-->
+                </property>
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
