@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/sky.iml" filepath="$PROJECT_DIR$/sky.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-admin/sky-admin.iml" filepath="$PROJECT_DIR$/sky-admin/sky-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-common/sky-common.iml" filepath="$PROJECT_DIR$/sky-common/sky-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sky-layui/sky-layui.iml" filepath="$PROJECT_DIR$/sky-layui/sky-layui.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-page/sky-page.iml" filepath="$PROJECT_DIR$/sky-page/sky-page.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-shiro/sky-shiro.iml" filepath="$PROJECT_DIR$/sky-shiro/sky-shiro.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-web/sky-web.iml" filepath="$PROJECT_DIR$/sky-web/sky-web.iml" />

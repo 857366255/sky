@@ -9,6 +9,7 @@
         <module name="fitness" />
         <module name="sky-admin" />
         <module name="sky-common" />
+        <module name="sky-layui" />
         <module name="sky-page" />
         <module name="sky-shiro" />
         <module name="sky-web" />
@@ -23,6 +24,7 @@
       <module name="sky-dao" target="1.5" />
       <module name="sky-erp" target="1.5" />
       <module name="sky-fitness" target="1.5" />
+      <module name="sky-layui" target="1.5" />
       <module name="sky-members" target="1.5" />
       <module name="sky-mybatis" target="1.5" />
       <module name="sky-page" target="1.5" />

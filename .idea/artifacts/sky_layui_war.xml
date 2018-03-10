@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sky-layui:war">
+    <output-path>$PROJECT_DIR$/sky-layui/target</output-path>
+    <root id="archive" name="sky-layui-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="sky-layui:war exploded" />
+    </root>
+  </artifact>
+</component>
