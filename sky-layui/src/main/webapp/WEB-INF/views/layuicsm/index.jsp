@@ -15,11 +15,10 @@
 </head>
 <body>
     <li>
-        <ul><a href="${basePath}/layuiSky">layuiSky首页(/index.jsp)</a></ul>
-        <%--<ul><a href="${basePath}/TestWeAdmin">WeAdmin首页(/test/index.jsp)</a></ul>
+        <ul><a href="${basePath}/TestWeAdmin">WeAdmin首页(/test/index.jsp)</a></ul>
         <ul><a href="${basePath}/WeAdmin">WeAdmin首页(/index.jsp)</a></ul>
         <ul><a href="${basePath}/TestLayuicsm">layuicsm首页(/test/index.jsp)</a></ul>
-        <ul><a href="${basePath}/layuicsm">layuicsm首页(/index.jsp)</a></ul>--%>
+        <ul><a href="${basePath}/layuicsm">layuicsm首页(/index.jsp)</a></ul>
     </li>
 </body>
 </html>
