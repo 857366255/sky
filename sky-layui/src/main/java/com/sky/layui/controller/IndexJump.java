@@ -29,5 +29,9 @@ public class IndexJump {
     public String goLayuiSky(){
         return "layuiSky/index";
     }
+    @RequestMapping(value = "/layuiSky/list",method = RequestMethod.GET)
+    public String goLayuiSkyList(){
+        return "layuiSky/edit-list";
+    }
 
 }
