@@ -14,4 +14,14 @@ public class JayuiSkyJump {
         return "layuiSky/edit-list";
     }
 
+    @RequestMapping(value = "/layuiSky/edit",method = RequestMethod.GET)
+    public String goLayuiSkyEdit(){
+        return "layuiSky/edit";
+    }//
+
+    @RequestMapping(value = "/layuiSky/editMasterSlave",method = RequestMethod.GET)
+    public String goLayuiSkyEditMasterSlave(){
+        return "layuiSky/edit-master-slave";
+    }//
+
 }

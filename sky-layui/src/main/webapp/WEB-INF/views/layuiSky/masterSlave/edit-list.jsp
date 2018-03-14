@@ -29,12 +29,7 @@
 
 
 <div class="layui-btn-group demoTable">
-    <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-    <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-    <button class="layui-btn" data-type="isAll">添加</button>
-
-
-    <button class="layui-btn" data-type="isAll" id="addTable">验证是否全选</button>
+    <button class="layui-btn" data-type="isAll" id="addTable">添加</button>
 </div>
 
 <table id="test2" lay-filter="test2"></table>

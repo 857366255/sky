@@ -53,12 +53,11 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item"><%--layui-nav-itemed:默认展开--%>
-                    <a class="" href="javascript:;">所有商品</a>
+                    <a class="" href="javascript:;">基础页面</a>
                     <dl class="layui-nav-child">
                         <dd><a data-url="${basePath}/layuiSky/editList">可编辑列表</a></dd>
-                        <dd><a data-url="${basePath}/TestWeAdmin/list">列表二</a></dd>
-                        <dd><a data-url="${basePath}/TestWeAdmin/list3">列表三</a></dd>
-                        <%--<dd><a href="">超链接</a></dd>--%>
+                        <dd><a data-url="${basePath}/layuiSky/edit">编辑</a></dd>
+                        <dd><a data-url="${basePath}/layuiSky/editMasterSlave">编辑主从</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item"><a data-url="${basePath}/TestWeAdmin/list4">云市场</a></li>
