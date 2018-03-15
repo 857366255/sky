@@ -5,17 +5,16 @@ package com.sky.admin.po;
  */
 public class ConfigurationPage {
 
-    private String coding;//唯一标识符
+    private Integer id;//唯一标识符
     private String name;//名称
     private String tableEn;//数据库表名
-    private String pkFieldEn;//数据库表主键字段
 
-    public String getCoding() {
-        return coding;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCoding(String coding) {
-        this.coding = coding;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -34,28 +33,15 @@ public class ConfigurationPage {
         this.tableEn = tableEn;
     }
 
-    public String getPkFieldEn() {
-        return pkFieldEn;
-    }
-
-    public void setPkFieldEn(String pkFieldEn) {
-        this.pkFieldEn = pkFieldEn;
-    }
 
     @Override
     public String toString() {
         return "ConfigurationPage{" +
-                "coding='" + coding + '\'' +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", tableEn='" + tableEn + '\'' +
-                ", pkFieldEn='" + pkFieldEn + '\'' +
                 '}';
     }
 
-    public Boolean equalsTableEn(ConfigurationPage cp) {
-       if(!this.coding.equals(cp.getCoding())) return false;
-       else if(!this.tableEn.equals(cp.getTableEn())) return false;
-       return true;
-    }
 
 }

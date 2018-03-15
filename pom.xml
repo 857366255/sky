@@ -7,24 +7,13 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>sky-web</module>
-    <!--<module>sky-dao</module>-->
-    <!--<module>sky-server</module>-->
     <module>sky-common</module>
     <module>sky-page</module>
-      <module>sky-admin</module>
-      <module>sky-test</module>
-      <module>test-shiro</module>
+    <module>sky-admin</module>
     <module>sky-shiro</module>
-      <module>test-web</module>
-    <module>sky-mybatis</module>
-      <module>sky-erp</module>
-      <module>sky-members</module>
-    <module>sky-fitness</module>
-      <module>sky-fitness</module>
-      <module>sky-fitness</module>
-    <module>sky-members</module>
+    <module>test-web</module>
     <module>fitness</module>
-      <module>sky-layui</module>
+    <module>sky-layui</module>
   </modules>
   <packaging>pom</packaging>
 

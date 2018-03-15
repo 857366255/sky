@@ -1,11 +1,13 @@
 package com.sky.admin.controller;
 
+import com.sky.admin.dao.ConfigurationPageDao;
 import com.sky.admin.po.ConfigurationPage;
 import com.sky.admin.service.ConfigurationPageService;
 import com.sky.admin.vo.ListField;
 import com.sky.admin.vo.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -18,11 +20,36 @@ import java.util.*;
 public class ConfigurationPageController {
 
     private static final String BASIC_PATH = "configurationpage";
-
     @Autowired
     private ConfigurationPageService configurationPageService;
+    @Autowired
+    private ConfigurationPageDao configurationPageDao;
 
+    @RequestMapping(value = "/index",method= RequestMethod.GET)
+    public String goIndex(){
+        return "index";
+    }
     @RequestMapping(value = "/list",method= RequestMethod.GET)
+    public String goList(Model model){
+        //model.addAttribute("data", configurationPageDao.findAll());
+        return BASIC_PATH+"/list";
+    }
+    @RequestMapping(value="/data", produces = "application/json; charset=utf-8" )
+    @ResponseBody
+    public Map<String,Object> goData(Integer limit,Integer  page,ConfigurationPage configurationPage){
+        System.out.println("limit = " + limit);
+        System.out.println("page = " + page);
+        Map<String,Object> mapData = new HashMap<String, Object>();
+        mapData.put("code","0");
+        mapData.put("count","9");
+        mapData.put("data",configurationPageDao.findAll());
+        mapData.put("msg","SUCCESS");
+
+        return mapData;
+    }
+
+
+   /* @RequestMapping(value = "/list",method= RequestMethod.GET)
     public String goList(Map<String, Object> map){
         return BASIC_PATH+"/list";
     }
@@ -45,20 +72,20 @@ public class ConfigurationPageController {
         return BASIC_PATH+"/detail";
     }
 
-    /**
+    *//**
      *获得数据
-     */
+     *//*
     @RequestMapping(value="/data", produces = "application/json; charset=utf-8" )
     @ResponseBody
     public List<ConfigurationPage> goData(Params params){
         return configurationPageService.getConfigurationPages();
     }
 
-    /**
+    *//**
      * 新增数据
      * @param configurationPage
      * @return
-     */
+     *//*
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String add(Map<String, Object> map,ConfigurationPage configurationPage){
         System.out.println("新增");
@@ -67,9 +94,9 @@ public class ConfigurationPageController {
         map.put("type","update");
         return "redirect:../update/"+configurationPage.getCoding();
     }
-    /**
+    *//**
      * 更新数据
-     */
+     *//*
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public Boolean update(Map<String, Object> map,ConfigurationPage configurationPage){
         System.out.println("更新");
@@ -82,9 +109,9 @@ public class ConfigurationPageController {
             return false;
         }
     }
-    /**
+    *//**
      * 删除数据
-     */
+     *//*
     @RequestMapping(value={"delete/{id}"},method=RequestMethod.DELETE)
     @ResponseBody
     public Boolean delete(@PathVariable String id){
@@ -102,10 +129,10 @@ public class ConfigurationPageController {
     public String goFieldList(Map<String, Object> map,@PathVariable String type,@PathVariable String id){
         System.out.println(type);
         map.put("type",type);
-        /*Map<String,Object> listParams = getListParams(configurationPageCoding);
-        map.put("listParams", JSON.toJSONString(listParams));*/
+        *//*Map<String,Object> listParams = getListParams(configurationPageCoding);
+        map.put("listParams", JSON.toJSONString(listParams));*//*
         return BASIC_PATH+"/detail/list";
-    }
+    }*/
 
     /*private Map<String, Object> getListParams(String configurationPageCoding) {
         Map<String,Object> listParams = new HashMap<String, Object>();
