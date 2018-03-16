@@ -28,6 +28,21 @@
     </select>
 
 
+    <!--增加-->
+    <insert id="doAdd" parameterType="com.sky.admin.po.ConfigurationPage">
+        INSERT INTO <include refid="tableEn" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="tableEn != null">table_en,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="tableEn != null">#{tableEn},</if>
+
+        </trim>
+    </insert>
+
 
 
 </mapper>

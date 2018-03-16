@@ -57,11 +57,7 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
 
     @Transactional
     public Boolean doAdd(ConfigurationPage cp) {
-        cp=configurationPageDao.getTableData(cp);
-        if(configurationPageDao.doAdd(cp)){
-            return addField(cp);
-        }
-        return false;
+        return configurationPageDao.doAdd(cp);
     }
 
     @Transactional

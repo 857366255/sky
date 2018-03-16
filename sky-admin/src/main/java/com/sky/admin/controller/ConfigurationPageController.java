@@ -22,8 +22,6 @@ public class ConfigurationPageController {
     private static final String BASIC_PATH = "configurationpage";
     @Autowired
     private ConfigurationPageService configurationPageService;
-    @Autowired
-    private ConfigurationPageDao configurationPageDao;
 
     @RequestMapping(value = "/index",method= RequestMethod.GET)
     public String goIndex(){
@@ -31,16 +29,29 @@ public class ConfigurationPageController {
     }
     @RequestMapping(value = "/list",method= RequestMethod.GET)
     public String goList(Model model){
-        //model.addAttribute("data", configurationPageDao.findAll());
         return BASIC_PATH+"/list";
     }
+    @RequestMapping(value = "/add",method= RequestMethod.GET)
+    public String goAdd(Model model){
+        return BASIC_PATH+"/add";
+    }
+
     @RequestMapping(value="/data", produces = "application/json; charset=utf-8" )
     @ResponseBody
-    public Map<String,Object> goData(Integer limit,Integer  page,ConfigurationPage configurationPage){
+    public Map<String,Object> doData(Integer limit,Integer  page,ConfigurationPage configurationPage){
         System.out.println("limit = " + limit);
         System.out.println("page = " + page);
         Map<String,Object> mapData = configurationPageService.getParams(limit,page,configurationPage);
         return mapData;
+    }
+    @RequestMapping(value = "/add",method= RequestMethod.POST)
+    public void doAdd(ConfigurationPage configurationPage){
+        if(configurationPageService.doAdd(configurationPage)){
+            System.out.println("提交成功:"+configurationPage);
+        }else {
+            System.out.println("提交失败:"+configurationPage);
+        }
+
     }
 
 
