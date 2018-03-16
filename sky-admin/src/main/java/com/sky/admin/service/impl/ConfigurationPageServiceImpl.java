@@ -32,7 +32,7 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
     public Map<String,Object> getParams(Integer limit,Integer  page,ConfigurationPage configurationPage){
         Map<String,Object> params =  new HashMap<String, Object>();
         params.put("code","0");
-        params.put("count","9");
+        params.put("count",configurationPageDao.countData(new ConfigurationPage()));
         params.put("data",configurationPageDao.findData( new Limit(page, limit)  ,configurationPage));
         params.put("msg","SUCCESS");
         return  params;

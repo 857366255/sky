@@ -48,20 +48,21 @@
             ,url: '${basePath}/configurationpage/data'
             ,page: true
             ,height: 'full-60'//最大高度-20  full-20
-            , limit:5
+            , limit:10
             //,width: 500
             ,cellMinWidth: 80
+            ,id:"id"
             ,cols: [[
                 {type:'numbers', fixed: 'left'}
                 ,{type: 'checkbox', fixed: 'left'}
                 ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none'}
-                ,{field:'username', title:'用户名',edit: 'text', templet: '#usernameTpl'}
-                ,{field:'email', title:'邮箱'}
-                ,{field:'sex', title:'性别', templet: '#switchTpl', minWidth: 85, align:'center'}
-                ,{field:'lock', title:'是否锁定', templet: '#checkboxTpl', minWidth: 110, align:'center'}
-                ,{field:'city', title:'城市'}
+                ,{field:'name', title:'名称'}
+                ,{field:'tableEn', title:'表名称'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
             ]]
+            ,done: function(res, curr, count){
+                $("[data-field='id']").css('display','none');
+            }
         });
 
         //点击加号按钮时，新添一行

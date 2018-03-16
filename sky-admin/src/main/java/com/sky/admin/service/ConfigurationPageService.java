@@ -6,11 +6,14 @@ import com.sky.admin.vo.ListField;
 import com.sky.admin.vo.QueryField;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wz on 2018/2/6.
  */
 public interface ConfigurationPageService {
+
+    Map<String,Object> getParams(Integer limit, Integer  page, ConfigurationPage configurationPage);
 
     List<EditField> getEditFields(String configurationPageCoding);
     List<ListField> getListFields(String configurationPageCoding);

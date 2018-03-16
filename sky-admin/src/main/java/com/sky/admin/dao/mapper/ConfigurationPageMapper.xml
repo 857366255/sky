@@ -14,14 +14,19 @@
     </resultMap>
 
     <!--查询全部数据-->
-    <select id="findAll" parameterType="java.util.List"  resultMap="ConfigurationPageResultMap">
+    <select id="findAll"  resultMap="ConfigurationPageResultMap">
         SELECT <include refid="showField" /> FROM <include refid="tableEn" />
     </select>
 
-    <select id="findData" parameterType="java.util.List"  resultMap="ConfigurationPageResultMap">
+    <select id="findData" resultMap="ConfigurationPageResultMap">
         SELECT <include refid="showField" /> FROM <include refid="tableEn" />
-        <if test="configurationPageCoding != null">
+        <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
     </select>
+
+    <select id="countData" resultType ="java.lang.Integer">
+        SELECT count(1) FROM <include refid="tableEn" />
+    </select>
+
 
 
 

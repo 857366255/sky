@@ -39,12 +39,7 @@ public class ConfigurationPageController {
     public Map<String,Object> goData(Integer limit,Integer  page,ConfigurationPage configurationPage){
         System.out.println("limit = " + limit);
         System.out.println("page = " + page);
-        Map<String,Object> mapData = new HashMap<String, Object>();
-        mapData.put("code","0");
-        mapData.put("count","9");
-        mapData.put("data",configurationPageDao.findAll());
-        mapData.put("msg","SUCCESS");
-
+        Map<String,Object> mapData = configurationPageService.getParams(limit,page,configurationPage);
         return mapData;
     }
 

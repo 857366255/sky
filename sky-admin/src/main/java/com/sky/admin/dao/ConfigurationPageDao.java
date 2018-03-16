@@ -15,5 +15,5 @@ public interface ConfigurationPageDao extends BaseDao<String ,ConfigurationPage>
     com.sky.admin.vo.ConfigurationPage getConfigurationPage(String coding);
 
     List<ConfigurationPage> findData(@Param("limit")Limit limit, @Param("configurationPage")ConfigurationPage configurationPage);
-
+    Integer countData(@Param("configurationPage")ConfigurationPage configurationPage);
 }
