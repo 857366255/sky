@@ -13,6 +13,10 @@
         <result property="tableEn" column="table_en"/>
     </resultMap>
 
+    <!--查询-->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="ConfigurationPageResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE id=#{id}
+    </select>
     <!--查询全部数据-->
     <select id="findAll"  resultMap="ConfigurationPageResultMap">
         SELECT <include refid="showField" /> FROM <include refid="tableEn" />
@@ -42,6 +46,21 @@
 
         </trim>
     </insert>
+
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.admin.vo.ConfigurationPage">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name=#{name},</if>
+            <if test="tableEn != null">table_en=#{tableEn},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <!--删除-->
+    <delete id="doDelete" parameterType="java.lang.Integer">
+        DELETE FROM <include refid="tableEn" /> WHERE id= #{id}
+    </delete>
 
 
 

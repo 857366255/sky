@@ -17,6 +17,7 @@
 </head>
 <body style="height: 100%;">
 <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="editDetail">编辑明细</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
@@ -56,6 +57,60 @@
             }
         });
 
+        //监听工具条
+        table.on('tool(skyList)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+                layer.msg('ID：'+ data.id + ' 的查看操作');
+            } else if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    del(data.id);
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+               // layer.alert('编辑行：<br>'+ JSON.stringify(data));
+                layer.open({
+                    type: 2,
+                    title: '编辑'+data.name,
+                    shade: 0,//遮罩shade: [0.8, '#393D49']
+                    maxmin: true,//放大和缩小
+                    tipsMore: true,//是否允许多个tips
+                    area: ['60%', '60%'],
+                    content: "${basePath}/configurationpage/edit/"+data.id//iframe的url
+                    ,end:function(layero, index){//销毁后触发的回调
+                        reload('skyList');//刷新数据
+                    }
+                    ,btn: ['保存', '取消'] //可以无限个按钮
+                    ,btn1: function(index, layero){
+                        window.frames["layui-layer-iframe"+index].document.getElementById("submit").click();//执行弹出窗口里的保存按钮
+                        layer.close(index);//关闭
+                    },btn2: function(index, layero){
+                        layer.close(index);//关闭
+                    }
+                });
+            } else if(obj.event === 'editDetail'){
+                layer.open({
+                    type: 2,
+                    title: '编辑明细'+data.name,
+                    shade: 0,//遮罩shade: [0.8, '#393D49']
+                    maxmin: true,//放大和缩小
+                    tipsMore: true,//是否允许多个tips
+                    area: ['60%', '60%'],
+                    content: "${basePath}/configurationpage/editDetail/"+data.id//iframe的url
+                    ,end:function(layero, index){//销毁后触发的回调
+                        reload('skyList');//刷新数据
+                    }
+                    ,btn: ['保存', '取消'] //可以无限个按钮
+                    ,btn1: function(index, layero){
+                        window.frames["layui-layer-iframe"+index].document.getElementById("submit").click();//执行弹出窗口里的保存按钮
+                        layer.close(index);//关闭
+                    },btn2: function(index, layero){
+                        layer.close(index);//关闭
+                    }
+                });
+            }
+        });
+
         //点击加号按钮时
         $("#add").click(function(){
             layer.open({
@@ -78,6 +133,17 @@
                 }
             });
         });
+        function del(id) {
+            $.ajax({
+                url: "${basePath}/configurationpage/del/"+id,
+                type: 'DELETE',
+                success: function(data) {
+                    reload('skyList');
+                },error : function(data) {
+                    alert("删除失败");
+                }
+            });
+        }
         //重新加载
         function reload(listId){
             table.reload(listId);

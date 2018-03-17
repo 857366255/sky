@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.admin.dao.DatabaseDao">
+
+    <!--映射实体类-->
+    <resultMap id="DatabaseResultMap" type="com.sky.admin.po.DatabaseTable">
+        <id property="tableEn" column="table_name"/>
+        <result property="annotation" column="table_comment"/>
+    </resultMap>
+    <select id="getDatabaseTable"  resultMap="DatabaseResultMap">
+        SELECT * FROM information_schema.tables WHERE table_schema=DATABASE()
+    </select>
+
+
+</mapper>

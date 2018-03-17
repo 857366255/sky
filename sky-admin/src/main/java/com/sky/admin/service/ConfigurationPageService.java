@@ -14,6 +14,7 @@ import java.util.Map;
 public interface ConfigurationPageService {
 
     Map<String,Object> getParams(Integer limit, Integer  page, ConfigurationPage configurationPage);
+    ConfigurationPage findById(Integer id);
 
     List<EditField> getEditFields(String configurationPageCoding);
     List<ListField> getListFields(String configurationPageCoding);
@@ -23,6 +24,6 @@ public interface ConfigurationPageService {
     List<ConfigurationPage> getConfigurationPages();
 
     Boolean doAdd(ConfigurationPage cp);
-    Boolean doDelete(String coding);
+    Boolean doDelete(Integer coding);
     Boolean doUpdate(ConfigurationPage cp);
 }

@@ -12,6 +12,7 @@ import com.sky.admin.vo.QueryField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Id;
 import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +38,9 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
         params.put("msg","SUCCESS");
         return  params;
     }
+    public ConfigurationPage findById(Integer id){
+        return configurationPageDao.findById(id);
+    }
 
     public List<EditField> getEditFields(String configurationPageCoding){
         return fieldDao.getEditFields(configurationPageCoding);
@@ -48,7 +52,7 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
         return fieldDao.getQueryFields(configurationPageCoding);
     }
     public ConfigurationPage getConfiguration(String coding){
-        return configurationPageDao.findById(coding);
+        return null;//configurationPageDao.findById(coding);
     }
 
     public List<ConfigurationPage> getConfigurationPages(){
@@ -61,13 +65,8 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
     }
 
     @Transactional
-    public Boolean doDelete(String coding) {
-        if(fieldDao.doDeleteByConfigurationPageCoding(coding)){
-            if( configurationPageDao.doDelete(coding)){
-                return true;
-            }
-        }
-        return false;
+    public Boolean doDelete(Integer id) {
+        return configurationPageDao.doDelete(id);
     }
 
     @Transactional
@@ -80,7 +79,7 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
             return addField(cp);
         }
         System.out.println(cpTemp);*/
-        return false;
+        return configurationPageDao.doUpdate(cp);
     }
 
     /**

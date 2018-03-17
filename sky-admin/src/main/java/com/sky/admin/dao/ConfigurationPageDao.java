@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by wz on 2018/2/5.
  */
-public interface ConfigurationPageDao extends BaseDao<String ,ConfigurationPage> {
+public interface ConfigurationPageDao extends BaseDao<Integer ,ConfigurationPage> {
     ConfigurationPage getTableData(@Param("cp")ConfigurationPage cp);
     com.sky.admin.vo.ConfigurationPage getConfigurationPage(String coding);
 

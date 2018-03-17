@@ -2,7 +2,9 @@ package com.sky.admin.controller;
 
 import com.sky.admin.dao.ConfigurationPageDao;
 import com.sky.admin.po.ConfigurationPage;
+import com.sky.admin.po.DatabaseTable;
 import com.sky.admin.service.ConfigurationPageService;
+import com.sky.admin.service.DatabaseService;
 import com.sky.admin.vo.ListField;
 import com.sky.admin.vo.Params;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class ConfigurationPageController {
     private static final String BASIC_PATH = "configurationpage";
     @Autowired
     private ConfigurationPageService configurationPageService;
+    @Autowired
+    private DatabaseService databaseService;
 
     @RequestMapping(value = "/index",method= RequestMethod.GET)
     public String goIndex(){
@@ -33,7 +37,21 @@ public class ConfigurationPageController {
     }
     @RequestMapping(value = "/add",method= RequestMethod.GET)
     public String goAdd(Model model){
-        return BASIC_PATH+"/add";
+        model.addAttribute("configurationpage",new ConfigurationPage());
+        model.addAttribute("databaseTables",databaseService.getDatabaseTable());
+        return BASIC_PATH+"/edit";
+    }
+    @RequestMapping(value = "/edit/{id}",method= RequestMethod.GET)
+    public String goEdit(Model model,@PathVariable Integer id){
+        model.addAttribute("configurationpage",configurationPageService.findById(id));
+        model.addAttribute("databaseTables",databaseService.getDatabaseTable());
+        return  BASIC_PATH+"/edit";
+    }
+    @RequestMapping(value = "/editDetail/{id}",method= RequestMethod.GET)
+    public String goEditDetail(Model model,@PathVariable Integer id){
+        model.addAttribute("configurationpage",configurationPageService.findById(id));
+        model.addAttribute("databaseTables",databaseService.getDatabaseTable());
+        return  BASIC_PATH+"/editDetail";
     }
 
     @RequestMapping(value="/data", produces = "application/json; charset=utf-8" )
@@ -44,6 +62,23 @@ public class ConfigurationPageController {
         Map<String,Object> mapData = configurationPageService.getParams(limit,page,configurationPage);
         return mapData;
     }
+
+    @RequestMapping(value = "/edit",method= RequestMethod.POST)
+    public void doEditPOST(ConfigurationPage configurationPage){
+        if(configurationPageService.doAdd(configurationPage)){
+            System.out.println("提交成功:"+configurationPage);
+        }else {
+            System.out.println("提交失败:"+configurationPage);
+        }
+    }
+    @RequestMapping(value = "/edit",method= RequestMethod.PUT)
+    public void doEditPUT(ConfigurationPage configurationPage){
+        if(configurationPageService.doUpdate(configurationPage)){
+            System.out.println("修改成功:"+configurationPage);
+        }else {
+            System.out.println("修改失败:"+configurationPage);
+        }
+    }
     @RequestMapping(value = "/add",method= RequestMethod.POST)
     public void doAdd(ConfigurationPage configurationPage){
         if(configurationPageService.doAdd(configurationPage)){
@@ -51,7 +86,17 @@ public class ConfigurationPageController {
         }else {
             System.out.println("提交失败:"+configurationPage);
         }
-
+    }
+    @RequestMapping(value={"del/{id}"},method=RequestMethod.DELETE)
+    @ResponseBody
+    public Boolean delete(@PathVariable Integer id){
+        if(configurationPageService.doDelete(id)){
+            System.out.println("删除成功");
+            return true;
+        }else{
+            System.out.println("删除失败");
+            return false;
+        }
     }
 
 
