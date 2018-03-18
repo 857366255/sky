@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<form:form class="layui-form" action="${basePath}/configurationpage/edit" method="post" modelAttribute="configurationpage" >
+<form:form class="layui-form" action="${basePath}/configurationpage/edit" method="POST" modelAttribute="configurationpage" >
     <c:if test="${configurationpage.id != null }">
         <form:hidden path="id" />
         <input type="hidden" name="_method" value="PUT" />

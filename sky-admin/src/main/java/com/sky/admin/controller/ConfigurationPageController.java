@@ -42,9 +42,9 @@ public class ConfigurationPageController {
         return BASIC_PATH+"/edit";
     }
     @RequestMapping(value = "/edit/{id}",method= RequestMethod.GET)
-    public String goEdit(Model model,@PathVariable Integer id){
-        model.addAttribute("configurationpage",configurationPageService.findById(id));
-        model.addAttribute("databaseTables",databaseService.getDatabaseTable());
+    public String goEdit(Map<String, Object> map,@PathVariable Integer id){
+        map.put("configurationpage",configurationPageService.findById(id));
+        map.put("databaseTables",databaseService.getDatabaseTable());
         return  BASIC_PATH+"/edit";
     }
     @RequestMapping(value = "/editDetail/{id}",method= RequestMethod.GET)
@@ -64,12 +64,13 @@ public class ConfigurationPageController {
     }
 
     @RequestMapping(value = "/edit",method= RequestMethod.POST)
-    public void doEditPOST(ConfigurationPage configurationPage){
+    public void doEditPOST(Model model,ConfigurationPage configurationPage){
         if(configurationPageService.doAdd(configurationPage)){
             System.out.println("提交成功:"+configurationPage);
         }else {
             System.out.println("提交失败:"+configurationPage);
         }
+        model.addAttribute("configurationpage", new ConfigurationPage());
     }
     @RequestMapping(value = "/edit",method= RequestMethod.PUT)
     public void doEditPUT(ConfigurationPage configurationPage){
@@ -77,14 +78,6 @@ public class ConfigurationPageController {
             System.out.println("修改成功:"+configurationPage);
         }else {
             System.out.println("修改失败:"+configurationPage);
-        }
-    }
-    @RequestMapping(value = "/add",method= RequestMethod.POST)
-    public void doAdd(ConfigurationPage configurationPage){
-        if(configurationPageService.doAdd(configurationPage)){
-            System.out.println("提交成功:"+configurationPage);
-        }else {
-            System.out.println("提交失败:"+configurationPage);
         }
     }
     @RequestMapping(value={"del/{id}"},method=RequestMethod.DELETE)

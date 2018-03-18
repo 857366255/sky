@@ -50,7 +50,7 @@
                 ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none'}
                 ,{field:'name', title:'名称'}
                 ,{field:'tableEn', title:'表名称'}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth:200}
             ]]
             ,done: function(res, curr, count){
                 $("[data-field='id']").css('display','none');//隐藏列表
