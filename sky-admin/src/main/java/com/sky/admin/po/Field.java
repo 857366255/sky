@@ -5,38 +5,35 @@ package com.sky.admin.po;
  * Created by wz on 2018/2/5.
  */
 public class Field {
-    private String coding;//唯一标识符
-    private String configurationPageCoding;//配置页面编码
-    private String tableEn;//数据库表名
-    private String fieldEn;//数据库字段名称
+
+    private Integer id;//唯一标识符
+    private Integer configurationpageId;//配置页面id
+    private String tableEn;//表名称en
+    private String fieldEn;//字段名称en
     private String name;//名称
-    /*编辑字段属性*/
-    private Boolean isShowEdit;//是否显示
-    private Boolean isEdit;//是否编辑
-    private String inputCoding;//输入框编码
-    private Integer sortingEdit;//编辑排序
-    /*列表字段属性*/
-    private Boolean isShowList;//列表显示是否
-    private Integer sortingList;//列表排序
-    /*查询字段属性*/
-    private Boolean isQuery;//是否查询
-    private String queryType;//查询条件类型
-    private Integer sortingQuery;//查询排序
+    private Boolean isshowlist;//是否显示列表
+    private Integer listsorting;//列表排序号
+    private Boolean isedit;//是否编辑
+    private Integer editsorting;//编辑排序号
+    private String inputtype;//输入框类型
+    private Boolean isquery;//是否查询
+    private String querytype;//查询类型
+    private Integer querysorting;//查询排序号
 
-    public String getCoding() {
-        return coding;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCoding(String coding) {
-        this.coding = coding;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getConfigurationPageCoding() {
-        return configurationPageCoding;
+    public Integer getConfigurationpageId() {
+        return configurationpageId;
     }
 
-    public void setConfigurationPageCoding(String configurationPageCoding) {
-        this.configurationPageCoding = configurationPageCoding;
+    public void setConfigurationpageId(Integer configurationpageId) {
+        this.configurationpageId = configurationpageId;
     }
 
     public String getTableEn() {
@@ -63,95 +60,86 @@ public class Field {
         this.name = name;
     }
 
-    public Boolean getShowEdit() {
-        return isShowEdit;
+    public Boolean getIsshowlist() {
+        return isshowlist;
     }
 
-    public void setShowEdit(Boolean showEdit) {
-        isShowEdit = showEdit;
+    public void setIsshowlist(Boolean isshowlist) {
+        this.isshowlist = isshowlist;
     }
 
-    public Boolean getEdit() {
-        return isEdit;
+    public Integer getListsorting() {
+        return listsorting;
     }
 
-    public void setEdit(Boolean edit) {
-        isEdit = edit;
+    public void setListsorting(Integer listsorting) {
+        this.listsorting = listsorting;
     }
 
-    public String getInputCoding() {
-        return inputCoding;
+    public Boolean getIsedit() {
+        return isedit;
     }
 
-    public void setInputCoding(String inputCoding) {
-        this.inputCoding = inputCoding;
+    public void setIsedit(Boolean isedit) {
+        this.isedit = isedit;
     }
 
-    public Integer getSortingEdit() {
-        return sortingEdit;
+    public Integer getEditsorting() {
+        return editsorting;
     }
 
-    public void setSortingEdit(Integer sortingEdit) {
-        this.sortingEdit = sortingEdit;
+    public void setEditsorting(Integer editsorting) {
+        this.editsorting = editsorting;
     }
 
-    public Boolean getShowList() {
-        return isShowList;
+    public String getInputtype() {
+        return inputtype;
     }
 
-    public void setShowList(Boolean showList) {
-        isShowList = showList;
+    public void setInputtype(String inputtype) {
+        this.inputtype = inputtype;
     }
 
-    public Integer getSortingList() {
-        return sortingList;
+    public Boolean getIsquery() {
+        return isquery;
     }
 
-    public void setSortingList(Integer sortingList) {
-        this.sortingList = sortingList;
+    public void setIsquery(Boolean isquery) {
+        this.isquery = isquery;
     }
 
-    public Boolean getQuery() {
-        return isQuery;
+    public String getQuerytype() {
+        return querytype;
     }
 
-    public void setQuery(Boolean query) {
-        isQuery = query;
+    public void setQuerytype(String querytype) {
+        this.querytype = querytype;
     }
 
-    public String getQueryType() {
-        return queryType;
+    public Integer getQuerysorting() {
+        return querysorting;
     }
 
-    public void setQueryType(String queryType) {
-        this.queryType = queryType;
-    }
-
-    public Integer getSortingQuery() {
-        return sortingQuery;
-    }
-
-    public void setSortingQuery(Integer sortingQuery) {
-        this.sortingQuery = sortingQuery;
+    public void setQuerysorting(Integer querysorting) {
+        this.querysorting = querysorting;
     }
 
     @Override
     public String toString() {
         return "Field{" +
-                "coding='" + coding + '\'' +
-                ", configurationPageCoding='" + configurationPageCoding + '\'' +
+                "id=" + id +
+                ", configurationpageId=" + configurationpageId +
                 ", tableEn='" + tableEn + '\'' +
                 ", fieldEn='" + fieldEn + '\'' +
                 ", name='" + name + '\'' +
-                ", isShowEdit=" + isShowEdit +
-                ", isEdit=" + isEdit +
-                ", inputCoding='" + inputCoding + '\'' +
-                ", sortingEdit=" + sortingEdit +
-                ", isShowList=" + isShowList +
-                ", sortingList=" + sortingList +
-                ", isQuery=" + isQuery +
-                ", queryType='" + queryType + '\'' +
-                ", sortingQuery=" + sortingQuery +
+                ", isshowlist=" + isshowlist +
+                ", listsorting=" + listsorting +
+                ", isedit=" + isedit +
+                ", editsorting=" + editsorting +
+                ", inputtype='" + inputtype + '\'' +
+                ", isquery=" + isquery +
+                ", querytype='" + querytype + '\'' +
+                ", querysorting=" + querysorting +
                 '}';
     }
 }

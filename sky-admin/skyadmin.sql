@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-03-15 15:23:43
+Date: 2018-03-19 17:24:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,23 +24,65 @@ CREATE TABLE `s_configurationpage` (
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `table_en` varchar(255) DEFAULT NULL COMMENT '表名称en',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='配置页面';
 
 -- ----------------------------
 -- Records of s_configurationpage
 -- ----------------------------
-INSERT INTO `s_configurationpage` VALUES ('1', '1', '1');
-INSERT INTO `s_configurationpage` VALUES ('2', '2', '2');
-INSERT INTO `s_configurationpage` VALUES ('3', '3', '3');
-INSERT INTO `s_configurationpage` VALUES ('4', '4', '4');
-INSERT INTO `s_configurationpage` VALUES ('5', '5', '5');
-INSERT INTO `s_configurationpage` VALUES ('6', '6', '6');
-INSERT INTO `s_configurationpage` VALUES ('7', '7', '7');
-INSERT INTO `s_configurationpage` VALUES ('8', '8', '8');
-INSERT INTO `s_configurationpage` VALUES ('9', '9', '9');
+INSERT INTO `s_configurationpage` VALUES ('1', '2', 's_configurationpage');
+INSERT INTO `s_configurationpage` VALUES ('2', '2', 's_configurationpage');
+INSERT INTO `s_configurationpage` VALUES ('3', '3', 's_field');
+INSERT INTO `s_configurationpage` VALUES ('4', '4', 's_field');
+INSERT INTO `s_configurationpage` VALUES ('6', '6', 's_configurationpage');
+INSERT INTO `s_configurationpage` VALUES ('7', '7', 's_field');
+INSERT INTO `s_configurationpage` VALUES ('8', '8', 's_configurationpage');
+INSERT INTO `s_configurationpage` VALUES ('9', '9', 's_configurationpage');
 INSERT INTO `s_configurationpage` VALUES ('10', '10', '10');
 INSERT INTO `s_configurationpage` VALUES ('11', '11', '11');
 INSERT INTO `s_configurationpage` VALUES ('12', '12', '12');
 INSERT INTO `s_configurationpage` VALUES ('13', '13', '13');
 INSERT INTO `s_configurationpage` VALUES ('14', '14', '14');
 INSERT INTO `s_configurationpage` VALUES ('15', '15', '15');
+INSERT INTO `s_configurationpage` VALUES ('16', '打', '1');
+INSERT INTO `s_configurationpage` VALUES ('17', 'SAD', '3');
+INSERT INTO `s_configurationpage` VALUES ('18', '阿斯顿', '1');
+INSERT INTO `s_configurationpage` VALUES ('19', '为', '1');
+INSERT INTO `s_configurationpage` VALUES ('20', '2', 's_configurationpage');
+INSERT INTO `s_configurationpage` VALUES ('21', '3', 's_configurationpage');
+INSERT INTO `s_configurationpage` VALUES ('22', '配置页面', 's_configurationpage');
+
+-- ----------------------------
+-- Table structure for s_field
+-- ----------------------------
+DROP TABLE IF EXISTS `s_field`;
+CREATE TABLE `s_field` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
+  `configurationpage_id` int(11) DEFAULT NULL COMMENT '配置页面id',
+  `table_en` varchar(255) DEFAULT NULL COMMENT '表名称en',
+  `field_en` varchar(255) DEFAULT NULL COMMENT '字段名称en',
+  `name` varchar(255) DEFAULT NULL COMMENT '名称',
+  `isshowlist` tinyint(1) DEFAULT NULL COMMENT '是否显示列表',
+  `listsorting` int(11) DEFAULT NULL COMMENT '列表排序号',
+  `isedit` tinyint(1) DEFAULT NULL COMMENT '是否编辑',
+  `editsorting` int(11) DEFAULT NULL COMMENT '编辑排序号',
+  `inputtype` varchar(255) DEFAULT NULL COMMENT '输入框类型',
+  `isquery` tinyint(1) DEFAULT NULL COMMENT '是否查询',
+  `querytype` varchar(255) DEFAULT NULL COMMENT '查询类型',
+  `querysorting` int(11) DEFAULT NULL COMMENT '查询排序号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of s_field
+-- ----------------------------
+INSERT INTO `s_field` VALUES ('1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `s_field` VALUES ('2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2');
+INSERT INTO `s_field` VALUES ('3', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3');
+INSERT INTO `s_field` VALUES ('4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4');
+INSERT INTO `s_field` VALUES ('5', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5');
+INSERT INTO `s_field` VALUES ('6', '6', '6', '6', '6', '6', '6', '6', '6', '6', '6', '6', '6');
+INSERT INTO `s_field` VALUES ('7', '7', '7', '7', '7', '7', '7', '7', '7', '7', '7', '7', '7');
+INSERT INTO `s_field` VALUES ('8', '8', '8', '8', '8', '8', '8', '8', '8', '8', '8', '8', '8');
+INSERT INTO `s_field` VALUES ('9', '9', '9', '9', '9', '9', '9', '9', '9', '9', '9', '9', '9');
+INSERT INTO `s_field` VALUES ('10', '10', '10', '10', '10', '10', '10', '10', '10', '10', '10', '10', '10');
+INSERT INTO `s_field` VALUES ('11', '11', '11', '1', '11', '11', '11', '11', '11', '11', '11', '11', '11');

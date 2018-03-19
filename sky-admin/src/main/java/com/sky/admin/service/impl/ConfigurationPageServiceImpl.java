@@ -42,15 +42,6 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
         return configurationPageDao.findById(id);
     }
 
-    public List<EditField> getEditFields(String configurationPageCoding){
-        return fieldDao.getEditFields(configurationPageCoding);
-    }
-    public List<ListField> getListFields(String configurationPageCoding){
-        return fieldDao.getListFields(configurationPageCoding);
-    }
-    public List<QueryField> getQueryFields(String configurationPageCoding){
-        return fieldDao.getQueryFields(configurationPageCoding);
-    }
     public ConfigurationPage getConfiguration(String coding){
         return null;//configurationPageDao.findById(coding);
     }

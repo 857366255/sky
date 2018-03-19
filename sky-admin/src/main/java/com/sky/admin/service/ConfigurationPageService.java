@@ -16,13 +16,6 @@ public interface ConfigurationPageService {
     Map<String,Object> getParams(Integer limit, Integer  page, ConfigurationPage configurationPage);
     ConfigurationPage findById(Integer id);
 
-    List<EditField> getEditFields(String configurationPageCoding);
-    List<ListField> getListFields(String configurationPageCoding);
-    List<QueryField> getQueryFields(String configurationPageCoding);
-
-    ConfigurationPage getConfiguration(String coding);
-    List<ConfigurationPage> getConfigurationPages();
-
     Boolean doAdd(ConfigurationPage cp);
     Boolean doDelete(Integer coding);
     Boolean doUpdate(ConfigurationPage cp);

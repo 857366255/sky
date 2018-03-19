@@ -73,12 +73,14 @@ public class ConfigurationPageController {
         model.addAttribute("configurationpage", new ConfigurationPage());
     }
     @RequestMapping(value = "/edit",method= RequestMethod.PUT)
-    public void doEditPUT(ConfigurationPage configurationPage){
+    public String doEditPUT(Model model,ConfigurationPage configurationPage){
         if(configurationPageService.doUpdate(configurationPage)){
             System.out.println("修改成功:"+configurationPage);
         }else {
             System.out.println("修改失败:"+configurationPage);
         }
+        //model.addAttribute("configurationpage", configurationPage);
+        return  "redirect:editDetail/"+configurationPage.getId();
     }
     @RequestMapping(value={"del/{id}"},method=RequestMethod.DELETE)
     @ResponseBody

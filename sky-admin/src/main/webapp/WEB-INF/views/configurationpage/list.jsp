@@ -103,7 +103,7 @@
                     ,btn: ['保存', '取消'] //可以无限个按钮
                     ,btn1: function(index, layero){
                         window.frames["layui-layer-iframe"+index].document.getElementById("submit").click();//执行弹出窗口里的保存按钮
-                        layer.close(index);//关闭
+                        //layer.close(index);//关闭
                     },btn2: function(index, layero){
                         layer.close(index);//关闭
                     }

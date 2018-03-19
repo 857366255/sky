@@ -21,7 +21,7 @@
         <form:form class="layui-form" action="${basePath}/configurationpage/edit" method="post" modelAttribute="configurationpage" >
             <c:if test="${configurationpage.id != null }">
                 <form:hidden path="id" />
-                <input type="hidden" name="_method" value="PUT" />
+                    <input type="hidden" name="_method" value="PUT" />
             </c:if>
             <fieldset class="layui-elem-field">
                 <legend>名称</legend>
@@ -37,11 +37,12 @@
             </fieldset>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button id="submit" class="btn btn-primary" type="submit" style="display: none;">立即提交</button>
-                        <%--<button type="reset" class="layui-btn layui-btn-primary">重置</button>--%>
+                    <button id="submit" class="btn btn-primary"  lay-filter="submit" lay-submit>立即提交</button><%--style="display: none;"--%>
+                        <%--<button class="layui-btn layui-btn-primary" lay-submit lay-filter="demo1">重置</button>--%>
                 </div>
             </div>
         </form:form>
+
     </div>
     <div class="layui-col-xs*">
         <%--<div class="layui-btn-group demoTable">
@@ -54,24 +55,37 @@
 <script src="${basePath}/UI/test/layuiSky/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
-    layui.use(['table', 'layedit', 'laydate'], function(){
-        var table = layui.table, $ = layui.jquery,layer = layui.layer;
+    layui.use(['table', 'layedit', 'laydate','form'], function(){
+        var table = layui.table, $ = layui.jquery,layer = layui.layer,form = layui.form;
         table.render({
             elem: '#skyList'
-            ,url: '${basePath}/configurationpage/data'
+            ,url: '${basePath}/field/data'
             ,page: false
             ,height: 'full-20'//最大高度-20  full-20
             , limit:10000
             //,width: 500
             ,cellMinWidth: 80
             ,cols: [[
-                {type:'numbers', fixed: 'left'}
-               // ,{type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none'}
-                ,{field:'name', title:'名称' ,edit: 'text',width:100}
-                ,{field:'tableEn', title:'表名称',width:200}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
-            ]]
+                {type:'numbers', fixed: 'left' , rowspan: 2}
+                ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none' , rowspan: 2}
+                ,{title:'配置页面' ,edit: 'text',width:100 ,rowspan:2}
+                ,{field:'configurationpageId', title:'配置页面id' ,edit: 'text',width:100 , rowspan: 2}
+                ,{field:'tableEn', title:'表名称en' ,edit: 'text',width:100, rowspan: 2}
+                ,{field:'fieldEn', title:'字段名称en' ,edit: 'text',width:100, rowspan: 2}
+                ,{field:'inputtype', title:'输入框类型' ,edit: 'text',width:100, rowspan: 2}
+                ,{field:'name', title:'名称' ,edit: 'text',width:100, rowspan: 2}
+                ,{align:'center',title:'列表' , colspan: 2}
+                ,{align:'center',title:'编辑' , colspan: 2}
+                ,{align:'center',title:'查询' , colspan: 3}
+            ],[
+                {field:'isshowlist', title:'是否显示列表' ,edit: 'checkbox',width:100}
+                ,{field:'listsorting', title:'列表排序号' ,edit: 'text',width:100}
+                ,{field:'isedit', title:'是否编辑' ,edit: 'text',width:100}
+                ,{field:'editsorting', title:'编辑排序号' ,edit: 'text',width:100}
+                ,{field:'isquery', title:'是否查询' ,edit: 'text',width:100}
+                ,{field:'querytype', title:'查询类型' ,edit: 'text',width:100}
+                ,{field:'querysorting', title:'查询排序号' ,edit: 'text',width:100}
+            ]/**/]
             ,done: function(res, curr, count){
                 $("[data-field='id']").css('display','none');//隐藏列表
             }
@@ -98,6 +112,35 @@
                 data : oldData
                 ,url:false
             });
+        });
+
+        //监听提交
+        form.on('submit(submit)', function(data){
+           alert("asdsd");
+            var customerArray = new Array();
+            customerArray.push({id: "1", name: "李四", pwd: "123"});
+            customerArray.push({id: "2", name: "张三", pwd: "332"});
+           var url = data.form.action;
+            alert("asdsd");
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                contentType : 'application/json;charset=utf-8',
+                dataType:"json",
+                data :$.toJSON({id: "1", name: "李四"}),//data  $.toJSON(data)
+
+                success: function(data) {
+                    alert("删");
+                    return false;
+                },error : function(data) {
+                    alert("删除失败");
+                    return false;
+                }
+            });
+            /* layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })*/
+            return false;
         });
 
 
