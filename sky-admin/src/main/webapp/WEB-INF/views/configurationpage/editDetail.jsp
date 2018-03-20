@@ -21,7 +21,7 @@
         <form:form class="layui-form" action="${basePath}/configurationpage/edit" method="post" modelAttribute="configurationpage" >
             <c:if test="${configurationpage.id != null }">
                 <form:hidden path="id" />
-                    <input type="hidden" name="_method" value="PUT" />
+                    <%--<input type="hidden" name="_method" value="PUT" />--%>
             </c:if>
             <fieldset class="layui-elem-field">
                 <legend>名称</legend>
@@ -116,30 +116,21 @@
 
         //监听提交
         form.on('submit(submit)', function(data){
-           alert("asdsd");
-            var customerArray = new Array();
-            customerArray.push({id: "1", name: "李四", pwd: "123"});
-            customerArray.push({id: "2", name: "张三", pwd: "332"});
-           var url = data.form.action;
-            alert("asdsd");
+            var fieldList =  table.cache["skyList"];
+            data.field.fieldList = fieldList;
             $.ajax({
-                url: url,
+                url: data.form.action,
                 type: 'PUT',
                 contentType : 'application/json;charset=utf-8',
                 dataType:"json",
-                data :$.toJSON({id: "1", name: "李四"}),//data  $.toJSON(data)
-
+                data :JSON.stringify(/*data.field*/fieldList),//JSON.stringify({id: 2, name: "李四"})
                 success: function(data) {
-                    alert("删");
                     return false;
                 },error : function(data) {
                     alert("删除失败");
                     return false;
                 }
             });
-            /* layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })*/
             return false;
         });
 

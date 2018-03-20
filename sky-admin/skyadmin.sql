@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-03-19 17:24:27
+Date: 2018-03-20 17:07:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,15 +24,15 @@ CREATE TABLE `s_configurationpage` (
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `table_en` varchar(255) DEFAULT NULL COMMENT '表名称en',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='配置页面';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='配置页面';
 
 -- ----------------------------
 -- Records of s_configurationpage
 -- ----------------------------
 INSERT INTO `s_configurationpage` VALUES ('1', '2', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('2', '2', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('3', '3', 's_field');
-INSERT INTO `s_configurationpage` VALUES ('4', '4', 's_field');
+INSERT INTO `s_configurationpage` VALUES ('2', 'asd', 's_configurationpage');
+INSERT INTO `s_configurationpage` VALUES ('3', '3', 's_configurationpage');
+INSERT INTO `s_configurationpage` VALUES ('4', '4', 's_configurationpage');
 INSERT INTO `s_configurationpage` VALUES ('6', '6', 's_configurationpage');
 INSERT INTO `s_configurationpage` VALUES ('7', '7', 's_field');
 INSERT INTO `s_configurationpage` VALUES ('8', '8', 's_configurationpage');
@@ -50,6 +50,7 @@ INSERT INTO `s_configurationpage` VALUES ('19', '为', '1');
 INSERT INTO `s_configurationpage` VALUES ('20', '2', 's_configurationpage');
 INSERT INTO `s_configurationpage` VALUES ('21', '3', 's_configurationpage');
 INSERT INTO `s_configurationpage` VALUES ('22', '配置页面', 's_configurationpage');
+INSERT INTO `s_configurationpage` VALUES ('23', '3', 's_configurationpage');
 
 -- ----------------------------
 -- Table structure for s_field
@@ -75,14 +76,14 @@ CREATE TABLE `s_field` (
 -- ----------------------------
 -- Records of s_field
 -- ----------------------------
-INSERT INTO `s_field` VALUES ('1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
-INSERT INTO `s_field` VALUES ('2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2');
-INSERT INTO `s_field` VALUES ('3', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3', '3');
-INSERT INTO `s_field` VALUES ('4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4');
-INSERT INTO `s_field` VALUES ('5', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5', '5');
-INSERT INTO `s_field` VALUES ('6', '6', '6', '6', '6', '6', '6', '6', '6', '6', '6', '6', '6');
-INSERT INTO `s_field` VALUES ('7', '7', '7', '7', '7', '7', '7', '7', '7', '7', '7', '7', '7');
-INSERT INTO `s_field` VALUES ('8', '8', '8', '8', '8', '8', '8', '8', '8', '8', '8', '8', '8');
-INSERT INTO `s_field` VALUES ('9', '9', '9', '9', '9', '9', '9', '9', '9', '9', '9', '9', '9');
-INSERT INTO `s_field` VALUES ('10', '10', '10', '10', '10', '10', '10', '10', '10', '10', '10', '10', '10');
-INSERT INTO `s_field` VALUES ('11', '11', '11', '1', '11', '11', '11', '11', '11', '11', '11', '11', '11');
+INSERT INTO `s_field` VALUES ('1', '1', '1a', '1a', '1a', '1', '1', '1', '1', '1a', '1', '1a', '1');
+INSERT INTO `s_field` VALUES ('2', '2', '2a', '2a', '2a', '2', '2', '2', '2', '2a', '2', '2a', '2');
+INSERT INTO `s_field` VALUES ('3', '3', '3a', '3a', '3a', '3', '3', '3', '3', '3a', '3', '3a', '3');
+INSERT INTO `s_field` VALUES ('4', '4', '4a', '4a', '4a', '4', '4', '4', '4', '4a', '4', '4a', '4');
+INSERT INTO `s_field` VALUES ('5', '5', '5a', '5a', '5a', '5', '5', '5', '5', '5a', '5', '5a', '5');
+INSERT INTO `s_field` VALUES ('6', '6', '6a', '6a', '6a', '6', '6', '6', '6', '6a', '6', '6a', '6');
+INSERT INTO `s_field` VALUES ('7', '7', '7a', '7a', '7a', '7', '7', '7', '7', '7a', '7', '7a', '7');
+INSERT INTO `s_field` VALUES ('8', '8', '8a', '8a', '8a', '8', '8', '8', '8', '8a', '8', '8a', '8');
+INSERT INTO `s_field` VALUES ('9', '9', '9a', '9a', '9a', '9', '9', '9', '9', '9a', '9', '9a', '9');
+INSERT INTO `s_field` VALUES ('10', '10', '10a', '10a', '10a', '10', '10', '10', '10', '10a', '10', '10a', '10');
+INSERT INTO `s_field` VALUES ('11', '11', '11a', '11a', '11a', '11', '11', '11', '11', '11a', '11', '11a', '11');

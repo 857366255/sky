@@ -3,6 +3,7 @@ package com.sky.admin.controller;
 import com.sky.admin.dao.ConfigurationPageDao;
 import com.sky.admin.po.ConfigurationPage;
 import com.sky.admin.po.DatabaseTable;
+import com.sky.admin.po.Field;
 import com.sky.admin.service.ConfigurationPageService;
 import com.sky.admin.service.DatabaseService;
 import com.sky.admin.vo.ListField;
@@ -72,15 +73,20 @@ public class ConfigurationPageController {
         }
         model.addAttribute("configurationpage", new ConfigurationPage());
     }
-    @RequestMapping(value = "/edit",method= RequestMethod.PUT)
-    public String doEditPUT(Model model,ConfigurationPage configurationPage){
-        if(configurationPageService.doUpdate(configurationPage)){
+    @RequestMapping(value = "/edit",method= RequestMethod.PUT, produces="application/json;charset=utf-8;")
+    @ResponseBody
+    public String doEditPUT(/*@RequestBody ConfigurationPage configurationPage,*/@RequestBody List<Map> lsitData){
+
+       // System.out.println("修改:"+configurationPage);
+        System.out.println("lsitData:"+lsitData);
+        /*if(configurationPageService.doUpdate(configurationPage)){
             System.out.println("修改成功:"+configurationPage);
         }else {
             System.out.println("修改失败:"+configurationPage);
-        }
+        }*/
+        return "zs";
         //model.addAttribute("configurationpage", configurationPage);
-        return  "redirect:editDetail/"+configurationPage.getId();
+      //  return  "redirect:editDetail/"+configurationPage.getId();
     }
     @RequestMapping(value={"del/{id}"},method=RequestMethod.DELETE)
     @ResponseBody
