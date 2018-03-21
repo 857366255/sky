@@ -48,23 +48,10 @@ public class ConfigurationPageController {
         map.put("databaseTables",databaseService.getDatabaseTable());
         return  BASIC_PATH+"/edit";
     }
-    @RequestMapping(value = "/editDetail/{id}",method= RequestMethod.GET)
-    public String goEditDetail(Model model,@PathVariable Integer id){
-        model.addAttribute("configurationpage",configurationPageService.findById(id));
-        model.addAttribute("databaseTables",databaseService.getDatabaseTable());
-        return  BASIC_PATH+"/editDetail";
-    }
 
-    @RequestMapping(value="/data", produces = "application/json; charset=utf-8" )
-    @ResponseBody
-    public Map<String,Object> doData(Integer limit,Integer  page,ConfigurationPage configurationPage){
-        System.out.println("limit = " + limit);
-        System.out.println("page = " + page);
-        Map<String,Object> mapData = configurationPageService.getParams(limit,page,configurationPage);
-        return mapData;
-    }
 
     @RequestMapping(value = "/edit",method= RequestMethod.POST)
+    @ResponseBody
     public void doEditPOST(Model model,ConfigurationPage configurationPage){
         if(configurationPageService.doAdd(configurationPage)){
             System.out.println("提交成功:"+configurationPage);
@@ -73,20 +60,14 @@ public class ConfigurationPageController {
         }
         model.addAttribute("configurationpage", new ConfigurationPage());
     }
-    @RequestMapping(value = "/edit",method= RequestMethod.PUT, produces="application/json;charset=utf-8;")
+    @RequestMapping(value = "/edit",method= RequestMethod.PUT)
     @ResponseBody
-    public String doEditPUT(/*@RequestBody ConfigurationPage configurationPage,*/@RequestBody List<Map> lsitData){
-
-       // System.out.println("修改:"+configurationPage);
-        System.out.println("lsitData:"+lsitData);
-        /*if(configurationPageService.doUpdate(configurationPage)){
+    public void doEditPUT(ConfigurationPage configurationPage){
+        if(configurationPageService.doUpdate(configurationPage)){
             System.out.println("修改成功:"+configurationPage);
         }else {
             System.out.println("修改失败:"+configurationPage);
-        }*/
-        return "zs";
-        //model.addAttribute("configurationpage", configurationPage);
-      //  return  "redirect:editDetail/"+configurationPage.getId();
+        }
     }
     @RequestMapping(value={"del/{id}"},method=RequestMethod.DELETE)
     @ResponseBody
@@ -98,6 +79,29 @@ public class ConfigurationPageController {
             System.out.println("删除失败");
             return false;
         }
+    }
+
+    @RequestMapping(value="/data", produces = "application/json; charset=utf-8" )
+    @ResponseBody
+    public Map<String,Object> doData(Integer limit,Integer  page,ConfigurationPage configurationPage){
+        System.out.println("limit = " + limit);
+        System.out.println("page = " + page);
+        Map<String,Object> mapData = configurationPageService.getParams(limit,page,configurationPage);
+        return mapData;
+    }
+    /******************************************************************************************************************/
+
+    @RequestMapping(value = "/editDetail/{id}",method= RequestMethod.GET)
+    public String goEditDetail(Model model,@PathVariable Integer id){
+        model.addAttribute("configurationpage",configurationPageService.findById(id));
+        model.addAttribute("databaseTables",databaseService.getDatabaseTable());
+        return  BASIC_PATH+"/editDetail";
+    }
+    @RequestMapping(value = "/editDetail/edit",method= RequestMethod.PUT, produces="application/json;charset=utf-8;")
+    @ResponseBody
+    public Map<String,Object> doEditDetailPUT(@RequestBody Map<String,Object> lsitData){
+        System.out.println("lsitData:"+lsitData);
+        return new HashMap<String, Object>();
     }
 
 

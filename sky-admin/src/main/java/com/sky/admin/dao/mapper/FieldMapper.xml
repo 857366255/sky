@@ -30,7 +30,7 @@
     </select>
 
     <select id="findData" resultMap="FieldResultMap">
-        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE configurationpage_id=#{field.configurationpageId}
         <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
     </select>
 

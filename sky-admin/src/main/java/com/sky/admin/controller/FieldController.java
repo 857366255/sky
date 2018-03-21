@@ -29,7 +29,9 @@ public class FieldController {
 
     @RequestMapping(value="/data", produces = "application/json; charset=utf-8" )
     @ResponseBody
-    public Map<String,Object> doData(Integer limit,Integer  page,Field field){
+    public Map<String,Object> doData(Integer limit,Integer  page,Integer id){
+        Field field =  new Field();
+        field.setConfigurationpageId(id);
         System.out.println("limit = " + limit);
         System.out.println("page = " + page);
         Map<String,Object> mapData = fieldService.getParams(null,null,field);

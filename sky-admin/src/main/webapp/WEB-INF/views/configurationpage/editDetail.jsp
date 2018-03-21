@@ -16,9 +16,29 @@
     <link rel="stylesheet" href="${basePath}/UI/test/layuiSky/layui/css/layui.css"  media="all">
 </head>
 <body>
+
+<script type="text/html" id="switchTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="isquery"  lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" >
+</script>
+
+<script type="text/html" id="checkboxTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <%--<input type="checkbox" name="isshowlist"  title="锁定" lay-filter="lockDemo" checked>--%>
+    <input type="checkbox" name="isshowlist" title="1" checked>
+</script>
+
+<%--<script type="text/html" id="checkboxTpl">
+    <input type="checkbox" name="isshowlist" title="1" checked>
+
+    &lt;%&ndash;<input name="like1[write]" lay-skin="primary" title="写作" checked="" type="checkbox">&ndash;%&gt;
+</script>
+<script type="text/html" id="switchTpl">
+    <input type="checkbox" name="isquery" lay-skin="switch" lay-text="女|男">
+</script>--%>
 <div class="layui-row" style="height: 100%">
     <div class="layui-col-xs3">
-        <form:form class="layui-form" action="${basePath}/configurationpage/edit" method="post" modelAttribute="configurationpage" >
+        <form:form class="layui-form" action="${basePath}/configurationpage/editDetail/edit" method="post" modelAttribute="configurationpage" >
             <c:if test="${configurationpage.id != null }">
                 <form:hidden path="id" />
                     <%--<input type="hidden" name="_method" value="PUT" />--%>
@@ -37,7 +57,7 @@
             </fieldset>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button id="submit" class="btn btn-primary"  lay-filter="submit" lay-submit>立即提交</button><%--style="display: none;"--%>
+                    <button id="submit" class="btn btn-primary"  lay-filter="submit" style="display: none;" lay-submit>立即提交</button><%----%>
                         <%--<button class="layui-btn layui-btn-primary" lay-submit lay-filter="demo1">重置</button>--%>
                 </div>
             </div>
@@ -78,14 +98,19 @@
                 ,{align:'center',title:'编辑' , colspan: 2}
                 ,{align:'center',title:'查询' , colspan: 3}
             ],[
-                {field:'isshowlist', title:'是否显示列表' ,edit: 'checkbox',width:100}
+                {field:'isshowlist', title:'是否显示列表' , templet: '#checkboxTpl',width:100}
                 ,{field:'listsorting', title:'列表排序号' ,edit: 'text',width:100}
-                ,{field:'isedit', title:'是否编辑' ,edit: 'text',width:100}
+                ,{field:'isedit', title:'是否编辑' ,  edit: 'text',width:100}
                 ,{field:'editsorting', title:'编辑排序号' ,edit: 'text',width:100}
-                ,{field:'isquery', title:'是否查询' ,edit: 'text',width:100}
+                ,{field:'isquery', title:'是否查询' ,templet: '#switchTpl', event: 'isquery',width:100}
                 ,{field:'querytype', title:'查询类型' ,edit: 'text',width:100}
                 ,{field:'querysorting', title:'查询排序号' ,edit: 'text',width:100}
+                /*,{field:'sex', title:'性别', width:85, templet: '#switchTpl', unresize: true}
+                ,{field:'lock', title:'是否锁定', width:110, templet: '#checkboxTpl', unresize: true}*/
             ]/**/]
+            ,where: {
+                id: ${configurationpage.id}
+            }
             ,done: function(res, curr, count){
                 $("[data-field='id']").css('display','none');//隐藏列表
             }
@@ -114,16 +139,42 @@
             });
         });
 
+        table.on('tool(skyList)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'isquery'){
+                layer.msg('ID：'+ data.id + ' 的查看操作');
+                obj.update({isquery:this.innerText});
+
+            } else if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            }
+        });
+
+        //监听性别操作
+        /*form.on('switch(sexDemo)', function(obj){
+            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+        });
+
+        //监听锁定操作
+        form.on('checkbox(lockDemo)', function(obj){
+            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+        });*/
         //监听提交
         form.on('submit(submit)', function(data){
             var fieldList =  table.cache["skyList"];
-            data.field.fieldList = fieldList;
+           // data.field.fieldList = fieldList;
+            var actionData = {configurationPage: data.field,fieldList:fieldList};
             $.ajax({
                 url: data.form.action,
                 type: 'PUT',
                 contentType : 'application/json;charset=utf-8',
                 dataType:"json",
-                data :JSON.stringify(/*data.field*/fieldList),//JSON.stringify({id: 2, name: "李四"})
+                data :JSON.stringify(actionData),//JSON.stringify({id: 2, name: "李四"})
                 success: function(data) {
                     return false;
                 },error : function(data) {
