@@ -42,9 +42,9 @@
     <input type="checkbox" lay-skin="switch" lay-text="显示|隐藏" {{ d.isquery ? 'checked' : '' }}>
 </script>
 <script type="text/html" id="inputtype">
-    <select  lay-verify="required" lay-search="">
-        <option>text</option>
-        <option>checkbox</option>
+    <select  lay-verify="required" lay-search="" lay-filter="inputtype">
+        <option {{ d.inputtype=='text' ? 'selected' : '' }}>text</option>
+        <option >checkbox</option>
         <option>select</option>
         <option>textarea</option>
     </select>
@@ -139,11 +139,11 @@
                 $("[data-field='isedit']").css('display','none');
                 $("[data-field='isquery']").css('display','none');
                 $("[data-field='configurationpageId']").css('display','none');
-             //   $("[data-field='inputtype']").css('display','none');
+                $("[data-field='inputtype']").css('display','none');
             }
         });
 
-       // var tableSelectData;
+        var tableSelectData=null;
         table.on('tool(skyList)', function(obj){
             var data = obj.data;
             var event = obj.event;
@@ -152,8 +152,7 @@
             if($.inArray(event,checkboxEvent)!=-1){
                 eval("obj.update({"+event+":this.firstElementChild.firstElementChild.checked})");
             } else if($.inArray(event,selectEvent)!=-1){
-                layer.msg('ID：'+ data.id + ' 修改');
-              //  tableSelectData={dataObj:obj,};
+                tableSelectData={obj:obj,event:event};
             } else if(obj.event === 'del'){
                 layer.confirm('真的删除行么', function(index){
                     obj.del();
@@ -163,7 +162,15 @@
                 layer.alert('编辑行：<br>'+ JSON.stringify(data))
             }
         });
-
+        //监听下拉框选择
+        form.on('select(inputtype)', function(data){
+            if(tableSelectData==null) return;
+            eval("tableSelectData.obj.update({"+tableSelectData.event+":data.value})");
+            tableSelectData=null;
+            /*console.log(data.elem); //得到select原始DOM对象
+            console.log(data.value); //得到被选中的值
+            console.log(data.othis); //得到美化后的DOM对象*/
+        });
         //监听提交
         form.on('submit(submit)', function(data){
             var fieldList =  table.cache["skyList"];
