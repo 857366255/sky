@@ -14,28 +14,45 @@
 <head>
     <title>编辑</title>
     <link rel="stylesheet" href="${basePath}/UI/test/layuiSky/layui/css/layui.css"  media="all">
+    <style rel="stylesheet">
+        .layui-table-cell {
+            height: 28px;
+            line-height: 28px;
+            padding: 0 15px;
+            position: relative;
+            overflow: visible;//解决:下拉框被覆盖
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
 
-<script type="text/html" id="switchTpl">
-    <!-- 这里的 checked 的状态只是演示 -->
-    <input type="checkbox" name="isquery"  lay-skin="switch" lay-text="女|男" lay-filter="sexDemo" >
+<script type="text/html" id="isshowlist">
+    <input type="checkbox" lay-skin="switch" lay-text="显示|隐藏" {{ d.isshowlist ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="isedit">
+    <input type="checkbox" lay-skin="switch" lay-text="编辑|禁用" {{ d.isedit ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="isquery">
+    <input type="checkbox" lay-skin="switch" lay-text="显示|隐藏" {{ d.isquery ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="isquery">
+    <input type="checkbox" lay-skin="switch" lay-text="显示|隐藏" {{ d.isquery ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="inputtype">
+    <select  lay-verify="required" lay-search="">
+        <option>text</option>
+        <option>checkbox</option>
+        <option>select</option>
+        <option>textarea</option>
+    </select>
 </script>
 
-<script type="text/html" id="checkboxTpl">
-    <!-- 这里的 checked 的状态只是演示 -->
-    <%--<input type="checkbox" name="isshowlist"  title="锁定" lay-filter="lockDemo" checked>--%>
-    <input type="checkbox" name="isshowlist" title="1" checked>
-</script>
 
-<%--<script type="text/html" id="checkboxTpl">
-    <input type="checkbox" name="isshowlist" title="1" checked>
 
-    &lt;%&ndash;<input name="like1[write]" lay-skin="primary" title="写作" checked="" type="checkbox">&ndash;%&gt;
-</script>
-<script type="text/html" id="switchTpl">
-    <input type="checkbox" name="isquery" lay-skin="switch" lay-text="女|男">
-</script>--%>
+
 <div class="layui-row" style="height: 100%">
     <div class="layui-col-xs3">
         <form:form class="layui-form" action="${basePath}/configurationpage/editDetail/edit" method="post" modelAttribute="configurationpage" >
@@ -82,69 +99,61 @@
             ,url: '${basePath}/field/data'
             ,page: false
             ,height: 'full-20'//最大高度-20  full-20
-            , limit:10000
-            //,width: 500
-            ,cellMinWidth: 80
+            ,limit:10000
+            //,skin: 'line' //行边框风格
+            ,even: true //开启隔行背景
+          //  ,size: 'sm' //小尺寸的表格
+           // ,width: 'full'
+            ,cellMinWidth: 50
             ,cols: [[
-                {type:'numbers', fixed: 'left' , rowspan: 2}
+                {type:'numbers', /*fixed: 'left',*/ rowspan: 2,width:50 }
                 ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none' , rowspan: 2}
-                ,{title:'配置页面' ,edit: 'text',width:100 ,rowspan:2}
-                ,{field:'configurationpageId', title:'配置页面id' ,edit: 'text',width:100 , rowspan: 2}
-                ,{field:'tableEn', title:'表名称en' ,edit: 'text',width:100, rowspan: 2}
-                ,{field:'fieldEn', title:'字段名称en' ,edit: 'text',width:100, rowspan: 2}
-                ,{field:'inputtype', title:'输入框类型' ,edit: 'text',width:100, rowspan: 2}
-                ,{field:'name', title:'名称' ,edit: 'text',width:100, rowspan: 2}
+                ,{field:'isshowlist', title:'是否显示列表' ,width:60, rowspan: 2}
+                ,{field:'isedit', title:'是否编辑' ,width:100, rowspan: 2}
+                ,{field:'isquery', title:'是否查询',width:100, rowspan: 2}
+                ,{field:'configurationpageId', title:'配置页面id' ,width:100 , rowspan: 2}
+                ,{field:'tableEn', title:'表名称' ,width:100, rowspan: 2}
+                ,{field:'fieldEn', title:'字段名称' ,width:100, rowspan: 2}
+                ,{field:'inputtype', title:'输入框类型' ,width:100, rowspan: 2}
+                ,{event:'inputtype', title:'输入框类型', templet: '#inputtype',width:100, rowspan: 2}
+                ,{field:'name', title:'名称' ,edit: 'text',width:60, rowspan: 2}
                 ,{align:'center',title:'列表' , colspan: 2}
                 ,{align:'center',title:'编辑' , colspan: 2}
                 ,{align:'center',title:'查询' , colspan: 3}
             ],[
-                {field:'isshowlist', title:'是否显示列表' , templet: '#checkboxTpl',width:100}
-                ,{field:'listsorting', title:'列表排序号' ,edit: 'text',width:100}
-                ,{field:'isedit', title:'是否编辑' ,  edit: 'text',width:100}
-                ,{field:'editsorting', title:'编辑排序号' ,edit: 'text',width:100}
-                ,{field:'isquery', title:'是否查询' ,templet: '#switchTpl', event: 'isquery',width:100}
+                {field:'listsorting', title:'排序号' ,edit: 'text',width:80}
+                ,{event:'isshowlist', title:'是否显示' , templet: '#isshowlist',width:100, align:'center'}
+                ,{field:'editsorting', title:'排序号' ,edit: 'text',width:80}
+                ,{event:'isedit', title:'是否编辑' ,  templet: '#isedit',width:100, align:'center'}
+                ,{field:'querysorting', title:'排序号' ,edit: 'text',width:80}
+                ,{event:'isquery', title:'是否查询' ,templet: '#isquery',width:100, align:'center'}
                 ,{field:'querytype', title:'查询类型' ,edit: 'text',width:100}
-                ,{field:'querysorting', title:'查询排序号' ,edit: 'text',width:100}
-                /*,{field:'sex', title:'性别', width:85, templet: '#switchTpl', unresize: true}
-                ,{field:'lock', title:'是否锁定', width:110, templet: '#checkboxTpl', unresize: true}*/
+
             ]/**/]
             ,where: {
                 id: ${configurationpage.id}
             }
             ,done: function(res, curr, count){
                 $("[data-field='id']").css('display','none');//隐藏列表
+                $("[data-field='isshowlist']").css('display','none');
+                $("[data-field='isedit']").css('display','none');
+                $("[data-field='isquery']").css('display','none');
+                $("[data-field='configurationpageId']").css('display','none');
+             //   $("[data-field='inputtype']").css('display','none');
             }
         });
 
-        //点击加号按钮时，新添一行
-        $("#addTable").click(function(){
-            var oldData =  table.cache["skyList"];
-            var data1={
-                "id": null
-                ,"": null
-                ,"email": null
-                ,"sex": "男"
-                ,"city": "浙江杭州"
-                ,"sign": "君不见，黄河之水天上来，奔流到海不复回。 君不见，高堂明镜悲白发，朝如青丝暮成雪。 人生得意须尽欢，莫使金樽空对月。 天生我材必有用，千金散尽还复来。 烹羊宰牛且为乐，会须一饮三百杯。 岑夫子，丹丘生，将进酒，杯莫停。 与君歌一曲，请君为我倾耳听。(倾耳听 一作：侧耳听) 钟鼓馔玉不足贵，但愿长醉不复醒。(不足贵 一作：何足贵；不复醒 一作：不愿醒/不用醒) 古来圣贤皆寂寞，惟有饮者留其名。(古来 一作：自古；惟 通：唯) 陈王昔时宴平乐，斗酒十千恣欢谑。 主人何为言少钱，径须沽取对君酌。 五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。"
-                ,"experience": "9"
-                ,"ip": "192.168.0.8"
-                ,"logins": "106"
-                ,"joinTime": "2016-10-14"
-                ,"LAY_CHECKED": true
-            };
-            oldData.push(data1);
-            table.reload('skyList',{
-                data : oldData
-                ,url:false
-            });
-        });
-
+       // var tableSelectData;
         table.on('tool(skyList)', function(obj){
             var data = obj.data;
-            if(obj.event === 'isquery'){
-                layer.msg('ID：'+ data.id + ' 的查看操作');
-                obj.update({isquery:this.innerText});
-
+            var event = obj.event;
+            var checkboxEvent = ["isshowlist","isedit","isquery"];
+            var selectEvent = ["inputtype"];
+            if($.inArray(event,checkboxEvent)!=-1){
+                eval("obj.update({"+event+":this.firstElementChild.firstElementChild.checked})");
+            } else if($.inArray(event,selectEvent)!=-1){
+                layer.msg('ID：'+ data.id + ' 修改');
+              //  tableSelectData={dataObj:obj,};
             } else if(obj.event === 'del'){
                 layer.confirm('真的删除行么', function(index){
                     obj.del();
@@ -155,15 +164,6 @@
             }
         });
 
-        //监听性别操作
-        /*form.on('switch(sexDemo)', function(obj){
-            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
-        });
-
-        //监听锁定操作
-        form.on('checkbox(lockDemo)', function(obj){
-            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
-        });*/
         //监听提交
         form.on('submit(submit)', function(data){
             var fieldList =  table.cache["skyList"];
@@ -178,14 +178,12 @@
                 success: function(data) {
                     return false;
                 },error : function(data) {
-                    alert("删除失败");
+                    alert("失败");
                     return false;
                 }
             });
             return false;
         });
-
-
     });
 </script>
 
