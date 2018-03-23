@@ -23,39 +23,25 @@
         <input type="hidden" name="_method" value="PUT" />
     </c:if>
     <div class="layui-form-item">
-        <label class="layui-form-label">名称</label>
+        <%--<label class="layui-form-label">名称</label>
         <div class="layui-input-block">
             <form:input lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input" type="text" path="name"></form:input>
-        </div>
+        </div>--%>
+        <fieldset class="layui-elem-field">
+            <legend>名称</legend>
+            <form:input lay-verify="title" autocomplete="off" placeholder="请输入" type="text" path="name" class="layui-input layui-field-box" ></form:input>
+        </fieldset>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">表名称</label>
-        <div class="layui-input-inline">
-            <form:select items="${databaseTables}" lay-verify="required" itemLabel="tableEn" itemValue="tableEn"  path="tableEn"></form:select>
-            <%--<select name="tableEn" lay-verify="required" lay-search="">
-                <option value="">直接选择或搜索选择</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
-                <option value="5">laytpl</option>
-                <option value="6">upload</option>
-                <option value="7">laydate</option>
-                <option value="8">laypage</option>
-                <option value="9">flow</option>
-                <option value="10">util</option>
-                <option value="11">code</option>
-                <option value="12">tree</option>
-                <option value="13">layedit</option>
-                <option value="14">nav</option>
-                <option value="15">tab</option>
-                <option value="16">table</option>
-                <option value="17">select</option>
-                <option value="18">checkbox</option>
-                <option value="19">switch</option>
-                <option value="20">radio</option>
-            </select>--%>
-        </div>
+        <fieldset class="layui-elem-field">
+            <legend>表名称</legend>
+            <c:if test="${configurationpage.id == null }">
+                <form:select items="${databaseTables}"  lay-verify="required" itemLabel="tableEn" itemValue="tableEn"  path="tableEn"  class="layui-field-box" ></form:select>
+            </c:if>
+            <c:if test="${configurationpage.id != null }">
+                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="${configurationpage.tableEn}" disabled>
+            </c:if>
+        </fieldset>
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">

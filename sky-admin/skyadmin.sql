@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-03-20 17:07:07
+Date: 2018-03-23 15:36:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,33 +24,13 @@ CREATE TABLE `s_configurationpage` (
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `table_en` varchar(255) DEFAULT NULL COMMENT '表名称en',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='配置页面';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='配置页面';
 
 -- ----------------------------
 -- Records of s_configurationpage
 -- ----------------------------
-INSERT INTO `s_configurationpage` VALUES ('1', '2', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('2', 'asd', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('3', '3', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('4', '4', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('6', '6', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('7', '7', 's_field');
-INSERT INTO `s_configurationpage` VALUES ('8', '8', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('9', '9', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('10', '10', '10');
-INSERT INTO `s_configurationpage` VALUES ('11', '11', '11');
-INSERT INTO `s_configurationpage` VALUES ('12', '12', '12');
-INSERT INTO `s_configurationpage` VALUES ('13', '13', '13');
-INSERT INTO `s_configurationpage` VALUES ('14', '14', '14');
-INSERT INTO `s_configurationpage` VALUES ('15', '15', '15');
-INSERT INTO `s_configurationpage` VALUES ('16', '打', '1');
-INSERT INTO `s_configurationpage` VALUES ('17', 'SAD', '3');
-INSERT INTO `s_configurationpage` VALUES ('18', '阿斯顿', '1');
-INSERT INTO `s_configurationpage` VALUES ('19', '为', '1');
-INSERT INTO `s_configurationpage` VALUES ('20', '2', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('21', '3', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('22', '配置页面', 's_configurationpage');
-INSERT INTO `s_configurationpage` VALUES ('23', '3', 's_configurationpage');
+INSERT INTO `s_configurationpage` VALUES ('30', '字段', 's_field');
+INSERT INTO `s_configurationpage` VALUES ('31', '配置页面', 's_configurationpage');
 
 -- ----------------------------
 -- Table structure for s_field
@@ -70,20 +50,27 @@ CREATE TABLE `s_field` (
   `isquery` tinyint(1) DEFAULT NULL COMMENT '是否查询',
   `querytype` varchar(255) DEFAULT NULL COMMENT '查询类型',
   `querysorting` int(11) DEFAULT NULL COMMENT '查询排序号',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `fk_sfield_cnfigurationpageid` (`configurationpage_id`),
+  CONSTRAINT `fk_sfield_cnfigurationpageid` FOREIGN KEY (`configurationpage_id`) REFERENCES `s_configurationpage` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of s_field
 -- ----------------------------
-INSERT INTO `s_field` VALUES ('1', '1', '1a', '1a', '1a', '1', '1', '1', '1', '1a', '1', '1a', '1');
-INSERT INTO `s_field` VALUES ('2', '2', '2a', '2a', '2a', '2', '2', '2', '2', '2a', '2', '2a', '2');
-INSERT INTO `s_field` VALUES ('3', '3', '3a', '3a', '3a', '3', '3', '3', '3', '3a', '3', '3a', '3');
-INSERT INTO `s_field` VALUES ('4', '4', '4a', '4a', '4a', '4', '4', '4', '4', '4a', '4', '4a', '4');
-INSERT INTO `s_field` VALUES ('5', '5', '5a', '5a', '5a', '5', '5', '5', '5', '5a', '5', '5a', '5');
-INSERT INTO `s_field` VALUES ('6', '6', '6a', '6a', '6a', '6', '6', '6', '6', '6a', '6', '6a', '6');
-INSERT INTO `s_field` VALUES ('7', '7', '7a', '7a', '7a', '7', '7', '7', '7', '7a', '7', '7a', '7');
-INSERT INTO `s_field` VALUES ('8', '8', '8a', '8a', '8a', '8', '8', '8', '8', '8a', '8', '8a', '8');
-INSERT INTO `s_field` VALUES ('9', '9', '9a', '9a', '9a', '9', '9', '9', '9', '9a', '9', '9a', '9');
-INSERT INTO `s_field` VALUES ('10', '10', '10a', '10a', '10a', '10', '10', '10', '10', '10a', '10', '10a', '10');
-INSERT INTO `s_field` VALUES ('11', '11', '11a', '11a', '11a', '11', '11', '11', '11', '11a', '11', '11a', '11');
+INSERT INTO `s_field` VALUES ('67', '30', 's_field', 'id', '唯一标识符', '1', '1', '1', '1', 'text', '1', null, '1');
+INSERT INTO `s_field` VALUES ('68', '30', 's_field', 'configurationpage_id', '配置页面id', '1', '2', '1', '2', 'text', '1', null, '2');
+INSERT INTO `s_field` VALUES ('69', '30', 's_field', 'table_en', '表名称en', '1', '3', '1', '3', 'text', '1', null, '3');
+INSERT INTO `s_field` VALUES ('70', '30', 's_field', 'field_en', '字段名称en', '1', '4', '1', '4', 'text', '1', null, '4');
+INSERT INTO `s_field` VALUES ('71', '30', 's_field', 'name', '名称', '1', '5', '1', '5', 'text', '1', null, '5');
+INSERT INTO `s_field` VALUES ('72', '30', 's_field', 'isshowlist', '是否显示列表', '1', '6', '1', '6', 'text', '1', null, '6');
+INSERT INTO `s_field` VALUES ('73', '30', 's_field', 'listsorting', '列表排序号', '1', '7', '1', '7', 'text', '1', null, '7');
+INSERT INTO `s_field` VALUES ('74', '30', 's_field', 'isedit', '是否编辑', '1', '8', '1', '8', 'text', '1', null, '8');
+INSERT INTO `s_field` VALUES ('75', '30', 's_field', 'editsorting', '编辑排序号', '1', '9', '1', '9', 'text', '1', null, '9');
+INSERT INTO `s_field` VALUES ('76', '30', 's_field', 'inputtype', '输入框类型', '1', '10', '1', '10', 'text', '1', null, '10');
+INSERT INTO `s_field` VALUES ('77', '30', 's_field', 'isquery', '是否查询', '1', '11', '1', '11', 'text', '1', null, '11');
+INSERT INTO `s_field` VALUES ('78', '30', 's_field', 'querytype', '查询类型', '1', '12', '1', '12', 'text', '1', null, '12');
+INSERT INTO `s_field` VALUES ('79', '30', 's_field', 'querysorting', '查询排序号', '1', '13', '1', '13', 'text', '1', null, '13');
+INSERT INTO `s_field` VALUES ('80', '31', 's_configurationpage', 'id', '唯一标识符', '1', '1', '1', '1', 'text', '1', null, '1');
+INSERT INTO `s_field` VALUES ('81', '31', 's_configurationpage', 'name', '名称', '1', '2', '1', '2', 'text', '1', null, '2');
+INSERT INTO `s_field` VALUES ('82', '31', 's_configurationpage', 'table_en', '表名称en', '1', '3', '1', '3', 'text', '1', null, '3');

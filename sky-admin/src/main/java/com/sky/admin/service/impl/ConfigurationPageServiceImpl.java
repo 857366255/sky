@@ -1,6 +1,7 @@
 package com.sky.admin.service.impl;
 
 import com.sky.admin.dao.ConfigurationPageDao;
+import com.sky.admin.dao.DatabaseDao;
 import com.sky.admin.dao.FieldDao;
 import com.sky.admin.po.ConfigurationPage;
 import com.sky.admin.po.Field;
@@ -28,7 +29,9 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
     private ConfigurationPageDao configurationPageDao;
     @Autowired
     private FieldDao fieldDao;
-    private Field field = new Field();
+    @Autowired
+    private DatabaseDao databaseDao;
+    //private Field field = new Field();
 
     public Map<String,Object> getParams(Integer limit,Integer  page,ConfigurationPage configurationPage){
         Map<String,Object> params =  new HashMap<String, Object>();
@@ -52,7 +55,23 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
 
     @Transactional
     public Boolean doAdd(ConfigurationPage cp) {
-        return configurationPageDao.doAdd(cp);
+
+        Integer id = configurationPageDao.doAddGetId(cp);
+        System.out.println("id:"+id);
+        System.out.println("cp:"+cp.getId());
+        List<Field> fieldList = databaseDao.getDatabaseField(cp.getTableEn());
+        for(Field field : fieldList){
+            field.setConfigurationpageId(cp.getId());
+            field.setId(null);
+            field.setInputtype("text");
+            field.setIsshowlist(true);
+            field.setIsedit(true);
+            field.setIsquery(true);
+            fieldDao.doAdd(field);
+        }
+        return true;
+
+        //return false;
     }
 
     @Transactional
@@ -71,6 +90,32 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
         }
         System.out.println(cpTemp);*/
         return configurationPageDao.doUpdate(cp);
+    }
+
+    @Transactional
+    public Boolean doUpdateConfigurationPageField(Map<String,Object> map){
+        ConfigurationPage configurationPage = new ConfigurationPage();
+        Map<String,Object> configurationPageMap = (Map<String,Object>)map.get("configurationPage");
+        List<Map<String,Object>> fieldList = (List<Map<String,Object>>)map.get("fieldList");
+        configurationPage.setId(Integer.valueOf(configurationPageMap.get("id").toString()));
+        configurationPage.setTableEn(String.valueOf(configurationPageMap.get("tableEn")));
+        configurationPage.setName(String.valueOf(configurationPageMap.get("name")));
+        if(configurationPageDao.doUpdate(configurationPage)){
+            for(Map<String,Object> map1 : fieldList){
+                Field field = new Field();
+                field.setId(Integer.valueOf(map1.get("id").toString()));
+                field.setName(String.valueOf(map1.get("name")));
+                field.setInputtype(String.valueOf(map1.get("inputtype")));
+                field.setIsedit(Boolean.valueOf(map1.get("isedit").toString()));
+                field.setIsquery(Boolean.valueOf(map1.get("isquery").toString()));
+                field.setIsshowlist(Boolean.valueOf(map1.get("isshowlist").toString()));
+                if(fieldDao.doUpdate(field)){
+                    continue;
+                }
+                return false;
+            }
+        }
+        return false;
     }
 
     /**

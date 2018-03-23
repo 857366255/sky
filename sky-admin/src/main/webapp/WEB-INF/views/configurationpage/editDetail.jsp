@@ -38,59 +38,42 @@
 <script type="text/html" id="isquery">
     <input type="checkbox" lay-skin="switch" lay-text="显示|隐藏" {{ d.isquery ? 'checked' : '' }}>
 </script>
-<script type="text/html" id="isquery">
-    <input type="checkbox" lay-skin="switch" lay-text="显示|隐藏" {{ d.isquery ? 'checked' : '' }}>
-</script>
 <script type="text/html" id="inputtype">
     <select  lay-verify="required" lay-search="" lay-filter="inputtype">
         <option {{ d.inputtype=='text' ? 'selected' : '' }}>text</option>
-        <option >checkbox</option>
-        <option>select</option>
-        <option>textarea</option>
+        <option {{ d.inputtype=='checkbox' ? 'selected' : '' }}>checkbox</option>
+        <option {{ d.inputtype=='select' ? 'selected' : '' }}>select</option>
+        <option {{ d.inputtype=='textarea' ? 'selected' : '' }}>textarea</option>
     </select>
 </script>
 
 
-
-
 <div class="layui-row" style="height: 100%">
     <div class="layui-col-xs3">
-        <form:form class="layui-form" action="${basePath}/configurationpage/editDetail/edit" method="post" modelAttribute="configurationpage" >
-            <c:if test="${configurationpage.id != null }">
-                <form:hidden path="id" />
-                    <%--<input type="hidden" name="_method" value="PUT" />--%>
-            </c:if>
+        <form:form class="layui-form" action="${basePath}/configurationpage/editDetail/edit" method="PUT" modelAttribute="configurationpage" >
+            <form:hidden path="id" />
             <fieldset class="layui-elem-field">
                 <legend>名称</legend>
-                <div class="layui-field-box">
-                    <form:input lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input" type="text" path="name"></form:input>
-                </div>
+                <form:input lay-verify="title" autocomplete="off" placeholder="请输入" type="text" path="name" class="layui-input layui-field-box" ></form:input>
             </fieldset>
-            <fieldset class="layui-elem-field layui-field-title">
+            <fieldset class="layui-elem-field">
                 <legend>表名称</legend>
-                <div class="layui-field-box">
-                    <form:select items="${databaseTables}" lay-verify="required" itemLabel="tableEn" itemValue="tableEn"  path="tableEn"></form:select>
-                </div>
+                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="${configurationpage.tableEn}" disabled>
             </fieldset>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button id="submit" class="btn btn-primary"  lay-filter="submit" style="display: none;" lay-submit>立即提交</button><%----%>
-                        <%--<button class="layui-btn layui-btn-primary" lay-submit lay-filter="demo1">重置</button>--%>
                 </div>
             </div>
         </form:form>
 
     </div>
     <div class="layui-col-xs*">
-        <%--<div class="layui-btn-group demoTable">
-            <button class="layui-btn" data-type="isAll" id="addTable">添加</button>
-        </div--%>
         <table id="skyList" lay-filter="skyList"></table>
     </div>
 </div>
 
 <script src="${basePath}/UI/test/layuiSky/layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use(['table', 'layedit', 'laydate','form'], function(){
         var table = layui.table, $ = layui.jquery,layer = layui.layer,form = layui.form;
@@ -103,20 +86,21 @@
             //,skin: 'line' //行边框风格
             ,even: true //开启隔行背景
           //  ,size: 'sm' //小尺寸的表格
-           // ,width: 'full'
+           // ,width: 500
             ,cellMinWidth: 50
+            , initSort: {field:'id', type:'desc'}//初始排序
             ,cols: [[
-                {type:'numbers', /*fixed: 'left',*/ rowspan: 2,width:50 }
+                {type:'numbers', fixed: 'left', rowspan: 2,width:50 }
                 ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none' , rowspan: 2}
                 ,{field:'isshowlist', title:'是否显示列表' ,width:60, rowspan: 2}
                 ,{field:'isedit', title:'是否编辑' ,width:100, rowspan: 2}
                 ,{field:'isquery', title:'是否查询',width:100, rowspan: 2}
-                ,{field:'configurationpageId', title:'配置页面id' ,width:100 , rowspan: 2}
-                ,{field:'tableEn', title:'表名称' ,width:100, rowspan: 2}
-                ,{field:'fieldEn', title:'字段名称' ,width:100, rowspan: 2}
                 ,{field:'inputtype', title:'输入框类型' ,width:100, rowspan: 2}
-                ,{event:'inputtype', title:'输入框类型', templet: '#inputtype',width:100, rowspan: 2}
-                ,{field:'name', title:'名称' ,edit: 'text',width:60, rowspan: 2}
+              //  ,{field:'configurationpageId', title:'配置页面id' ,width:100 , rowspan: 2}
+               // ,{field:'tableEn', title:'表名称' ,width:100, rowspan: 2}
+                ,{field:'fieldEn', title:'字段名称' ,width:150, rowspan: 2}
+                ,{event:'inputtype', title:'输入框类型', templet: '#inputtype',width:130, rowspan: 2}
+                ,{field:'name', title:'名称' ,edit: 'text',width:130, rowspan: 2}
                 ,{align:'center',title:'列表' , colspan: 2}
                 ,{align:'center',title:'编辑' , colspan: 2}
                 ,{align:'center',title:'查询' , colspan: 3}
@@ -138,7 +122,7 @@
                 $("[data-field='isshowlist']").css('display','none');
                 $("[data-field='isedit']").css('display','none');
                 $("[data-field='isquery']").css('display','none');
-                $("[data-field='configurationpageId']").css('display','none');
+                //$("[data-field='configurationpageId']").css('display','none');
                 $("[data-field='inputtype']").css('display','none');
             }
         });
@@ -174,7 +158,6 @@
         //监听提交
         form.on('submit(submit)', function(data){
             var fieldList =  table.cache["skyList"];
-           // data.field.fieldList = fieldList;
             var actionData = {configurationPage: data.field,fieldList:fieldList};
             $.ajax({
                 url: data.form.action,
@@ -183,7 +166,8 @@
                 dataType:"json",
                 data :JSON.stringify(actionData),//JSON.stringify({id: 2, name: "李四"})
                 success: function(data) {
-                    return false;
+                    layer.msg('保存成功');
+                    return true;
                 },error : function(data) {
                     alert("失败");
                     return false;

@@ -100,6 +100,7 @@ public class ConfigurationPageController {
     @RequestMapping(value = "/editDetail/edit",method= RequestMethod.PUT, produces="application/json;charset=utf-8;")
     @ResponseBody
     public Map<String,Object> doEditDetailPUT(@RequestBody Map<String,Object> lsitData){
+        configurationPageService.doUpdateConfigurationPageField(lsitData);
         System.out.println("lsitData:"+lsitData);
         return new HashMap<String, Object>();
     }

@@ -46,6 +46,20 @@
 
         </trim>
     </insert>
+    <!--增加 切返回id-->
+    <insert id="doAddGetId" useGeneratedKeys="true" keyProperty="id" parameterType="com.sky.admin.po.ConfigurationPage">
+        INSERT INTO <include refid="tableEn" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="tableEn != null">table_en,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="tableEn != null">#{tableEn},</if>
+
+        </trim>
+    </insert>
 
     <!--更新-->
     <update id="doUpdate" parameterType="com.sky.admin.vo.ConfigurationPage">

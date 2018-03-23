@@ -11,6 +11,21 @@
     <select id="getDatabaseTable"  resultMap="DatabaseResultMap">
         SELECT * FROM information_schema.tables WHERE table_schema=DATABASE()
     </select>
+    <!--映射实体类-->
+    <resultMap id="FieldDatabaseResultMap" type="com.sky.admin.po.Field">
+        <id property="id" column="id"/>
+        <result property="configurationpageId" column="configurationpage_id"/>
+        <result property="tableEn" column="table_name"/>
+        <result property="fieldEn" column="column_name"/>
+        <result property="name" column="column_comment"/>
+        <result property="listsorting" column="ordinal_position"/>
+        <result property="editsorting" column="ordinal_position"/>
+        <result property="querysorting" column="ordinal_position"/>
+
+    </resultMap>
+    <select id="getDatabaseField"  resultMap="FieldDatabaseResultMap">
+        SELECT * FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name=#{tableEn}
+    </select>
 
 
 </mapper>

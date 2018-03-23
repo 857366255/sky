@@ -38,5 +38,56 @@
         SELECT count(1) FROM <include refid="tableEn" />
     </select>
 
+    <!--增加-->
+    <insert id="doAdd" keyProperty="id" parameterType="com.sky.admin.po.Field">
+        INSERT INTO <include refid="tableEn" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="configurationpageId != null">configurationpage_id,</if>
+            <if test="tableEn != null">table_en,</if>
+            <if test="fieldEn != null">field_en,</if>
+            <if test="name != null">name,</if>
+            <if test="isshowlist != null">isshowlist,</if>
+            <if test="listsorting != null">listsorting,</if>
+            <if test="isedit != null">isedit,</if>
+            <if test="editsorting != null">editsorting,</if>
+            <if test="inputtype != null">inputtype,</if>
+            <if test="isquery != null">isquery,</if>
+            <if test="querytype != null">querytype,</if>
+            <if test="querysorting != null">querysorting,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="configurationpageId != null">#{configurationpageId},</if>
+            <if test="tableEn != null">#{tableEn},</if>
+            <if test="fieldEn != null">#{fieldEn},</if>
+            <if test="name != null">#{name},</if>
+            <if test="isshowlist != null">#{isshowlist},</if>
+            <if test="listsorting != null">#{listsorting},</if>
+            <if test="isedit != null">#{isedit},</if>
+            <if test="editsorting != null">#{editsorting},</if>
+            <if test="inputtype != null">#{inputtype},</if>
+            <if test="isquery != null">#{isquery},</if>
+            <if test="querytype != null">#{querytype},</if>
+            <if test="querysorting != null">#{querysorting},</if>
+        </trim>
+    </insert>
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.admin.po.Field">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name=#{name},</if>
+            <if test="isshowlist != null">isshowlist=#{isshowlist},</if>
+            <if test="listsorting != null">listsorting=#{listsorting},</if>
+            <if test="isedit != null">isedit=#{isedit},</if>
+            <if test="editsorting != null">editsorting=#{editsorting},</if>
+            <if test="inputtype != null">inputtype=#{inputtype},</if>
+            <if test="isquery != null">isquery=#{isquery},</if>
+            <if test="querytype != null">querytype=#{querytype},</if>
+            <if test="querysorting != null">querysorting=#{querysorting},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+
 
 </mapper>

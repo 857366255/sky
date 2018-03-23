@@ -1,6 +1,7 @@
 package com.sky.admin.dao;
 
 import com.sky.admin.po.DatabaseTable;
+import com.sky.admin.po.Field;
 
 import java.util.List;
 
@@ -9,4 +10,5 @@ import java.util.List;
  */
 public interface DatabaseDao {
     List<DatabaseTable> getDatabaseTable();
+    List<Field> getDatabaseField(String tableEn);
 }
