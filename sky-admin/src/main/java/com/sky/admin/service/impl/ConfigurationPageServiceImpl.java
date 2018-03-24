@@ -10,6 +10,7 @@ import com.sky.admin.vo.EditField;
 import com.sky.admin.vo.Limit;
 import com.sky.admin.vo.ListField;
 import com.sky.admin.vo.QueryField;
+import com.sky.tool.Conversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -93,28 +94,36 @@ public class ConfigurationPageServiceImpl implements ConfigurationPageService {
     }
 
     @Transactional
-    public Boolean doUpdateConfigurationPageField(Map<String,Object> map){
+    public Boolean doUpdateConfigurationPage(Map<String,Object> map){
         ConfigurationPage configurationPage = new ConfigurationPage();
         Map<String,Object> configurationPageMap = (Map<String,Object>)map.get("configurationPage");
         List<Map<String,Object>> fieldList = (List<Map<String,Object>>)map.get("fieldList");
-        configurationPage.setId(Integer.valueOf(configurationPageMap.get("id").toString()));
-        configurationPage.setTableEn(String.valueOf(configurationPageMap.get("tableEn")));
-        configurationPage.setName(String.valueOf(configurationPageMap.get("name")));
+        configurationPage.setId(Conversion.valueOfInteger(configurationPageMap.get("id")));
+        configurationPage.setTableEn(Conversion.valueOfString(configurationPageMap.get("tableEn")));
+        configurationPage.setName(Conversion.valueOfString(configurationPageMap.get("name")));
         if(configurationPageDao.doUpdate(configurationPage)){
             for(Map<String,Object> map1 : fieldList){
                 Field field = new Field();
-                field.setId(Integer.valueOf(map1.get("id").toString()));
-                field.setName(String.valueOf(map1.get("name")));
-                field.setInputtype(String.valueOf(map1.get("inputtype")));
-                field.setIsedit(Boolean.valueOf(map1.get("isedit").toString()));
-                field.setIsquery(Boolean.valueOf(map1.get("isquery").toString()));
-                field.setIsshowlist(Boolean.valueOf(map1.get("isshowlist").toString()));
+                field.setId(Conversion.valueOfInteger(map1.get("id")));
+                field.setName(Conversion.valueOfString(map1.get("name")));
+                field.setInputtype(Conversion.valueOfString(map1.get("inputtype")));
+                field.setIsedit(Conversion.valueOfBoolean(map1.get("isedit")));
+                field.setIsquery(Conversion.valueOfBoolean(map1.get("isquery")));
+                field.setIsshowlist(Conversion.valueOfBoolean(map1.get("isshowlist")));
                 if(fieldDao.doUpdate(field)){
                     continue;
                 }
                 return false;
             }
         }
+        return false;
+    }
+
+    @Transactional
+    public Boolean doDeleteConfigurationPage(Integer id){
+       if(fieldDao.doDeleteBatchConfigurationpageId(id)){
+           return configurationPageDao.doDelete(id);
+       }
         return false;
     }
 

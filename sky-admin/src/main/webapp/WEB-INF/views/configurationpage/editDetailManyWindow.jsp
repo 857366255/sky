@@ -24,7 +24,7 @@
         }
     </style>
 </head>
-<body>
+<body  class="layui-layout-body">
 
 <script type="text/html" id="isshowlist">
     <input type="checkbox" lay-skin="switch" lay-text="显示|隐藏" {{ d.isshowlist ? 'checked' : '' }}>
@@ -46,46 +46,63 @@
 
 
 <div class="layui-row" style="height: 100%">
-    <div class="layui-col-xs3">
-        <form:form class="layui-form" action="${basePath}/configurationpage/editDetail/edit" method="PUT" modelAttribute="configurationpage" >
-            <form:hidden path="id" />
-            <fieldset class="layui-elem-field">
-                <legend>名称</legend>
-                <form:input lay-verify="title" autocomplete="off" placeholder="请输入" type="text" path="name" class="layui-input layui-field-box" ></form:input>
-            </fieldset>
-            <fieldset class="layui-elem-field">
-                <legend>表名称</legend>
-                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="${configurationpage.tableEn}" disabled>
-            </fieldset>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button id="submit" class="btn btn-primary"  lay-filter="submit" style="display: none;" lay-submit>立即提交</button><%----%>
-                </div>
-            </div>
-        </form:form>
 
-    </div>
+
     <div class="layui-col-xs*">
-        <table id="skyList" lay-filter="skyList"></table>
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">网站设置</li>
+                <li>用户管理</li>
+                <li>权限分配</li>
+                <li>商品管理</li>
+                <li>订单管理</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <form:form class="layui-form" action="${basePath}/configurationpage/editDetail/edit" method="PUT" modelAttribute="configurationpage" >
+                        <form:hidden path="id" />
+                        <fieldset class="layui-elem-field">
+                            <legend>名称</legend>
+                            <form:input lay-verify="title" autocomplete="off" placeholder="请输入" type="text" path="name" class="layui-input layui-field-box" ></form:input>
+                        </fieldset>
+                        <fieldset class="layui-elem-field">
+                            <legend>表名称</legend>
+                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="${configurationpage.tableEn}" disabled>
+                        </fieldset>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button id="submit" class="btn btn-primary"  lay-filter="submit" style="display: none;" lay-submit>立即提交</button><%----%>
+                            </div>
+                        </div>
+                    </form:form>
+                </div>
+                <div class="layui-tab-item">
+                    <table id="skyList" lay-filter="skyList"></table>
+                </div>
+                <div class="layui-tab-item">内容3</div>
+                <div class="layui-tab-item">内容4</div>
+                <div class="layui-tab-item">内容5</div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script src="${basePath}/UI/test/layuiSky/layui/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(['table', 'layedit', 'laydate','form'], function(){
-        var table = layui.table, $ = layui.jquery,layer = layui.layer,form = layui.form;
+    layui.use(['table', 'layedit', 'laydate','form','element'], function(){
+        var table = layui.table, $ = layui.jquery,layer = layui.layer,form = layui.form,element = layui.element;
         table.render({
             elem: '#skyList'
             ,url: '${basePath}/field/data'
             ,page: false
-            ,height: 'full-20'//最大高度-20  full-20
+            ,height: 'full-110'//最大高度-20  full-20
             ,limit:10000
             //,skin: 'line' //行边框风格
             ,even: true //开启隔行背景
           //  ,size: 'sm' //小尺寸的表格
            // ,width: 500
             ,cellMinWidth: 50
-            , initSort: {field:'id', type:'desc'}//初始排序
+            ,initSort: {field:'id', type:'desc'}//初始排序
             ,cols: [[
                 {type:'numbers', fixed: 'left', rowspan: 2,width:50 }
                 ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none' , rowspan: 2}

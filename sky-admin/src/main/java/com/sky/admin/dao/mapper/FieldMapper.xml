@@ -87,6 +87,10 @@
         </trim>
         WHERE id=#{id}
     </update>
+    <!--删除-->
+    <delete id="doDeleteBatchConfigurationpageId" parameterType="java.lang.Integer">
+        DELETE FROM <include refid="tableEn" /> WHERE configurationpage_id= #{configurationpageId}
+    </delete>
 
 
 

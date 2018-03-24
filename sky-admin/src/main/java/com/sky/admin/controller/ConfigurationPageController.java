@@ -71,8 +71,8 @@ public class ConfigurationPageController {
     }
     @RequestMapping(value={"del/{id}"},method=RequestMethod.DELETE)
     @ResponseBody
-    public Boolean delete(@PathVariable Integer id){
-        if(configurationPageService.doDelete(id)){
+    public Boolean doDelete(@PathVariable Integer id){
+        if(configurationPageService.doDeleteConfigurationPage(id)){
             System.out.println("删除成功");
             return true;
         }else{
@@ -97,10 +97,17 @@ public class ConfigurationPageController {
         model.addAttribute("databaseTables",databaseService.getDatabaseTable());
         return  BASIC_PATH+"/editDetail";
     }
+    @RequestMapping(value = "/editDetailManyWindow/{id}",method= RequestMethod.GET)
+    public String goEditDetailManyWindow(Model model,@PathVariable Integer id){
+        model.addAttribute("configurationpage",configurationPageService.findById(id));
+        model.addAttribute("databaseTables",databaseService.getDatabaseTable());
+        return  BASIC_PATH+"/editDetailManyWindow";
+    }
+
     @RequestMapping(value = "/editDetail/edit",method= RequestMethod.PUT, produces="application/json;charset=utf-8;")
     @ResponseBody
     public Map<String,Object> doEditDetailPUT(@RequestBody Map<String,Object> lsitData){
-        configurationPageService.doUpdateConfigurationPageField(lsitData);
+        configurationPageService.doUpdateConfigurationPage(lsitData);
         System.out.println("lsitData:"+lsitData);
         return new HashMap<String, Object>();
     }

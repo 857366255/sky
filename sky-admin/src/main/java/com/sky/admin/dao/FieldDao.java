@@ -16,4 +16,5 @@ import java.util.List;
 public interface FieldDao extends BaseDao<Integer ,Field> {
     List<Field> findData(@Param("limit")Limit limit, @Param("field")Field field);
     Integer countData(@Param("field")Field field);
+    Boolean doDeleteBatchConfigurationpageId(Integer configurationpageId);
 }

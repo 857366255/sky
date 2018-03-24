@@ -19,5 +19,6 @@ public interface ConfigurationPageService {
     Boolean doAdd(ConfigurationPage cp);
     Boolean doDelete(Integer coding);
     Boolean doUpdate(ConfigurationPage cp);
-    Boolean doUpdateConfigurationPageField(Map<String,Object> map);
+    Boolean doUpdateConfigurationPage(Map<String,Object> map);
+    Boolean doDeleteConfigurationPage(Integer id);
 }

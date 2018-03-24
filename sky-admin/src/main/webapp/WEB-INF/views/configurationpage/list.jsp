@@ -17,6 +17,7 @@
 </head>
 <body style="height: 100%;">
 <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="editDetailManyWindow">编辑明细多窗口</a>
     <a class="layui-btn layui-btn-xs" lay-event="editDetail">编辑明细</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
@@ -91,7 +92,7 @@
             } else if(obj.event === 'editDetail'){
                 layer.open({
                     type: 2,
-                    title: '编辑明细'+data.name,
+                    title: '编辑明细:'+data.name,
                     shade: 0,//遮罩shade: [0.8, '#393D49']
                     maxmin: true,//放大和缩小
                     tipsMore: true,//是否允许多个tips
@@ -107,6 +108,31 @@
                     },btn2: function(index, layero){
                         layer.close(index);//关闭
                     }
+                });
+            } else if(obj.event === 'editDetailManyWindow'){
+                layer.open({
+                    type: 2,
+                    title: '编辑明细多窗口:'+data.name,
+                    shade: 0,//遮罩shade: [0.8, '#393D49']
+                    maxmin: true,//放大和缩小
+                    tipsMore: true,//是否允许多个tips
+                    area: ['60%', '60%'],
+                    content: "${basePath}/configurationpage/editDetailManyWindow/"+data.id//iframe的url
+                    ,end:function(layero, index){//销毁后触发的回调
+                        reload('skyList');//刷新数据
+                    }
+                    ,btn: ['保存', '取消'] //可以无限个按钮
+                    ,btn1: function(index, layero){
+                        window.frames["layui-layer-iframe"+index].document.getElementById("submit").click();//执行弹出窗口里的保存按钮
+                        //layer.close(index);//关闭
+                    },btn2: function(index, layero){
+                        layer.close(index);//关闭
+                    },success: function(layero,index){
+                        //在回调方法中的第2个参数“index”表示的是当前弹窗的索引。
+                        //通过layer.full方法将窗口放大。
+                        layer.full(index);
+                    }
+
                 });
             }
         });
