@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.production.dao.DeviceCapacityDetailDao">
+    <sql id="showField" > id,devucetypeid,sectionid,processid,capacity </sql>
+    <sql id="tableEn" > t_devicecapacitydetail </sql>
+    <!--映射实体类-->
+    <resultMap id="ResultMap" type="com.sky.production.po.DeviceCapacityDetail">
+        <id property="id" column="id"/>
+        <result property="devucetypeid" column="devucetypeid"/>
+        <result property="sectionid" column="sectionid"/>
+        <result property="processid" column="processid"/>
+        <result property="capacity" column="capacity"/>
+    </resultMap>
+    <!--查询全部数据-->
+    <select id="findAll" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+    </select>
+    <!--查询-->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE id=#{id}
+    </select>
+
+    <!--增加-->
+    <insert id="doAdd" keyProperty="id" parameterType="com.sky.production.po.DeviceCapacityDetail">
+        INSERT INTO <include refid="tableEn" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="devucetypeid != null">devucetypeid,</if>
+            <if test="sectionid != null">sectionid,</if>
+            <if test="processid != null">processid,</if>
+            <if test="capacity != null">capacity,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="devucetypeid != null">#{devucetypeid},</if>
+            <if test="sectionid != null">#{sectionid},</if>
+            <if test="processid != null">#{processid},</if>
+            <if test="capacity != null">#{capacity},</if>
+        </trim>
+    </insert>
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.production.po.DeviceCapacityDetail">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="devucetypeid != null">devucetypeid=#{devucetypeid},</if>
+            <if test="sectionid != null">sectionid=#{sectionid},</if>
+            <if test="processid != null">processid=#{processid},</if>
+            <if test="capacity != null">capacity=#{capacity},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+    <!--删除-->
+    <delete id="doDelete" parameterType="java.lang.Integer">
+        DELETE FROM <include refid="tableEn" /> WHERE id= #{id}
+    </delete>
+
+</mapper>

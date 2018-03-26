@@ -14,6 +14,7 @@
     <module>test-web</module>
     <module>fitness</module>
     <module>sky-layui</module>
+      <module>sky-production-schedule</module>
   </modules>
   <packaging>pom</packaging>
 

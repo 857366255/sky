@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.production.dao.ProcessFlowDao">
+    <sql id="showField" > id,suppliesid,fromtype,fromid,totype,toid </sql>
+    <sql id="tableEn" > t_processflow </sql>
+    <!--映射实体类-->
+    <resultMap id="ResultMap" type="com.sky.production.po.ProcessFlow">
+        <id property="id" column="id"/>
+        <result property="suppliesid" column="suppliesid"/>
+        <result property="fromtype" column="fromtype"/>
+        <result property="fromid" column="fromid"/>
+        <result property="totype" column="totype"/>
+        <result property="toid" column="toid"/>
+    </resultMap>
+    <!--查询全部数据-->
+    <select id="findAll" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+    </select>
+    <!--查询-->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE id=#{id}
+    </select>
+
+    <!--增加-->
+    <insert id="doAdd" keyProperty="id" parameterType="com.sky.production.po.ProcessFlow">
+        INSERT INTO <include refid="tableEn" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppliesid != null">suppliesid,</if>
+            <if test="fromtype != null">fromtype,</if>
+            <if test="fromid != null">fromid,</if>
+            <if test="totype != null">totype,</if>
+            <if test="toid != null">toid,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppliesid != null">#{suppliesid},</if>
+            <if test="fromtype != null">#{fromtype},</if>
+            <if test="fromid != null">#{fromid},</if>
+            <if test="totype != null">#{totype},</if>
+            <if test="toid != null">#{toid},</if>
+        </trim>
+    </insert>
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.production.po.ProcessFlow">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="suppliesid != null">suppliesid=#{suppliesid},</if>
+            <if test="fromtype != null">fromtype=#{fromtype},</if>
+            <if test="fromid != null">fromid=#{fromid},</if>
+            <if test="totype != null">totype=#{totype},</if>
+            <if test="toid != null">toid=#{toid},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+    <!--删除-->
+    <delete id="doDelete" parameterType="java.lang.Integer">
+        DELETE FROM <include refid="tableEn" /> WHERE id= #{id}
+    </delete>
+
+</mapper>

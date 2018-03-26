@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sky-production-schedule:war">
+    <output-path>$PROJECT_DIR$/sky-production-schedule/target</output-path>
+    <root id="archive" name="sky-production-schedule-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="sky-production-schedule:war exploded" />
+    </root>
+  </artifact>
+</component>

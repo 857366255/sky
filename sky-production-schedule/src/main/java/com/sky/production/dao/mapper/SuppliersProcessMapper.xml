@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.production.dao.SuppliersProcessDao">
+    <sql id="showField" > id,suppliersid,sectionid,processid </sql>
+    <sql id="tableEn" > t_suppliersprocess </sql>
+    <!--映射实体类-->
+    <resultMap id="ResultMap" type="com.sky.production.po.SuppliersProcess">
+        <id property="id" column="id"/>
+        <result property="suppliersid" column="suppliersid"/>
+        <result property="sectionid" column="sectionid"/>
+        <result property="processid" column="processid"/>
+    </resultMap>
+    <!--查询全部数据-->
+    <select id="findAll" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+    </select>
+    <!--查询-->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE id=#{id}
+    </select>
+
+    <!--增加-->
+    <insert id="doAdd" keyProperty="id" parameterType="com.sky.production.po.SuppliersProcess">
+        INSERT INTO <include refid="tableEn" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppliersid != null">suppliersid,</if>
+            <if test="sectionid != null">sectionid,</if>
+            <if test="processid != null">processid,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppliersid != null">#{suppliersid},</if>
+            <if test="sectionid != null">#{sectionid},</if>
+            <if test="processid != null">#{processid},</if>
+        </trim>
+    </insert>
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.production.po.SuppliersProcess">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="suppliersid != null">suppliersid=#{suppliersid},</if>
+            <if test="sectionid != null">sectionid=#{sectionid},</if>
+            <if test="processid != null">processid=#{processid},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+    <!--删除-->
+    <delete id="doDelete" parameterType="java.lang.Integer">
+        DELETE FROM <include refid="tableEn" /> WHERE id= #{id}
+    </delete>
+
+</mapper>

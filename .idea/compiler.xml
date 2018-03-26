@@ -11,6 +11,7 @@
         <module name="sky-common" />
         <module name="sky-layui" />
         <module name="sky-page" />
+        <module name="sky-production-schedule" />
         <module name="sky-shiro" />
         <module name="sky-web" />
         <module name="test-web" />
@@ -28,6 +29,7 @@
       <module name="sky-members" target="1.5" />
       <module name="sky-mybatis" target="1.5" />
       <module name="sky-page" target="1.5" />
+      <module name="sky-production-schedule" target="1.5" />
       <module name="sky-server" target="1.5" />
       <module name="sky-shiro" target="1.5" />
       <module name="sky-test" target="1.5" />
