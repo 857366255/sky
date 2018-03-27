@@ -7,6 +7,10 @@ import java.util.Map;
 /**
  * Created by wz on 2018/3/27.
  */
-public interface DevicetypeestService {
+public interface DevicetypeService {
     Map<String,Object> getParams(Integer limit, Integer  page, DeviceType deviceType);
+    Boolean doAdd(DeviceType deviceType);
+    DeviceType findById(Integer id);
+    Boolean doUpdate(DeviceType deviceType);
+    Boolean doDelete(Integer id);
 }

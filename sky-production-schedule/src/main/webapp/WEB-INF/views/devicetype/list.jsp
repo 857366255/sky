@@ -30,7 +30,7 @@
 </div>
 
 <div class="layui-row">
-    <div class="layui-col-xs3">
+    <div class="layui-col-xs4">
         <fieldset class="layui-elem-field">
             <legend>设备类型</legend>
             <div class="layui-field-box">
@@ -47,7 +47,7 @@
         </fieldset>
 
     </div>
-
+</div>
 <script src="${basePath}/UI/layuiSky/layui/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['table','layer','form'], function(){
@@ -135,9 +135,9 @@
             table.render({
                 elem: '#devicecapacitydetail'
                 ,url: '${basePath}/${typePath}/data'
-                ,page: true
+                //,page: true
                 ,height: 'full-130'//最大高度-20  full-20
-                , limit:10
+                , limit:1000
                 //,width: 300
                 ,cellMinWidth: 40
                 ,cols: [[
@@ -165,10 +165,10 @@
                 ,cellMinWidth: 40
                 ,cols: [[
                     {type:'numbers', fixed: 'left'}
-                    ,{templet:"#radioTpl" , fixed: 'left',width:55}
+                    ,{templet:"#radioTpl" , fixed: 'left',width:70}
                     ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none'}
                     ,{field:'name', title:'名称'}
-                    // ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth:200}
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth:200}
                 ]]
                 ,done: function(res, curr, count){
                     $("[data-field='id']").css('display','none');//隐藏列表
