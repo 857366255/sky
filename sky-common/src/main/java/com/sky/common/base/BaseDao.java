@@ -1,5 +1,8 @@
 package com.sky.common.base;
 
+import com.sky.admin.vo.Limit;
+import org.apache.ibatis.annotations.Param;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -55,5 +58,20 @@ public interface BaseDao<K,V> {
     public List<V> findAll();
 
     public List<V> findByCondition(V vo);
+
+    /**
+     * 实现数据分页查询
+     * @param limit
+     * @param vo
+     * @return
+     */
+    public List<V> findData(@Param("limit")Limit limit, @Param("configurationPage")V vo);
+
+    /**
+     * 查询数据数量
+     * @param vo
+     * @return
+     */
+    public Integer countData(@Param("configurationPage")V vo);
 
 }

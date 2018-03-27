@@ -52,8 +52,18 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item"><a data-url="${basePath}/production/list">配置页面</a></li>
-                <li class="layui-nav-item"><a data-url="${basePath}/TestWeAdmin/list4">云市场</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/devicetype/list">设备类型(修改中)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/section/list">工段(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/process/list">工序(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/supplies/list">物资(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/bom/list">BOM(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/bomdetail/list">Bom明细(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/suppliersprocess/list">产品工艺(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/devicecapacitydetail/list">设备产能明细(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/processflow/list">工艺流程(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/production/list">生产单(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/personnel/list">人员(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/schedule/list">日程安排(未完成)</a></li>
             </ul>
         </div>
     </div>
