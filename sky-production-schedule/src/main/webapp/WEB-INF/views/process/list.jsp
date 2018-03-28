@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
-<c:set var="typePath" value="section"/>
+<c:set var="typePath" value="process"/>
 <html>
 
 <head>
@@ -29,31 +29,19 @@
     <button class="layui-btn" data-type="isAll" id="add">新增</button>--%>
 </div>
 
-<div class="layui-row">
-    <div class="layui-col-xs4">
-        <fieldset class="layui-elem-field">
-            <legend>工段</legend>
-            <div class="layui-field-box">
-                <table id="table_one" lay-filter="table_one"></table>
-            </div>
-        </fieldset>
-    </div>
-    <div class="layui-col-xs*">
-        <fieldset class="layui-elem-field">
-            <legend>工序</legend>
-            <div class="layui-field-box">
-                <table id="table_two" lay-filter="table_two"></table>
-            </div>
-        </fieldset>
-
-    </div>
+<div>
+    <fieldset class="layui-elem-field">
+        <legend>工序</legend>
+        <div class="layui-field-box">
+            <table id="table_one" lay-filter="table_one"></table>
+        </div>
+    </fieldset>
 </div>
 <script src="${basePath}/UI/layuiSky/layui/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['table','layer','form'], function(){
         var table = layui.table, $ = layui.jquery,layer = layui.layer,form = layui.form;
         renderOne();
-        renderTwo();
         //监听工具条
         table.on('tool(table_one)', function(obj){
             var data = obj.data;
@@ -91,7 +79,6 @@
         //单选事件
         form.on("radio(radio)",function(obj) {
             layer.tips(this.value+" "+this.name+":"+obj.elem.checked,obj.othis);
-            renderTwo();
         });
 
         //点击加号按钮时
@@ -131,28 +118,6 @@
         function reload(listId){
             table.reload(listId);
         }
-        function renderTwo() {
-            table.render({
-                elem: '#table_two'
-                ,url: '${basePath}/${typePath}/data'
-                //,page: true
-                ,height: 'full-130'//最大高度-20  full-20
-                , limit:1000
-                //,width: 300
-                ,cellMinWidth: 40
-                ,cols: [[
-                    {type:'numbers', fixed: 'left'}
-                    //,{templet:"#radioTpl" , fixed: 'left',width:55}
-                    ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none'}
-                    ,{field:'name', title:'名称'}
-                    // ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth:200}
-                ]]
-                ,done: function(res, curr, count){
-                    $("[data-field='id']").css('display','none');//隐藏列表
-                }
-            });
-        }
-
 
         function renderOne() {
             table.render({
@@ -165,9 +130,10 @@
                 ,cellMinWidth: 40
                 ,cols: [[
                     {type:'numbers', fixed: 'left'}
-                    ,{templet:"#radioTpl" , fixed: 'left',width:70}
+                   // ,{templet:"#radioTpl" , fixed: 'left',width:70}
                     ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none'}
-                    ,{field:'name', title:'名称'}
+                    ,{field:'sectionname', title:'工段'}
+                    ,{field:'name', title:'工序'}
                     ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth:200}
                 ]]
                 ,done: function(res, curr, count){

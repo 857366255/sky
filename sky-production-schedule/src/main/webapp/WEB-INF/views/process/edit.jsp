@@ -25,7 +25,12 @@
     </c:if>
     <div class="layui-form-item">
         <fieldset class="layui-elem-field">
-            <legend>名称</legend>
+            <legend>工段</legend>
+            <form:select items="${sections}"  lay-verify="required" itemLabel="name" itemValue="id"  path="sectionid"  class="layui-field-box" ></form:select>
+            <%--<form:select items="${databaseTables}"  lay-verify="required" itemLabel="tableEn" itemValue="tableEn"  path="tableEn"  class="layui-field-box" ></form:select>--%>
+        </fieldset>
+        <fieldset class="layui-elem-field">
+            <legend>工序</legend>
             <form:input lay-verify="title" autocomplete="off" placeholder="请输入" type="text" path="name" class="layui-input layui-field-box" ></form:input>
         </fieldset>
     </div>
