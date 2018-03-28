@@ -2,12 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sky.production.dao.ProcessDao">
-    <sql id="showField" > id,name </sql>
+    <sql id="showField" > id,name,sectionid </sql>
     <sql id="tableEn" > t_process </sql>
     <!--映射实体类-->
     <resultMap id="ResultMap" type="com.sky.production.po.Process">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
+        <result property="sectionid" column="sectionid"/>
+        <association property="section" column="sectionid" select="com.sky.production.dao.SectionDao.findById">
+            <result column="name" property="name"/>
+        </association>
     </resultMap>
     <!--查询全部数据-->
     <select id="findAll" resultMap="ResultMap">
@@ -18,15 +22,26 @@
         SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE id=#{id}
     </select>
 
+    <select id="findData" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+        <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
+    </select>
+
+    <select id="countData" resultType ="java.lang.Integer">
+        SELECT count(1) FROM <include refid="tableEn" />
+    </select>
+
     <!--增加-->
     <insert id="doAdd" keyProperty="id" parameterType="com.sky.production.po.Process">
         INSERT INTO <include refid="tableEn" />
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">name,</if>
+            <if test="sectionid != null">sectionid,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
+            <if test="sectionid != null">#{sectionid},</if>
         </trim>
     </insert>
     <!--更新-->
@@ -34,6 +49,7 @@
         UPDATE <include refid="tableEn" />
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null">name=#{name},</if>
+            <if test="sectionid != null">sectionid=#{sectionid},</if>
         </trim>
         WHERE id=#{id}
     </update>

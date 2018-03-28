@@ -2,54 +2,50 @@ package com.sky.production.service.impl;
 
 import com.sky.admin.vo.Limit;
 import com.sky.production.dao.DeviceTypeDao;
-import com.sky.production.dao.SectionDao;
 import com.sky.production.po.DeviceType;
-import com.sky.production.po.Section;
 import com.sky.production.service.DevicetypeService;
-import com.sky.production.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by wz on 2018/3/27.
  */
 @Service
-public class DevicetypeServiceimpl implements SectionService {
+public class SectionServiceimpl implements DevicetypeService {
 
     @Autowired
-    private SectionDao sectionDao;
+    private DeviceTypeDao deviceTypeDao;
 
-    public Map<String,Object> getParams(Integer limit, Integer  page, Section section){
+    public Map<String,Object> getParams(Integer limit, Integer  page, DeviceType deviceType){
         Map<String,Object> params =  new HashMap<String, Object>();
         params.put("code","0");
-        params.put("count",sectionDao.countData(new Section()));
-        params.put("data",sectionDao.findData( new Limit(page, limit)  ,section));
+        params.put("count",deviceTypeDao.countData(new DeviceType()));
+        params.put("data",deviceTypeDao.findData( new Limit(page, limit)  ,deviceType));
         params.put("msg","SUCCESS");
         return  params;
     }
 
     @Transactional
-    public Boolean doAdd(Section section) {
-        return sectionDao.doAdd(section);
+    public Boolean doAdd(DeviceType deviceType) {
+        return deviceTypeDao.doAdd(deviceType);
     }
 
     @Transactional
-    public Section findById(Integer id){
-        return sectionDao.findById(id);
+    public DeviceType findById(Integer id){
+        return deviceTypeDao.findById(id);
     }
 
     @Transactional
-    public Boolean doUpdate(Section section){
-        return sectionDao.doUpdate(section);
+    public Boolean doUpdate(DeviceType deviceType){
+        return deviceTypeDao.doUpdate(deviceType);
     }
 
     @Transactional
     public Boolean doDelete(Integer id) {
-        return sectionDao.doDelete(id);
+        return deviceTypeDao.doDelete(id);
     }
 }

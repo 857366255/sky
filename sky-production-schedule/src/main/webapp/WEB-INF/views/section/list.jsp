@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
-<c:set var="typePath" value="devicetype"/>
+<c:set var="typePath" value="section"/>
 <html>
 
 <head>
@@ -32,7 +32,7 @@
 <div class="layui-row">
     <div class="layui-col-xs4">
         <fieldset class="layui-elem-field">
-            <legend>设备类型</legend>
+            <legend>工段</legend>
             <div class="layui-field-box">
                 <table id="table_one" lay-filter="table_one"></table>
             </div>
@@ -40,7 +40,7 @@
     </div>
     <div class="layui-col-xs*">
         <fieldset class="layui-elem-field">
-            <legend>设备信息</legend>
+            <legend>工序</legend>
             <div class="layui-field-box">
                 <table id="table_two" lay-filter="table_two"></table>
             </div>
@@ -51,7 +51,7 @@
 <script src="${basePath}/UI/layuiSky/layui/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['table','layer','form'], function(){
-        var table = layui.table, $ = layui.jquery,layer = layui.layer,form = layui.form;;
+        var table = layui.table, $ = layui.jquery,layer = layui.layer,form = layui.form;
         renderOne();
         renderTwo();
         //监听工具条

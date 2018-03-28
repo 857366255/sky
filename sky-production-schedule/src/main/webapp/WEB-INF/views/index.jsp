@@ -52,8 +52,8 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item"><a data-url="${basePath}/devicetype/list">设备类型(修改中)</a></li>
-                <li class="layui-nav-item"><a data-url="${basePath}/section/list">工段(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/devicetype/list">设备类型(半完成等待设备产能明细)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/section/list">工段(半完成等待工序)</a></li>
                 <li class="layui-nav-item"><a data-url="${basePath}/process/list">工序(未完成)</a></li>
                 <li class="layui-nav-item"><a data-url="${basePath}/supplies/list">物资(未完成)</a></li>
                 <li class="layui-nav-item"><a data-url="${basePath}/bom/list">BOM(未完成)</a></li>

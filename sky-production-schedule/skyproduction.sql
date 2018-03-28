@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-03-26 16:57:24
+Date: 2018-03-28 14:51:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -83,11 +83,15 @@ CREATE TABLE `t_devicetype` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='设备类型';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='设备类型';
 
 -- ----------------------------
 -- Records of t_devicetype
 -- ----------------------------
+INSERT INTO `t_devicetype` VALUES ('1', 'asd');
+INSERT INTO `t_devicetype` VALUES ('2', '在');
+INSERT INTO `t_devicetype` VALUES ('3', '阿斯顿');
+INSERT INTO `t_devicetype` VALUES ('4', '啊发生');
 
 -- ----------------------------
 -- Table structure for t_personnel
@@ -110,12 +114,16 @@ DROP TABLE IF EXISTS `t_process`;
 CREATE TABLE `t_process` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工序';
+  `sectionid` int(11) DEFAULT NULL COMMENT '工段id',
+  PRIMARY KEY (`id`),
+  KEY `fk_process_sectionid` (`sectionid`),
+  CONSTRAINT `fk_process_sectionid` FOREIGN KEY (`sectionid`) REFERENCES `t_section` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='工序';
 
 -- ----------------------------
 -- Records of t_process
 -- ----------------------------
+INSERT INTO `t_process` VALUES ('1', '123123', '3');
 
 -- ----------------------------
 -- Table structure for t_processflow
@@ -176,11 +184,14 @@ CREATE TABLE `t_section` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工段';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='工段';
 
 -- ----------------------------
 -- Records of t_section
 -- ----------------------------
+INSERT INTO `t_section` VALUES ('3', 'zxc');
+INSERT INTO `t_section` VALUES ('4', 'das');
+INSERT INTO `t_section` VALUES ('5', 'dfdgd');
 
 -- ----------------------------
 -- Table structure for t_suppliersprocess
