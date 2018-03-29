@@ -65,13 +65,13 @@ public interface BaseDao<K,V> {
      * @param vo
      * @return
      */
-    public List<V> findData(@Param("limit")Limit limit, @Param("configurationPage")V vo);
+    public List<V> findData(@Param("limit")Limit limit, @Param("vo")V vo);
 
     /**
      * 查询数据数量
      * @param vo
      * @return
      */
-    public Integer countData(@Param("configurationPage")V vo);
+    public Integer countData(@Param("vo")V vo);
 
 }

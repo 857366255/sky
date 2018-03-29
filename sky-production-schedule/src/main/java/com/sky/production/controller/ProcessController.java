@@ -84,6 +84,7 @@ public class ProcessController {
         System.out.println("limit = " + limit);
         System.out.println("page = " + page);
         Map<String,Object> mapData = processService.getParams(limit,page,process);
+        System.out.println(process);
         return mapData;
     }
 }

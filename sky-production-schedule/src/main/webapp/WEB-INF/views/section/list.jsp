@@ -26,7 +26,8 @@
 </script>
 
 <div class="layui-btn-group demoTable">
-    <button class="layui-btn" data-type="isAll" id="add">新增</button>--%>
+    <button class="layui-btn" data-type="isAll" id="add">新增工段</button>
+    <button class="layui-btn" data-type="isAll" id="addProcess">新增工序</button>
 </div>
 
 <div class="layui-row">
@@ -53,7 +54,7 @@
     layui.use(['table','layer','form'], function(){
         var table = layui.table, $ = layui.jquery,layer = layui.layer,form = layui.form;
         renderOne();
-        renderTwo();
+        renderTwo(-1);
         //监听工具条
         table.on('tool(table_one)', function(obj){
             var data = obj.data;
@@ -61,7 +62,7 @@
                 layer.msg('ID：'+ data.id + ' 的查看操作');
             } else if(obj.event === 'del'){
                 layer.confirm('真的删除行么', function(index){
-                    del(data.id);
+                    del(data.id,"${typePath}");
                     layer.close(index);
                 });
             } else if(obj.event === 'edit'){
@@ -88,10 +89,44 @@
                 });
             }
         });
+        //监听工具条
+        table.on('tool(table_two)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+                layer.msg('ID：'+ data.id + ' 的查看操作');
+            } else if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    del(data.id,"process");
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                // layer.alert('编辑行：<br>'+ JSON.stringify(data));
+                layer.open({
+                    type: 2,
+                    title: '编辑'+data.name,
+                    shade: 0,//遮罩shade: [0.8, '#393D49']
+                    maxmin: true,//放大和缩小
+                    tipsMore: true,//是否允许多个tips
+                    area: ['60%', '60%'],
+                    content: "${basePath}/process/edit/"+data.id//iframe的url
+                    ,end:function(layero, index){//销毁后触发的回调
+                        renderTwo();//刷新数据
+                    }
+                    ,btn: ['保存', '取消'] //可以无限个按钮
+                    ,btn1: function(index, layero){
+                        //var body = layer.getChildFrame('body', index); //巧妙的地方在这里哦
+                        window.frames["layui-layer-iframe"+index].document.getElementById("submit").click();//执行弹出窗口里的保存按钮
+                        layer.close(index);//关闭
+                    },btn2: function(index, layero){
+                        layer.close(index);//关闭
+                    }
+                });
+            }
+        });
         //单选事件
         form.on("radio(radio)",function(obj) {
             layer.tips(this.value+" "+this.name+":"+obj.elem.checked,obj.othis);
-            renderTwo();
+            renderTwo(this.value);
         });
 
         //点击加号按钮时
@@ -116,43 +151,41 @@
                 }
             });
         });
-        function del(id) {
+        $("#addProcess").click(function(){
+            layer.open({
+                type: 2,
+                title: '新增',
+                shade: 0,//遮罩shade: [0.8, '#393D49']
+                maxmin: true,//放大和缩小
+                tipsMore: true,//是否允许多个tips
+                area: ['60%', '60%'],
+                content: "${basePath}/process/add"//iframe的url
+                ,end:function(layero, index){//销毁后触发的回调
+                    renderTwo();//刷新数据
+                }
+                ,btn: ['保存', '取消'] //可以无限个按钮
+                ,btn1: function(index, layero){
+                    window.frames["layui-layer-iframe"+index].document.getElementById("submit").click();//执行弹出窗口里的保存按钮
+                    layer.close(index);//关闭
+                },btn2: function(index, layero){
+                    layer.close(index);//关闭
+                }
+            });
+        });
+
+
+        function del(id,url) {
             $.ajax({
-                url: "${basePath}/${typePath}/del/"+id,
+                url: "${basePath}/"+url+"/del/"+id,
                 type: 'DELETE',
                 success: function(data) {
+                    renderTwo();
                     renderOne();
                 },error : function(data) {
                     alert("删除失败");
                 }
             });
         }
-        //重新加载
-        function reload(listId){
-            table.reload(listId);
-        }
-        function renderTwo() {
-            table.render({
-                elem: '#table_two'
-                ,url: '${basePath}/${typePath}/data'
-                //,page: true
-                ,height: 'full-130'//最大高度-20  full-20
-                , limit:1000
-                //,width: 300
-                ,cellMinWidth: 40
-                ,cols: [[
-                    {type:'numbers', fixed: 'left'}
-                    //,{templet:"#radioTpl" , fixed: 'left',width:55}
-                    ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none'}
-                    ,{field:'name', title:'名称'}
-                    // ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth:200}
-                ]]
-                ,done: function(res, curr, count){
-                    $("[data-field='id']").css('display','none');//隐藏列表
-                }
-            });
-        }
-
 
         function renderOne() {
             table.render({
@@ -170,6 +203,31 @@
                     ,{field:'name', title:'名称'}
                     ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth:200}
                 ]]
+                ,done: function(res, curr, count){
+                    $("[data-field='id']").css('display','none');//隐藏列表
+                }
+            });
+        }
+        function renderTwo(sectionid) {
+            table.render({
+                elem: '#table_two'
+                ,url: '${basePath}/process/data'
+                //,page: true
+                ,height: 'full-130'//最大高度-20  full-20
+                , limit:1000
+                //,width: 300
+                ,cellMinWidth: 40
+                ,cols: [[
+                    {type:'numbers', fixed: 'left'}
+                    //,{templet:"#radioTpl" , fixed: 'left',width:55}
+                    ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none'}
+                    ,{field:'sectionname', title:'工段'}
+                    ,{field:'name', title:'名称'}
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth:200}
+                ]]
+                ,where: {
+                    sectionid: sectionid
+                }
                 ,done: function(res, curr, count){
                     $("[data-field='id']").css('display','none');//隐藏列表
                 }

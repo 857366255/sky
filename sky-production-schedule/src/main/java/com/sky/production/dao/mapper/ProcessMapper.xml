@@ -24,6 +24,7 @@
 
     <select id="findData" resultMap="ResultMap">
         SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+        <where><if test="vo.sectionid!=null"> sectionid=#{vo.sectionid} </if></where>
         <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
     </select>
 
