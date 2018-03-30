@@ -19,6 +19,15 @@
         SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE id=#{id}
     </select>
 
+    <select id="findData" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+        <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
+    </select>
+
+    <select id="countData" resultType ="java.lang.Integer">
+        SELECT count(1) FROM <include refid="tableEn" />
+    </select>
+
     <!--增加-->
     <insert id="doAdd" keyProperty="id" parameterType="com.sky.production.po.Supplies">
         INSERT INTO <include refid="tableEn" />
