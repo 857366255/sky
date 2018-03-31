@@ -5,6 +5,7 @@ import com.sky.production.dao.DeviceTypeDao;
 import com.sky.production.dao.ProcessDao;
 import com.sky.production.po.DeviceType;
 import com.sky.production.po.Process;
+import com.sky.production.po.Supplies;
 import com.sky.production.service.DevicetypeService;
 import com.sky.production.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,9 @@ public class ProcessServiceimpl implements ProcessService{
     }
 
     public List<Process> findAll() {
-        return null;
+        List<Process> processList = processDao.findAll();
+        processList.add(0,new Process());
+        return processList;
     }
 
 

@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
-<c:set var="typePath" value="bom"/>
+<c:set var="typePath" value="devicecapacitydetail"/>
 <html>
 
 <head>
@@ -18,22 +18,30 @@
 </head>
 <body>
 
-<form:form class="layui-form" action="${basePath}/${typePath}/edit" method="POST" modelAttribute="bom" >
-    <c:if test="${bom.id != null }">
+<form:form class="layui-form" action="${basePath}/${typePath}/edit" method="POST" modelAttribute="devicecapacitydetail" >
+    <c:if test="${devicecapacitydetail.id != null }">
         <form:hidden path="id" />
         <input type="hidden" name="_method" value="PUT" />
     </c:if>
     <fieldset class="layui-elem-field">
-        <legend>物资名称</legend>
-        <form:select items="${supplies}"  lay-verify="required" itemLabel="name" itemValue="id"  path="suppliesid"  class="layui-field-box" ></form:select>
+        <legend>设备</legend>
+        <form:select items="${devicetypes}"  lay-verify="required" itemLabel="name" itemValue="id"  path="devucetypeid"  class="layui-field-box" ></form:select>
             <%--<form:select items="${databaseTables}"  lay-verify="required" itemLabel="tableEn" itemValue="tableEn"  path="tableEn"  class="layui-field-box" ></form:select>--%>
     </fieldset>
-    <div class="layui-form-item">
-        <fieldset class="layui-elem-field">
-            <legend>数量</legend>
-            <form:input lay-verify="title" autocomplete="off" placeholder="请输入" type="text" path="suppliesnumber" class="layui-input layui-field-box" ></form:input>
-        </fieldset>
-    </div>
+    <fieldset class="layui-elem-field">
+        <legend>工段</legend>
+        <form:select items="${sections}"  lay-verify="required" itemLabel="name" itemValue="id"  path="sectionid"  class="layui-field-box" ></form:select>
+            <%--<form:select items="${databaseTables}"  lay-verify="required" itemLabel="tableEn" itemValue="tableEn"  path="tableEn"  class="layui-field-box" ></form:select>--%>
+    </fieldset>
+
+    <fieldset class="layui-elem-field">
+        <legend>工序</legend>
+        <form:select items="${processs}"  lay-verify="required" itemLabel="name" itemValue="id"  path="processid"  class="layui-field-box" ></form:select>
+    </fieldset>
+    <fieldset class="layui-elem-field">
+        <legend>产能</legend>
+        <form:input lay-verify="title" autocomplete="off" placeholder="请输入" type="text" path="capacity" class="layui-input layui-field-box" ></form:input>
+    </fieldset>
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button id="submit" class="btn btn-primary" type="submit" style="display: none;">立即提交</button>

@@ -51,7 +51,8 @@ public class SuppliesServiceimpl implements SuppliesService {
     }
 
     public List<Supplies> findAll() {
-
-        return null;
+        List<Supplies> suppliesList = suppliesDao.findAll();
+        suppliesList.add(0,new Supplies());
+        return suppliesList;
     }
 }

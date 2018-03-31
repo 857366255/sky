@@ -56,14 +56,14 @@
                 <li class="layui-nav-item"><a data-url="${basePath}/section/list">工段(完成)</a></li>
                 <li class="layui-nav-item"><a data-url="${basePath}/process/list">工序(完成)</a></li>
                 <li class="layui-nav-item"><a data-url="${basePath}/supplies/list">物资(完成)</a></li>
-                <li class="layui-nav-item"><a data-url="${basePath}/bom/list">BOM(修改中)</a></li>
-                <li class="layui-nav-item"><a data-url="${basePath}/bomdetail/list">Bom明细(未完成)</a></li>
-                <li class="layui-nav-item"><a data-url="${basePath}/suppliersprocess/list">产品工艺(未完成)</a></li>
-                <li class="layui-nav-item"><a data-url="${basePath}/devicecapacitydetail/list">设备产能明细(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/bom/list">BOM(完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/bomdetail/list">Bom明细(完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/suppliesprocess/list">产品工艺(完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/devicecapacitydetail/list">设备产能明细(完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/production/list">生产单(修改中)</a></li>
                 <li class="layui-nav-item"><a data-url="${basePath}/processflow/list">工艺流程(未完成)</a></li>
-                <li class="layui-nav-item"><a data-url="${basePath}/production/list">生产单(未完成)</a></li>
-                <li class="layui-nav-item"><a data-url="${basePath}/personnel/list">人员(未完成)</a></li>
-                <li class="layui-nav-item"><a data-url="${basePath}/schedule/list">日程安排(未完成)</a></li>
+                <%--<li class="layui-nav-item"><a data-url="${basePath}/personnel/list">人员(未完成)</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/schedule/list">日程安排(未完成)</a></li>--%>
             </ul>
         </div>
     </div>

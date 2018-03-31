@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
-<c:set var="typePath" value="bom"/>
+<c:set var="typePath" value="bomdetail"/>
 <html>
 
 <head>
@@ -18,13 +18,18 @@
 </head>
 <body>
 
-<form:form class="layui-form" action="${basePath}/${typePath}/edit" method="POST" modelAttribute="bom" >
-    <c:if test="${bom.id != null }">
+<form:form class="layui-form" action="${basePath}/${typePath}/edit" method="POST" modelAttribute="bomdetail" >
+    <c:if test="${bomdetail.id != null }">
         <form:hidden path="id" />
         <input type="hidden" name="_method" value="PUT" />
     </c:if>
     <fieldset class="layui-elem-field">
-        <legend>物资名称</legend>
+        <legend>bom产品名称</legend>
+        <form:select items="${boms}"  lay-verify="required" itemLabel="suppliesname" itemValue="id"  path="bomid"  class="layui-field-box" ></form:select>
+            <%--<form:select items="${databaseTables}"  lay-verify="required" itemLabel="tableEn" itemValue="tableEn"  path="tableEn"  class="layui-field-box" ></form:select>--%>
+    </fieldset>
+    <fieldset class="layui-elem-field">
+        <legend>材料名称</legend>
         <form:select items="${supplies}"  lay-verify="required" itemLabel="name" itemValue="id"  path="suppliesid"  class="layui-field-box" ></form:select>
             <%--<form:select items="${databaseTables}"  lay-verify="required" itemLabel="tableEn" itemValue="tableEn"  path="tableEn"  class="layui-field-box" ></form:select>--%>
     </fieldset>

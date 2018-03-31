@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-03-28 14:51:45
+Date: 2018-03-31 16:40:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,11 +26,14 @@ CREATE TABLE `t_bom` (
   PRIMARY KEY (`id`),
   KEY `fk_bom_suppliesid` (`suppliesid`),
   CONSTRAINT `fk_bom_suppliesid` FOREIGN KEY (`suppliesid`) REFERENCES `t_supplies` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='BOM';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='BOM';
 
 -- ----------------------------
 -- Records of t_bom
 -- ----------------------------
+INSERT INTO `t_bom` VALUES ('1', '3', '10');
+INSERT INTO `t_bom` VALUES ('3', '1', '10');
+INSERT INTO `t_bom` VALUES ('4', '2', '20');
 
 -- ----------------------------
 -- Table structure for t_bomdetail
@@ -46,11 +49,16 @@ CREATE TABLE `t_bomdetail` (
   KEY `fk_bomdetail_suppliesid` (`suppliesid`),
   CONSTRAINT `fk_bomdetail_bomid` FOREIGN KEY (`bomid`) REFERENCES `t_bom` (`id`),
   CONSTRAINT `fk_bomdetail_suppliesid` FOREIGN KEY (`suppliesid`) REFERENCES `t_supplies` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Bom明细';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='Bom明细';
 
 -- ----------------------------
 -- Records of t_bomdetail
 -- ----------------------------
+INSERT INTO `t_bomdetail` VALUES ('9', null, null, '0');
+INSERT INTO `t_bomdetail` VALUES ('10', '3', '1', '1');
+INSERT INTO `t_bomdetail` VALUES ('11', '3', null, '0');
+INSERT INTO `t_bomdetail` VALUES ('12', '4', null, '0');
+INSERT INTO `t_bomdetail` VALUES ('13', '4', '2', '0');
 
 -- ----------------------------
 -- Table structure for t_devicecapacitydetail
@@ -69,11 +77,12 @@ CREATE TABLE `t_devicecapacitydetail` (
   CONSTRAINT `fk_dad_` FOREIGN KEY (`processid`) REFERENCES `t_process` (`id`),
   CONSTRAINT `fk_dad_devucetypeid` FOREIGN KEY (`devucetypeid`) REFERENCES `t_devicetype` (`id`),
   CONSTRAINT `fk_dad_sectionid` FOREIGN KEY (`sectionid`) REFERENCES `t_section` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='设备产能明细';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='设备产能明细';
 
 -- ----------------------------
 -- Records of t_devicecapacitydetail
 -- ----------------------------
+INSERT INTO `t_devicecapacitydetail` VALUES ('1', '2', '4', '1', '0');
 
 -- ----------------------------
 -- Table structure for t_devicetype
@@ -83,7 +92,7 @@ CREATE TABLE `t_devicetype` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='设备类型';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='设备类型';
 
 -- ----------------------------
 -- Records of t_devicetype
@@ -184,7 +193,7 @@ CREATE TABLE `t_section` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='工段';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='工段';
 
 -- ----------------------------
 -- Records of t_section
@@ -192,28 +201,6 @@ CREATE TABLE `t_section` (
 INSERT INTO `t_section` VALUES ('3', 'zxc');
 INSERT INTO `t_section` VALUES ('4', 'das');
 INSERT INTO `t_section` VALUES ('5', 'dfdgd');
-
--- ----------------------------
--- Table structure for t_suppliersprocess
--- ----------------------------
-DROP TABLE IF EXISTS `t_suppliersprocess`;
-CREATE TABLE `t_suppliersprocess` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
-  `suppliersid` int(11) DEFAULT NULL COMMENT '产品(半成品)id',
-  `sectionid` int(11) DEFAULT NULL COMMENT '工段id',
-  `processid` int(11) DEFAULT NULL COMMENT '工艺id',
-  PRIMARY KEY (`id`),
-  KEY `fk_sp_sectionid` (`sectionid`),
-  KEY `fk_sp_processid` (`processid`),
-  KEY `fk_sp_suppliersid` (`suppliersid`),
-  CONSTRAINT `fk_sp_processid` FOREIGN KEY (`processid`) REFERENCES `t_process` (`id`),
-  CONSTRAINT `fk_sp_sectionid` FOREIGN KEY (`sectionid`) REFERENCES `t_section` (`id`),
-  CONSTRAINT `fk_sp_suppliersid` FOREIGN KEY (`suppliersid`) REFERENCES `t_supplies` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产品工艺';
-
--- ----------------------------
--- Records of t_suppliersprocess
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_supplies
@@ -224,8 +211,34 @@ CREATE TABLE `t_supplies` (
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `type` varchar(255) DEFAULT NULL COMMENT '类型',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物资';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='物资';
 
 -- ----------------------------
 -- Records of t_supplies
 -- ----------------------------
+INSERT INTO `t_supplies` VALUES ('1', '阿斯顿', '产品');
+INSERT INTO `t_supplies` VALUES ('2', '爱的', '材料');
+INSERT INTO `t_supplies` VALUES ('3', '发顺丰', '半成品');
+
+-- ----------------------------
+-- Table structure for t_suppliesprocess
+-- ----------------------------
+DROP TABLE IF EXISTS `t_suppliesprocess`;
+CREATE TABLE `t_suppliesprocess` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
+  `suppliesid` int(11) DEFAULT NULL COMMENT '产品(半成品)id',
+  `sectionid` int(11) DEFAULT NULL COMMENT '工段id',
+  `processid` int(11) DEFAULT NULL COMMENT '工艺id',
+  PRIMARY KEY (`id`),
+  KEY `fk_sp_sectionid` (`sectionid`) USING BTREE,
+  KEY `fk_sp_processid` (`processid`) USING BTREE,
+  KEY `fk_sp_suppliesid` (`suppliesid`) USING BTREE,
+  CONSTRAINT `fk_sp_processid` FOREIGN KEY (`processid`) REFERENCES `t_process` (`id`),
+  CONSTRAINT `fk_sp_sectionid` FOREIGN KEY (`sectionid`) REFERENCES `t_section` (`id`),
+  CONSTRAINT `fk_sp_suppliesid` FOREIGN KEY (`suppliesid`) REFERENCES `t_supplies` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='产品工艺';
+
+-- ----------------------------
+-- Records of t_suppliesprocess
+-- ----------------------------
+INSERT INTO `t_suppliesprocess` VALUES ('1', '3', '4', '1');

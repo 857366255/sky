@@ -7,6 +7,8 @@ package com.sky.production.po;
 public class Bom {
     private Integer id;
     private Integer suppliesid;//产品(半成品)id
+    private String suppliesname;
+    private Supplies supplies;
     private Integer suppliesnumber;//产品(半成品)数量
 
     public Integer getId() {
@@ -25,6 +27,15 @@ public class Bom {
         this.suppliesid = suppliesid;
     }
 
+    public String getSuppliesname() {
+        return suppliesname;
+    }
+
+    public void setSupplies(Supplies supplies) {
+        if(supplies != null) this.suppliesname = supplies.getName();
+        this.supplies = supplies;
+    }
+
     public Integer getSuppliesnumber() {
         return suppliesnumber;
     }
@@ -38,6 +49,8 @@ public class Bom {
         return "Bom{" +
                 "id=" + id +
                 ", suppliesid=" + suppliesid +
+                ", suppliesname='" + suppliesname + '\'' +
+                ", supplies=" + supplies +
                 ", suppliesnumber=" + suppliesnumber +
                 '}';
     }

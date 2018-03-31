@@ -48,7 +48,7 @@ public class Process {
     }
 
     public void setSection(Section section) {
-        this.sectionname = section.getName();
+        if(section != null) this.sectionname = section.getName();
         this.section = section;
     }
 

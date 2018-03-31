@@ -10,6 +10,8 @@
         <result property="bomid" column="bomid"/>
         <result property="suppliesid" column="suppliesid"/>
         <result property="suppliesnumber" column="suppliesnumber"/>
+        <association property="bom" column="bomid" select="com.sky.production.dao.BomDao.findById"></association>
+        <association property="supplies" column="suppliesid" select="com.sky.production.dao.SuppliesDao.findById"></association>
     </resultMap>
     <!--查询全部数据-->
     <select id="findAll" resultMap="ResultMap">
@@ -18,6 +20,15 @@
     <!--查询-->
     <select id="findById" parameterType="java.lang.Integer" resultMap="ResultMap">
         SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE id=#{id}
+    </select>
+
+    <select id="findData" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+        <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
+    </select>
+
+    <select id="countData" resultType ="java.lang.Integer">
+        SELECT count(1) FROM <include refid="tableEn" />
     </select>
 
     <!--增加-->

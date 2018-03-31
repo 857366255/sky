@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sky.production.dao.SuppliersProcessDao">
-    <sql id="showField" > id,suppliersid,sectionid,processid </sql>
-    <sql id="tableEn" > t_suppliersprocess </sql>
+<mapper namespace="com.sky.production.dao.SuppliesProcessDao">
+    <sql id="showField" > id,suppliesid,sectionid,processid </sql>
+    <sql id="tableEn" > t_suppliesprocess </sql>
     <!--映射实体类-->
-    <resultMap id="ResultMap" type="com.sky.production.po.SuppliersProcess">
+    <resultMap id="ResultMap" type="com.sky.production.po.SuppliesProcess">
         <id property="id" column="id"/>
-        <result property="suppliersid" column="suppliersid"/>
+        <result property="suppliesid" column="suppliesid"/>
         <result property="sectionid" column="sectionid"/>
         <result property="processid" column="processid"/>
+        <association property="supplies" column="suppliesid" select="com.sky.production.dao.SuppliesDao.findById"></association>
+        <association property="section" column="sectionid" select="com.sky.production.dao.SectionDao.findById"></association>
+        <association property="process" column="processid" select="com.sky.production.dao.ProcessDao.findById"></association>
     </resultMap>
     <!--查询全部数据-->
     <select id="findAll" resultMap="ResultMap">
@@ -20,26 +23,36 @@
         SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE id=#{id}
     </select>
 
+
+    <select id="findData" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+        <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
+    </select>
+
+    <select id="countData" resultType ="java.lang.Integer">
+        SELECT count(1) FROM <include refid="tableEn" />
+    </select>
+
     <!--增加-->
-    <insert id="doAdd" keyProperty="id" parameterType="com.sky.production.po.SuppliersProcess">
+    <insert id="doAdd" keyProperty="id" parameterType="com.sky.production.po.SuppliesProcess">
         INSERT INTO <include refid="tableEn" />
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="suppliersid != null">suppliersid,</if>
+            <if test="suppliesid != null">suppliesid,</if>
             <if test="sectionid != null">sectionid,</if>
             <if test="processid != null">processid,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="suppliersid != null">#{suppliersid},</if>
+            <if test="suppliesid != null">#{suppliesid},</if>
             <if test="sectionid != null">#{sectionid},</if>
             <if test="processid != null">#{processid},</if>
         </trim>
     </insert>
     <!--更新-->
-    <update id="doUpdate" parameterType="com.sky.production.po.SuppliersProcess">
+    <update id="doUpdate" parameterType="com.sky.production.po.SuppliesProcess">
         UPDATE <include refid="tableEn" />
         <trim prefix="SET" suffixOverrides=",">
-            <if test="suppliersid != null">suppliersid=#{suppliersid},</if>
+            <if test="suppliesid != null">suppliesid=#{suppliesid},</if>
             <if test="sectionid != null">sectionid=#{sectionid},</if>
             <if test="processid != null">processid=#{processid},</if>
         </trim>

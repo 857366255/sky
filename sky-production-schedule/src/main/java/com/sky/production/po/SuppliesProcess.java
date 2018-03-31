@@ -1,21 +1,20 @@
 package com.sky.production.po;
 
 /**
- * 设备产能明细
+ * 物资工艺
  * Created by wz on 2018/3/26.
  */
-public class DeviceCapacityDetail {
+public class SuppliesProcess {
     private Integer id;//唯一标识符
-    private Integer devucetypeid;//设备类型id
-    private String devicetypename;
-    private DeviceType devicetype;
+    private Integer suppliesid;//产品(半成品)id
+    private String suppliesname;
+    private Supplies supplies;
     private Integer sectionid;//工段id
     private String sectionname;
     private Section section;
-    private Integer processid;//工序id
+    private Integer processid;//工艺id
     private String processname;
     private Process process;
-    private float capacity;//private Integer ;//产能
 
     public Integer getId() {
         return id;
@@ -25,12 +24,12 @@ public class DeviceCapacityDetail {
         this.id = id;
     }
 
-    public Integer getDevucetypeid() {
-        return devucetypeid;
+    public Integer getSuppliesid() {
+        return suppliesid;
     }
 
-    public void setDevucetypeid(Integer devucetypeid) {
-        this.devucetypeid = devucetypeid;
+    public void setSuppliesid(Integer suppliesid) {
+        this.suppliesid = suppliesid;
     }
 
     public Integer getSectionid() {
@@ -49,21 +48,13 @@ public class DeviceCapacityDetail {
         this.processid = processid;
     }
 
-    public float getCapacity() {
-        return capacity;
+    public String getSuppliesname() {
+        return suppliesname;
     }
 
-    public void setCapacity(float capacity) {
-        this.capacity = capacity;
-    }
-
-    public String getDevicetypename() {
-        return devicetypename;
-    }
-
-    public void setDevicetype(DeviceType devicetype) {
-        if(devicetype != null) this.devicetypename = devicetype.getName();
-        this.devicetype = devicetype;
+    public void setSupplies(Supplies supplies) {
+        if(supplies != null) this.suppliesname = supplies.getName();
+        this.supplies = supplies;
     }
 
     public String getSectionname() {
@@ -86,18 +77,11 @@ public class DeviceCapacityDetail {
 
     @Override
     public String toString() {
-        return "DeviceCapacityDetail{" +
+        return "SuppliesProcess{" +
                 "id=" + id +
-                ", devucetypeid=" + devucetypeid +
-                ", devicetypename='" + devicetypename + '\'' +
-                ", devicetype=" + devicetype +
+                ", suppliesid=" + suppliesid +
                 ", sectionid=" + sectionid +
-                ", sectionname='" + sectionname + '\'' +
-                ", section=" + section +
                 ", processid=" + processid +
-                ", processname='" + processname + '\'' +
-                ", process=" + process +
-                ", capacity=" + capacity +
                 '}';
     }
 }

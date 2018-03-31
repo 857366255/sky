@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
-<c:set var="typePath" value="bom"/>
+<c:set var="typePath" value="devicecapacitydetail"/>
 <html>
 
 <head>
@@ -21,14 +21,10 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
-<script type="text/html" id="radioTpl">
-    <input type="radio" name="radio"  value="{{d.id}}" title=" " lay-filter="radio" style="width: 50px">
-</script>
 
 <div class="layui-btn-group demoTable">
     <button class="layui-btn" data-type="isAll" id="add">新增</button>--%>
 </div>
-
 
 <fieldset class="layui-elem-field">
     <legend>BOM</legend>
@@ -124,8 +120,10 @@
                     {type:'numbers', fixed: 'left'}
                     ,{type:'checkbox', fixed: 'left'}
                     ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none'}
-                    ,{field:'suppliesname', title:'物资名称'}
-                    ,{field:'suppliesnumber', title:'数量'}
+                    ,{field:'devicetypename', title:'设备'}
+                    ,{field:'sectionname', title:'工段'}
+                    ,{field:'processname', title:'工序'}
+                    ,{field:'capacity', title:'产能'}
                     ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth:200}
                 ]]
                 ,done: function(res, curr, count){

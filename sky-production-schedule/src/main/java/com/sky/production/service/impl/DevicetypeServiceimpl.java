@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,5 +48,11 @@ public class DevicetypeServiceimpl implements DevicetypeService {
     @Transactional
     public Boolean doDelete(Integer id) {
         return deviceTypeDao.doDelete(id);
+    }
+
+    public List<DeviceType> findAll() {
+        List<DeviceType> deviceTypeList = deviceTypeDao.findAll();
+        deviceTypeList.add(0,new DeviceType());
+        return deviceTypeList;
     }
 }
