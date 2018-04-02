@@ -1,5 +1,7 @@
 package com.sky.production.po;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -9,7 +11,10 @@ import java.util.Date;
 public class Production {
     private Integer id;//唯一标识符
     private Integer suppliesid;//物资id
+    private String suppliesname;
+    private Supplies supplies;
     private float suppliesnumber;//数量
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private Date deliverydate;//交货日期
 
     public Integer getId() {
@@ -44,11 +49,23 @@ public class Production {
         this.deliverydate = deliverydate;
     }
 
+    public String getSuppliesname() {
+        return suppliesname;
+    }
+
+    public void setSupplies(Supplies supplies) {
+        if(supplies != null) this.suppliesname = supplies.getName();
+        this.supplies = supplies;
+    }
+
+
     @Override
     public String toString() {
         return "Production{" +
                 "id=" + id +
                 ", suppliesid=" + suppliesid +
+                ", suppliesname='" + suppliesname + '\'' +
+                ", supplies=" + supplies +
                 ", suppliesnumber=" + suppliesnumber +
                 ", deliverydate=" + deliverydate +
                 '}';

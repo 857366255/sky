@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
-<c:set var="typePath" value="devicetype"/>
+<c:set var="typePath" value="production"/>
 <html>
 
 <head>
@@ -21,6 +21,9 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
+<script type="text/html" id="radioTpl">
+    <input type="radio" name="radio"  value="{{d.id}}" title=" " lay-filter="radio" style="width: 50px">
+</script>
 
 <div class="layui-btn-group demoTable">
     <button class="layui-btn" data-type="isAll" id="add">新增</button>--%>
@@ -28,7 +31,7 @@
 
 
 <fieldset class="layui-elem-field">
-    <legend>设备类型</legend>
+    <legend>生产单</legend>
     <div class="layui-field-box">
         <table id="table_one" lay-filter="table_one"></table>
     </div>
@@ -108,7 +111,6 @@
             });
         }
 
-
         function renderOne() {
             table.render({
                 elem: '#table_one'
@@ -120,9 +122,11 @@
                 ,cellMinWidth: 40
                 ,cols: [[
                     {type:'numbers', fixed: 'left'}
-                    //,{templet:"#radioTpl" , fixed: 'left',width:70}
+                    ,{type:'checkbox', fixed: 'left'}
                     ,{field:'id', title:'ID', unresize: true, sort: true ,display:'none'}
-                    ,{field:'name', title:'名称'}
+                    ,{field:'suppliesname', title:'物资名称'}
+                    ,{field:'suppliesnumber', title:'数量'}
+                    ,{field:'deliverydate', title:'日期'}
                     ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth:200}
                 ]]
                 ,done: function(res, curr, count){
