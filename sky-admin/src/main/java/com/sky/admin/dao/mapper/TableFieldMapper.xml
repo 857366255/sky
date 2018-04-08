@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.admin.dao.TableFieldDao">
+    <sql id="showField" > id,table_en,field_en,input_type </sql>
+    <sql id="tableEn" > s_table_field </sql>
+    <!--映射实体类-->
+    <resultMap id="FieldResultMap" type="com.sky.admin.po.TableField">
+        <id property="id" column="id"/>
+        <result property="tableEn" column="table_en"/>
+        <result property="fieldEn" column="field_en"/>
+        <result property="inputType" column="input_type"/>
+    </resultMap>
+
+
+    <select id="findTableData" resultMap="FieldResultMap">
+        SELECT table_en FROM <include refid="tableEn" />
+        <where>
+            <if test="vo.tableEn != null">table_en=#{vo.tableEn}</if>
+        </where>
+        GROUP BY table_en
+        <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
+    </select>
+    <select id="countTableData" resultType ="java.lang.Integer">
+        SELECT count(1) FROM (
+          SELECT table_en FROM s_table_field
+            <where>
+                <if test="vo.tableEn != null">table_en=#{vo.tableEn}</if>
+            </where>
+            GROUP BY table_en
+        )a
+    </select>
+
+    <select id="findData" resultMap="FieldResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+        <where>
+            <if test="vo.tableEn != null">table_en=#{vo.tableEn}</if>
+        </where>
+        <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
+    </select>
+
+    <select id="countData" resultType ="java.lang.Integer">
+        SELECT count(1) FROM <include refid="tableEn" />
+        <where>
+            <if test="vo.tableEn != null">table_en=#{vo.tableEn}</if>
+        </where>
+    </select>
+
+    <!--增加-->
+    <insert id="doAdd" keyProperty="id" parameterType="com.sky.admin.po.TableField">
+        INSERT INTO <include refid="tableEn" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tableEn != null">table_en,</if>
+            <if test="fieldEn != null">field_en,</if>
+            <if test="inputType != null">input_type,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tableEn != null">#{tableEn},</if>
+            <if test="fieldEn != null">#{fieldEn},</if>
+            <if test="inputType != null">#{inputType},</if>
+        </trim>
+    </insert>
+
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.admin.po.TableField">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tableEn != null">table_en=#{inputType},</if>
+            <if test="fieldEn != null">field_en=#{inputType},</if>
+            <if test="inputType != null">input_type=#{inputType},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <!--删除-->
+    <delete id="doDelete" parameterType="java.lang.Integer">
+        DELETE FROM <include refid="tableEn" /> WHERE id= #{id}
+    </delete>
+
+    <!--映射实体类-->
+    <resultMap id="TableFieldDatabaseResultMap" type="com.sky.admin.po.TableField">
+        <id property="id" column="id"/>
+        <result property="tableEn" column="table_name"/>
+        <result property="fieldEn" column="column_name"/>
+        <result property="inputType" column="input_type"/>
+    </resultMap>
+    <select id="getAddTableField"  resultMap="TableFieldDatabaseResultMap">
+        SELECT *
+          FROM (SELECT a.table_name,a.column_name,b.id,'text' input_type
+                FROM information_schema.columns a
+                LEFT JOIN s_table_field b ON a.table_name=b.table_en AND a.column_name=b.field_en
+                WHERE table_schema=DATABASE() AND a.table_name NOT in (SELECT a.table_name FROM information_schema.tables a WHERE a.table_name LIKE 's_%')
+          )a
+        WHERE a.id IS NULL
+    </select>
+    <select id="getDeleteTableField"  resultMap="TableFieldDatabaseResultMap">
+        SELECT *
+          FROM (SELECT a.id,b.table_name,b.column_name,a.input_type
+                FROM s_table_field a
+                LEFT JOIN information_schema.columns b ON b.table_name=a.table_en AND b.column_name=a.field_en AND table_schema=DATABASE()
+                WHERE a.table_en NOT in (SELECT a.table_name FROM information_schema.tables a WHERE a.table_name LIKE 's_%')
+          )a
+        WHERE a.table_name IS NULL
+    </select>
+
+</mapper>

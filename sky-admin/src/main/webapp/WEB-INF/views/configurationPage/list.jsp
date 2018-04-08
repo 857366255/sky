@@ -12,8 +12,8 @@
 
 <head>
     <title>列表</title>
-    <link rel="stylesheet" href="${basePath}/UI/test/layuiSky/layui/css/layui.css"  media="all">
-    <link rel="stylesheet" href="${basePath}/UI/test/layuiSky/sky/css/edit-list.css"  media="all">
+    <link rel="stylesheet" href="${basePath}/UI/layuiSky/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${basePath}/UI/layuiSky/sky/css/edit-list.css" media="all">
 </head>
 <body style="height: 100%;">
 <script type="text/html" id="barDemo">
@@ -28,12 +28,12 @@
 
 
 <div class="layui-btn-group demoTable">
-    <button class="layui-btn" data-type="isAll" id="add">新增</button>--%>
+    <button class="layui-btn" data-type="isAll" id="add">新增</button>
 </div>
 
 <table id="skyList" lay-filter="skyList"></table>
 
-<script src="${basePath}/UI/test/layuiSky/layui/layui.js" charset="utf-8"></script>
+<script src="${basePath}/UI/layuiSky/layui/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['table','layer'], function(){
         var table = layui.table, $ = layui.jquery,layer = layui.layer;

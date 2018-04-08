@@ -12,8 +12,8 @@
 
 <head>
     <title>后台管理 </title>
-    <link rel="stylesheet" href="${basePath}/UI/test/layuiSky/layui/css/layui.css">
-    <link rel="stylesheet" href="${basePath}/UI/test/layuiSky/sky/css/index.css">
+    <link rel="stylesheet" href="${basePath}/UI/layuiSky/layui/css/layui.css">
+    <link rel="stylesheet" href="${basePath}/UI/layuiSky/sky/css/index.css">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -52,6 +52,8 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item"><a data-url="${basePath}/configurationPage/list">配置页面2</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/tableField/list">表字段输入类型</a></li>
                 <li class="layui-nav-item"><a data-url="${basePath}/configurationpage/list">配置页面</a></li>
                 <li class="layui-nav-item"><%--layui-nav-itemed:默认展开--%>
                     <a class="" href="javascript:;">基础页面</a>
@@ -86,7 +88,7 @@
         © layui.com - 底部固定区域
     </div>
 </div>
-<script src="${basePath}/UI/test/layuiSky/layui/layui.js"></script>
-<script src="${basePath}/UI/test/layuiSky/sky/js/index.js"></script>
+<script src="${basePath}/UI/layuiSky/layui/layui.js"></script>
+<script src="${basePath}/UI/layuiSky/sky/js/index.js"></script>
 </body>
 </html>

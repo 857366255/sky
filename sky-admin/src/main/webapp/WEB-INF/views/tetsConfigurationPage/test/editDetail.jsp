@@ -13,7 +13,7 @@
 
 <head>
     <title>编辑</title>
-    <link rel="stylesheet" href="${basePath}/UI/test/layuiSky/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="${basePath}/UI/layuiSky/layui/css/layui.css" media="all">
     <style rel="stylesheet">
         [lay-event="inputtype"] {
             top: -5px !important;
@@ -70,7 +70,7 @@
     </div>
 </div>
 
-<script src="${basePath}/UI/test/layuiSky/layui/layui.js" charset="utf-8"></script>
+<script src="${basePath}/UI/layuiSky/layui/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['table', 'layedit', 'laydate','form'], function(){
         var table = layui.table, $ = layui.jquery,layer = layui.layer,form = layui.form;

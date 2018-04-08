@@ -1,28 +1,21 @@
 package com.sky.admin.controller;
 
-import com.sky.admin.dao.ConfigurationPageDao;
-import com.sky.admin.po.ConfigurationPage;
-import com.sky.admin.po.DatabaseTable;
-import com.sky.admin.po.Field;
+
 import com.sky.admin.service.ConfigurationPageService;
 import com.sky.admin.service.DatabaseService;
-import com.sky.admin.vo.ListField;
-import com.sky.admin.vo.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
 
 /**
  * Created by wz on 2018/2/7.
  */
 @Controller
-@RequestMapping(value = "configurationpage")
+@RequestMapping(value = "configurationPage")
 public class ConfigurationPageController {
 
-    private static final String BASIC_PATH = "configurationpage";
+    private static final String BASIC_PATH = "configurationPage";
     @Autowired
     private ConfigurationPageService configurationPageService;
     @Autowired
@@ -32,19 +25,28 @@ public class ConfigurationPageController {
     public String goIndex(){
         return "index";
     }
+
+
+    @RequestMapping(value = "/list",method= RequestMethod.GET)
+    public String goList(){
+        return "configurationPage/list";
+        //return "configurationPage/list2";
+    }
+
+    /*
     @RequestMapping(value = "/list",method= RequestMethod.GET)
     public String goList(Model model){
         return BASIC_PATH+"/list";
     }
     @RequestMapping(value = "/add",method= RequestMethod.GET)
     public String goAdd(Model model){
-        model.addAttribute("configurationpage",new ConfigurationPage());
+        model.addAttribute("configurationPage",new ConfigurationPage());
         model.addAttribute("databaseTables",databaseService.getDatabaseTable());
         return BASIC_PATH+"/edit";
     }
     @RequestMapping(value = "/edit/{id}",method= RequestMethod.GET)
     public String goEdit(Map<String, Object> map,@PathVariable Integer id){
-        map.put("configurationpage",configurationPageService.findById(id));
+        map.put("configurationPage",configurationPageService.findById(id));
         map.put("databaseTables",databaseService.getDatabaseTable());
         return  BASIC_PATH+"/edit";
     }
@@ -89,7 +91,7 @@ public class ConfigurationPageController {
         Map<String,Object> mapData = configurationPageService.getParams(limit,page,configurationPage);
         return mapData;
     }
-    /******************************************************************************************************************/
+    *//******************************************************************************************************************//*
 
     @RequestMapping(value = "/editDetail/{id}",method= RequestMethod.GET)
     public String goEditDetail(Model model,@PathVariable Integer id){
@@ -111,7 +113,7 @@ public class ConfigurationPageController {
         System.out.println("lsitData:"+lsitData);
         return new HashMap<String, Object>();
     }
-
+*/
 
    /* @RequestMapping(value = "/list",method= RequestMethod.GET)
     public String goList(Map<String, Object> map){

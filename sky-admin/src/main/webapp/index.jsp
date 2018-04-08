@@ -15,7 +15,7 @@
 </head>
 <body>
     <li>
-        <ul><a href="${basePath}/configurationpage/index">登入</a></ul>
+        <ul><a href="${basePath}/configurationPage/index">登入</a></ul>
         <%--<ul><a href="${basePath}/TestWeAdmin">WeAdmin首页(/test/index.jsp)</a></ul>
         <ul><a href="${basePath}/WeAdmin">WeAdmin首页(/index.jsp)</a></ul>
         <ul><a href="${basePath}/TestLayuicsm">layuicsm首页(/test/index.jsp)</a></ul>
