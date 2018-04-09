@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.smarthonme.dao.ProductTypeDao">
+    <sql id="showField" > id,product_type,product_key,name,data_point_unpack,data_point_name,technical </sql>
+    <sql id="tableEn" > producttype </sql>
+    <!--映射实体类-->
+    <resultMap id="ResultMap" type="com.sky.smarthonme.po.ProductType">
+        <id property="id" column="id"/>
+        <result property="productType" column="product_type"/>
+        <result property="productKey" column="product_key"/>
+        <result property="name" column="name"/>
+        <result property="dataPointUnpack" column="data_point_unpack"/>
+        <result property="dataPointName" column="data_point_name"/>
+        <result property="technical" column="technical"/>
+    </resultMap>
+
+    <!--查询全部数据-->
+    <select id="findAll" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+    </select>
+    <!--查询-->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE id=#{id}
+    </select>
+
+    <select id="findData" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+        <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
+    </select>
+
+    <select id="countData" resultType ="java.lang.Integer">
+        SELECT count(1) FROM <include refid="tableEn" />
+    </select>
+
+    <!--增加-->
+    <insert id="doAdd" keyProperty="id" parameterType="com.sky.smarthonme.po.ProductType">
+        INSERT INTO <include refid="tableEn" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productType != null">product_type,</if>
+            <if test="productKey != null">product_key,</if>
+            <if test="name != null">name,</if>
+            <if test="dataPointUnpack != null">data_point_unpack,</if>
+            <if test="dataPointName != null">data_point_name,</if>
+            <if test="technical != null">technical,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productType != null">#{productType},</if>
+            <if test="productKey != null">#{productKey},</if>
+            <if test="name != null">#{name},</if>
+            <if test="dataPointUnpack != null">#{dataPointUnpack},</if>
+            <if test="dataPointName != null">#{dataPointName},</if>
+            <if test="technical != null">#{technical},</if>
+        </trim>
+    </insert>
+
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.smarthonme.po.ProductType">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productType != null">product_type=#{productType},</if>
+            <if test="productKey != null">product_key=#{productKey},</if>
+            <if test="name != null">name=#{name},</if>
+            <if test="dataPointUnpack != null">data_point_unpack=#{dataPointUnpack},</if>
+            <if test="dataPointName != null">data_point_name=#{dataPointName},</if>
+            <if test="technical != null">technical=#{technical},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <!--删除-->
+    <delete id="doDelete" parameterType="java.lang.Integer">
+        DELETE FROM <include refid="tableEn" /> WHERE id= #{id}
+    </delete>
+
+</mapper>

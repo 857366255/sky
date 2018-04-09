@@ -1,11 +1,15 @@
 package com.sky.admin.controller;
 
 
+import com.sky.admin.po.ConfigurationPage;
 import com.sky.admin.service.ConfigurationPageService;
 import com.sky.admin.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 
 /**
@@ -25,13 +29,30 @@ public class ConfigurationPageController {
     public String goIndex(){
         return "index";
     }
+    @RequestMapping(value = "/test",method= RequestMethod.GET)
+    public String gotest(){
+        return "test";
+    }
 
 
     @RequestMapping(value = "/list",method= RequestMethod.GET)
     public String goList(){
-        return "configurationPage/list";
+        return BASIC_PATH+"/list";
         //return "configurationPage/list2";
     }
+    @RequestMapping(value="/data", produces = "application/json; charset=utf-8" )
+    @ResponseBody
+    public Map<String,Object> doData(Integer limit, Integer  page, ConfigurationPage configurationPage){
+        Map<String,Object> mapData = configurationPageService.getParams(limit,page,configurationPage);
+        return mapData;
+    }
+    @RequestMapping(value = "/add",method= RequestMethod.GET)
+    public String goAdd(Model model){
+        model.addAttribute("configurationPage",new ConfigurationPage());
+        model.addAttribute("databaseTables",databaseService.getDatabaseTable());
+        return BASIC_PATH+"/edit";
+    }
+
 
     /*
     @RequestMapping(value = "/list",method= RequestMethod.GET)

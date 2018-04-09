@@ -15,6 +15,7 @@
     <module>fitness</module>
     <module>sky-layui</module>
       <module>sky-production-schedule</module>
+      <module>smarthonme</module>
   </modules>
   <packaging>pom</packaging>
 

@@ -5,9 +5,11 @@
   Time: 9:26
   To change this template use File | Settings | File Templates.
 --%>
+<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
+<c:set var="typePath" value="configurationPage"/>
 <html>
 
 <head>
@@ -35,11 +37,11 @@
 
 <script src="${basePath}/UI/layuiSky/layui/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(['table','layer'], function(){
-        var table = layui.table, $ = layui.jquery,layer = layui.layer;
+    layui.use(['table'], function(){
+        var table = layui.table, $ = layui.jquery,layer = window.parent.layer;
         table.render({
             elem: '#skyList'
-            ,url: '${basePath}/configurationpage/data'
+            ,url: '${basePath}/${typePath}/data'
             ,page: true
             ,height: 'full-60'//最大高度-20  full-20
             , limit:10
@@ -123,7 +125,7 @@
                     }
                     ,btn: ['保存', '取消'] //可以无限个按钮
                     ,btn1: function(index, layero){
-                        window.frames["layui-layer-iframe"+index].document.getElementById("submit").click();//执行弹出窗口里的保存按钮
+                        window.parent.frames["layui-layer-iframe"+index].document.getElementById("submit").click();//执行弹出窗口里的保存按钮
                         //layer.close(index);//关闭
                     },btn2: function(index, layero){
                         layer.close(index);//关闭
@@ -146,7 +148,7 @@
                 maxmin: true,//放大和缩小
                 tipsMore: true,//是否允许多个tips
                 area: ['60%', '60%'],
-                content: "${basePath}/configurationpage/add"//iframe的url
+                content: "${basePath}/configurationPage/add"//iframe的url
                 ,end:function(layero, index){//销毁后触发的回调
                     reload('skyList');//刷新数据
                 }

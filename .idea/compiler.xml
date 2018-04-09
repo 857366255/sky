@@ -14,6 +14,7 @@
         <module name="sky-production-schedule" />
         <module name="sky-shiro" />
         <module name="sky-web" />
+        <module name="smarthonme" />
         <module name="test-web" />
       </profile>
     </annotationProcessing>
@@ -34,6 +35,7 @@
       <module name="sky-shiro" target="1.5" />
       <module name="sky-test" target="1.5" />
       <module name="sky-web" target="1.5" />
+      <module name="smarthonme" target="1.5" />
       <module name="test-shiro" target="1.5" />
       <module name="test-web" target="1.5" />
     </bytecodeTargetLevel>

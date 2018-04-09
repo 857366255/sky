@@ -5,6 +5,7 @@
   Time: 9:26
   To change this template use File | Settings | File Templates.
 --%>
+<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
@@ -52,9 +53,9 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item"><a data-url="${basePath}/configurationPage/list">配置页面2</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/configurationPage/list">配置页面</a></li>
                 <li class="layui-nav-item"><a data-url="${basePath}/tableField/list">表字段输入类型</a></li>
-                <li class="layui-nav-item"><a data-url="${basePath}/configurationpage/list">配置页面</a></li>
+                <%--<li class="layui-nav-item"><a data-url="${basePath}/configurationpage/list">配置页面</a></li>--%>
                 <li class="layui-nav-item"><%--layui-nav-itemed:默认展开--%>
                     <a class="" href="javascript:;">基础页面</a>
                     <dl class="layui-nav-child">
@@ -63,7 +64,6 @@
                         <dd><a data-url="${basePath}/layuiSky/editMasterSlave">编辑主从</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a data-url="${basePath}/TestWeAdmin/list4">云市场</a></li>
             </ul>
         </div>
     </div>

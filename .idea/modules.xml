@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/sky-production-schedule/sky-production-schedule.iml" filepath="$PROJECT_DIR$/sky-production-schedule/sky-production-schedule.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-shiro/sky-shiro.iml" filepath="$PROJECT_DIR$/sky-shiro/sky-shiro.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-web/sky-web.iml" filepath="$PROJECT_DIR$/sky-web/sky-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smarthonme/smarthonme.iml" filepath="$PROJECT_DIR$/smarthonme/smarthonme.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-web/test-web.iml" filepath="$PROJECT_DIR$/test-web/test-web.iml" />
     </modules>
   </component>
