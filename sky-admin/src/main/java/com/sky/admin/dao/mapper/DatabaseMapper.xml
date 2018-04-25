@@ -9,7 +9,7 @@
         <result property="annotation" column="table_comment"/>
     </resultMap>
     <select id="getDatabaseTable"  resultMap="DatabaseResultMap">
-        SELECT * FROM information_schema.tables WHERE table_schema=DATABASE()
+        SELECT * FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name NOT IN (SELECT a.table_name FROM information_schema.tables a WHERE a.table_name LIKE 's_%')
     </select>
     <!--映射实体类-->
     <resultMap id="FieldDatabaseResultMap" type="com.sky.admin.po.Field">

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.admin.dao.TableRelevanceFieldDao">
+    <sql id="showField" > id,table_relevanceid,field_en </sql>
+    <sql id="tableEn" > s_table_relevance_field </sql>
+    <!--映射实体类-->
+    <resultMap id="ResultMap" type="com.sky.admin.po.TableRelevanceField">
+        <id property="id" column="id"/>
+        <result property="tableRelevanceid" column="table_relevanceid"/>
+        <result property="fieldEn" column="field_en"/>
+    </resultMap>
+    <!--查询全部数据-->
+    <select id="findAll" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+    </select>
+    <!--查询-->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE id=#{id}
+    </select>
+
+    <select id="findData" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+        <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
+    </select>
+
+    <select id="countData" resultType ="java.lang.Integer">
+        SELECT count(1) FROM <include refid="tableEn" />
+    </select>
+
+    <!--增加-->
+    <insert id="doAdd" keyProperty="id" parameterType="com.sky.admin.po.TableRelevanceField">
+        INSERT INTO <include refid="tableEn" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tableRelevanceid != null">table_relevanceid,</if>
+            <if test="fieldEn != null">field_en,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tableRelevanceid != null">#{tableRelevanceid},</if>
+            <if test="fieldEn != null">#{fieldEn},</if>
+        </trim>
+    </insert>
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.admin.po.TableRelevanceField">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tableRelevanceid != null">table_relevanceid=#{tableRelevanceid},</if>
+            <if test="fieldEn != null">field_en=#{fieldEn},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+    <!--删除-->
+    <delete id="doDelete" parameterType="java.lang.Integer">
+        DELETE FROM <include refid="tableEn" /> WHERE id= #{id}
+    </delete>
+
+</mapper>

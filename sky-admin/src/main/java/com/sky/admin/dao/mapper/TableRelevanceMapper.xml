@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.admin.dao.TableRelevanceDao">
+    <sql id="showField" > id,tableid,tableid_field_en,table_en,field_en,table_relevanceid,table_relevanceid_field_en,type </sql>
+    <sql id="tableEn" > s_table_relevance </sql>
+    <!--映射实体类-->
+    <resultMap id="ResultMap" type="com.sky.admin.po.TableRelevance">
+        <id property="id" column="id"/>
+        <result property="tableid" column="tableid"/>
+        <result property="tableidFieldEn" column="tableid_field_en"/>
+        <result property="tableEn" column="table_en"/>
+        <result property="fieldEn" column="field_en"/>
+        <result property="tableRelevanceid" column="table_relevanceid"/>
+        <result property="tableRelevanceidFieldEn" column="table_relevanceid_field_en"/>
+        <result property="type" column="type"/>
+    </resultMap>
+    <!--查询全部数据-->
+    <select id="findAll" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+    </select>
+    <!--查询-->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE id=#{id}
+    </select>
+
+    <select id="findData" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+        <where><if test="vo.tableid!=null"> tableid=#{vo.tableid} </if></where>
+        <if test="limit != null"> LIMIT #{limit.offset},#{limit.rows} </if>
+    </select>
+
+    <select id="countData" resultType ="java.lang.Integer">
+        SELECT count(1) FROM <include refid="tableEn" />
+        <where><if test="vo.tableid!=null"> tableid=#{vo.tableid} </if></where>
+    </select>
+
+    <!--增加-->
+    <insert id="doAdd" keyProperty="id" parameterType="com.sky.admin.po.TableRelevance">
+        INSERT INTO <include refid="tableEn" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tableid != null">tableid,</if>
+            <if test="tableidFieldEn != null">tableid_field_en,</if>
+            <if test="tableEn != null">table_en,</if>
+            <if test="fieldEn != null">field_en,</if>
+            <if test="tableRelevanceid != null">table_relevanceid,</if>
+            <if test="tableRelevanceidFieldEn != null">table_relevanceid_field_en,</if>
+            <if test="type != null">type,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tableid != null">#{tableid},</if>
+            <if test="tableidFieldEn != null">#{tableidFieldEn},</if>
+            <if test="tableEn != null">#{tableEn},</if>
+            <if test="fieldEn != null">#{fieldEn},</if>
+            <if test="tableRelevanceid != null">#{tableRelevanceid},</if>
+            <if test="tableRelevanceidFieldEn != null">#{tableRelevanceidFieldEn},</if>
+            <if test="type != null">#{type},</if>
+        </trim>
+    </insert>
+    <!--更新-->
+    <update id="doUpdate" parameterType="com.sky.admin.po.TableRelevance">
+        UPDATE <include refid="tableEn" />
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tableid != null">tableid=#{tableid},</if>
+            <if test="tableidFieldEn != null">tableid_field_en=#{tableidFieldEn},</if>
+            <if test="tableEn != null">table_en=#{tableEn},</if>
+            <if test="fieldEn != null">field_en=#{fieldEn},</if>
+            <if test="tableRelevanceid != null">table_relevanceid=#{tableRelevanceid},</if>
+            <if test="tableRelevanceidFieldEn != null">table_relevanceid_field_en=#{tableRelevanceidFieldEn},</if>
+            <if test="type != null">type=#{type},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+    <!--删除-->
+    <delete id="doDelete" parameterType="java.lang.Integer">
+        DELETE FROM <include refid="tableEn" /> WHERE id= #{id}
+    </delete>
+
+</mapper>

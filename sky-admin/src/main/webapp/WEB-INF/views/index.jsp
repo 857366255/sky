@@ -53,7 +53,7 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item"><a data-url="${basePath}/configurationPage/list">配置页面</a></li>
+                <li class="layui-nav-item"><a data-url="${basePath}/table/list">表关联关系设置</a></li>
                 <li class="layui-nav-item"><a data-url="${basePath}/tableField/list">表字段输入类型</a></li>
                 <%--<li class="layui-nav-item"><a data-url="${basePath}/configurationpage/list">配置页面</a></li>--%>
                 <li class="layui-nav-item"><%--layui-nav-itemed:默认展开--%>
