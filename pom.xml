@@ -16,6 +16,7 @@
       <module>sky-production-schedule</module>
       <module>smarthonme</module>
       <module>sky-demo</module>
+    <module>test</module>
   </modules>
   <packaging>pom</packaging>
 
