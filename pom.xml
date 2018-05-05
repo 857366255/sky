@@ -11,11 +11,11 @@
     <module>sky-page</module>
     <module>sky-admin</module>
     <module>sky-shiro</module>
-    <module>test-web</module>
     <module>fitness</module>
     <module>sky-layui</module>
       <module>sky-production-schedule</module>
       <module>smarthonme</module>
+      <module>sky-demo</module>
   </modules>
   <packaging>pom</packaging>
 

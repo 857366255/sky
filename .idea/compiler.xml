@@ -9,13 +9,13 @@
         <module name="fitness" />
         <module name="sky-admin" />
         <module name="sky-common" />
+        <module name="sky-demo" />
         <module name="sky-layui" />
         <module name="sky-page" />
         <module name="sky-production-schedule" />
         <module name="sky-shiro" />
         <module name="sky-web" />
         <module name="smarthonme" />
-        <module name="test-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,6 +24,7 @@
       <module name="sky-admin" target="1.5" />
       <module name="sky-common" target="1.5" />
       <module name="sky-dao" target="1.5" />
+      <module name="sky-demo" target="1.5" />
       <module name="sky-erp" target="1.5" />
       <module name="sky-fitness" target="1.5" />
       <module name="sky-layui" target="1.5" />

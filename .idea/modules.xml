@@ -6,13 +6,13 @@
       <module fileurl="file://$PROJECT_DIR$/sky.iml" filepath="$PROJECT_DIR$/sky.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-admin/sky-admin.iml" filepath="$PROJECT_DIR$/sky-admin/sky-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-common/sky-common.iml" filepath="$PROJECT_DIR$/sky-common/sky-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sky-demo/sky-demo.iml" filepath="$PROJECT_DIR$/sky-demo/sky-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-layui/sky-layui.iml" filepath="$PROJECT_DIR$/sky-layui/sky-layui.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-page/sky-page.iml" filepath="$PROJECT_DIR$/sky-page/sky-page.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-production-schedule/sky-production-schedule.iml" filepath="$PROJECT_DIR$/sky-production-schedule/sky-production-schedule.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-shiro/sky-shiro.iml" filepath="$PROJECT_DIR$/sky-shiro/sky-shiro.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-web/sky-web.iml" filepath="$PROJECT_DIR$/sky-web/sky-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/smarthonme/smarthonme.iml" filepath="$PROJECT_DIR$/smarthonme/smarthonme.iml" />
-      <module fileurl="file://$PROJECT_DIR$/test-web/test-web.iml" filepath="$PROJECT_DIR$/test-web/test-web.iml" />
     </modules>
   </component>
 </project>

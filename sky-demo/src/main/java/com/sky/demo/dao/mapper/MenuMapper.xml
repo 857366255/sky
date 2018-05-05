@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.demo.dao.MenuDao">
+    <sql id="showField" > id,name,icon,menuid,url</sql>
+    <sql id="tableEn" > s_menu </sql>
+    <!--映射实体类-->
+    <resultMap id="ResultMap" type="com.sky.demo.po.Menu">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="icon" column="icon"/>
+        <result property="menuid" column="menuid"/>
+        <result property="url" column="url"/>
+    </resultMap>
+    <!--查询全部数据-->
+    <select id="findAll" resultMap="ResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" />
+    </select>
+
+    <!--映射实体类-->
+    <resultMap id="menuClassesResultMap" type="com.sky.demo.po.Menu">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="icon" column="icon"/>
+        <result property="menuid" column="menuid"/>
+        <result property="url" column="url"/>
+        <collection property="menus"  ofType="menuClassesResultMap"
+                    select="findCreationByCoding" column="id" />
+    </resultMap>
+    <select id="findCreationByCoding" parameterType="java.lang.Integer" resultMap="menuClassesResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE menuid=#{id};
+    </select>
+    <select id="findMenus" parameterType="java.lang.Integer" resultMap="menuClassesResultMap">
+        SELECT <include refid="showField" /> FROM <include refid="tableEn" /> WHERE menuid IS NULL;
+    </select>
+
+
+</mapper>
